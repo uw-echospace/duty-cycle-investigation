@@ -1,0 +1,6 @@
+name: dc-study
+channels:
+  - defaults
+dependencies:
+  - dask
+prefix: /Users/adityakrishna/miniconda3/envs/dc-study
