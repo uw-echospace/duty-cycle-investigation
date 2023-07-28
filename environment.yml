@@ -3,4 +3,5 @@ channels:
   - defaults
 dependencies:
   - dask
+  - matplotlib
 prefix: /Users/adityakrishna/miniconda3/envs/dc-study
