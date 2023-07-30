@@ -38,6 +38,11 @@ def parse_args():
         type=float
     )
     parser.add_argument(
+        "--show_PST",
+        action="store_true",
+        help="Use to place PST time axis in figures",
+    )
+    parser.add_argument(
         "--read_csv",
         action="store_true",
         help="Use if data has already been generated",
@@ -77,5 +82,6 @@ if __name__ == "__main__":
     cfg["save_activity_dc_comparisons"] = args['save_figures']
     cfg["save_presence_dc_comparisons"] = args['save_figures']
     cfg["show_plots"] = args['show_plots']
+    cfg["show_PST"] = args['show_PST']
 
     _ = pipeline.run(data_params, cfg)

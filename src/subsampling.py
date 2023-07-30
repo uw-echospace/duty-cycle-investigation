@@ -1,6 +1,8 @@
 import pandas as pd
 import data_handling as dh
 
+from pathlib import Path
+
 
 def simulate_dutycycle_on_detections(location_df, dc_tag):
     cycle_length = int(dc_tag.split('e')[1])
@@ -20,10 +22,10 @@ def simulate_dutycycle_on_detections(location_df, dc_tag):
 
 
 def prepare_summary_for_plotting_with_duty_cycle(site_tag, dc_tag, type_tag):
-    location_df = pd.read_csv(f'../data/2022_bd2_summary/{site_tag}/bd2__{type_tag}{site_tag}_2022.csv', index_col=0)
+    location_df = pd.read_csv(f'{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{site_tag}/bd2__{type_tag}{site_tag}_2022.csv', index_col=0)
     plottable_location_df = simulate_dutycycle_on_detections(location_df, dc_tag)
     csv_filename = f'bd2__{type_tag}{site_tag}_2022_{dc_tag}.csv'
-    plottable_location_df.to_csv(f"../data/2022_bd2_summary/{site_tag}/duty_cycled/simulated_schemes/{csv_filename}")
+    plottable_location_df.to_csv(f"{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{site_tag}/duty_cycled/simulated_schemes/{csv_filename}")
 
     return plottable_location_df
 
@@ -53,6 +55,6 @@ def construct_activity_arr_from_dc_tags(data_params):
         activity_arr = pd.concat([activity_arr, dc_dets], axis=1)
 
     csv_filename = f'dc__{data_params["type_tag"]}{data_params["site_tag"]}_summary.csv'
-    activity_arr.to_csv(f'../data/2022_bd2_summary/{data_params["site_tag"]}/duty_cycled/{csv_filename}')
+    activity_arr.to_csv(f'{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{data_params["site_tag"]}/duty_cycled/{csv_filename}')
 
     return activity_arr
