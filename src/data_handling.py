@@ -46,7 +46,7 @@ def construct_activity_arr_from_location_summary(location_df, dc_tag):
     
     return activity_arr
 
-def construct_activity_grid(activity_arr, dc_tag, cfg):
+def construct_activity_grid(activity_arr, dc_tag):
     activity_datetimes = pd.to_datetime(activity_arr.index.values)
     activity_dates = activity_datetimes.strftime("%m/%d/%y").unique()
     activity_times = activity_datetimes.strftime("%H:%M").unique()
@@ -63,7 +63,7 @@ def construct_activity_grid(activity_arr, dc_tag, cfg):
 
     return activity_df
 
-def construct_presence_grid(activity_arr, dc_tag, cfg):
+def construct_presence_grid(activity_arr, dc_tag):
     activity_datetimes = pd.to_datetime(activity_arr.index.values)
     activity_dates = activity_datetimes.strftime("%m/%d/%y").unique()
     activity_times = activity_datetimes.strftime("%H:%M").unique()

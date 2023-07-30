@@ -95,7 +95,7 @@ def plot_dc_comparisons_per_night(activity_arr, data_params, cfg):
     for i, date in enumerate(dates):
         plt.subplot(int(np.ceil(np.sqrt(len(dates)))), int(np.ceil(np.sqrt(len(dates)))), i+1)
         for i, dc_tag in enumerate(data_params["dc_tags"]):
-            activity_df = dh.construct_activity_grid(activity_arr, dc_tag, cfg)
+            activity_df = dh.construct_activity_grid(activity_arr, dc_tag)
             activity_of_date = activity_df[date]
             plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})")
             plt.bar(np.arange(0, len(activity_df.index))+i/(len(data_params['dc_tags'])), height=activity_of_date, width=1/(len(data_params['dc_tags'])), 
@@ -130,7 +130,7 @@ def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, cfg):
     plt.figure(figsize=(10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
-        activity_df = dh.construct_activity_grid(activity_arr, dc_tag, cfg).T
+        activity_df = dh.construct_activity_grid(activity_arr, dc_tag).T
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         plt.title(f"{data_params['type_tag'].upper().replace('_', '')} Activity from {data_params['site_name']} (DC Tag : {dc_tag})")
         plt.imshow(1+activity_df, norm=colors.LogNorm(vmin=1, vmax=10e3))
@@ -163,7 +163,7 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, cfg):
     plot_colors = cfg["dc_color_mappings"]
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
-        presence_df = dh.construct_presence_grid(activity_arr, dc_tag, cfg).T
+        presence_df = dh.construct_presence_grid(activity_arr, dc_tag).T
         plt.subplot(len(data_params["dc_tags"]), 1, i+1)
         plt.title(f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} (DC : {dc_tag})", loc='left', y=1.05)
         masked_array = np.ma.masked_where(presence_df == 1, presence_df)
