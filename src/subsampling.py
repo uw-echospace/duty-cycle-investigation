@@ -2,7 +2,10 @@ import pandas as pd
 import data_handling as dh
 
 
-def simulate_dutycycle_on_detections(location_df, cycle_length, percent_on):
+def simulate_dutycycle_on_detections(location_df, dc_tag):
+    cycle_length = int(dc_tag.split('e')[1])
+    percent_on = float(dc_tag.split('e')[0]) / cycle_length
+
     location_df['ref_time'] = pd.DatetimeIndex(location_df['ref_time'])
     location_df['call_end_time'] = pd.DatetimeIndex(location_df['call_end_time'])
     location_df['call_start_time'] = pd.DatetimeIndex(location_df['call_start_time'])
@@ -16,15 +19,15 @@ def simulate_dutycycle_on_detections(location_df, cycle_length, percent_on):
     return dc_applied_df
 
 
-def prepare_summary_for_plotting_with_duty_cycle(site_name, cycle_length, percent_on, type_tag):
-    location_df = pd.read_csv(f'../data/2022_bd2_summary/{site_name}/bd2__{type_tag}{site_name}_2022.csv', index_col=0)
-    plottable_location_df = simulate_dutycycle_on_detections(location_df, cycle_length, percent_on)
-    dc_tag = f"{round(percent_on*cycle_length)}e{cycle_length}"
-    plottable_location_df.to_csv(f"../data/2022_bd2_summary/{site_name}/duty_cycled/simulated_schemes/bd2__{type_tag}{site_name}_2022_{dc_tag}.csv")
+def prepare_summary_for_plotting_with_duty_cycle(site_tag, dc_tag, type_tag):
+    location_df = pd.read_csv(f'../data/2022_bd2_summary/{site_tag}/bd2__{type_tag}{site_tag}_2022.csv', index_col=0)
+    plottable_location_df = simulate_dutycycle_on_detections(location_df, dc_tag)
+    csv_filename = f'bd2__{type_tag}{site_tag}_2022_{dc_tag}.csv'
+    plottable_location_df.to_csv(f"../data/2022_bd2_summary/{site_tag}/duty_cycled/simulated_schemes/{csv_filename}")
 
     return plottable_location_df
 
-def get_list_of_dc_tags(cycle_lengths, percent_ons):
+def get_list_of_dc_tags(cycle_lengths=[1800, 360], percent_ons=[0.1667]):
     dc_tags = []
 
     cycle_length = 1800
@@ -43,14 +46,13 @@ def construct_activity_arr_from_dc_tags(data_params):
     activity_arr = pd.DataFrame()
 
     for dc_tag in data_params['dc_tags']:
-        cycle_length = int(dc_tag.split('e')[1])
-        percent_on = float(dc_tag.split('e')[0]) / cycle_length
 
-        location_df = prepare_summary_for_plotting_with_duty_cycle(data_params['site_tag'], cycle_length, percent_on, data_params['type_tag'])
+        location_df = prepare_summary_for_plotting_with_duty_cycle(data_params['site_tag'], dc_tag, data_params['type_tag'])
         dc_dets = dh.construct_activity_arr_from_location_summary(location_df, dc_tag)
         dc_dets = dc_dets.set_index("Date_and_Time_UTC")
         activity_arr = pd.concat([activity_arr, dc_dets], axis=1)
 
-    activity_arr.to_csv(f'../data/2022_bd2_summary/{data_params["site_tag"]}/duty_cycled/dc__{data_params["type_tag"]}{data_params["site_tag"]}_summary.csv')
+    csv_filename = f'dc__{data_params["type_tag"]}{data_params["site_tag"]}_summary.csv'
+    activity_arr.to_csv(f'../data/2022_bd2_summary/{data_params["site_tag"]}/duty_cycled/{csv_filename}')
 
     return activity_arr

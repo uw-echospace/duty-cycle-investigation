@@ -14,8 +14,7 @@ def rect(pos):
     r = plt.Rectangle(pos-0.505, 1, 1, facecolor="none", edgecolor="k", linewidth=0.6)
     plt.gca().add_patch(r)
 
-def plot_activity_grid(activity_df, data_params, save=False):
-
+def plot_activity_grid(activity_df, data_params, cfg):
     plt.rcParams.update({'font.size': 16})
     plt.figure(figsize=(20, 10))
     title = f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} ({data_params['cur_dc_tag']})"
@@ -27,14 +26,14 @@ def plot_activity_grid(activity_df, data_params, save=False):
     plt.xlabel('Date (MM/DD/YY)')
     plt.colorbar()
     plt.tight_layout()
-    if save:
+    if cfg["save_activity_grid"]:
         Path(f'{Path.cwd()}/../figures/{data_params["site_tag"]}/activity_grids').mkdir(parents=True, exist_ok=True)
         plot_name = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_activity_grid.png'
         plt.savefig(f'{Path.cwd()}/../figures/{data_params["site_tag"]}/activity_grids/{plot_name}', bbox_inches='tight')
-    plt.show()
+    if cfg["show_plots"]:
+        plt.show()
 
 def plot_presence_grid(presence_df, data_params, cfg):
-    
     plt.rcParams.update({'font.size': 16})
     plt.figure(figsize=(20, 10))
     title = f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} ({data_params['cur_dc_tag']})"
@@ -55,12 +54,13 @@ def plot_presence_grid(presence_df, data_params, cfg):
     plt.tight_layout()
     if cfg["save_presence_grid"]:
         Path(f'{Path.cwd()}/../figures/{data_params["site_tag"]}/presence_grids').mkdir(parents=True, exist_ok=True)
-        plot_name = f'{data_params["site_tag"]}/presence_grids/{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_presence_grid.png'
-        plt.savefig(f'{Path.cwd()}/../figures/{plot_name}', bbox_inches='tight')
-    plt.show()
+        png_name = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_presence_grid.png'
+        plot_path = f'{data_params["site_tag"]}/presence_grids/{png_name}'
+        plt.savefig(f'{Path.cwd()}/../figures/{plot_path}', bbox_inches='tight')
+    if cfg["show_plots"]:
+        plt.show()
 
 def plot_dc_comparisons_per_night(activity_arr, data_params, cfg):
-    
     dates = pd.to_datetime(activity_arr.index.values).strftime("%m/%d/%y").unique()
     plt.rcParams.update({'font.size': 16})
     plt.figure(figsize=(10*int(np.ceil(np.sqrt(len(dates)))), 2.5*len(dates)))
@@ -84,10 +84,10 @@ def plot_dc_comparisons_per_night(activity_arr, data_params, cfg):
         Path(f'{Path.cwd()}/../figures/{data_params["site_tag"]}').mkdir(parents=True, exist_ok=True)
         plot_name = f'dc_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}.png'
         plt.savefig(f'{Path.cwd()}/../figures/{data_params["site_tag"]}/{plot_name}', bbox_inches='tight')
-    plt.show()
+    if cfg["show_plots"]:
+        plt.show()
 
 def plot_dc_comparisons_per_scheme(activity_arr, data_params, cfg):
-    
     dates = pd.to_datetime(activity_arr.index.values).strftime("%m/%d/%y").unique()
     plt.rcParams.update({'font.size': 16})
     plt.figure(figsize=(10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
@@ -106,11 +106,11 @@ def plot_dc_comparisons_per_scheme(activity_arr, data_params, cfg):
     if cfg["save_activity_dc_comparisons"]:
         Path(f'{Path.cwd()}/../figures/{data_params["site_tag"]}').mkdir(parents=True, exist_ok=True)
         plot_name = f'activity_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}.png'
-        plt.savefig(f'{Path.cwd()}/../figures/{plot_name}', bbox_inches='tight')
-    plt.show()
+        plt.savefig(f'{Path.cwd()}/../figures/{data_params["site_tag"]}/{plot_name}', bbox_inches='tight')
+    if cfg["show_plots"]:
+        plt.show()
 
 def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, cfg):
-
     dates = pd.to_datetime(activity_arr.index.values).strftime("%m/%d/%y").unique()
     plt.rcParams.update({'font.size': 16})
     plt.figure(figsize=(10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
@@ -133,11 +133,11 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, cfg):
         plt.yticks(np.arange(0, len(presence_df.index))-0.5, presence_df.index, rotation=50)
         plt.grid(which="both", color='k')
 
-
     plt.xlabel("UTC Time (HH:MM)")
     plt.tight_layout()
     if cfg["save_presence_dc_comparisons"]:
         Path(f'{Path.cwd()}/../figures/{data_params["site_tag"]}').mkdir(parents=True, exist_ok=True)
         plot_name = f'presence_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}.png'
         plt.savefig(f'{Path.cwd()}/../figures/{data_params["site_tag"]}/{plot_name}', bbox_inches='tight')
-    plt.show()
+    if cfg["show_plots"]:
+        plt.show()

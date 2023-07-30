@@ -25,7 +25,8 @@ def assemble_initial_location_summary(data_params, save=True):
         location_df = location_df.loc[(location_df["low_freq"]).astype('float64') > data_params["freq_tags"][0]]
 
     if save:
-        location_df.to_csv(f'../data/2022_bd2_summary/{data_params["site_tag"]}/bd2__{data_params["type_tag"]}{data_params["site_tag"]}_2022.csv')
+        csv_filename = f'bd2__{data_params["type_tag"]}{data_params["site_tag"]}_2022.csv'
+        location_df.to_csv(f'../data/2022_bd2_summary/{data_params["site_tag"]}/{csv_filename}')
 
     return location_df
 
