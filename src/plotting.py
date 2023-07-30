@@ -102,7 +102,7 @@ def plot_dc_comparisons_per_night(activity_arr, data_params, cfg):
                     color=cfg["dc_color_mappings"][dc_tag], label=dc_tag, alpha=0.75, edgecolor='k')
         plt.grid(axis="y")
         plt.xticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=50)
-        plt.ylabel('Number of Detections (MM/DD)')
+        plt.ylabel('Number of Detections')
         plt.xlabel(f'{xlabel} Time (HH:MM)')
         plt.legend()
 
