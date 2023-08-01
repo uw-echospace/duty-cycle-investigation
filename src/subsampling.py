@@ -5,8 +5,8 @@ from pathlib import Path
 
 
 def simulate_dutycycle_on_detections(location_df, dc_tag):
-    cycle_length = int(dc_tag.split('e')[1])
-    percent_on = float(dc_tag.split('e')[0]) / cycle_length
+    cycle_length = int(dc_tag.split('of')[1])
+    percent_on = float(dc_tag.split('of')[0]) / cycle_length
 
     location_df['ref_time'] = pd.DatetimeIndex(location_df['ref_time'])
     location_df['call_end_time'] = pd.DatetimeIndex(location_df['call_end_time'])
@@ -34,12 +34,12 @@ def get_list_of_dc_tags(cycle_lengths=[1800, 360], percent_ons=[0.1667]):
 
     cycle_length = 1800
     percent_on = 1.0
-    dc_tag = f"{round(percent_on*cycle_length)}e{cycle_length}"
+    dc_tag = f"{round(percent_on*cycle_length)}of{cycle_length}"
     dc_tags += [dc_tag]
 
     for cycle_length in cycle_lengths:
         for percent_on in percent_ons:
-            dc_tag = f"{round(percent_on*cycle_length)}e{cycle_length}"
+            dc_tag = f"{round(percent_on*cycle_length)}of{cycle_length}"
             dc_tags += [dc_tag]
 
     return dc_tags

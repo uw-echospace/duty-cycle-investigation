@@ -24,7 +24,7 @@ def plot_activity_grid(activity_df, data_params, cfg):
     plot_times = activity_times.strftime("%H:%M").unique()
 
     plt.rcParams.update({'font.size': 16})
-    plt.figure(figsize=(20, 10))
+    plt.figure(figsize=(len(activity_df.index), len(activity_df.index)//2))
     title = f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title, loc='left', y=1.05)
     plt.imshow(1+activity_df, norm=colors.LogNorm(vmin=1, vmax=10e3))
@@ -51,12 +51,12 @@ def plot_presence_grid(presence_df, data_params, cfg):
     plot_times = activity_times.strftime("%H:%M").unique()
 
     plt.rcParams.update({'font.size': 16})
-    plt.figure(figsize=(20, 10))
+    plt.figure(figsize=(len(presence_df.index), len(presence_df.index)//2))
     title = f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title, loc='left', y=1.05)
     masked_array = np.ma.masked_where(presence_df == 1, presence_df)
     cmap = plt.get_cmap("Greys")  # Can be any colormap that you want after the cm
-    cmap.set_bad(color=cfg["dc_color_mappings"][data_params['cur_dc_tag']], alpha=0.6)
+    cmap.set_bad(color=cfg["dc_color_mappings"][data_params['cur_dc_tag']], alpha=0.75)
     im = plt.imshow(masked_array, cmap=cmap)
     x, y = np.meshgrid(np.arange(presence_df.shape[1]), np.arange(presence_df.shape[0]))
     m = np.c_[x[presence_df == 1], y[presence_df == 1]]
@@ -89,21 +89,30 @@ def plot_dc_comparisons_per_night(activity_arr, data_params, cfg):
         xlabel = 'PST'
     plot_times = activity_times.strftime("%H:%M").unique()
 
-    plt.rcParams.update({'font.size': 16})
-    plt.figure(figsize=(10*int(np.ceil(np.sqrt(len(dates)))), 2.5*len(dates)))
+    plt.rcParams.update({'font.size': 25})
+    plt.figure(figsize=(10*int(np.ceil(np.sqrt(len(dates)))),10*int(np.ceil(np.sqrt(len(dates))))))
 
     for i, date in enumerate(dates):
         plt.subplot(int(np.ceil(np.sqrt(len(dates)))), int(np.ceil(np.sqrt(len(dates)))), i+1)
         for i, dc_tag in enumerate(data_params["dc_tags"]):
             activity_df = dh.construct_activity_grid(activity_arr, dc_tag)
             activity_of_date = activity_df[date]
-            plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})")
-            plt.bar(np.arange(0, len(activity_df.index))+i/(len(data_params['dc_tags'])), height=activity_of_date, width=1/(len(data_params['dc_tags'])), 
+            bar_width = 1/(len(data_params['dc_tags']))
+            plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=24)
+            plt.bar(np.arange(0, len(activity_df.index))+(bar_width*(i - 1)), height=activity_of_date, width=bar_width, 
                     color=cfg["dc_color_mappings"][dc_tag], label=dc_tag, alpha=0.75, edgecolor='k')
         plt.grid(axis="y")
-        plt.xticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=50)
+        plt.xticks(np.arange(0, len(activity_df.index), 2)-0.5, plot_times[::2], rotation=50)
+        plt.xlim(plt.xticks()[0][0], plt.xticks()[0][-1])
         plt.ylabel('Number of Detections')
         plt.xlabel(f'{xlabel} Time (HH:MM)')
+        plt.axvline(1.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        plt.axvline(7.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        plt.axvline(17.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        ax = plt.gca()
+        plt.text(x=(1.5/21), y=0.56, s="Dusk", color='midnightblue', transform=ax.transAxes)
+        plt.text(x=7.8/21,  y=0.56, s="Midnight", color='midnightblue', transform=ax.transAxes)
+        plt.text(x=(18.3/21),  y=0.56, s="Dawn", color='midnightblue', transform=ax.transAxes)
         plt.legend()
 
     plt.tight_layout()
@@ -126,16 +135,17 @@ def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, cfg):
         xlabel = 'PST'
     plot_times = activity_times.strftime("%H:%M").unique()
 
-    plt.rcParams.update({'font.size': 16})
+    plt.rcParams.update({'font.size': 20})
     plt.figure(figsize=(10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
-        activity_df = dh.construct_activity_grid(activity_arr, dc_tag).T
+        activity_df = (dh.construct_activity_grid(activity_arr, dc_tag).T).iloc[::-1]
+        plot_dates = pd.to_datetime(activity_df.index.values, format='%m/%d/%y').strftime("%m/%d").unique()
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
-        plt.title(f"{data_params['type_tag'].upper().replace('_', '')} Activity from {data_params['site_name']} (DC Tag : {dc_tag})")
+        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (DC Tag : {dc_tag})")
         plt.imshow(1+activity_df, norm=colors.LogNorm(vmin=1, vmax=10e3))
-        plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_times, rotation=50)
-        plt.yticks(np.arange(0, len(activity_df.index))-0.5, dates, rotation=50)
+        plt.xticks(np.arange(0, len(activity_df.columns), 2)-0.5, plot_times[::2], rotation=45)
+        plt.yticks(np.arange(0, len(activity_df.index), 2)-0.5, plot_dates[::2], rotation=45)
         plt.ylabel('Date (MM/DD)')
         plt.xlabel(f'{xlabel} Time (HH:MM)')
     plt.tight_layout()
@@ -158,14 +168,15 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, cfg):
         xlabel = 'PST'
     plot_times = activity_times.strftime("%H:%M").unique()
 
-    plt.rcParams.update({'font.size': 16})
+    plt.rcParams.update({'font.size': 20})
     plt.figure(figsize=(10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
     plot_colors = cfg["dc_color_mappings"]
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
-        presence_df = dh.construct_presence_grid(activity_arr, dc_tag).T
+        presence_df = (dh.construct_presence_grid(activity_arr, dc_tag).T).iloc[::-1]
+        plot_dates = pd.to_datetime(presence_df.index.values, format='%m/%d/%y').strftime("%m/%d").unique()
         plt.subplot(len(data_params["dc_tags"]), 1, i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} (DC : {dc_tag})", loc='left', y=1.05)
+        plt.title(f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} (DC : {dc_tag})")
         masked_array = np.ma.masked_where(presence_df == 1, presence_df)
         cmap = plt.get_cmap("Greys")  # Can be any colormap that you want after the cm
         cmap.set_bad(color=plot_colors[dc_tag], alpha=0.75)
@@ -175,8 +186,8 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, cfg):
         for pos in m:
             rect(pos)
         plt.ylabel('Date (MM/DD)')
-        plt.xticks(np.arange(0, len(presence_df.columns), 1)-0.5, plot_times, rotation=50)
-        plt.yticks(np.arange(0, len(presence_df.index))-0.5, dates, rotation=50)
+        plt.xticks(np.arange(0, len(presence_df.columns), 2)-0.5, plot_times[::2], rotation=45)
+        plt.yticks(np.arange(0, len(presence_df.index), 2)-0.5, plot_dates[::2], rotation=45)
         plt.grid(which="both", color='k')
         plt.xlabel(f"{xlabel} Time (HH:MM)")
     plt.tight_layout()

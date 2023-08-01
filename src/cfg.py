@@ -1,9 +1,9 @@
 def get_config():
     return {
         "dc_color_mappings": {
-            '1800e1800' : 'cyan',
-            '60e360' : 'red',
-            '300e1800' : 'orange'
+            '1800of1800' : 'cyan',
+            '60of360' : 'red',
+            '300of1800' : 'orange'
             },
 
         "site_names": {

@@ -1,7 +1,9 @@
 from pathlib import Path
+
 import dask.dataframe as dd
 import pandas as pd
 import numpy as np
+import datetime as dt
 
 import subsampling as ss
 
@@ -31,20 +33,38 @@ def assemble_initial_location_summary(data_params, save=True):
     return location_df
 
 
-def construct_activity_arr_from_location_summary(location_df, dc_tag):
+def construct_activity_arr_from_location_summary(location_df, dc_tag, resolution="30T"):
+    cycle_length = dc_tag.split('of')[1]
     site_name = location_df['Site name'].values[0].split()[0]
     all_processed_filepaths = sorted(list(map(str, list(Path(f'{Path(__file__).resolve().parent}/../data/raw/{site_name}').iterdir()))))
-
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
-    datetimes_with_calls_detected = pd.to_datetime(location_df["input_file"].unique(), format="%Y%m%d_%H%M%S", exact=False)
-    num_of_detections = location_df.groupby(["input_file"])["input_file"].count()
-    num_of_detections.index = datetimes_with_calls_detected
 
-    num_of_detections = add_rows_for_absence(num_of_detections, all_processed_datetimes, datetimes_with_calls_detected)
-    activity_arr = pd.DataFrame(list(zip(num_of_detections.index, num_of_detections.values)), 
-                                columns=["Date_and_Time_UTC", f"Number_of_Detections ({dc_tag})"])
+    start, end = all_processed_datetimes.strftime("%H:%M:%S")[0], all_processed_datetimes.strftime("%H:%M:%S")[-1]
+    num_of_detections = location_df.resample(resolution, on='ref_time')['ref_time'].count()
+    incomplete_activity_arr = pd.DataFrame(num_of_detections.values, index=num_of_detections.index, columns=[f"Number_of_Detections ({dc_tag})"])
+
+    dates = pd.to_datetime(num_of_detections.index.values).strftime("%Y-%m-%d").unique()
+    activity_arr = pd.DataFrame()
+
+    for date in dates:
+        start_of_dets_for_date = num_of_detections[pd.DatetimeIndex(num_of_detections.index).strftime("%Y-%m-%d") == date].index[0]
+        end_of_dets_for_date = num_of_detections[pd.DatetimeIndex(num_of_detections.index).strftime("%Y-%m-%d") == date].index[-1]
+
+        pad_start = pd.Series(pd.date_range(dt.datetime.strptime(f"{date} {start}", "%Y-%m-%d %H:%M:%S"), start_of_dets_for_date, freq=resolution, inclusive='left'))
+        pad_end = pd.Series(pd.date_range(end_of_dets_for_date, dt.datetime.strptime(f"{date} {end}", "%Y-%m-%d %H:%M:%S"), freq=resolution, inclusive='right'))
+        all_pad = pd.concat([pad_start, pad_end])
+        pad_df = pd.DataFrame(0.0, index=all_pad, columns=[f"Number_of_Detections ({dc_tag})"])
+
+        incomplete_activity_arr = pd.concat([incomplete_activity_arr, pad_df])
+        incomplete_activity_arr = incomplete_activity_arr.sort_index()
+
+        date_arr = incomplete_activity_arr[pd.DatetimeIndex(incomplete_activity_arr.index).strftime("%Y-%m-%d") == date]
+        condition1 = np.logical_and(pd.DatetimeIndex(date_arr.index).hour >= 3, pd.DatetimeIndex(date_arr.index).hour < 13)
+        condition2 = np.logical_and(pd.DatetimeIndex(date_arr.index).hour == 13, pd.DatetimeIndex(date_arr.index).minute == 0)
+        full_date_arr = date_arr[np.logical_or(condition1, condition2)]
+        activity_arr = pd.concat([activity_arr, full_date_arr])
     
-    return activity_arr
+    return pd.DataFrame(list(zip(activity_arr.index, activity_arr[f"Number_of_Detections ({dc_tag})"].values)), columns=["Date_and_Time_UTC", f"Number_of_Detections ({dc_tag})"])
 
 def construct_activity_grid(activity_arr, dc_tag):
     activity_datetimes = pd.to_datetime(activity_arr.index.values)
@@ -53,8 +73,8 @@ def construct_activity_grid(activity_arr, dc_tag):
 
     activity = activity_arr[f"Number_of_Detections ({dc_tag})"].values.reshape(len(activity_dates), len(activity_times)).T
 
-    on = int(dc_tag.split('e')[0])
-    total = int(dc_tag.split('e')[1])
+    on = int(dc_tag.split('of')[0])
+    total = int(dc_tag.split('of')[1])
     if on == total:
         activity_df = pd.DataFrame(activity, index=activity_times, columns=activity_dates)
     else:
