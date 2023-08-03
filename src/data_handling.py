@@ -37,38 +37,11 @@ def construct_activity_arr_from_location_summary(location_df, dc_tag, file_paths
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     col_name = f"Number_of_Detections ({dc_tag})"
 
-    start, end = "03:00:00", "13:00:00"
     num_of_detections = location_df.resample(resolution, on='ref_time')['ref_time'].count()
     incomplete_activity_arr = pd.DataFrame(num_of_detections.values, index=num_of_detections.index, columns=[col_name])
+    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(resolution).first()
+    activity_arr = activity_arr.between_time('03:00', '13:00')
 
-    dates = pd.to_datetime(num_of_detections.index.values).strftime("%Y-%m-%d").unique()
-    activity_arr = pd.DataFrame()
-
-    for date in dates:
-        start_of_dets_for_date = num_of_detections[pd.DatetimeIndex(num_of_detections.index).strftime("%Y-%m-%d") == date].index[0]
-        end_of_dets_for_date = num_of_detections[pd.DatetimeIndex(num_of_detections.index).strftime("%Y-%m-%d") == date].index[-1]
-
-        start_of_recording = dt.datetime.strptime(f"{date} {start}", "%Y-%m-%d %H:%M:%S")
-        end_of_recording = dt.datetime.strptime(f"{date} {end}", "%Y-%m-%d %H:%M:%S")
-
-        pad_start, pad_end = pd.Series(), pd.Series()
-        if (start_of_recording != start_of_dets_for_date):
-            pad_start = pd.Series(pd.date_range(start_of_recording, start_of_dets_for_date, freq=resolution, inclusive='left'))
-        if (end_of_recording != end_of_dets_for_date):
-            pad_end = pd.Series(pd.date_range(end_of_dets_for_date, end_of_recording, freq=resolution, inclusive='right'))
-
-        all_pad = pd.concat([pad_start, pad_end])
-        pad_df = pd.DataFrame(0.0, index=all_pad, columns=[col_name])
-
-        incomplete_activity_arr = pd.concat([incomplete_activity_arr, pad_df])
-        incomplete_activity_arr = incomplete_activity_arr.sort_index()
-
-        date_arr = incomplete_activity_arr[pd.DatetimeIndex(incomplete_activity_arr.index).strftime("%Y-%m-%d") == date]
-        condition1 = np.logical_and(pd.DatetimeIndex(date_arr.index).hour >= 3, pd.DatetimeIndex(date_arr.index).hour < 13)
-        condition2 = np.logical_and(pd.DatetimeIndex(date_arr.index).hour == 13, pd.DatetimeIndex(date_arr.index).minute == 0)
-        full_date_arr = date_arr[np.logical_or(condition1, condition2)]
-        activity_arr = pd.concat([activity_arr, full_date_arr])
-    
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
 
 
