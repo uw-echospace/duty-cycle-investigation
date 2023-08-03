@@ -1,6 +1,8 @@
 import pipeline
 import subsampling as ss
-from cfg import get_config
+from core import SITE_NAMES, FREQ_GROUPS
+
+from pathlib import Path
 
 import argparse
 
@@ -60,28 +62,60 @@ def parse_args():
 
     return vars(parser.parse_args())
 
+def get_file_paths(data_params):
+
+    file_paths = dict()
+    file_paths["raw_SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/raw/{data_params["site_tag"]}'
+
+    file_paths["SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{data_params["site_tag"]}'
+    Path(f'{file_paths["SITE_folder"]}').mkdir(parents=True, exist_ok=True)
+    file_paths["bd2_TYPE_SITE_YEAR"] = f'bd2__{data_params["type_tag"]}{data_params["site_tag"]}_2022'
+    file_paths["duty_cycled_folder"] = f'{file_paths["SITE_folder"]}/duty_cycled'
+    Path(f'{file_paths["duty_cycled_folder"]}').mkdir(parents=True, exist_ok=True)
+    file_paths["dc_TYPE_SITE_summary"] = f'dc__{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["simulated_schemes_folder"] = f'{file_paths["duty_cycled_folder"]}/simulated_schemes'
+    Path(f'{file_paths["simulated_schemes_folder"]}').mkdir(parents=True, exist_ok=True)
+
+    file_paths["figures_SITE_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}'
+    Path(file_paths["figures_SITE_folder"]).mkdir(parents=True, exist_ok=True)
+    file_paths["activity_comparisons_figname"] = f'activity_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["dc_comparisons_figname"] = f'dc_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["presence_comparisons_figname"] = f'presence_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+
+    file_paths["activity_grid_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}/activity_grids'
+    Path(file_paths["activity_grid_folder"]).mkdir(parents=True, exist_ok=True)
+    file_paths["activity_grid_figname"] = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_activity_grid'
+
+    file_paths["presence_grid_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}/presence_grids'
+    Path(file_paths["presence_grid_folder"]).mkdir(parents=True, exist_ok=True)
+    file_paths["presence_grid_figname"] = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_presence_grid'
+
+    return file_paths
+
 if __name__ == "__main__":
     args = parse_args()
 
-    cfg = get_config()
     data_params = dict()
-    data_params["site_name"] = cfg['site_names'][args['site_tag']]
+    data_params["site_name"] = SITE_NAMES[args['site_tag']]
     data_params["site_tag"] = args['site_tag']
     data_params["type_tag"] = args['type_of_calls']
-    data_params["freq_tags"] = cfg['freq_groups'][args['type_of_calls']]
+    data_params["freq_tags"] = FREQ_GROUPS[args['type_of_calls']]
     data_params["cycle_lengths"] = args['cycle_lengths']
     data_params["percent_ons"] = args['percent_ons']
     dc_tags = ss.get_list_of_dc_tags(data_params["cycle_lengths"], data_params["percent_ons"])
     data_params["dc_tags"] = dc_tags
     data_params["cur_dc_tag"] = args['specific_dc_tag']
 
-    cfg["read_csv"] = args['read_csv']
-    cfg["save_activity_grid"] = args['save_figures']
-    cfg["save_presence_grid"] = args['save_figures']
-    cfg["save_dc_night_comparisons"] = args['save_figures']
-    cfg["save_activity_dc_comparisons"] = args['save_figures']
-    cfg["save_presence_dc_comparisons"] = args['save_figures']
-    cfg["show_plots"] = args['show_plots']
-    cfg["show_PST"] = args['show_PST']
+    pipeline_params = dict()
+    pipeline_params["read_csv"] = args['read_csv']
+    pipeline_params["save_activity_grid"] = args['save_figures']
+    pipeline_params["save_presence_grid"] = args['save_figures']
+    pipeline_params["save_dc_night_comparisons"] = args['save_figures']
+    pipeline_params["save_activity_dc_comparisons"] = args['save_figures']
+    pipeline_params["save_presence_dc_comparisons"] = args['save_figures']
+    pipeline_params["show_plots"] = args['show_plots']
+    pipeline_params["show_PST"] = args['show_PST']
 
-    _ = pipeline.run(data_params, cfg)
+    file_paths = get_file_paths(data_params)
+
+    _ = pipeline.run(data_params, pipeline_params, file_paths)

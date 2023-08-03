@@ -21,11 +21,10 @@ def simulate_dutycycle_on_detections(location_df, dc_tag):
     return dc_applied_df
 
 
-def prepare_summary_for_plotting_with_duty_cycle(site_tag, dc_tag, type_tag):
-    location_df = pd.read_csv(f'{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{site_tag}/bd2__{type_tag}{site_tag}_2022.csv', index_col=0)
+def prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag):
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
     plottable_location_df = simulate_dutycycle_on_detections(location_df, dc_tag)
-    csv_filename = f'bd2__{type_tag}{site_tag}_2022_{dc_tag}.csv'
-    plottable_location_df.to_csv(f"{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{site_tag}/duty_cycled/simulated_schemes/{csv_filename}")
+    plottable_location_df.to_csv(f'{file_paths["simulated_schemes_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}_{dc_tag}.csv')
 
     return plottable_location_df
 
@@ -44,17 +43,16 @@ def get_list_of_dc_tags(cycle_lengths=[1800, 360], percent_ons=[0.1667]):
 
     return dc_tags
 
-def construct_activity_arr_from_dc_tags(data_params):
+def construct_activity_arr_from_dc_tags(data_params, file_paths):
     activity_arr = pd.DataFrame()
 
     for dc_tag in data_params['dc_tags']:
 
-        location_df = prepare_summary_for_plotting_with_duty_cycle(data_params['site_tag'], dc_tag, data_params['type_tag'])
-        dc_dets = dh.construct_activity_arr_from_location_summary(location_df, dc_tag)
+        location_df = prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag)
+        dc_dets = dh.construct_activity_arr_from_location_summary(location_df, dc_tag, file_paths, data_params['resolution'])
         dc_dets = dc_dets.set_index("Date_and_Time_UTC")
         activity_arr = pd.concat([activity_arr, dc_dets], axis=1)
 
-    csv_filename = f'dc__{data_params["type_tag"]}{data_params["site_tag"]}_summary.csv'
-    activity_arr.to_csv(f'{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{data_params["site_tag"]}/duty_cycled/{csv_filename}')
+    activity_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_TYPE_SITE_summary"]}.csv')
 
     return activity_arr
