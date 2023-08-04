@@ -1,0 +1,4 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+1772.8745,1772.8779,44375.0,63550.0,Echolocation,Myotis mystacinus,0.248,0.575,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220917_100000.WAV,recover-20220919,UBNA_007,Telephone Field
+1772.9265,1772.9297,43515.0,62469.0,Echolocation,Myotis mystacinus,0.301,0.561,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220917_100000.WAV,recover-20220919,UBNA_007,Telephone Field
+1773.4585,1773.4619,42656.0,60497.0,Echolocation,Myotis mystacinus,0.319,0.512,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220917_100000.WAV,recover-20220919,UBNA_007,Telephone Field

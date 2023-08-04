@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+1456.9635,1456.9695,51250.0,60477.0,Echolocation,Pipistrellus pipistrellus,0.438,0.549,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1457.2575,1457.2639,48671.0,65100.0,Echolocation,Pipistrellus pipistrellus,0.465,0.583,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1457.5745,1457.5819,46953.0,67333.0,Echolocation,Pipistrellus pipistrellus,0.348,0.569,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1457.7965,1457.803,46953.0,65551.0,Echolocation,Pipistrellus pipistrellus,0.486,0.603,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1458.1415,1458.1485,46953.0,66997.0,Echolocation,Pipistrellus pipistrellus,0.464,0.59,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1458.5325,1458.5416,46953.0,63934.0,Echolocation,Pipistrellus pipistrellus,0.384,0.51,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1458.9535,1458.9592,48671.0,57277.0,Echolocation,Pipistrellus pipistrellus,0.584,0.618,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1635.6335,1635.6371,45234.0,78612.0,Echolocation,Myotis alcathoe,0.324,0.504,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1635.7295,1635.7335,43515.0,81346.0,Echolocation,Myotis alcathoe,0.414,0.569,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
+1635.8195,1635.823,44375.0,69336.0,Echolocation,Myotis alcathoe,0.313,0.507,-1,/mnt/ubna_data_02/recover-20220919/UBNA_007/20220919_123000.WAV,recover-20220919,UBNA_007,Telephone Field
