@@ -1,0 +1,26 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+800.5475,800.5652,22890.0,27300.0,Echolocation,Nyctalus leisleri,0.516,0.596,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1589.1495,1589.1568,38359.0,47586.0,Echolocation,Pipistrellus nathusii,0.393,0.507,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1590.0815,1590.091,42656.0,51021.0,Echolocation,Pipistrellus nathusii,0.449,0.515,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1786.1955,1786.2039,28046.0,38993.0,Echolocation,Eptesicus serotinus,0.447,0.605,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1786.3035,1786.311,28906.0,36648.0,Echolocation,Eptesicus serotinus,0.307,0.621,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1786.3905,1786.3973,27187.0,40436.0,Echolocation,Eptesicus serotinus,0.409,0.503,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1786.5065,1786.5139,27187.0,39882.0,Echolocation,Eptesicus serotinus,0.556,0.686,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1786.6295,1786.6367,27187.0,39200.0,Echolocation,Eptesicus serotinus,0.502,0.583,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1786.7345,1786.7426,28046.0,39337.0,Echolocation,Eptesicus serotinus,0.446,0.585,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1786.9365,1786.9436,28906.0,43593.0,Echolocation,Eptesicus serotinus,0.512,0.61,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.0895,1787.0978,28046.0,42524.0,Echolocation,Eptesicus serotinus,0.501,0.588,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.1605,1787.1691,34062.0,41142.0,Echolocation,Eptesicus serotinus,0.259,0.58,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.1885,1787.197,33203.0,40492.0,Echolocation,Eptesicus serotinus,0.256,0.603,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.2145,1787.2236,33203.0,40893.0,Echolocation,Eptesicus serotinus,0.273,0.667,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.3935,1787.4035,24609.0,41478.0,Echolocation,Eptesicus serotinus,0.567,0.641,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.5015,1787.5078,26328.0,42700.0,Echolocation,Eptesicus serotinus,0.474,0.596,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.5665,1787.5723,29765.0,42533.0,Echolocation,Eptesicus serotinus,0.421,0.543,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.6095,1787.6144,28046.0,44700.0,Echolocation,Eptesicus serotinus,0.304,0.549,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.7095,1787.7154,23750.0,44530.0,Echolocation,Eptesicus serotinus,0.396,0.598,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1787.8285,1787.8343,26328.0,42129.0,Echolocation,Eptesicus serotinus,0.436,0.615,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1788.0175,1788.0239,28906.0,38710.0,Echolocation,Eptesicus serotinus,0.37,0.519,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1788.1115,1788.1202,28046.0,38128.0,Echolocation,Eptesicus serotinus,0.411,0.596,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1788.2505,1788.2586000000001,24609.0,40926.0,Echolocation,Eptesicus serotinus,0.451,0.587,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1788.5795,1788.5879,26328.0,39212.0,Echolocation,Eptesicus serotinus,0.539,0.62,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
+1788.6975,1788.7062,25468.0,37237.0,Echolocation,Eptesicus serotinus,0.412,0.547,-1,/mnt/ubna_data_01/recover-20220728/UBNA_011/20220728_053000.WAV,recover-20220728,UBNA_011,Foliage
