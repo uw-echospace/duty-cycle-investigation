@@ -1,0 +1,4 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+44.7655,44.7721,44375.0,52058.0,Echolocation,Pipistrellus pipistrellus,0.475,0.507,-1,/mnt/ubna_data_02/recover-20220922/UBNA_001/20220920_050000.WAV,recover-20220922,UBNA_001,Telephone Field
+749.7725,749.7789,47812.0,54125.0,Echolocation,Pipistrellus pipistrellus,0.548,0.57,-1,/mnt/ubna_data_02/recover-20220922/UBNA_001/20220920_050000.WAV,recover-20220922,UBNA_001,Telephone Field
+1618.0495,1618.0558,43515.0,54513.0,Echolocation,Pipistrellus pipistrellus,0.377,0.516,-1,/mnt/ubna_data_02/recover-20220922/UBNA_001/20220920_050000.WAV,recover-20220922,UBNA_001,Telephone Field
