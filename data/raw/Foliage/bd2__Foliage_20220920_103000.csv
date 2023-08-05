@@ -1,0 +1,3 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Recover Folder,SD Card,Site name
+19.9045,19.9173,22890.0,27633.0,Nyctalus leisleri,0.377,0.554,-1,Echolocation,/mnt/ubna_data_02/recover-20220922/UBNA_002/20220920_103000.WAV,recover-20220922,UBNA_002,Foliage
+20.0415,20.051,25468.0,32298.0,Eptesicus serotinus,0.286,0.501,-1,Echolocation,/mnt/ubna_data_02/recover-20220922/UBNA_002/20220920_103000.WAV,recover-20220922,UBNA_002,Foliage
