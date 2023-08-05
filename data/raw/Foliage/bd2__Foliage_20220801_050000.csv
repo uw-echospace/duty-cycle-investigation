@@ -1,0 +1,5 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+1469.8065,1469.8125,40078.0,62555.0,Echolocation,Myotis daubentonii,0.233,0.527,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_050000.WAV,recover-20220801,UBNA_006,Foliage
+1471.7435,1471.7488,40937.0,56767.0,Echolocation,Pipistrellus nathusii,0.227,0.51,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_050000.WAV,recover-20220801,UBNA_006,Foliage
+1471.8305,1471.8364,37500.0,54055.0,Echolocation,Pipistrellus nathusii,0.218,0.51,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_050000.WAV,recover-20220801,UBNA_006,Foliage
+1473.6585,1473.6645,36640.0,58500.0,Echolocation,Myotis brandtii,0.234,0.522,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_050000.WAV,recover-20220801,UBNA_006,Foliage

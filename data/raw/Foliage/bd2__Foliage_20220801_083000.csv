@@ -1,0 +1,10 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+1592.5205,1592.5265,40937.0,53568.0,Echolocation,Pipistrellus nathusii,0.326,0.541,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
+1592.8035,1592.8109,42656.0,56852.0,Echolocation,Pipistrellus nathusii,0.283,0.525,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
+1592.9705,1592.977,39218.0,56634.0,Echolocation,Pipistrellus nathusii,0.275,0.524,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
+1593.0725,1593.0802,40937.0,58706.0,Echolocation,Pipistrellus nathusii,0.302,0.527,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
+1594.4155,1594.4217,42656.0,61389.0,Echolocation,Pipistrellus nathusii,0.227,0.504,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
+1594.5585,1594.5647,40937.0,62696.0,Echolocation,Myotis brandtii,0.231,0.544,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
+1594.6515,1594.6564,41796.0,63228.0,Echolocation,Myotis brandtii,0.206,0.571,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
+1594.7745,1594.7804,41796.0,62383.0,Echolocation,Pipistrellus nathusii,0.203,0.557,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
+1595.1735,1595.1786,40937.0,58553.0,Echolocation,Myotis daubentonii,0.208,0.538,-1,/mnt/ubna_data_01/recover-20220801/UBNA_006/20220801_083000.WAV,recover-20220801,UBNA_006,Foliage
