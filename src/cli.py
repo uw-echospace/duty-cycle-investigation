@@ -63,6 +63,9 @@ def parse_args():
     return vars(parser.parse_args())
 
 def get_file_paths(data_params):
+    """
+    Assemble a dictionary for file_paths important for the pipeline.
+    """
 
     file_paths = dict()
     file_paths["raw_SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/raw/{data_params["site_tag"]}'
@@ -93,6 +96,10 @@ def get_file_paths(data_params):
     return file_paths
 
 if __name__ == "__main__":
+    """
+    Put together important parameters and run the pipeline to generate results
+    """
+    
     args = parse_args()
 
     data_params = dict()

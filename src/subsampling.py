@@ -5,6 +5,10 @@ from pathlib import Path
 
 
 def simulate_dutycycle_on_detections(location_df, dc_tag):
+    """
+    Simulates a provided duty-cycling scheme on the provided location summary of concatenated bd2 outputs.
+    """
+
     cycle_length = int(dc_tag.split('of')[1])
     percent_on = float(dc_tag.split('of')[0]) / cycle_length
 
@@ -22,6 +26,10 @@ def simulate_dutycycle_on_detections(location_df, dc_tag):
 
 
 def prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag):
+    """
+    Generates a duty-cycled location summary of concatenated bd2 outputs for measuring effects of duty-cycling.
+    """
+
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
     plottable_location_df = simulate_dutycycle_on_detections(location_df, dc_tag)
     plottable_location_df.to_csv(f'{file_paths["simulated_schemes_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}_{dc_tag}.csv')
@@ -29,6 +37,13 @@ def prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag):
     return plottable_location_df
 
 def get_list_of_dc_tags(cycle_lengths=[1800, 360], percent_ons=[0.1667]):
+    """
+    Takes a list of cycle lengths and the percent ON values to generate a list of tags.
+    Cycle length is the period of the duty-cycle when the recording resets.
+    Percent ON is the percentage of the cycle length where we simulate recording; only regarding calls within recording periods.
+    Each cycle length x percent ON combination will be saved into a list in the format "{percent_on*cycle_lenght}of{cycle_length}"
+    """
+
     dc_tags = []
 
     cycle_length = 1800
@@ -44,6 +59,10 @@ def get_list_of_dc_tags(cycle_lengths=[1800, 360], percent_ons=[0.1667]):
     return dc_tags
 
 def construct_activity_arr_from_dc_tags(data_params, file_paths):
+    """
+    Generates an activity summary for each provided duty-cycling scheme and puts them together for comparison.
+    """
+
     activity_arr = pd.DataFrame()
 
     for dc_tag in data_params['dc_tags']:

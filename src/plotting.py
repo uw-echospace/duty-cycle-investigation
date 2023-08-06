@@ -13,10 +13,19 @@ from core import DC_COLOR_MAPPINGS
 
 
 def rect(pos):
+    """
+    Draws boxes in our presence plotting functions to show presence for date and time.
+    Function borrowed from https://stackoverflow.com/questions/51432498/add-borders-to-grid-plot-based-on-value.
+    """
+
     r = plt.Rectangle(pos-0.505, 1, 1, facecolor="none", edgecolor="k", linewidth=0.6)
     plt.gca().add_patch(r)
 
 def plot_activity_grid(activity_df, data_params, pipeline_params, file_paths):
+    """
+    Plots an activity grid generated from an activity summary for a specific duty-cycling scheme.
+    """
+
     activity_times = pd.DatetimeIndex(activity_df.index).tz_localize('UTC')
     activity_dates = pd.DatetimeIndex(activity_df.columns).strftime("%m/%d")
     ylabel = 'UTC'
@@ -32,11 +41,15 @@ def plot_activity_grid(activity_df, data_params, pipeline_params, file_paths):
     total = int(data_params['cur_dc_tag'].split('of')[1])
     recover_ratio = total / on
 
+    masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
+    cmap = plt.get_cmap('viridis')
+    cmap.set_bad(color='red')
+
     plt.rcParams.update({'font.size': 20})
     plt.figure(figsize=(len(activity_df.index), len(activity_df.index)//2))
     title = f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title)
-    plt.imshow(1+(recover_ratio*activity_df), norm=colors.LogNorm(vmin=1, vmax=10e3))
+    plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
     plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=50)
     plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=50)
     plt.ylabel(f'{ylabel} Time (HH:MM)')
@@ -49,6 +62,11 @@ def plot_activity_grid(activity_df, data_params, pipeline_params, file_paths):
         plt.show()
 
 def plot_presence_grid(presence_df, data_params, pipeline_params, file_paths):
+    """
+    Plots an presence grid generated from an activity summary for a specific duty-cycling scheme.
+    """
+
+    presence_df = presence_df.replace(np.NaN, 156)
     activity_times = pd.DatetimeIndex(presence_df.index).tz_localize('UTC')
     activity_dates = pd.DatetimeIndex(presence_df.columns)
     ylabel = 'UTC'
@@ -67,7 +85,7 @@ def plot_presence_grid(presence_df, data_params, pipeline_params, file_paths):
     masked_array = np.ma.masked_where(presence_df == 1, presence_df)
     cmap = plt.get_cmap("Greys")  # Can be any colormap that you want after the cm
     cmap.set_bad(color=DC_COLOR_MAPPINGS[data_params['cur_dc_tag']], alpha=0.75)
-    im = plt.imshow(masked_array, cmap=cmap)
+    plt.imshow(masked_array, cmap=cmap, vmin=0, vmax=255)
     x, y = np.meshgrid(np.arange(presence_df.shape[1]), np.arange(presence_df.shape[0]))
     m = np.c_[x[presence_df == 1], y[presence_df == 1]]
     for pos in m:
@@ -84,6 +102,9 @@ def plot_presence_grid(presence_df, data_params, pipeline_params, file_paths):
         plt.show()
 
 def plot_dc_comparisons_per_night(activity_arr, data_params, pipeline_params, file_paths):
+    """
+    Plots a bar graph for each date comparing all duty-cycling schemes provided in a given location.
+    """
 
     datetimes = pd.to_datetime(activity_arr.index.values)
     dates = datetimes.strftime("%m/%d/%y").unique()
@@ -132,6 +153,10 @@ def plot_dc_comparisons_per_night(activity_arr, data_params, pipeline_params, fi
         plt.show()
 
 def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths):
+    """
+    Plots an activity grid for each duty-cycling scheme for a given location, looking at all datetimes in data/raw.
+    """
+
     datetimes = pd.to_datetime(activity_arr.index.values)
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
@@ -143,7 +168,7 @@ def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_
         xlabel = 'PST'
     plot_times = activity_times.strftime("%H:%M").unique()
 
-    plt.rcParams.update({'font.size': 20})
+    plt.rcParams.update({'font.size': 30})
     plt.figure(figsize=(len(data_params["dc_tags"])*10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
@@ -151,10 +176,13 @@ def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_
         on = int(dc_tag.split('of')[0])
         total = int(dc_tag.split('of')[1])
         recover_ratio = total / on
+        masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
+        cmap = plt.get_cmap('viridis')
+        cmap.set_bad(color='red')
         plot_dates = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y').strftime("%m/%d").unique()
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (DC Tag : {dc_tag})")
-        plt.imshow(1+(recover_ratio*activity_df), norm=colors.LogNorm(vmin=1, vmax=10e3))
+        plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
         plt.xticks(np.arange(0, len(activity_df.columns), 2)-0.5, plot_dates[::2], rotation=45)
         plt.yticks(np.arange(0, len(activity_df.index), 2)-0.5, plot_times[::2], rotation=45)
         plt.xlabel('Date (MM/DD)')
@@ -166,6 +194,10 @@ def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_
         plt.show()
 
 def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths):
+    """
+    Plots a presence grid for each duty-cycling scheme for a given location, looking at all datetimes in data/raw.
+    """
+
     datetimes = pd.to_datetime(activity_arr.index.values)
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
@@ -178,11 +210,11 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
     plot_times = np.array(activity_times.strftime("%H:%M").unique())
     plot_times[1::2] = " "
 
-    plt.rcParams.update({'font.size': 20})
+    plt.rcParams.update({'font.size': 30})
     plt.figure(figsize=(len(data_params["dc_tags"])*10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
-        presence_df = dh.construct_presence_grid(activity_arr, dc_tag)
+        presence_df = dh.construct_presence_grid(activity_arr, dc_tag).replace(np.NaN, 156)
         plot_dates = np.array(pd.to_datetime(presence_df.columns.values, format='%m/%d/%y').strftime("%m/%d").unique())
         plot_dates[1::2] = ' '
         plt.subplot(len(data_params["dc_tags"]), 1, i+1)
@@ -190,7 +222,7 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
         masked_array = np.ma.masked_where(presence_df == 1, presence_df)
         cmap = plt.get_cmap("Greys")  # Can be any colormap that you want after the cm
         cmap.set_bad(color=DC_COLOR_MAPPINGS[dc_tag], alpha=0.75)
-        im = plt.imshow(masked_array, cmap=cmap)
+        plt.imshow(masked_array, cmap=cmap, vmin=0, vmax=255)
         x, y = np.meshgrid(np.arange(presence_df.shape[1]), np.arange(presence_df.shape[0]))
         m = np.c_[x[presence_df == 1], y[presence_df == 1]]
         for pos in m:
