@@ -1,0 +1,23 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+408.3855,408.3994,23750.0,28705.0,Echolocation,Nyctalus leisleri,0.37,0.511,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1119.1665,1119.1775,44375.0,51046.0,Echolocation,Pipistrellus pipistrellus,0.388,0.538,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1181.8305,1181.8436,24609.0,30273.0,Echolocation,Nyctalus leisleri,0.254,0.523,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1190.1685,1190.1764,27187.0,34735.0,Echolocation,Nyctalus leisleri,0.282,0.566,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1190.4685,1190.4778,26328.0,35666.0,Echolocation,Eptesicus serotinus,0.369,0.529,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1190.7725,1190.7817,26328.0,36043.0,Echolocation,Eptesicus serotinus,0.34,0.636,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1190.9335,1190.9435,25468.0,33721.0,Echolocation,Nyctalus leisleri,0.304,0.648,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1191.3565,1191.3686,23750.0,35926.0,Echolocation,Eptesicus serotinus,0.5,0.715,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1191.5215,1191.5356,24609.0,31010.0,Echolocation,Nyctalus leisleri,0.323,0.609,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1191.8285,1191.8405,23750.0,33040.0,Echolocation,Nyctalus leisleri,0.357,0.712,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1192.1155,1192.1292,22890.0,29573.0,Echolocation,Nyctalus leisleri,0.291,0.627,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1192.4125,1192.4254,22890.0,33614.0,Echolocation,Eptesicus serotinus,0.438,0.703,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1192.7215,1192.7344,23750.0,29020.0,Echolocation,Nyctalus leisleri,0.505,0.677,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1193.1685,1193.1824,22890.0,28566.0,Echolocation,Nyctalus leisleri,0.567,0.688,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1193.4655,1193.481,22890.0,27297.0,Echolocation,Nyctalus leisleri,0.428,0.595,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1193.7785,1193.7921,22890.0,28325.0,Echolocation,Nyctalus leisleri,0.598,0.694,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1194.0785,1194.0928,22890.0,27972.0,Echolocation,Nyctalus leisleri,0.382,0.601,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1194.3695,1194.3814,23750.0,29066.0,Echolocation,Nyctalus leisleri,0.491,0.65,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1194.9475,1194.958,23750.0,30704.0,Echolocation,Nyctalus leisleri,0.415,0.658,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1523.0955,1523.1171,23750.0,26769.0,Echolocation,Nyctalus leisleri,0.581,0.614,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1524.1835,1524.2019,23750.0,26002.0,Echolocation,Nyctalus leisleri,0.683,0.701,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
+1526.9395,1526.9597,23750.0,26905.0,Echolocation,Nyctalus leisleri,0.492,0.534,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_033000.WAV,recover-20220915,UBNA_002,Foliage
