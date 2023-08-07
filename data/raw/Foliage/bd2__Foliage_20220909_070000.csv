@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+714.2865,714.3117,18593.0,21833.0,Echolocation,Nyctalus noctula,0.416,0.527,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1168.0425,1168.0509,43515.0,57689.0,Echolocation,Pipistrellus pipistrellus,0.198,0.532,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1168.4075,1168.4148,42656.0,55845.0,Echolocation,Pipistrellus pipistrellus,0.166,0.515,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1168.7995,1168.8064,44375.0,53346.0,Echolocation,Pipistrellus pipistrellus,0.289,0.518,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1168.9825,1168.9897,44375.0,57541.0,Echolocation,Pipistrellus pipistrellus,0.304,0.546,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1169.1895,1169.1962,42656.0,55304.0,Echolocation,Pipistrellus nathusii,0.188,0.509,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1169.2975,1169.3044,41796.0,61273.0,Echolocation,Pipistrellus pipistrellus,0.178,0.55,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1169.8185,1169.8284,40937.0,61208.0,Echolocation,Pipistrellus nathusii,0.425,0.523,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1169.9185,1169.9271,41796.0,65792.0,Echolocation,Pipistrellus nathusii,0.274,0.508,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1170.0265,1170.0354,40937.0,55014.0,Echolocation,Pipistrellus nathusii,0.419,0.518,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
+1170.1185,1170.1276,41796.0,61832.0,Echolocation,Pipistrellus nathusii,0.173,0.518,-1,/mnt/ubna_data_02/recover-20220912/UBNA_008/20220909_070000.WAV,recover-20220912,UBNA_008,Foliage
