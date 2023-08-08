@@ -45,8 +45,8 @@ def plot_activity_grid(activity_df, data_params, pipeline_params, file_paths):
     cmap = plt.get_cmap('viridis')
     cmap.set_bad(color='red')
 
-    plt.rcParams.update({'font.size': 20})
-    plt.figure(figsize=(len(activity_df.index), len(activity_df.index)//2))
+    plt.rcParams.update({'font.size': 30})
+    plt.figure(figsize=(len(activity_dates)//1.5, len(activity_dates)//6))
     title = f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title)
     plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
@@ -78,8 +78,8 @@ def plot_presence_grid(presence_df, data_params, pipeline_params, file_paths):
     plot_dates = np.array(activity_dates.strftime("%m/%d").unique())
     plot_dates[1::2] = " "
 
-    plt.rcParams.update({'font.size': 20})
-    plt.figure(figsize=(len(presence_df.index), len(presence_df.index)//2))
+    plt.rcParams.update({'font.size': 30})
+    plt.figure(figsize=(len(activity_dates)//1.5, len(activity_dates)//6))
     title = f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title)
     masked_array = np.ma.masked_where(presence_df == 1, presence_df)
@@ -169,7 +169,7 @@ def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_
     plot_times = activity_times.strftime("%H:%M").unique()
 
     plt.rcParams.update({'font.size': 30})
-    plt.figure(figsize=(len(data_params["dc_tags"])*10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
+    plt.figure(figsize=(len(dates)//1.5, len(dates)//2))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         activity_df = (dh.construct_activity_grid(activity_arr, dc_tag))
@@ -211,7 +211,7 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
     plot_times[1::2] = " "
 
     plt.rcParams.update({'font.size': 30})
-    plt.figure(figsize=(len(data_params["dc_tags"])*10, (len(data_params["dc_tags"])**2)*np.sqrt(len(dates))/1.5))
+    plt.figure(figsize=(len(dates)//1.5, len(dates)//2))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         presence_df = dh.construct_presence_grid(activity_arr, dc_tag).replace(np.NaN, 156)
