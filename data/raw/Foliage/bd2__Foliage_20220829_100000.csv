@@ -1,0 +1,13 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+69.3725,69.3805,47812.0,64114.0,Echolocation,Pipistrellus pipistrellus,0.482,0.552,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+486.8535,486.8612,47812.0,61815.0,Echolocation,Pipistrellus pipistrellus,0.497,0.542,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+486.9425,486.951,48671.0,64237.0,Echolocation,Pipistrellus pipistrellus,0.489,0.545,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+487.1125,487.1184,47812.0,64109.0,Echolocation,Pipistrellus pipistrellus,0.581,0.669,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+487.2955,487.3054,47812.0,63462.0,Echolocation,Pipistrellus pipistrellus,0.444,0.534,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+1079.2255,1079.2303,47812.0,63519.0,Echolocation,Pipistrellus pipistrellus,0.506,0.598,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+1767.9845,1767.9897,46093.0,60447.0,Echolocation,Pipistrellus pipistrellus,0.381,0.546,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+1768.0745,1768.0809,46953.0,53366.0,Echolocation,Pipistrellus pipistrellus,0.507,0.529,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+1768.3235,1768.3298,45234.0,59958.0,Echolocation,Pipistrellus pipistrellus,0.564,0.639,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+1768.6105,1768.6193,44375.0,61714.0,Echolocation,Pipistrellus pipistrellus,0.385,0.508,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+1768.8045,1768.8122,44375.0,63739.0,Echolocation,Pipistrellus pipistrellus,0.39,0.545,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage
+1769.0915,1769.0993,45234.0,64157.0,Echolocation,Pipistrellus pipistrellus,0.443,0.616,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_100000.WAV,recover-20220828,UBNA_009,Foliage

@@ -1,0 +1,4 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
+405.6705,405.6913,16875.0,20798.0,Echolocation,Nyctalus noctula,0.409,0.523,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220827_030000.WAV,recover-20220828,UBNA_009,Foliage
+406.8965,406.9177,16875.0,21232.0,Echolocation,Nyctalus noctula,0.549,0.629,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220827_030000.WAV,recover-20220828,UBNA_009,Foliage
+407.5015,407.5178,16875.0,20902.0,Echolocation,Nyctalus noctula,0.488,0.61,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220827_030000.WAV,recover-20220828,UBNA_009,Foliage
