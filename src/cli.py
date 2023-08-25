@@ -97,7 +97,7 @@ def get_file_paths(data_params):
 
 if __name__ == "__main__":
     """
-    Put together important parameters and run the pipeline to generate results
+    Put together important parahmeters and run the pipeline to generate results
     """
     
     args = parse_args()
