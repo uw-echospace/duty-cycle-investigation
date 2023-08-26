@@ -1,0 +1,14 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+489.3615,489.3796,22890.0,26307.0,Echolocation,Nyctalus leisleri,0.474,0.544,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+602.5565,602.5763,22031.0,26243.0,Echolocation,Nyctalus leisleri,0.464,0.533,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+615.7735,615.7915,22890.0,25575.0,Echolocation,Nyctalus leisleri,0.531,0.565,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+643.7155,643.7317,26328.0,29446.0,Echolocation,Nyctalus leisleri,0.416,0.516,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1632.1445,1632.1672,16875.0,21535.0,Echolocation,Nyctalus noctula,0.385,0.519,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1652.6265,1652.6426,22890.0,27894.0,Echolocation,Nyctalus leisleri,0.316,0.5,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1696.7975,1696.8088,16015.0,22252.0,Echolocation,Nyctalus noctula,0.339,0.521,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1704.4525,1704.4669,23750.0,29300.0,Echolocation,Nyctalus leisleri,0.223,0.539,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1716.3465,1716.3587,16015.0,21489.0,Echolocation,Nyctalus noctula,0.319,0.523,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1718.2175,1718.2313,19453.0,25922.0,Echolocation,Nyctalus noctula,0.254,0.522,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1720.0555,1720.0779,21171.0,24571.0,Echolocation,Nyctalus leisleri,0.517,0.543,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1740.9285,1740.9508,16875.0,21359.0,Echolocation,Nyctalus noctula,0.397,0.512,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage
+1785.6515,1785.6699,17734.0,21804.0,Echolocation,Nyctalus noctula,0.409,0.544,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_130000.WAV,Foliage

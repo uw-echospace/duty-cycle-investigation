@@ -1,0 +1,4 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+1468.1185,1468.1403,17734.0,20958.0,Echolocation,Nyctalus noctula,0.362,0.516,-1,/mnt/ubna_data_01/recover-20220725/UBNA_009/20220725_130000.WAV,Foliage
+1468.2465,1468.2688,17734.0,21333.0,Echolocation,Nyctalus noctula,0.395,0.517,-1,/mnt/ubna_data_01/recover-20220725/UBNA_009/20220725_130000.WAV,Foliage
+1468.3775,1468.3967,17734.0,21296.0,Echolocation,Nyctalus noctula,0.37,0.513,-1,/mnt/ubna_data_01/recover-20220725/UBNA_009/20220725_130000.WAV,Foliage

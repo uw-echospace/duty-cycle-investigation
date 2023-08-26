@@ -1,0 +1,14 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+155.7665,155.782,22031.0,26272.0,Echolocation,Nyctalus leisleri,0.562,0.609,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+235.0035,235.0196,22031.0,27142.0,Echolocation,Nyctalus leisleri,0.444,0.602,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+235.2775,235.2954,22031.0,25847.0,Echolocation,Nyctalus leisleri,0.575,0.632,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+235.6675,235.6795,23750.0,28543.0,Echolocation,Nyctalus leisleri,0.333,0.507,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+316.6435,316.6597,22890.0,27364.0,Echolocation,Nyctalus leisleri,0.522,0.615,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+317.52049999999997,317.5374,23750.0,27955.0,Echolocation,Nyctalus leisleri,0.396,0.536,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+325.0635,325.0759,24609.0,29203.0,Echolocation,Nyctalus leisleri,0.362,0.583,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+338.0155,338.0302,23750.0,27993.0,Echolocation,Nyctalus leisleri,0.402,0.515,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+338.6545,338.6681,22890.0,27016.0,Echolocation,Nyctalus leisleri,0.418,0.533,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+356.4465,356.4652,24609.0,28810.0,Echolocation,Nyctalus leisleri,0.408,0.516,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+805.0795,805.0958,22031.0,26757.0,Echolocation,Nyctalus leisleri,0.487,0.585,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+1120.6125,1120.6268,22031.0,25351.0,Echolocation,Nyctalus leisleri,0.437,0.513,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage
+1124.8465,1124.862,22031.0,27376.0,Echolocation,Nyctalus leisleri,0.426,0.584,-1,/mnt/ubna_data_01/recover-20220715/UBNA_007/20220715_060000.WAV,Foliage

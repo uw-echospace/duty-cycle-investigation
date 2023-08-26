@@ -1,0 +1,4 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+105.4785,105.4939,23750.0,26860.0,Echolocation,Nyctalus leisleri,0.472,0.531,-1,/mnt/ubna_data_01/recover-20220712_unit2/20220712_030000.WAV,Foliage
+895.4575,895.4705,41796.0,45772.0,Echolocation,Pipistrellus pipistrellus,0.434,0.528,-1,/mnt/ubna_data_01/recover-20220712_unit2/20220712_030000.WAV,Foliage
+1436.0485,1436.0667,16015.0,20477.0,Echolocation,Nyctalus noctula,0.268,0.535,-1,/mnt/ubna_data_01/recover-20220712_unit2/20220712_030000.WAV,Foliage

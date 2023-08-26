@@ -1,0 +1,4 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+124.4735,124.4801,40937.0,48579.0,Echolocation,Pipistrellus nathusii,0.486,0.531,-1,/mnt/ubna_data_01/recover-20220719/UBNA_003/20220718_120000.WAV,Foliage
+126.4995,126.5065,39218.0,49718.0,Echolocation,Pipistrellus nathusii,0.308,0.502,-1,/mnt/ubna_data_01/recover-20220719/UBNA_003/20220718_120000.WAV,Foliage
+127.4925,127.4991,40937.0,47903.0,Echolocation,Pipistrellus nathusii,0.465,0.535,-1,/mnt/ubna_data_01/recover-20220719/UBNA_003/20220718_120000.WAV,Foliage

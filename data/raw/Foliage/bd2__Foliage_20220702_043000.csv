@@ -1,0 +1,9 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+1203.3555,1203.3597,48671.0,67362.0,Echolocation,Pipistrellus pipistrellus,0.45,0.613,-1,/mnt/ubna_data_01/recover-20220702_unit2/20220702_043000.WAV,Foliage
+1203.5805,1203.5847,48671.0,71392.0,Echolocation,Pipistrellus pipistrellus,0.265,0.56,-1,/mnt/ubna_data_01/recover-20220702_unit2/20220702_043000.WAV,Foliage
+1203.7515,1203.7567,43515.0,85281.0,Echolocation,Myotis alcathoe,0.372,0.505,-1,/mnt/ubna_data_01/recover-20220702_unit2/20220702_043000.WAV,Foliage
+1203.9385,1203.9433,46953.0,76803.0,Echolocation,Pipistrellus pipistrellus,0.422,0.572,-1,/mnt/ubna_data_01/recover-20220702_unit2/20220702_043000.WAV,Foliage
+1513.2645,1513.2775,25468.0,32057.0,Echolocation,Nyctalus leisleri,0.395,0.603,-1,/mnt/ubna_data_01/recover-20220702_unit2/20220702_043000.WAV,Foliage
+1513.5505,1513.5662,24609.0,30976.0,Echolocation,Nyctalus leisleri,0.232,0.503,-1,/mnt/ubna_data_01/recover-20220702_unit2/20220702_043000.WAV,Foliage
+1527.3685,1527.3824,25468.0,32697.0,Echolocation,Nyctalus leisleri,0.361,0.618,-1,/mnt/ubna_data_01/recover-20220702_unit2/20220702_043000.WAV,Foliage
+1527.9585,1527.9727,24609.0,30964.0,Echolocation,Nyctalus leisleri,0.302,0.536,-1,/mnt/ubna_data_01/recover-20220702_unit2/20220702_043000.WAV,Foliage

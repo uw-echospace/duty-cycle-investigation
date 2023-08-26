@@ -1,0 +1,5 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+124.1195,124.1249,40937.0,57646.0,Echolocation,Myotis daubentonii,0.212,0.549,-1,/mnt/ubna_data_01/recover-20220725/UBNA_009/20220724_103000.WAV,Foliage
+125.2355,125.2435,40078.0,46817.0,Echolocation,Pipistrellus nathusii,0.465,0.52,-1,/mnt/ubna_data_01/recover-20220725/UBNA_009/20220724_103000.WAV,Foliage
+282.8415,282.8559,22890.0,27616.0,Echolocation,Nyctalus leisleri,0.37,0.535,-1,/mnt/ubna_data_01/recover-20220725/UBNA_009/20220724_103000.WAV,Foliage
+285.0085,285.0225,22031.0,26940.0,Echolocation,Nyctalus leisleri,0.425,0.558,-1,/mnt/ubna_data_01/recover-20220725/UBNA_009/20220724_103000.WAV,Foliage

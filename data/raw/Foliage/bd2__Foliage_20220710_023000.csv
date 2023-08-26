@@ -1,0 +1,15 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+318.1525,318.1681,23750.0,28866.0,Echolocation,Nyctalus leisleri,0.376,0.522,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+365.2425,365.2567,24609.0,29952.0,Echolocation,Nyctalus leisleri,0.421,0.551,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1130.2155,1130.2301,15156.0,20430.0,Echolocation,Nyctalus leisleri,0.244,0.507,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1130.4855,1130.4991,15156.0,19966.0,Echolocation,Nyctalus leisleri,0.266,0.583,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1130.6195,1130.6328,15156.0,20451.0,Echolocation,Nyctalus leisleri,0.245,0.594,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1130.7545,1130.7678,15156.0,20695.0,Echolocation,Nyctalus leisleri,0.239,0.597,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1141.9345,1141.9492,15156.0,21021.0,Echolocation,Nyctalus leisleri,0.287,0.528,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1142.0755,1142.089,15156.0,20809.0,Echolocation,Nyctalus noctula,0.228,0.555,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1142.2105,1142.2237,15156.0,20893.0,Echolocation,Nyctalus leisleri,0.277,0.559,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1142.3455,1142.3591,15156.0,21068.0,Echolocation,Nyctalus leisleri,0.255,0.532,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1142.4825,1142.4956,15156.0,20603.0,Echolocation,Nyctalus leisleri,0.291,0.54,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1142.6175,1142.6304,15156.0,21105.0,Echolocation,Nyctalus leisleri,0.23,0.581,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1154.8595,1154.8725,15156.0,20428.0,Echolocation,Nyctalus noctula,0.232,0.512,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage
+1166.0575,1166.071,16015.0,21033.0,Echolocation,Nyctalus noctula,0.205,0.532,-1,/mnt/ubna_data_01/recover-20220712_unit3/20220710_023000.WAV,Foliage

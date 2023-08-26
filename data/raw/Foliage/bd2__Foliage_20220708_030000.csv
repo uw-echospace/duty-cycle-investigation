@@ -1,0 +1,3 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+858.2745,858.2882,21171.0,27493.0,Echolocation,Nyctalus noctula,0.208,0.507,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_030000.WAV,Foliage
+858.3395,858.3521,22031.0,27407.0,Echolocation,Nyctalus noctula,0.203,0.54,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_030000.WAV,Foliage
