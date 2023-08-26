@@ -1,4 +1,5 @@
 from pathlib import Path
+import glob
 
 import dask.dataframe as dd
 import pandas as pd
@@ -48,14 +49,14 @@ def construct_activity_arr_from_location_summary(location_df, dc_tag, file_paths
     Will be used later to assembled an activity summary for each duty-cycling scheme to compare effects.
     """
 
-    all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').iterdir()))))
+    all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     col_name = f"Number_of_Detections ({dc_tag})"
 
     num_of_detections = location_df.resample(resolution, on='ref_time')['ref_time'].count()
     incomplete_activity_arr = pd.DataFrame(num_of_detections.values, index=num_of_detections.index, columns=[col_name])
     activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(resolution).first()
-    activity_arr = activity_arr.between_time('03:00', '13:00')
+    activity_arr = activity_arr.between_time('02:00', '13:00')
 
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
 
