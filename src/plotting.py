@@ -27,15 +27,16 @@ def plot_activity_grid(activity_df, data_params, pipeline_params, file_paths):
     """
 
     activity_times = pd.DatetimeIndex(activity_df.index).tz_localize('UTC')
-    activity_dates = pd.DatetimeIndex(activity_df.columns).strftime("%m/%d")
+    activity_dates = pd.DatetimeIndex(activity_df.columns).strftime("%m/%d/%y")
     ylabel = 'UTC'
     if pipeline_params["show_PST"]:
         activity_times = activity_times.tz_convert(tz='US/Pacific')
         ylabel = 'PST'
-    plot_times = np.array(pd.DatetimeIndex(activity_times).strftime("%H:%M").unique())
-    plot_times[1::2] = " "
-    plot_dates = np.array(activity_dates.unique())
-    plot_dates[1::2] = " "
+    activity_times = activity_times.strftime("%H:%M")
+    plot_times = [''] * len(activity_times)
+    plot_times[::2] = activity_times[::2]
+    plot_dates = [''] * len(activity_dates)
+    plot_dates[::7] = activity_dates[::7]
 
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
@@ -45,15 +46,15 @@ def plot_activity_grid(activity_df, data_params, pipeline_params, file_paths):
     cmap = plt.get_cmap('viridis')
     cmap.set_bad(color='red')
 
-    plt.rcParams.update({'font.size': (len(activity_times)*0.5)*len(activity_dates)/len(activity_times)})
-    plt.figure(figsize=(len(activity_dates)/2, len(activity_times)/2))
+    plt.rcParams.update({'font.size': len(activity_dates) + 1.5*len(activity_times)})
+    plt.figure(figsize=(1.5*len(activity_dates), 1.5*len(activity_times)))
     title = f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title)
     plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
-    plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=50)
-    plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=50)
+    plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
+    plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
     plt.ylabel(f'{ylabel} Time (HH:MM)')
-    plt.xlabel('Date (MM/DD)')
+    plt.xlabel('Date (MM/DD/YY)')
     plt.colorbar()
     plt.tight_layout()
     if pipeline_params["save_activity_grid"]:
@@ -68,18 +69,19 @@ def plot_presence_grid(presence_df, data_params, pipeline_params, file_paths):
 
     presence_df = presence_df.replace(np.NaN, 156)
     activity_times = pd.DatetimeIndex(presence_df.index).tz_localize('UTC')
-    activity_dates = pd.DatetimeIndex(presence_df.columns)
+    activity_dates = pd.DatetimeIndex(presence_df.columns).strftime("%m/%d/%y")
     ylabel = 'UTC'
     if pipeline_params["show_PST"]:
         activity_times = activity_times.tz_convert(tz='US/Pacific')
         ylabel = 'PST'
-    plot_times = np.array(activity_times.strftime("%H:%M").unique())
-    plot_times[1::2] = " "
-    plot_dates = np.array(activity_dates.strftime("%m/%d").unique())
-    plot_dates[1::2] = " "
+    activity_times = activity_times.strftime("%H:%M")
+    plot_times = [''] * len(activity_times)
+    plot_times[::2] = activity_times[::2]
+    plot_dates = [''] * len(activity_dates)
+    plot_dates[::7] = activity_dates[::7]
 
-    plt.rcParams.update({'font.size': (len(activity_times)*0.5)*len(activity_dates)/len(activity_times)})
-    plt.figure(figsize=(len(activity_dates)/2, len(activity_times)/2))
+    plt.rcParams.update({'font.size': len(activity_dates) + 2*len(activity_times)})
+    plt.figure(figsize=(2*len(activity_dates), 2*len(activity_times)))
     title = f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title)
     masked_array = np.ma.masked_where(presence_df == 1, presence_df)
@@ -91,9 +93,9 @@ def plot_presence_grid(presence_df, data_params, pipeline_params, file_paths):
     for pos in m:
         rect(pos)
     plt.ylabel(f"{ylabel} Time (HH:MM)")
-    plt.xlabel('Date (MM/DD)')
-    plt.yticks(np.arange(0, len(presence_df.index))-0.5, plot_times, rotation=50)
-    plt.xticks(np.arange(0, len(presence_df.columns))-0.5, plot_dates, rotation=50)
+    plt.xlabel('Date (MM/DD/YY)')
+    plt.yticks(np.arange(0, len(presence_df.index))-0.5, plot_times, rotation=30)
+    plt.xticks(np.arange(0, len(presence_df.columns))-0.5, plot_dates, rotation=30)
     plt.grid(which="both", color='k')
     plt.tight_layout()
     if pipeline_params["save_presence_grid"]:
@@ -166,10 +168,12 @@ def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_
     if pipeline_params["show_PST"]:
         activity_times = activity_times.tz_convert(tz='US/Pacific')
         xlabel = 'PST'
-    plot_times = activity_times.strftime("%H:%M").unique()
+    activity_times = activity_times.strftime("%H:%M")
+    plot_times = [''] * len(activity_times)
+    plot_times[::2] = activity_times[::2]
 
-    plt.rcParams.update({'font.size': (len(times)*0.5)*len(dates)/len(times)})
-    plt.figure(figsize=(len(times)*2, (3/4)*len(times)*2))
+    plt.rcParams.update({'font.size': len(dates) + 1.5*len(times)})
+    plt.figure(figsize=(5*len(dates), 5*len(activity_times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         activity_df = (dh.construct_activity_grid(activity_arr, dc_tag))
@@ -179,13 +183,16 @@ def plot_dc_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_
         masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
         cmap = plt.get_cmap('viridis')
         cmap.set_bad(color='red')
-        plot_dates = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y').strftime("%m/%d").unique()
+        datetimes = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y')
+        activity_dates = datetimes.strftime("%m/%d/%y").unique()
+        plot_dates = [''] * len(activity_dates)
+        plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (DC Tag : {dc_tag})")
         plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
-        plt.xticks(np.arange(0, len(activity_df.columns), 2)-0.5, plot_dates[::2], rotation=45)
-        plt.yticks(np.arange(0, len(activity_df.index), 2)-0.5, plot_times[::2], rotation=45)
-        plt.xlabel('Date (MM/DD)')
+        plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
+        plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
+        plt.xlabel('Date (MM/DD/YY)')
         plt.ylabel(f'{xlabel} Time (HH:MM)')
     plt.tight_layout()
     if pipeline_params["save_activity_dc_comparisons"]:
@@ -207,16 +214,19 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
     if pipeline_params["show_PST"]:
         activity_times = activity_times.tz_convert(tz='US/Pacific')
         xlabel = 'PST'
-    plot_times = np.array(activity_times.strftime("%H:%M").unique())
-    plot_times[1::2] = " "
+    activity_times = activity_times.strftime("%H:%M")
+    plot_times = [''] * len(activity_times)
+    plot_times[::2] = activity_times[::2]
 
-    plt.rcParams.update({'font.size': (len(times)*0.5)*len(dates)/len(times)})
-    plt.figure(figsize=(len(times)*2, (3/4)*len(times)*2))
+    plt.rcParams.update({'font.size': len(dates) + 1.5*len(times)})
+    plt.figure(figsize=(5*len(dates), 5*len(activity_times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         presence_df = dh.construct_presence_grid(activity_arr, dc_tag).replace(np.NaN, 156)
-        plot_dates = np.array(pd.to_datetime(presence_df.columns.values, format='%m/%d/%y').strftime("%m/%d").unique())
-        plot_dates[1::2] = ' '
+        datetimes = pd.to_datetime(presence_df.columns.values, format='%m/%d/%y')
+        activity_dates = datetimes.strftime("%m/%d/%y").unique()
+        plot_dates = [''] * len(activity_dates)
+        plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params["dc_tags"]), 1, i+1)
         plt.title(f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} (DC : {dc_tag})")
         masked_array = np.ma.masked_where(presence_df == 1, presence_df)
@@ -228,9 +238,9 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
         for pos in m:
             rect(pos)
         plt.ylabel(f"{xlabel} Time (HH:MM)")
-        plt.xlabel('Date (MM/DD)')
-        plt.xticks(np.arange(0, len(presence_df.columns))-0.5, plot_dates, rotation=45)
-        plt.yticks(np.arange(0, len(presence_df.index))-0.5, plot_times, rotation=45)
+        plt.xlabel('Date (MM/DD/YY)')
+        plt.xticks(np.arange(0, len(presence_df.columns))-0.5, plot_dates, rotation=30)
+        plt.yticks(np.arange(0, len(presence_df.index))-0.5, plot_times, rotation=30)
         plt.grid(which="both", color='k')
     plt.tight_layout()
     if pipeline_params["save_presence_dc_comparisons"]:

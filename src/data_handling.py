@@ -42,6 +42,22 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
 
     return location_df
 
+def assemble_single_bd2_output(path_to_bd2_output, data_params):
+    location_df = pd.read_csv(path_to_bd2_output)
+    file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
+
+    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'].values.astype('float64'), unit='S')
+    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'].values.astype('float64'), unit='S') 
+
+    location_df.insert(0, 'call_end_time', anchor_end_times)
+    location_df.insert(0, 'call_start_time', anchor_start_times)
+    location_df.insert(0, 'ref_time', anchor_start_times)
+
+    location_df = location_df.loc[(location_df["high_freq"]).astype('float64') < data_params["freq_tags"][1]]
+    location_df = location_df.loc[(location_df["low_freq"]).astype('float64') > data_params["freq_tags"][0]]
+
+    return location_df
+
 
 def construct_activity_arr_from_location_summary(location_df, dc_tag, file_paths, resolution="30T"):
     """
