@@ -8,6 +8,9 @@ from core import FREQ_GROUPS
 import bout_clustering as bt_clustering
 
 def plot_ipi_hist(bout_params, fig_details):
+    """
+    Plots a histogram of IPIs from a provided location and frequency group for the specified range of intervals and bin width.
+    """
 
     ipis_ms = bt_clustering.get_valid_ipis_ms(bout_params)
 
@@ -32,6 +35,10 @@ def plot_ipi_hist(bout_params, fig_details):
     return ipis_ms, histogram
 
 def plot_log_survival(intervals_ms, survival, fig_details):
+    """
+    Plots the log-survivorship curve of intervals with 10ms resolution with x-axis in minutes.
+    """
+
     intervals_s = np.divide(intervals_ms, 1000).astype('int')
     intervals_min = np.divide(intervals_s, 60).astype('int')
 
@@ -49,6 +56,10 @@ def plot_log_survival(intervals_ms, survival, fig_details):
     plt.show()
 
 def plot_fast_regression_results(intervals_ms, survival, fast_process, fig_details):
+    """
+    Plots the log-survivorship curve of intervals in the time window to visualize the linear regression of the fast process
+    """
+
     fast_start = (intervals_ms[fast_process['indices']][0])
     fast_end = (intervals_ms[fast_process['indices']][-1])
 
@@ -77,6 +88,10 @@ def plot_fast_regression_results(intervals_ms, survival, fast_process, fig_detai
     plt.show()
 
 def plot_slow_regression_results(intervals_ms, survival, slow_process, fig_details):
+    """
+    Plots the log-survivorship curve of intervals in the time window to visualize the linear regression of the slow process
+    """
+
     slow_start = (intervals_ms[slow_process['indices']][0])
     slow_end = (intervals_ms[slow_process['indices']][-1])
 
@@ -105,6 +120,11 @@ def plot_slow_regression_results(intervals_ms, survival, slow_process, fig_detai
     plt.show()
 
 def plot_bci_over_survival(intervals_ms, survival, fast_process, slow_process, bci, fig_details):
+    """
+    Plots the log-survivorship curve of intervals in the time window to visualize the linear regression of the both processs
+    along with the derived BCI to see where it is in time.
+    """
+
     fast_start = (intervals_ms[fast_process['indices']][0])
     fast_end = (intervals_ms[fast_process['indices']][-1])
     slow_start = (intervals_ms[slow_process['indices']][0])
@@ -154,6 +174,11 @@ def plot_bci_over_survival(intervals_ms, survival, fast_process, slow_process, b
     plt.show()
 
 def plot_nlin_results_over_survival(intervals_ms, survival, fast_process, slow_process, optim_x, optim_bci, bci, fig_details):
+    """
+    Plots the log-survivorship curve of intervals in the time window to visualize the linear regression of the both processs
+    along with two derived BCIs (Slater BCI and Sibly BCI) to see where they are in time.
+    """
+
     fast_start = (intervals_ms[fast_process['indices']][0])
     fast_end = (intervals_ms[fast_process['indices']][-1])
     slow_start = (intervals_ms[slow_process['indices']][0])
@@ -206,6 +231,10 @@ def plot_nlin_results_over_survival(intervals_ms, survival, fast_process, slow_p
     plt.show()
 
 def plot_audio_seg(audio_features, spec_features):
+    """
+    Function to plot the spectrogram of a provided audio segment
+    """
+
     audio_seg = audio_features['audio_seg']
     fs = audio_features['sample_rate']
     start = audio_features['start']
@@ -225,7 +254,11 @@ def plot_audio_seg(audio_features, spec_features):
     plt.tight_layout()
     plt.show()
 
-def plot_dets_over_audio_seg(audio_features, spec_features, data_params, plot_dets):
+def plot_dets_over_audio_seg(audio_features, spec_features, plot_dets):
+    """
+    Function to plot the spectrogram of a provided audio segment with overlayed detections
+    """
+
     audio_seg = audio_features['audio_seg']
     fs = audio_features['sample_rate']
     start = audio_features['start']
@@ -241,8 +274,9 @@ def plot_dets_over_audio_seg(audio_features, spec_features, data_params, plot_de
     legend_patches = [yellow_patch]
     ax = plt.gca()
     for i, row in plot_dets.iterrows():
-        rect = patches.Rectangle(((row['start_time'] - start - 0.01)*(fs/2), (row['low_freq']-2000)/(fs/2)), 
-                        0.04*(fs/2), 12000/(fs/2), linewidth=2, edgecolor='yellow', facecolor='none', alpha=0.8)
+        rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
+                        (row['end_time'] - row['start_time'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
+                        linewidth=2, edgecolor='yellow', facecolor='none', alpha=0.8)
         
         ax.add_patch(rect)
 
@@ -257,6 +291,11 @@ def plot_dets_over_audio_seg(audio_features, spec_features, data_params, plot_de
     plt.show()
 
 def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_params, plot_dets):
+    """
+    Function to plot the spectrogram of a provided audio segment with overlayed detections and bout tags for bout starts and ends.
+    If there is a duty-cycle scheme being applied, also plots the recording windows being simulated.
+    """
+
     audio_seg = audio_features['audio_seg']
     fs = audio_features['sample_rate']
     start = audio_features['start']
@@ -279,13 +318,14 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
                     plt.text(x=(row['start_time'] - start - duration/15)*(fs/2), y=(data_params['freq_tags'][0]-6000)/(fs/2), 
                             s=f"{row['call_status'].upper()}", color='pink', fontsize=12)
                 if row['call_status'] == 'bout start':
-                    plt.text(x=(row['start_time'] - start + 0.01)*(fs/2), y=3/4, 
+                    plt.text(x=(row['start_time'] - start + 0.01)*(fs/2), y=min((data_params['freq_tags'][1]+2000)/(fs/2), 3/4), 
                             s=f"{row['call_status'].upper()}", color='pink', fontsize=12)
             rect = patches.Rectangle(((row['start_time'] - start - 0.01)*(fs/2), (row['low_freq']-2000)/(fs/2)), 
                         0.04*(fs/2), 12000/(fs/2), linewidth=4, edgecolor='pink', facecolor='none', alpha=0.8)
         else:
-            rect = patches.Rectangle(((row['start_time'] - start - 0.01)*(fs/2), (row['low_freq']-2000)/(fs/2)), 
-                        0.04*(fs/2), 12000/(fs/2), linewidth=1, edgecolor='yellow', facecolor='none', alpha=0.8)
+            rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
+                            (row['end_time'] - row['start_time'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
+                            linewidth=2, edgecolor='yellow', facecolor='none', alpha=0.8)
         
         ax.add_patch(rect)
 
@@ -320,6 +360,10 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
     plt.show()
 
 def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, plot_bouts):
+    """
+    Function to plot the spectrogram of a provided audio segment with overlayed bouts and bout duurations.
+    """
+
     audio_seg = audio_features['audio_seg']
     fs = audio_features['sample_rate']
     start = audio_features['start']
@@ -338,10 +382,10 @@ def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, plot_b
     legend_patches = [green_patch, pink_patch, yellow_patch]
     ax = plt.gca()
     for i, row in plot_bouts.iterrows():
-        plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=3/4, 
+        plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+2000)/(fs/2), 3/4), 
                             s=f"{round(row['bout_duration_in_secs'], 2)}s", color='pink', fontsize=14)
-        rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), (FREQ_GROUPS[bout_params['freq_key']][0])/(fs/2)), 
-                        (row['bout_duration_in_secs'])*(fs/2), (FREQ_GROUPS[bout_params['freq_key']][1] - FREQ_GROUPS[bout_params['freq_key']][0])/(fs/2), 
+        rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
+                        (row['bout_duration_in_secs'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
                         linewidth=2, edgecolor='pink', facecolor='none', alpha=0.8)
         ax.add_patch(rect)
 

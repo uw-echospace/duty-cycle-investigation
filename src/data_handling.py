@@ -43,6 +43,11 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     return location_df
 
 def assemble_single_bd2_output(path_to_bd2_output, data_params):
+    """
+    Adds columns to bd2 output for a single file to be of the same format as the output
+    of the assemble_initial_location_summary() method.
+    """
+
     location_df = pd.read_csv(path_to_bd2_output)
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
 
