@@ -60,16 +60,16 @@ def regress_around_slow_intervals(intervals_ms, survival):
     slow_process['indices'] = slow_inds
     return slow_process
 
-def test_ipis_ms(ipis_ms, location_sum_dates, location_sum_df):
+def test_ipis_ms(ipis_ms, dates, location_sum_df):
     """
     The # of intervals calculated should be equal to the # of calls - (DATES)
     DATES is a constant here because for each date, the first call is not considered 
     as there is no previous call to calculate an interval for.
     """
 
-    assert(len(ipis_ms) + len(location_sum_dates) == len(location_sum_df))
+    assert(len(ipis_ms) + len(dates) == len(location_sum_df))
 
-def get_valid_ipis_ms(bout_params):
+def get_valid_ipis_ms(location_sum_df):
     """
     Gets the IPIs (Inter-Pulse Intervals) for a given location and frequency group
     using the 2022_bd2_summary files stored in data.
@@ -79,32 +79,32 @@ def get_valid_ipis_ms(bout_params):
     Returns a numpy array of IPIs in milliseconds.
     """
 
-    location_sum_df = pd.read_csv(f'../data/2022_bd2_summary/{bout_params["site_key"]}/bd2__{bout_params["freq_key"]}{bout_params["site_key"]}_2022.csv', index_col=0)
     intervals = pd.to_datetime(location_sum_df['call_start_time']) - pd.to_datetime(location_sum_df['call_end_time']).shift(1)
     location_sum_df.insert(0, 'time_from_prev_call_end_time', intervals)
 
+    location_sum_df['ref_time'] = pd.DatetimeIndex(location_sum_df['call_start_time'])
     location_sum_df = location_sum_df.set_index('ref_time')
-    location_sum_dates = np.unique(pd.DatetimeIndex(location_sum_df.index).date)
-    for date in location_sum_dates:
-        ref_times_of_dates = location_sum_df.loc[pd.DatetimeIndex(location_sum_df.index).date == date].index
-        location_sum_df.at[ref_times_of_dates[0], 'time_from_prev_call_end_time'] = pd.NaT
+
+    first_calls_per_day = location_sum_df.resample('D').first()['call_start_time']
+    first_valid_calls_per_day = pd.DatetimeIndex(first_calls_per_day.loc[~first_calls_per_day.isna()].values)
+    location_sum_df.loc[first_valid_calls_per_day, 'time_from_prev_call_end_time'] = pd.NaT
 
     intervals = location_sum_df['time_from_prev_call_end_time'].values
     valid_intervals = intervals[~np.isnan(intervals)]
     ipis_ms = valid_intervals.astype('float32')/1e6
 
-    test_ipis_ms(ipis_ms, location_sum_dates, location_sum_df)
+    test_ipis_ms(ipis_ms, first_valid_calls_per_day, location_sum_df)
 
     return ipis_ms
 
-def get_histogram(bout_params, fig_details):
+def get_histogram(location_sum_df, bin_step):
     """
     Uses the IPIs from a location and for a frequency group to compute and return a complete histogram.
     The interval width is set to be 10ms to provide good resolution for the most common IPIs.
     """
 
-    ipis_ms = get_valid_ipis_ms(bout_params)
-    hist_loc = np.histogram(ipis_ms, bins=np.arange(0, ipis_ms.max()+fig_details['bin_step'], fig_details['bin_step']))
+    ipis_ms = get_valid_ipis_ms(location_sum_df)
+    hist_loc = np.histogram(ipis_ms, bins=np.arange(0, ipis_ms.max()+bin_step, bin_step))
 
     return ipis_ms, hist_loc
 
@@ -218,14 +218,14 @@ def classify_bouts_in_single_bd2_output(location_df, bout_params):
 
     return location_df
 
-def classify_bouts_in_location_summary(bout_params):
+def classify_bouts_in_location_summary(location_df, bout_params):
     """
     Reads in the bd2_summary for a single location and frequency grouping and assigns bout tags whether a call is:
     within bout, outside bout, a bout start, or a bout end.
     """
 
-    location_df = pd.read_csv(f'../data/2022_bd2_summary/{bout_params["site_key"]}/bd2__{bout_params["freq_key"]}{bout_params["site_key"]}_2022.csv')
-    location_df.drop(columns=location_df.columns[0], inplace=True)
+    location_df.reset_index(inplace=True)
+    location_df = location_df.drop(columns=location_df.columns[0])
 
     intervals = (pd.to_datetime(location_df['call_start_time'].values[1:]) - pd.to_datetime(location_df['call_end_time'].values[:-1]))
     ipis_f = intervals.to_numpy(dtype='float32')/1e6
@@ -257,8 +257,8 @@ def construct_bout_metrics_from_classified_dets(location_df):
 
     end_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout end', 'call_end_time'])
     start_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout start', 'call_start_time'])
-    end_times = location_df.loc[location_df['call_status']=='bout end', 'end_time'].astype('float')
-    start_times = location_df.loc[location_df['call_status']=='bout start', 'start_time'].astype('float')
+    end_times = location_df.loc[location_df['call_status']=='bout end', 'end_time_wrt_ref'].astype('float')
+    start_times = location_df.loc[location_df['call_status']=='bout start', 'start_time_wrt_ref'].astype('float')
     if len(start_times_of_bouts) != len(end_times_of_bouts):
         start_times_of_bouts = start_times_of_bouts[:-1]
         start_times = start_times[:-1]
@@ -279,10 +279,39 @@ def construct_bout_metrics_from_classified_dets(location_df):
     bout_metrics = pd.DataFrame()
     bout_metrics['start_time_of_bout'] = start_times_of_bouts.values
     bout_metrics['end_time_of_bout'] = end_times_of_bouts.values
-    bout_metrics['start_time'] = start_times.values
-    bout_metrics['end_time'] = end_times.values
+    bout_metrics['start_time_wrt_ref'] = start_times.values
+    bout_metrics['end_time_wrt_ref'] = end_times.values
     bout_metrics['low_freq'] = low_freqs
     bout_metrics['high_freq'] = high_freqs
     bout_metrics['bout_duration'] = end_times_of_bouts.values - start_times_of_bouts.values
     bout_metrics['bout_duration_in_secs'] = bout_metrics['bout_duration'].apply(lambda x : x.total_seconds())
     return bout_metrics
+
+def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc_tag):
+    bout_params = dict()
+    bout_params['site_key'] = data_params['site_tag']
+    bout_params['freq_key'] = data_params['type_tag']
+
+    ipis_loc, hist_loc = get_histogram(location_sum_df, 10)
+    intervals_ms, survival = get_log_survival(hist_loc)
+
+    fast_process = regress_around_peakIPI(intervals_ms, survival, hist_loc[0])
+    fast_process = calculate_exponential_coefficients(fast_process)
+
+    slow_process = regress_around_slow_intervals(intervals_ms, survival)
+    slow_process = calculate_exponential_coefficients(slow_process)
+
+    nlin_results, misassigned_points_optim = get_bci_from_sibly_method(intervals_ms, survival, fast_process, slow_process)
+    bout_params['bci'] = nlin_results['bci']
+
+    batdetect2_predictions = classify_bouts_in_location_summary(location_sum_df, bout_params)
+    bout_metrics = construct_bout_metrics_from_classified_dets(batdetect2_predictions)
+
+    time_on = int(dc_tag.split('of')[0])
+
+    test_bout_end_times_in_period(bout_metrics, time_on)
+
+    return bout_metrics
+
+def test_bout_end_times_in_period(bout_metrics, time_on):
+    assert(bout_metrics['end_time_wrt_ref'].max() < time_on)
