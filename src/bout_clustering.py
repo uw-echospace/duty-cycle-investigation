@@ -257,14 +257,18 @@ def construct_bout_metrics_from_classified_dets(location_df):
 
     end_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout end', 'call_end_time'])
     start_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout start', 'call_start_time'])
-    end_times = location_df.loc[location_df['call_status']=='bout end', 'end_time_wrt_ref'].astype('float')
-    start_times = location_df.loc[location_df['call_status']=='bout start', 'start_time_wrt_ref'].astype('float')
+    ref_end_times = location_df.loc[location_df['call_status']=='bout end', 'end_time_wrt_ref'].astype('float')
+    ref_start_times = location_df.loc[location_df['call_status']=='bout start', 'start_time_wrt_ref'].astype('float')
+    end_times = location_df.loc[location_df['call_status']=='bout end', 'end_time'].astype('float')
+    start_times = location_df.loc[location_df['call_status']=='bout start', 'start_time'].astype('float')
     if len(start_times_of_bouts) != len(end_times_of_bouts):
         start_times_of_bouts = start_times_of_bouts[:-1]
         start_times = start_times[:-1]
+        ref_start_times = ref_start_times[:-1]
     if len(start_times_of_bouts) != len(end_times_of_bouts):
         start_times_of_bouts = start_times_of_bouts[1:]
         start_times = start_times[1:]
+        ref_start_times = ref_start_times[1:]
 
     bout_starts = start_times_of_bouts.index
     bout_ends = end_times_of_bouts.index
@@ -279,8 +283,10 @@ def construct_bout_metrics_from_classified_dets(location_df):
     bout_metrics = pd.DataFrame()
     bout_metrics['start_time_of_bout'] = start_times_of_bouts.values
     bout_metrics['end_time_of_bout'] = end_times_of_bouts.values
-    bout_metrics['start_time_wrt_ref'] = start_times.values
-    bout_metrics['end_time_wrt_ref'] = end_times.values
+    bout_metrics['start_time_wrt_ref'] = ref_start_times.values
+    bout_metrics['end_time_wrt_ref'] = ref_end_times.values
+    bout_metrics['start_time'] = start_times.values
+    bout_metrics['end_time'] = end_times.values
     bout_metrics['low_freq'] = low_freqs
     bout_metrics['high_freq'] = high_freqs
     bout_metrics['bout_duration'] = end_times_of_bouts.values - start_times_of_bouts.values

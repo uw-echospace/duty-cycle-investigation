@@ -58,7 +58,7 @@ def plot_activity_grid(activity_df, data_params, pipeline_params, file_paths):
     plt.colorbar()
     plt.tight_layout()
     if pipeline_params["save_activity_grid"]:
-        plt.savefig(f'{file_paths["activity_grid_folder"]}/{file_paths["activity_grid_figname"]}.png', bbox_inches='tight')
+        plt.savefig(f'{file_paths["activity_grid_folder"]}/{file_paths["activity_dets_grid_figname"]}.png', bbox_inches='tight')
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -97,7 +97,7 @@ def plot_activity_grid_for_bouts(activity_df, data_params, pipeline_params, file
     plt.colorbar()
     plt.tight_layout()
     if pipeline_params["save_activity_grid"]:
-        plt.savefig(f'{file_paths["activity_grid_folder"]}/{file_paths["activity_grid_figname"]}.png', bbox_inches='tight')
+        plt.savefig(f'{file_paths["activity_grid_folder"]}/{file_paths["activity_bouts_grid_figname"]}.png', bbox_inches='tight')
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -191,7 +191,7 @@ def plot_dc_dets_comparisons_per_night(activity_arr, data_params, pipeline_param
 
     plt.tight_layout()
     if pipeline_params["save_dc_night_comparisons"]:
-        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_det_comparisons_figname"]}.png', bbox_inches='tight')
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -243,7 +243,7 @@ def plot_dc_bouts_comparisons_per_night(activity_arr, data_params, pipeline_para
 
     plt.tight_layout()
     if pipeline_params["save_dc_night_comparisons"]:
-        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_bout_comparisons_figname"]}.png', bbox_inches='tight')
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -290,7 +290,7 @@ def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipel
         plt.ylabel(f'{xlabel} Time (HH:MM)')
     plt.tight_layout()
     if pipeline_params["save_activity_dc_comparisons"]:
-        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["activity_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["activity_det_comparisons_figname"]}.png', bbox_inches='tight')
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -333,7 +333,7 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
         plt.ylabel(f'{xlabel} Time (HH:MM)')
     plt.tight_layout()
     if pipeline_params["save_activity_dc_comparisons"]:
-        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["activity_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["activity_bout_comparisons_figname"]}.png', bbox_inches='tight')
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -408,17 +408,17 @@ def compare_metrics_per_night(activity_bouts_arr, activity_dets_arr, data_params
 
     for i, date in enumerate(dates):
         plt.subplot(int(np.ceil(np.sqrt(len(dates)))), int(np.ceil(np.sqrt(len(dates)))), i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})")
+        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
         dc_tag = data_params['cur_dc_tag']
 
         activity_bouts_df = dh.construct_activity_grid_for_bouts(activity_bouts_arr, dc_tag)
         on = int(dc_tag.split('of')[0])
         total = int(dc_tag.split('of')[1])
         recover_ratio = total / on
-        bouts_of_date = np.log(recover_ratio*activity_bouts_df[date]+1)
-        i=0
+        bouts_of_date = (recover_ratio*activity_bouts_df[date])
+        j=0
         bar_width = 1/2
-        plt.bar(np.arange(0, len(activity_bouts_df.index))+(bar_width*(i - 0.5)), height=bouts_of_date, width=bar_width, 
+        plt.bar(np.arange(0, len(activity_bouts_df.index))+(bar_width*(j - 0.5)), height=bouts_of_date, width=bar_width, 
                 color='cyan', label=f'% of bout time', alpha=0.75, edgecolor='k')
         
         activity_dets_df = dh.construct_activity_grid_for_number_of_dets(activity_dets_arr, dc_tag)
@@ -426,17 +426,18 @@ def compare_metrics_per_night(activity_bouts_arr, activity_dets_arr, data_params
         total = int(dc_tag.split('of')[1])
         recover_ratio = total / on
         detections_of_date = recover_ratio*activity_dets_df[date]
-        normalized_detections_of_date = np.log(100*(detections_of_date / (activity_dets_arr.max()[0]))+1)
+        normalized_detections_of_date = (100*(detections_of_date / (activity_dets_arr.max()[0])))
 
-        i=1
+        j=1
         bar_width = 1/2
-        plt.bar(np.arange(0, len(activity_dets_df.index))+(bar_width*(i - 0.5)), height=normalized_detections_of_date, width=bar_width, 
+        plt.bar(np.arange(0, len(activity_dets_df.index))+(bar_width*(j - 0.5)), height=normalized_detections_of_date, width=bar_width, 
                 color='orange', label=f'% of dets', alpha=0.75, edgecolor='k')
         
         plt.grid(axis="y")
         plt.xticks(np.arange(0, len(activity_bouts_df.index), 2)-0.5, plot_times[::2], rotation=50)
         plt.xlim(plt.xticks()[0][0], plt.xticks()[0][-1])
-        plt.ylabel(f'Log Percentage (%)')
+        plt.ylim(0, 100)
+        plt.ylabel(f'Percentage (%)')
         plt.xlabel(f'{xlabel} Time (HH:MM)')
         plt.axvline(1.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
         plt.axvline(7.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
@@ -449,6 +450,6 @@ def compare_metrics_per_night(activity_bouts_arr, activity_dets_arr, data_params
 
     plt.tight_layout()
     if pipeline_params["save_dc_night_comparisons"]:
-        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_metric_comparisons_figname"]}.png', bbox_inches='tight')
     if pipeline_params["show_plots"]:
         plt.show()

@@ -7,12 +7,12 @@ import scipy.stats as stats
 from core import FREQ_GROUPS
 import bout_clustering as bt_clustering
 
-def plot_ipi_hist(bout_params, fig_details):
+def plot_ipi_hist(location_df, fig_details):
     """
     Plots a histogram of IPIs from a provided location and frequency group for the specified range of intervals and bin width.
     """
 
-    ipis_ms = bt_clustering.get_valid_ipis_ms(bout_params)
+    ipis_ms = bt_clustering.get_valid_ipis_ms(location_df)
 
     plt.rcParams.update({'font.size' : 20})
     plt.figure(figsize=(12, 6))

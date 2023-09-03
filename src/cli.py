@@ -82,13 +82,17 @@ def get_file_paths(data_params):
 
     file_paths["figures_SITE_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}'
     Path(file_paths["figures_SITE_folder"]).mkdir(parents=True, exist_ok=True)
-    file_paths["activity_comparisons_figname"] = f'activity_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
-    file_paths["dc_comparisons_figname"] = f'dc_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["activity_det_comparisons_figname"] = f'activity_det_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["dc_det_comparisons_figname"] = f'dc_det_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["activity_bout_comparisons_figname"] = f'activity_bout_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["dc_bout_comparisons_figname"] = f'dc_bout_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["dc_metric_comparisons_figname"] = f'metric_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
     file_paths["presence_comparisons_figname"] = f'presence_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
 
     file_paths["activity_grid_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}/activity_grids'
     Path(file_paths["activity_grid_folder"]).mkdir(parents=True, exist_ok=True)
-    file_paths["activity_grid_figname"] = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_activity_grid'
+    file_paths["activity_dets_grid_figname"] = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_activity_dets_grid'
+    file_paths["activity_bouts_grid_figname"] = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_activity_bouts_grid'
 
     file_paths["presence_grid_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}/presence_grids'
     Path(file_paths["presence_grid_folder"]).mkdir(parents=True, exist_ok=True)
