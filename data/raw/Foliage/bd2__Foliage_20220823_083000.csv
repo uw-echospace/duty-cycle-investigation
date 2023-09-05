@@ -1,6 +1,6 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
-877.9375,877.9531,23750.0,26867.0,Echolocation,Nyctalus leisleri,0.535,0.594,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,recover-20220825,UBNA_006,Foliage
-1336.6905,1336.7062,23750.0,27209.0,Echolocation,Nyctalus leisleri,0.454,0.501,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,recover-20220825,UBNA_006,Foliage
-1603.1725,1603.1805,38359.0,45528.0,Echolocation,Pipistrellus nathusii,0.415,0.518,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,recover-20220825,UBNA_006,Foliage
-1603.9635,1603.9729,38359.0,48537.0,Echolocation,Pipistrellus nathusii,0.577,0.638,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,recover-20220825,UBNA_006,Foliage
-1604.3605,1604.3695,35781.0,46484.0,Echolocation,Pipistrellus nathusii,0.33,0.506,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,recover-20220825,UBNA_006,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+877.9375,877.9531,23750.0,26867.0,Echolocation,Nyctalus leisleri,0.535,0.594,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,Foliage,recover-20220825,006
+1336.6905,1336.7062,23750.0,27209.0,Echolocation,Nyctalus leisleri,0.454,0.501,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,Foliage,recover-20220825,006
+1603.1725,1603.1805,38359.0,45528.0,Echolocation,Pipistrellus nathusii,0.415,0.518,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,Foliage,recover-20220825,006
+1603.9635,1603.9729,38359.0,48537.0,Echolocation,Pipistrellus nathusii,0.577,0.638,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,Foliage,recover-20220825,006
+1604.3605,1604.3695,35781.0,46484.0,Echolocation,Pipistrellus nathusii,0.33,0.506,-1,/mnt/ubna_data_01/recover-20220825/UBNA_006/20220823_083000.WAV,Foliage,recover-20220825,006

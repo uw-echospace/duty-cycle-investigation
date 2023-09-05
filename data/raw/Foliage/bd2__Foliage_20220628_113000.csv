@@ -1,2 +1,2 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
-629.0505,629.0544,28906.0,45921.0,Echolocation,Myotis daubentonii,0.228,0.516,-1,/mnt/ubna_data_01/recover-20220630_unit2/20220628_113000.WAV,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+629.0505,629.0544,28906.0,45921.0,Echolocation,Myotis daubentonii,0.228,0.516,-1,/mnt/ubna_data_01/recover-20220630_unit2/20220628_113000.WAV,Foliage,recover-20220630_unit2,010

@@ -1,2 +1,2 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
-1784.9555,1784.9705,20312.0,24907.0,Echolocation,Nyctalus noctula,0.391,0.535,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_033000.WAV,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+1784.9555,1784.9705,20312.0,24907.0,Echolocation,Nyctalus noctula,0.391,0.535,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_033000.WAV,Foliage,recover-20220709_unit3,No Valid Info

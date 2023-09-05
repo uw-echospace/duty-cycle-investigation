@@ -1,174 +1,174 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
-347.1275,347.1352,39218.0,48061.0,Echolocation,Pipistrellus nathusii,0.5,0.547,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-347.2285,347.238,42656.0,47015.0,Echolocation,Pipistrellus nathusii,0.414,0.504,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-347.3215,347.3296,40078.0,49631.0,Echolocation,Pipistrellus nathusii,0.55,0.617,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-391.7275,391.7354,38359.0,45134.0,Echolocation,Pipistrellus nathusii,0.532,0.628,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-391.9315,391.9392,39218.0,49102.0,Echolocation,Pipistrellus nathusii,0.437,0.518,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-392.0375,392.0458,39218.0,45789.0,Echolocation,Pipistrellus nathusii,0.524,0.57,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-392.2325,392.241,38359.0,48772.0,Echolocation,Pipistrellus nathusii,0.544,0.589,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-392.4275,392.4358,39218.0,47616.0,Echolocation,Pipistrellus nathusii,0.463,0.565,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-392.5285,392.5355,39218.0,46263.0,Echolocation,Pipistrellus nathusii,0.464,0.535,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-392.8175,392.8268,39218.0,49741.0,Echolocation,Pipistrellus nathusii,0.476,0.559,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-393.0185,393.0268,39218.0,49861.0,Echolocation,Pipistrellus nathusii,0.479,0.573,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-393.1215,393.1303,38359.0,46404.0,Echolocation,Pipistrellus nathusii,0.584,0.616,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-393.3175,393.326,40078.0,47358.0,Echolocation,Pipistrellus nathusii,0.554,0.611,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-393.6025,393.6107,39218.0,47695.0,Echolocation,Pipistrellus nathusii,0.487,0.556,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-393.8045,393.8139,39218.0,48690.0,Echolocation,Pipistrellus nathusii,0.538,0.643,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-394.0895,394.0967,39218.0,46691.0,Echolocation,Pipistrellus nathusii,0.592,0.641,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-394.9695,394.9763,39218.0,45867.0,Echolocation,Pipistrellus nathusii,0.361,0.537,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-402.0755,402.0846,37500.0,47453.0,Echolocation,Pipistrellus nathusii,0.572,0.624,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-402.3555,402.3625,38359.0,45084.0,Echolocation,Pipistrellus nathusii,0.53,0.569,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-402.6275,402.6367,39218.0,45626.0,Echolocation,Pipistrellus nathusii,0.655,0.665,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-402.9075,402.9182,40078.0,50328.0,Echolocation,Pipistrellus nathusii,0.589,0.648,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-403.1945,403.2032,39218.0,49334.0,Echolocation,Pipistrellus nathusii,0.678,0.717,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-403.4055,403.4128,39218.0,52034.0,Echolocation,Pipistrellus nathusii,0.634,0.665,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-403.5875,403.5937,36640.0,50346.0,Echolocation,Pipistrellus nathusii,0.44,0.514,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-403.6775,403.6849,38359.0,52612.0,Echolocation,Pipistrellus nathusii,0.62,0.694,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-403.8575,403.8648,37500.0,60054.0,Echolocation,Pipistrellus nathusii,0.424,0.529,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-403.9505,403.9582,38359.0,51743.0,Echolocation,Pipistrellus nathusii,0.582,0.67,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.1385,404.1451,38359.0,57160.0,Echolocation,Pipistrellus nathusii,0.525,0.647,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.2345,404.2424,40078.0,51171.0,Echolocation,Pipistrellus nathusii,0.638,0.672,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.3225,404.33,40078.0,52054.0,Echolocation,Pipistrellus nathusii,0.54,0.569,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.4235,404.4325,40078.0,48410.0,Echolocation,Pipistrellus nathusii,0.493,0.515,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.5175,404.5255,38359.0,54348.0,Echolocation,Pipistrellus nathusii,0.495,0.545,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.6105,404.6173,39218.0,47346.0,Echolocation,Pipistrellus nathusii,0.585,0.62,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.70550000000003,404.7126,38359.0,49916.0,Echolocation,Pipistrellus nathusii,0.471,0.574,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.7975,404.8039,39218.0,53098.0,Echolocation,Pipistrellus nathusii,0.686,0.716,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-404.9865,404.9925,36640.0,52904.0,Echolocation,Pipistrellus nathusii,0.612,0.668,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-405.0815,405.0887,36640.0,49359.0,Echolocation,Pipistrellus nathusii,0.591,0.645,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-405.1765,405.1831,34921.0,59540.0,Echolocation,Pipistrellus nathusii,0.527,0.598,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-405.2735,405.2807,36640.0,54596.0,Echolocation,Pipistrellus nathusii,0.545,0.64,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-405.5525,405.5597,38359.0,61058.0,Echolocation,Pipistrellus nathusii,0.674,0.745,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-405.7425,405.7495,33203.0,62846.0,Echolocation,Pipistrellus nathusii,0.332,0.53,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-405.8405,405.847,39218.0,61016.0,Echolocation,Pipistrellus nathusii,0.593,0.66,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-405.9405,405.9473,36640.0,65238.0,Echolocation,Pipistrellus nathusii,0.482,0.576,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-406.0475,406.0544,37500.0,66462.0,Echolocation,Pipistrellus nathusii,0.376,0.51,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-406.1485,406.1549,39218.0,59605.0,Echolocation,Pipistrellus nathusii,0.66,0.694,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-406.4265,406.43240000000003,38359.0,58322.0,Echolocation,Pipistrellus nathusii,0.537,0.686,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-406.5295,406.5346,38359.0,56381.0,Echolocation,Pipistrellus nathusii,0.522,0.603,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-406.6305,406.6372,37500.0,64879.0,Echolocation,Pipistrellus nathusii,0.491,0.614,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-406.7235,406.73,38359.0,55738.0,Echolocation,Pipistrellus nathusii,0.543,0.633,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-406.8265,406.83299999999997,38359.0,58396.0,Echolocation,Pipistrellus nathusii,0.595,0.7,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-406.9185,406.9273,38359.0,52811.0,Echolocation,Pipistrellus nathusii,0.402,0.502,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-407.0985,407.1074,38359.0,52728.0,Echolocation,Pipistrellus nathusii,0.541,0.569,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-512.9035,512.9107,40937.0,52927.0,Echolocation,Pipistrellus nathusii,0.435,0.504,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-513.1945,513.1997,41796.0,62604.0,Echolocation,Pipistrellus nathusii,0.413,0.53,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-513.2665,513.2736,41796.0,54608.0,Echolocation,Pipistrellus nathusii,0.455,0.53,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-513.3515,513.358,40937.0,66205.0,Echolocation,Pipistrellus nathusii,0.414,0.551,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-651.1725,651.1804,38359.0,46421.0,Echolocation,Pipistrellus nathusii,0.516,0.577,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-651.4565,651.4644,39218.0,46915.0,Echolocation,Pipistrellus nathusii,0.494,0.558,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-651.7445,651.7528,39218.0,46295.0,Echolocation,Pipistrellus nathusii,0.485,0.513,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-997.3965,997.4061,37500.0,43600.0,Echolocation,Pipistrellus nathusii,0.449,0.526,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-997.6775,997.6876,38359.0,44778.0,Echolocation,Pipistrellus nathusii,0.474,0.565,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1000.8665,1000.8755,37500.0,44088.0,Echolocation,Pipistrellus nathusii,0.453,0.587,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1028.7155,1028.7234,40937.0,51680.0,Echolocation,Pipistrellus nathusii,0.494,0.642,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1028.8125,1028.8191,40937.0,48531.0,Echolocation,Pipistrellus nathusii,0.523,0.582,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1028.9055,1028.9132,40078.0,54384.0,Echolocation,Pipistrellus nathusii,0.405,0.571,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1029.1605,1029.1675,40078.0,55680.0,Echolocation,Pipistrellus nathusii,0.4,0.553,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1029.2595,1029.2658,39218.0,54700.0,Echolocation,Pipistrellus nathusii,0.364,0.505,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1029.3555,1029.363,40937.0,57418.0,Echolocation,Pipistrellus nathusii,0.347,0.58,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1029.4535,1029.4595,40937.0,51965.0,Echolocation,Pipistrellus nathusii,0.575,0.605,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1029.5465,1029.5527,40937.0,59494.0,Echolocation,Pipistrellus nathusii,0.419,0.561,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1029.6405,1029.6471,39218.0,57376.0,Echolocation,Pipistrellus nathusii,0.398,0.562,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1030.8335,1030.8401,40937.0,47894.0,Echolocation,Pipistrellus nathusii,0.514,0.56,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1031.1785,1031.1841,40937.0,55076.0,Echolocation,Pipistrellus nathusii,0.322,0.501,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1031.3945,1031.3999,41796.0,61982.0,Echolocation,Pipistrellus nathusii,0.373,0.537,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1031.5605,1031.566,41796.0,62453.0,Echolocation,Pipistrellus nathusii,0.381,0.553,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1031.6455,1031.6508,41796.0,53101.0,Echolocation,Pipistrellus nathusii,0.492,0.567,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1031.7285,1031.7345,41796.0,58633.0,Echolocation,Pipistrellus nathusii,0.477,0.624,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1031.8995,1031.9059,41796.0,58097.0,Echolocation,Pipistrellus nathusii,0.521,0.626,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1031.9895,1031.9952,41796.0,58284.0,Echolocation,Pipistrellus nathusii,0.512,0.618,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1032.3985,1032.405,40078.0,65107.0,Echolocation,Myotis daubentonii,0.288,0.518,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1032.5725,1032.579,40937.0,65942.0,Echolocation,Myotis daubentonii,0.226,0.548,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1032.7505,1032.7574,40937.0,60608.0,Echolocation,Pipistrellus nathusii,0.282,0.571,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1032.8385,1032.8442,41796.0,63658.0,Echolocation,Myotis daubentonii,0.281,0.521,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1033.4425,1033.4488,40078.0,62021.0,Echolocation,Myotis daubentonii,0.331,0.548,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1033.8725,1033.8794,38359.0,64134.0,Echolocation,Pipistrellus nathusii,0.233,0.548,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1033.9475,1033.9541,38359.0,66197.0,Echolocation,Myotis daubentonii,0.293,0.505,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1117.2445,1117.2514,51250.0,68651.0,Echolocation,Pipistrellus pipistrellus,0.379,0.545,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1117.5495,1117.5535,40937.0,80542.0,Echolocation,Myotis mystacinus,0.306,0.545,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1117.6115,1117.6156,41796.0,78157.0,Echolocation,Myotis mystacinus,0.376,0.555,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1118.3155,1118.319,46953.0,73195.0,Echolocation,Myotis alcathoe,0.415,0.565,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1118.4415,1118.4456,50390.0,62557.0,Echolocation,Myotis alcathoe,0.23,0.512,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1118.7945,1118.7983,49531.0,64785.0,Echolocation,Myotis alcathoe,0.255,0.588,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.0535,1119.058,51250.0,65360.0,Echolocation,Pipistrellus pipistrellus,0.382,0.594,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.1065,1119.11,51250.0,67977.0,Echolocation,Myotis alcathoe,0.375,0.552,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.1475,1119.1513,52109.0,70664.0,Echolocation,Myotis alcathoe,0.279,0.552,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.2805,1119.2847,48671.0,77767.0,Echolocation,Myotis alcathoe,0.377,0.538,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.3845,1119.3885,49531.0,79989.0,Echolocation,Myotis alcathoe,0.474,0.575,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.4225,1119.4263,42656.0,86673.0,Echolocation,Myotis alcathoe,0.483,0.633,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.4635,1119.468,44375.0,86999.0,Echolocation,Myotis alcathoe,0.454,0.532,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.5635,1119.5669,46953.0,82436.0,Echolocation,Myotis alcathoe,0.575,0.65,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.6165,1119.6197,47812.0,84692.0,Echolocation,Myotis alcathoe,0.567,0.706,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.6805,1119.6836,43515.0,88753.0,Echolocation,Myotis alcathoe,0.537,0.65,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.7295,1119.7336,45234.0,86344.0,Echolocation,Myotis alcathoe,0.596,0.667,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.7795,1119.7835,41796.0,87835.0,Echolocation,Myotis alcathoe,0.534,0.619,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.8475,1119.8515,36640.0,85827.0,Echolocation,Myotis alcathoe,0.509,0.689,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.8985,1119.9031,42656.0,92589.0,Echolocation,Myotis alcathoe,0.625,0.685,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1119.9565,1119.9611,40078.0,93597.0,Echolocation,Myotis alcathoe,0.585,0.659,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.0465,1120.0502,41796.0,90665.0,Echolocation,Myotis alcathoe,0.452,0.618,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.1275,1120.1317,37500.0,92197.0,Echolocation,Myotis alcathoe,0.327,0.658,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.1815,1120.1864,42656.0,99132.0,Echolocation,Myotis alcathoe,0.421,0.628,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.2475,1120.2516,35781.0,95292.0,Echolocation,Myotis alcathoe,0.378,0.649,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.4025,1120.4074,34062.0,97606.0,Echolocation,Myotis alcathoe,0.288,0.667,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.5175,1120.5214,36640.0,95419.0,Echolocation,Myotis alcathoe,0.422,0.653,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.5805,1120.5848,34062.0,99407.0,Echolocation,Myotis alcathoe,0.367,0.659,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.6485,1120.6528,35781.0,88660.0,Echolocation,Myotis mystacinus,0.293,0.716,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.7025,1120.707,36640.0,83114.0,Echolocation,Myotis mystacinus,0.374,0.743,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.7545,1120.7582,40937.0,78676.0,Echolocation,Myotis mystacinus,0.422,0.654,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.8475,1120.8511,40078.0,82913.0,Echolocation,Myotis mystacinus,0.337,0.579,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.8895,1120.8939,34921.0,80371.0,Echolocation,Myotis mystacinus,0.484,0.654,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.9255,1120.929,40937.0,81648.0,Echolocation,Myotis mystacinus,0.498,0.624,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1120.9625,1120.9664,47812.0,78687.0,Echolocation,Myotis mystacinus,0.368,0.654,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1121.0015,1121.0051,44375.0,74334.0,Echolocation,Myotis mystacinus,0.386,0.53,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1121.0435,1121.0468,43515.0,73551.0,Echolocation,Myotis mystacinus,0.448,0.563,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1121.1335,1121.1372,44375.0,73293.0,Echolocation,Myotis mystacinus,0.387,0.564,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1121.1825,1121.1864,47812.0,74687.0,Echolocation,Myotis mystacinus,0.467,0.582,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1121.2735,1121.2767,50390.0,70517.0,Echolocation,Myotis alcathoe,0.239,0.507,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1167.0645,1167.0722,38359.0,44614.0,Echolocation,Pipistrellus nathusii,0.524,0.577,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1169.2305,1169.2382,38359.0,45446.0,Echolocation,Pipistrellus nathusii,0.472,0.598,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1169.6165,1169.6246,38359.0,44418.0,Echolocation,Pipistrellus nathusii,0.58,0.627,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1169.7955,1169.8045,37500.0,43796.0,Echolocation,Pipistrellus nathusii,0.46,0.54,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1170.0025,1170.0098,37500.0,43721.0,Echolocation,Pipistrellus nathusii,0.524,0.538,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1170.1025,1170.1112,37500.0,43526.0,Echolocation,Pipistrellus nathusii,0.478,0.545,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1170.1975,1170.2071,37500.0,43797.0,Echolocation,Pipistrellus nathusii,0.399,0.513,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1170.3835,1170.3917,38359.0,48117.0,Echolocation,Pipistrellus nathusii,0.483,0.52,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1170.4785,1170.4858,37500.0,44810.0,Echolocation,Pipistrellus nathusii,0.501,0.575,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1170.6685,1170.6757,37500.0,45687.0,Echolocation,Pipistrellus nathusii,0.504,0.568,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1170.8645,1170.8727,38359.0,44115.0,Echolocation,Pipistrellus nathusii,0.453,0.508,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1171.0665,1171.0753,37500.0,43751.0,Echolocation,Pipistrellus nathusii,0.543,0.644,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1171.7345,1171.7429,36640.0,42945.0,Echolocation,Pipistrellus nathusii,0.491,0.564,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1185.0885,1185.0944,39218.0,57353.0,Echolocation,Myotis daubentonii,0.235,0.502,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1185.3575,1185.3637,41796.0,57972.0,Echolocation,Pipistrellus nathusii,0.284,0.543,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1185.4965,1185.5016,40937.0,54993.0,Echolocation,Pipistrellus nathusii,0.205,0.505,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1185.9165,1185.9221,42656.0,58367.0,Echolocation,Myotis daubentonii,0.24,0.515,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1186.0735,1186.0804,38359.0,79946.0,Echolocation,Myotis daubentonii,0.391,0.511,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1186.5265,1186.5322,40937.0,59185.0,Echolocation,Myotis daubentonii,0.361,0.518,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1187.1565,1187.1614,46093.0,55583.0,Echolocation,Pipistrellus pipistrellus,0.45,0.502,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1188.3735,1188.3802,42656.0,57622.0,Echolocation,Pipistrellus nathusii,0.326,0.582,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1188.5645,1188.5731,38359.0,48008.0,Echolocation,Pipistrellus nathusii,0.478,0.601,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1188.6705,1188.6776,39218.0,56268.0,Echolocation,Pipistrellus nathusii,0.587,0.63,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1188.7745,1188.7817,40078.0,52798.0,Echolocation,Pipistrellus nathusii,0.576,0.636,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1189.7695,1189.7768,40937.0,50874.0,Echolocation,Pipistrellus nathusii,0.419,0.563,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1189.8515,1189.8592,40078.0,61129.0,Echolocation,Pipistrellus nathusii,0.489,0.58,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1189.9395,1189.9462,39218.0,49575.0,Echolocation,Pipistrellus nathusii,0.387,0.527,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.1315,1190.1381,40937.0,53138.0,Echolocation,Pipistrellus nathusii,0.626,0.672,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.2165,1190.2245,41796.0,53171.0,Echolocation,Pipistrellus nathusii,0.493,0.613,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.3045,1190.3125,39218.0,55180.0,Echolocation,Pipistrellus nathusii,0.562,0.628,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.4045,1190.4134,40937.0,50608.0,Echolocation,Pipistrellus nathusii,0.564,0.67,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.5095,1190.5176,40937.0,55162.0,Echolocation,Pipistrellus nathusii,0.547,0.648,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.6105,1190.6195,40937.0,53710.0,Echolocation,Pipistrellus nathusii,0.441,0.528,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.7195,1190.727,40937.0,51263.0,Echolocation,Pipistrellus nathusii,0.574,0.611,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.8415,1190.8498,40937.0,50022.0,Echolocation,Pipistrellus nathusii,0.562,0.63,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1190.9385,1190.9458,40078.0,53707.0,Echolocation,Pipistrellus nathusii,0.656,0.712,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1191.0445,1191.0532,40078.0,45644.0,Echolocation,Pipistrellus nathusii,0.506,0.54,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1191.2495,1191.2571,40937.0,52571.0,Echolocation,Pipistrellus nathusii,0.56,0.63,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1192.5215,1192.5297,40937.0,50038.0,Echolocation,Pipistrellus nathusii,0.57,0.672,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1192.7795,1192.7872,40937.0,49761.0,Echolocation,Pipistrellus nathusii,0.55,0.614,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1193.0605,1193.0688,40078.0,46477.0,Echolocation,Pipistrellus nathusii,0.496,0.579,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1193.2555,1193.2627,40078.0,47536.0,Echolocation,Pipistrellus nathusii,0.502,0.591,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1490.6765,1490.6847,37500.0,44638.0,Echolocation,Pipistrellus nathusii,0.445,0.513,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1491.7715,1491.7789,37500.0,44438.0,Echolocation,Pipistrellus nathusii,0.423,0.538,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1492.2035,1492.2102,36640.0,48416.0,Echolocation,Pipistrellus nathusii,0.275,0.506,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1492.9615,1492.9696,37500.0,44230.0,Echolocation,Pipistrellus nathusii,0.392,0.519,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
-1493.2485,1493.2577,37500.0,43598.0,Echolocation,Pipistrellus nathusii,0.385,0.57,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+347.1275,347.1352,39218.0,48061.0,Echolocation,Pipistrellus nathusii,0.5,0.547,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+347.2285,347.238,42656.0,47015.0,Echolocation,Pipistrellus nathusii,0.414,0.504,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+347.3215,347.3296,40078.0,49631.0,Echolocation,Pipistrellus nathusii,0.55,0.617,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+391.7275,391.7354,38359.0,45134.0,Echolocation,Pipistrellus nathusii,0.532,0.628,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+391.9315,391.9392,39218.0,49102.0,Echolocation,Pipistrellus nathusii,0.437,0.518,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+392.0375,392.0458,39218.0,45789.0,Echolocation,Pipistrellus nathusii,0.524,0.57,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+392.2325,392.241,38359.0,48772.0,Echolocation,Pipistrellus nathusii,0.544,0.589,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+392.4275,392.4358,39218.0,47616.0,Echolocation,Pipistrellus nathusii,0.463,0.565,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+392.5285,392.5355,39218.0,46263.0,Echolocation,Pipistrellus nathusii,0.464,0.535,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+392.8175,392.8268,39218.0,49741.0,Echolocation,Pipistrellus nathusii,0.476,0.559,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+393.0185,393.0268,39218.0,49861.0,Echolocation,Pipistrellus nathusii,0.479,0.573,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+393.1215,393.1303,38359.0,46404.0,Echolocation,Pipistrellus nathusii,0.584,0.616,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+393.3175,393.326,40078.0,47358.0,Echolocation,Pipistrellus nathusii,0.554,0.611,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+393.6025,393.6107,39218.0,47695.0,Echolocation,Pipistrellus nathusii,0.487,0.556,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+393.8045,393.8139,39218.0,48690.0,Echolocation,Pipistrellus nathusii,0.538,0.643,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+394.0895,394.0967,39218.0,46691.0,Echolocation,Pipistrellus nathusii,0.592,0.641,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+394.9695,394.9763,39218.0,45867.0,Echolocation,Pipistrellus nathusii,0.361,0.537,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+402.0755,402.0846,37500.0,47453.0,Echolocation,Pipistrellus nathusii,0.572,0.624,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+402.3555,402.3625,38359.0,45084.0,Echolocation,Pipistrellus nathusii,0.53,0.569,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+402.6275,402.6367,39218.0,45626.0,Echolocation,Pipistrellus nathusii,0.655,0.665,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+402.9075,402.9182,40078.0,50328.0,Echolocation,Pipistrellus nathusii,0.589,0.648,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+403.1945,403.2032,39218.0,49334.0,Echolocation,Pipistrellus nathusii,0.678,0.717,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+403.4055,403.4128,39218.0,52034.0,Echolocation,Pipistrellus nathusii,0.634,0.665,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+403.5875,403.5937,36640.0,50346.0,Echolocation,Pipistrellus nathusii,0.44,0.514,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+403.6775,403.6849,38359.0,52612.0,Echolocation,Pipistrellus nathusii,0.62,0.694,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+403.8575,403.8648,37500.0,60054.0,Echolocation,Pipistrellus nathusii,0.424,0.529,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+403.9505,403.9582,38359.0,51743.0,Echolocation,Pipistrellus nathusii,0.582,0.67,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.1385,404.1451,38359.0,57160.0,Echolocation,Pipistrellus nathusii,0.525,0.647,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.2345,404.2424,40078.0,51171.0,Echolocation,Pipistrellus nathusii,0.638,0.672,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.3225,404.33,40078.0,52054.0,Echolocation,Pipistrellus nathusii,0.54,0.569,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.4235,404.4325,40078.0,48410.0,Echolocation,Pipistrellus nathusii,0.493,0.515,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.5175,404.5255,38359.0,54348.0,Echolocation,Pipistrellus nathusii,0.495,0.545,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.6105,404.6173,39218.0,47346.0,Echolocation,Pipistrellus nathusii,0.585,0.62,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.70550000000003,404.7126,38359.0,49916.0,Echolocation,Pipistrellus nathusii,0.471,0.574,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.7975,404.8039,39218.0,53098.0,Echolocation,Pipistrellus nathusii,0.686,0.716,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+404.9865,404.9925,36640.0,52904.0,Echolocation,Pipistrellus nathusii,0.612,0.668,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+405.0815,405.0887,36640.0,49359.0,Echolocation,Pipistrellus nathusii,0.591,0.645,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+405.1765,405.1831,34921.0,59540.0,Echolocation,Pipistrellus nathusii,0.527,0.598,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+405.2735,405.2807,36640.0,54596.0,Echolocation,Pipistrellus nathusii,0.545,0.64,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+405.5525,405.5597,38359.0,61058.0,Echolocation,Pipistrellus nathusii,0.674,0.745,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+405.7425,405.7495,33203.0,62846.0,Echolocation,Pipistrellus nathusii,0.332,0.53,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+405.8405,405.847,39218.0,61016.0,Echolocation,Pipistrellus nathusii,0.593,0.66,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+405.9405,405.9473,36640.0,65238.0,Echolocation,Pipistrellus nathusii,0.482,0.576,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+406.0475,406.0544,37500.0,66462.0,Echolocation,Pipistrellus nathusii,0.376,0.51,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+406.1485,406.1549,39218.0,59605.0,Echolocation,Pipistrellus nathusii,0.66,0.694,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+406.4265,406.43240000000003,38359.0,58322.0,Echolocation,Pipistrellus nathusii,0.537,0.686,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+406.5295,406.5346,38359.0,56381.0,Echolocation,Pipistrellus nathusii,0.522,0.603,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+406.6305,406.6372,37500.0,64879.0,Echolocation,Pipistrellus nathusii,0.491,0.614,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+406.7235,406.73,38359.0,55738.0,Echolocation,Pipistrellus nathusii,0.543,0.633,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+406.8265,406.83299999999997,38359.0,58396.0,Echolocation,Pipistrellus nathusii,0.595,0.7,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+406.9185,406.9273,38359.0,52811.0,Echolocation,Pipistrellus nathusii,0.402,0.502,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+407.0985,407.1074,38359.0,52728.0,Echolocation,Pipistrellus nathusii,0.541,0.569,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+512.9035,512.9107,40937.0,52927.0,Echolocation,Pipistrellus nathusii,0.435,0.504,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+513.1945,513.1997,41796.0,62604.0,Echolocation,Pipistrellus nathusii,0.413,0.53,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+513.2665,513.2736,41796.0,54608.0,Echolocation,Pipistrellus nathusii,0.455,0.53,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+513.3515,513.358,40937.0,66205.0,Echolocation,Pipistrellus nathusii,0.414,0.551,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+651.1725,651.1804,38359.0,46421.0,Echolocation,Pipistrellus nathusii,0.516,0.577,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+651.4565,651.4644,39218.0,46915.0,Echolocation,Pipistrellus nathusii,0.494,0.558,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+651.7445,651.7528,39218.0,46295.0,Echolocation,Pipistrellus nathusii,0.485,0.513,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+997.3965,997.4061,37500.0,43600.0,Echolocation,Pipistrellus nathusii,0.449,0.526,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+997.6775,997.6876,38359.0,44778.0,Echolocation,Pipistrellus nathusii,0.474,0.565,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1000.8665,1000.8755,37500.0,44088.0,Echolocation,Pipistrellus nathusii,0.453,0.587,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1028.7155,1028.7234,40937.0,51680.0,Echolocation,Pipistrellus nathusii,0.494,0.642,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1028.8125,1028.8191,40937.0,48531.0,Echolocation,Pipistrellus nathusii,0.523,0.582,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1028.9055,1028.9132,40078.0,54384.0,Echolocation,Pipistrellus nathusii,0.405,0.571,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1029.1605,1029.1675,40078.0,55680.0,Echolocation,Pipistrellus nathusii,0.4,0.553,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1029.2595,1029.2658,39218.0,54700.0,Echolocation,Pipistrellus nathusii,0.364,0.505,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1029.3555,1029.363,40937.0,57418.0,Echolocation,Pipistrellus nathusii,0.347,0.58,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1029.4535,1029.4595,40937.0,51965.0,Echolocation,Pipistrellus nathusii,0.575,0.605,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1029.5465,1029.5527,40937.0,59494.0,Echolocation,Pipistrellus nathusii,0.419,0.561,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1029.6405,1029.6471,39218.0,57376.0,Echolocation,Pipistrellus nathusii,0.398,0.562,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1030.8335,1030.8401,40937.0,47894.0,Echolocation,Pipistrellus nathusii,0.514,0.56,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1031.1785,1031.1841,40937.0,55076.0,Echolocation,Pipistrellus nathusii,0.322,0.501,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1031.3945,1031.3999,41796.0,61982.0,Echolocation,Pipistrellus nathusii,0.373,0.537,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1031.5605,1031.566,41796.0,62453.0,Echolocation,Pipistrellus nathusii,0.381,0.553,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1031.6455,1031.6508,41796.0,53101.0,Echolocation,Pipistrellus nathusii,0.492,0.567,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1031.7285,1031.7345,41796.0,58633.0,Echolocation,Pipistrellus nathusii,0.477,0.624,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1031.8995,1031.9059,41796.0,58097.0,Echolocation,Pipistrellus nathusii,0.521,0.626,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1031.9895,1031.9952,41796.0,58284.0,Echolocation,Pipistrellus nathusii,0.512,0.618,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1032.3985,1032.405,40078.0,65107.0,Echolocation,Myotis daubentonii,0.288,0.518,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1032.5725,1032.579,40937.0,65942.0,Echolocation,Myotis daubentonii,0.226,0.548,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1032.7505,1032.7574,40937.0,60608.0,Echolocation,Pipistrellus nathusii,0.282,0.571,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1032.8385,1032.8442,41796.0,63658.0,Echolocation,Myotis daubentonii,0.281,0.521,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1033.4425,1033.4488,40078.0,62021.0,Echolocation,Myotis daubentonii,0.331,0.548,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1033.8725,1033.8794,38359.0,64134.0,Echolocation,Pipistrellus nathusii,0.233,0.548,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1033.9475,1033.9541,38359.0,66197.0,Echolocation,Myotis daubentonii,0.293,0.505,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1117.2445,1117.2514,51250.0,68651.0,Echolocation,Pipistrellus pipistrellus,0.379,0.545,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1117.5495,1117.5535,40937.0,80542.0,Echolocation,Myotis mystacinus,0.306,0.545,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1117.6115,1117.6156,41796.0,78157.0,Echolocation,Myotis mystacinus,0.376,0.555,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1118.3155,1118.319,46953.0,73195.0,Echolocation,Myotis alcathoe,0.415,0.565,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1118.4415,1118.4456,50390.0,62557.0,Echolocation,Myotis alcathoe,0.23,0.512,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1118.7945,1118.7983,49531.0,64785.0,Echolocation,Myotis alcathoe,0.255,0.588,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.0535,1119.058,51250.0,65360.0,Echolocation,Pipistrellus pipistrellus,0.382,0.594,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.1065,1119.11,51250.0,67977.0,Echolocation,Myotis alcathoe,0.375,0.552,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.1475,1119.1513,52109.0,70664.0,Echolocation,Myotis alcathoe,0.279,0.552,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.2805,1119.2847,48671.0,77767.0,Echolocation,Myotis alcathoe,0.377,0.538,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.3845,1119.3885,49531.0,79989.0,Echolocation,Myotis alcathoe,0.474,0.575,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.4225,1119.4263,42656.0,86673.0,Echolocation,Myotis alcathoe,0.483,0.633,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.4635,1119.468,44375.0,86999.0,Echolocation,Myotis alcathoe,0.454,0.532,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.5635,1119.5669,46953.0,82436.0,Echolocation,Myotis alcathoe,0.575,0.65,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.6165,1119.6197,47812.0,84692.0,Echolocation,Myotis alcathoe,0.567,0.706,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.6805,1119.6836,43515.0,88753.0,Echolocation,Myotis alcathoe,0.537,0.65,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.7295,1119.7336,45234.0,86344.0,Echolocation,Myotis alcathoe,0.596,0.667,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.7795,1119.7835,41796.0,87835.0,Echolocation,Myotis alcathoe,0.534,0.619,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.8475,1119.8515,36640.0,85827.0,Echolocation,Myotis alcathoe,0.509,0.689,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.8985,1119.9031,42656.0,92589.0,Echolocation,Myotis alcathoe,0.625,0.685,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1119.9565,1119.9611,40078.0,93597.0,Echolocation,Myotis alcathoe,0.585,0.659,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.0465,1120.0502,41796.0,90665.0,Echolocation,Myotis alcathoe,0.452,0.618,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.1275,1120.1317,37500.0,92197.0,Echolocation,Myotis alcathoe,0.327,0.658,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.1815,1120.1864,42656.0,99132.0,Echolocation,Myotis alcathoe,0.421,0.628,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.2475,1120.2516,35781.0,95292.0,Echolocation,Myotis alcathoe,0.378,0.649,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.4025,1120.4074,34062.0,97606.0,Echolocation,Myotis alcathoe,0.288,0.667,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.5175,1120.5214,36640.0,95419.0,Echolocation,Myotis alcathoe,0.422,0.653,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.5805,1120.5848,34062.0,99407.0,Echolocation,Myotis alcathoe,0.367,0.659,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.6485,1120.6528,35781.0,88660.0,Echolocation,Myotis mystacinus,0.293,0.716,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.7025,1120.707,36640.0,83114.0,Echolocation,Myotis mystacinus,0.374,0.743,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.7545,1120.7582,40937.0,78676.0,Echolocation,Myotis mystacinus,0.422,0.654,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.8475,1120.8511,40078.0,82913.0,Echolocation,Myotis mystacinus,0.337,0.579,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.8895,1120.8939,34921.0,80371.0,Echolocation,Myotis mystacinus,0.484,0.654,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.9255,1120.929,40937.0,81648.0,Echolocation,Myotis mystacinus,0.498,0.624,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1120.9625,1120.9664,47812.0,78687.0,Echolocation,Myotis mystacinus,0.368,0.654,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1121.0015,1121.0051,44375.0,74334.0,Echolocation,Myotis mystacinus,0.386,0.53,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1121.0435,1121.0468,43515.0,73551.0,Echolocation,Myotis mystacinus,0.448,0.563,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1121.1335,1121.1372,44375.0,73293.0,Echolocation,Myotis mystacinus,0.387,0.564,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1121.1825,1121.1864,47812.0,74687.0,Echolocation,Myotis mystacinus,0.467,0.582,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1121.2735,1121.2767,50390.0,70517.0,Echolocation,Myotis alcathoe,0.239,0.507,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1167.0645,1167.0722,38359.0,44614.0,Echolocation,Pipistrellus nathusii,0.524,0.577,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1169.2305,1169.2382,38359.0,45446.0,Echolocation,Pipistrellus nathusii,0.472,0.598,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1169.6165,1169.6246,38359.0,44418.0,Echolocation,Pipistrellus nathusii,0.58,0.627,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1169.7955,1169.8045,37500.0,43796.0,Echolocation,Pipistrellus nathusii,0.46,0.54,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1170.0025,1170.0098,37500.0,43721.0,Echolocation,Pipistrellus nathusii,0.524,0.538,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1170.1025,1170.1112,37500.0,43526.0,Echolocation,Pipistrellus nathusii,0.478,0.545,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1170.1975,1170.2071,37500.0,43797.0,Echolocation,Pipistrellus nathusii,0.399,0.513,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1170.3835,1170.3917,38359.0,48117.0,Echolocation,Pipistrellus nathusii,0.483,0.52,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1170.4785,1170.4858,37500.0,44810.0,Echolocation,Pipistrellus nathusii,0.501,0.575,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1170.6685,1170.6757,37500.0,45687.0,Echolocation,Pipistrellus nathusii,0.504,0.568,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1170.8645,1170.8727,38359.0,44115.0,Echolocation,Pipistrellus nathusii,0.453,0.508,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1171.0665,1171.0753,37500.0,43751.0,Echolocation,Pipistrellus nathusii,0.543,0.644,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1171.7345,1171.7429,36640.0,42945.0,Echolocation,Pipistrellus nathusii,0.491,0.564,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1185.0885,1185.0944,39218.0,57353.0,Echolocation,Myotis daubentonii,0.235,0.502,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1185.3575,1185.3637,41796.0,57972.0,Echolocation,Pipistrellus nathusii,0.284,0.543,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1185.4965,1185.5016,40937.0,54993.0,Echolocation,Pipistrellus nathusii,0.205,0.505,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1185.9165,1185.9221,42656.0,58367.0,Echolocation,Myotis daubentonii,0.24,0.515,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1186.0735,1186.0804,38359.0,79946.0,Echolocation,Myotis daubentonii,0.391,0.511,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1186.5265,1186.5322,40937.0,59185.0,Echolocation,Myotis daubentonii,0.361,0.518,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1187.1565,1187.1614,46093.0,55583.0,Echolocation,Pipistrellus pipistrellus,0.45,0.502,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1188.3735,1188.3802,42656.0,57622.0,Echolocation,Pipistrellus nathusii,0.326,0.582,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1188.5645,1188.5731,38359.0,48008.0,Echolocation,Pipistrellus nathusii,0.478,0.601,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1188.6705,1188.6776,39218.0,56268.0,Echolocation,Pipistrellus nathusii,0.587,0.63,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1188.7745,1188.7817,40078.0,52798.0,Echolocation,Pipistrellus nathusii,0.576,0.636,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1189.7695,1189.7768,40937.0,50874.0,Echolocation,Pipistrellus nathusii,0.419,0.563,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1189.8515,1189.8592,40078.0,61129.0,Echolocation,Pipistrellus nathusii,0.489,0.58,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1189.9395,1189.9462,39218.0,49575.0,Echolocation,Pipistrellus nathusii,0.387,0.527,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.1315,1190.1381,40937.0,53138.0,Echolocation,Pipistrellus nathusii,0.626,0.672,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.2165,1190.2245,41796.0,53171.0,Echolocation,Pipistrellus nathusii,0.493,0.613,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.3045,1190.3125,39218.0,55180.0,Echolocation,Pipistrellus nathusii,0.562,0.628,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.4045,1190.4134,40937.0,50608.0,Echolocation,Pipistrellus nathusii,0.564,0.67,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.5095,1190.5176,40937.0,55162.0,Echolocation,Pipistrellus nathusii,0.547,0.648,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.6105,1190.6195,40937.0,53710.0,Echolocation,Pipistrellus nathusii,0.441,0.528,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.7195,1190.727,40937.0,51263.0,Echolocation,Pipistrellus nathusii,0.574,0.611,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.8415,1190.8498,40937.0,50022.0,Echolocation,Pipistrellus nathusii,0.562,0.63,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1190.9385,1190.9458,40078.0,53707.0,Echolocation,Pipistrellus nathusii,0.656,0.712,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1191.0445,1191.0532,40078.0,45644.0,Echolocation,Pipistrellus nathusii,0.506,0.54,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1191.2495,1191.2571,40937.0,52571.0,Echolocation,Pipistrellus nathusii,0.56,0.63,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1192.5215,1192.5297,40937.0,50038.0,Echolocation,Pipistrellus nathusii,0.57,0.672,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1192.7795,1192.7872,40937.0,49761.0,Echolocation,Pipistrellus nathusii,0.55,0.614,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1193.0605,1193.0688,40078.0,46477.0,Echolocation,Pipistrellus nathusii,0.496,0.579,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1193.2555,1193.2627,40078.0,47536.0,Echolocation,Pipistrellus nathusii,0.502,0.591,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1490.6765,1490.6847,37500.0,44638.0,Echolocation,Pipistrellus nathusii,0.445,0.513,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1491.7715,1491.7789,37500.0,44438.0,Echolocation,Pipistrellus nathusii,0.423,0.538,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1492.2035,1492.2102,36640.0,48416.0,Echolocation,Pipistrellus nathusii,0.275,0.506,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1492.9615,1492.9696,37500.0,44230.0,Echolocation,Pipistrellus nathusii,0.392,0.519,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info
+1493.2485,1493.2577,37500.0,43598.0,Echolocation,Pipistrellus nathusii,0.385,0.57,-1,/mnt/ubna_data_01/recover-20220709_unit3/20220708_110000.WAV,Foliage,recover-20220709_unit3,No Valid Info

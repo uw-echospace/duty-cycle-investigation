@@ -1,7 +1,7 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
-184.2355,184.2505,23750.0,27172.0,Echolocation,Nyctalus leisleri,0.548,0.609,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage
-748.0985000000001,748.1118,23750.0,28311.0,Echolocation,Nyctalus leisleri,0.377,0.53,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage
-763.5605,763.5784,11718.0,18056.0,Echolocation,Nyctalus leisleri,0.339,0.502,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage
-767.3605,767.3787,11718.0,17173.0,Echolocation,Nyctalus leisleri,0.364,0.517,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage
-914.8345,914.8524,11718.0,16422.0,Echolocation,Nyctalus leisleri,0.413,0.507,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage
-1615.8695,1615.885,23750.0,28119.0,Echolocation,Nyctalus leisleri,0.528,0.604,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+184.2355,184.2505,23750.0,27172.0,Echolocation,Nyctalus leisleri,0.548,0.609,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage,recover-20220717,005
+748.0985000000001,748.1118,23750.0,28311.0,Echolocation,Nyctalus leisleri,0.377,0.53,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage,recover-20220717,005
+763.5605,763.5784,11718.0,18056.0,Echolocation,Nyctalus leisleri,0.339,0.502,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage,recover-20220717,005
+767.3605,767.3787,11718.0,17173.0,Echolocation,Nyctalus leisleri,0.364,0.517,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage,recover-20220717,005
+914.8345,914.8524,11718.0,16422.0,Echolocation,Nyctalus leisleri,0.413,0.507,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage,recover-20220717,005
+1615.8695,1615.885,23750.0,28119.0,Echolocation,Nyctalus leisleri,0.528,0.604,-1,/mnt/ubna_data_01/recover-20220717/UBNA_005/20220716_120000.WAV,Foliage,recover-20220717,005

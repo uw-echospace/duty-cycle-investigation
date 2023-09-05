@@ -1,5 +1,5 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
-1210.8475,1210.8509,22890.0,61311.0,Echolocation,Myotis nattereri,0.502,0.545,-1,/mnt/ubna_data_01/recover-20220620_unit2/20220619_030000.WAV,Foliage
-1312.6455,1312.6496,22890.0,62383.0,Echolocation,Myotis nattereri,0.482,0.518,-1,/mnt/ubna_data_01/recover-20220620_unit2/20220619_030000.WAV,Foliage
-1340.6735,1340.6772,22890.0,66104.0,Echolocation,Myotis nattereri,0.506,0.533,-1,/mnt/ubna_data_01/recover-20220620_unit2/20220619_030000.WAV,Foliage
-1732.9995,1733.0039,20312.0,70366.0,Echolocation,Myotis nattereri,0.5,0.521,-1,/mnt/ubna_data_01/recover-20220620_unit2/20220619_030000.WAV,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+1210.8475,1210.8509,22890.0,61311.0,Echolocation,Myotis nattereri,0.502,0.545,-1,/mnt/ubna_data_01/recover-20220620_unit2/20220619_030000.WAV,Foliage,recover-20220620_unit2,010
+1312.6455,1312.6496,22890.0,62383.0,Echolocation,Myotis nattereri,0.482,0.518,-1,/mnt/ubna_data_01/recover-20220620_unit2/20220619_030000.WAV,Foliage,recover-20220620_unit2,010
+1340.6735,1340.6772,22890.0,66104.0,Echolocation,Myotis nattereri,0.506,0.533,-1,/mnt/ubna_data_01/recover-20220620_unit2/20220619_030000.WAV,Foliage,recover-20220620_unit2,010
+1732.9995,1733.0039,20312.0,70366.0,Echolocation,Myotis nattereri,0.5,0.521,-1,/mnt/ubna_data_01/recover-20220620_unit2/20220619_030000.WAV,Foliage,recover-20220620_unit2,010
