@@ -48,7 +48,7 @@ def plot_log_survival(intervals_ms, survival, fig_details):
     plt.plot(intervals_ms, survival, marker='.', c='navy')
     plt.ylabel('log(# of intervals)', fontsize=18)
     plt.xlabel('Time (min)', fontsize=18)
-    plt.xticks(intervals_ms[::360000], intervals_min[::360000], rotation=45)
+    plt.xticks(intervals_ms[::180000], intervals_min[::180000], rotation=45)
     plt.grid(which='both')
     plt.xlim(0, intervals_ms[-1])
 
@@ -133,44 +133,28 @@ def plot_bci_over_survival(intervals_ms, survival, fast_process, slow_process, b
     plt.figure(figsize=(12, 6))
     plt.rcParams.update({'font.size' : 20})
     plt.title(f"{fig_details['freq_group']}log-survivorship curve in {fig_details['site_name']}", fontsize=20)
-
     plt.plot(intervals_ms, survival, marker='.', c='cyan', alpha=0.8)
+
     plt.plot(intervals_ms[fast_process['indices']], survival[fast_process['indices']], marker='.', c='navy')
+    plt.plot(intervals_ms[slow_process['indices']], survival[slow_process['indices']], marker='.', c='navy')
     plt.axvline(fast_start, linestyle='dashed', color='k')
     plt.axvline(fast_end, linestyle='dashed', color='k')
-
-    x = np.linspace(-100, intervals_ms[-1], int(slow_end))
-    plt.plot(x, fast_process['metrics'].intercept + fast_process['metrics'].slope*x, c='red', marker=None, label=f"R^2 = {round(fast_process['metrics'].rvalue**2, 4)}")
-    plt.plot(x, slow_process['metrics'].intercept + slow_process['metrics'].slope*x, c='blue', marker=None, label=f"R^2 = {round(slow_process['metrics'].rvalue**2, 4)}")
-    
-    plt.axvline(bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"BCI: {round(bci/1000, 2)}s")
-    plt.grid(axis='y')
-    plt.ylabel('log(# of intervals)', fontsize=18)
-    plt.xlabel('Time (ms)', fontsize=18)
-    plt.xlim(intervals_ms[0], fig_details['time_end'])
-    plt.ylim(survival[-1]-0.2, survival[0]+0.2)
-    plt.tight_layout()
-    plt.legend(loc='upper right')
-
-    plt.figure(figsize=(12, 6))
-    plt.title(f"{fig_details['freq_group']}log-survivorship curve in {fig_details['site_name']}", fontsize=20)
-    
-    plt.plot(intervals_ms, survival, marker='.', c='cyan', alpha=0.8)
-    plt.plot(intervals_ms[slow_process['indices']], survival[slow_process['indices']], marker='.', c='navy')
     plt.axvline(slow_start, linestyle='dashed', color='k')
     plt.axvline(slow_end, linestyle='dashed', color='k')
 
-    plt.plot(x, fast_process['metrics'].intercept + fast_process['metrics'].slope*x, c='red', marker=None, label=f"R^2 = {round(fast_process['metrics'].rvalue**2, 4)}")
-    plt.plot(x, slow_process['metrics'].intercept + slow_process['metrics'].slope*x, c='blue', marker=None, label=f"R^2 = {round(slow_process['metrics'].rvalue**2, 4)}")
-    
+    x = np.linspace(-100, intervals_ms[-1], int(slow_end))
+    plt.plot(x, fast_process['metrics'].intercept + fast_process['metrics'].slope*x, c='red', alpha=0.6, marker=None, label=f"R^2 = {round(fast_process['metrics'].rvalue**2, 4)}")
+    plt.plot(x, slow_process['metrics'].intercept + slow_process['metrics'].slope*x, c='blue', alpha=0.6, marker=None, label=f"R^2 = {round(slow_process['metrics'].rvalue**2, 4)}")
+
     plt.axvline(bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"BCI: {round(bci/1000, 2)}s")
     plt.grid(axis='y')
     plt.ylabel('log(# of intervals)', fontsize=18)
     plt.xlabel('Time (ms)', fontsize=18)
-    plt.xlim(intervals_ms[0], intervals_ms[-1])
+    plt.xlim(10e0, 10e7)
     plt.ylim(survival[-1]-0.2, survival[0]+0.2)
     plt.tight_layout()
     plt.legend(loc='upper right')
+    plt.xscale("log")
     plt.show()
 
 def plot_nlin_results_over_survival(intervals_ms, survival, fast_process, slow_process, optim_x, optim_bci, bci, fig_details):
@@ -191,43 +175,26 @@ def plot_nlin_results_over_survival(intervals_ms, survival, fast_process, slow_p
 
     plt.plot(intervals_ms, bt_clustering.model(intervals_ms, optim_x[0], optim_x[1], optim_x[2], optim_x[3]), marker='.', c='green', alpha=0.1)
     plt.plot(intervals_ms[fast_process['indices']], survival[fast_process['indices']], marker='.', c='navy')
+    plt.plot(intervals_ms[slow_process['indices']], survival[slow_process['indices']], marker='.', c='navy')
     plt.axvline(fast_start, linestyle='dashed', color='k')
     plt.axvline(fast_end, linestyle='dashed', color='k')
-
-    x = np.linspace(-100, intervals_ms[-1], int(slow_end))
-    plt.plot(x, fast_process['metrics'].intercept + fast_process['metrics'].slope*x, c='red', marker=None, label=f"R^2 = {round(fast_process['metrics'].rvalue**2, 4)}")
-    plt.plot(x, slow_process['metrics'].intercept + slow_process['metrics'].slope*x, c='blue', marker=None, label=f"R^2 = {round(slow_process['metrics'].rvalue**2, 4)}")
-    
-    plt.axvline(bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"BCI: {round(bci/1000, 2)}s")
-    plt.axvline(optim_bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"Optim BCI: {round(optim_bci/1000, 2)}s")
-    plt.grid(axis='y')
-    plt.ylabel('log(# of intervals)', fontsize=18)
-    plt.xlabel('Time (ms)', fontsize=18)
-    plt.xlim(intervals_ms[0], fig_details['time_end'])
-    plt.ylim(survival[-1]-0.2, survival[0]+0.2)
-    plt.tight_layout()
-    plt.legend(loc='upper right')
-
-    plt.figure(figsize=(12, 6))
-    plt.title(f"{fig_details['freq_group']}log-survivorship curve in {fig_details['site_name']}", fontsize=20)
-    
-    plt.plot(intervals_ms, survival, marker='.', c='cyan', alpha=0.8)
-    plt.plot(intervals_ms, bt_clustering.model(intervals_ms, optim_x[0], optim_x[1], optim_x[2], optim_x[3]), marker='.', c='green', alpha=0.1)
-    plt.plot(intervals_ms[slow_process['indices']], survival[slow_process['indices']], marker='.', c='navy')
     plt.axvline(slow_start, linestyle='dashed', color='k')
     plt.axvline(slow_end, linestyle='dashed', color='k')
-    
-    plt.plot(x, fast_process['metrics'].intercept + fast_process['metrics'].slope*x, c='red', marker=None, label=f"R^2 = {round(fast_process['metrics'].rvalue**2, 4)}")
-    plt.plot(x, slow_process['metrics'].intercept + slow_process['metrics'].slope*x, c='blue', marker=None, label=f"R^2 = {round(slow_process['metrics'].rvalue**2, 4)}")
+
+    x = np.linspace(-100, intervals_ms[-1], int(slow_end))
+    plt.plot(x, fast_process['metrics'].intercept + fast_process['metrics'].slope*x, c='red', alpha=0.6, marker=None, label=f"R^2 = {round(fast_process['metrics'].rvalue**2, 4)}")
+    plt.plot(x, slow_process['metrics'].intercept + slow_process['metrics'].slope*x, c='blue', alpha=0.6, marker=None, label=f"R^2 = {round(slow_process['metrics'].rvalue**2, 4)}")
+
     plt.axvline(bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"BCI: {round(bci/1000, 2)}s")
     plt.axvline(optim_bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"Optim BCI: {round(optim_bci/1000, 2)}s")
     plt.grid(axis='y')
     plt.ylabel('log(# of intervals)', fontsize=18)
     plt.xlabel('Time (ms)', fontsize=18)
-    plt.xlim(intervals_ms[0], intervals_ms[-1])
+    plt.xlim(10e0, 10e7)
     plt.ylim(survival[-1]-0.2, survival[0]+0.2)
     plt.tight_layout()
     plt.legend(loc='upper right')
+    plt.xscale("log")
     plt.show()
 
 def plot_audio_seg(audio_features, spec_features):

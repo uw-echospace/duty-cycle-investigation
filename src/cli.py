@@ -75,8 +75,8 @@ def get_file_paths(data_params):
     file_paths["bd2_TYPE_SITE_YEAR"] = f'bd2__{data_params["type_tag"]}{data_params["site_tag"]}_2022'
     file_paths["duty_cycled_folder"] = f'{file_paths["SITE_folder"]}/duty_cycled'
     Path(f'{file_paths["duty_cycled_folder"]}').mkdir(parents=True, exist_ok=True)
-    file_paths["dc_dets_TYPE_SITE_summary"] = f'dc_dets__{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_bouts_TYPE_SITE_summary"] = f'dc_bouts__{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_dets__TYPE_SITE_summary"] = f'dc_dets__{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_bouts__TYPE_SITE_summary"] = f'dc_bouts__{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["simulated_schemes_folder"] = f'{file_paths["duty_cycled_folder"]}/simulated_schemes'
     Path(f'{file_paths["simulated_schemes_folder"]}').mkdir(parents=True, exist_ok=True)
 

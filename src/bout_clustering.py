@@ -52,7 +52,7 @@ def regress_around_slow_intervals(intervals_ms, survival):
     They are also among intervals from 20 to 60min. This range is very likely between-bout.
     """
 
-    slow_inds = np.logical_and(survival >= (survival.max() * 0.30), survival <= (survival.max() * 0.40))
+    slow_inds = np.logical_and(survival >= (survival.max() * 0.22), survival <= (survival.max() * 0.32)) 
     slow_coeff = stats.linregress(intervals_ms[slow_inds], survival[slow_inds])
 
     slow_process = dict()

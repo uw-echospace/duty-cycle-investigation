@@ -78,7 +78,7 @@ def construct_activity_dets_arr_from_dc_tags(data_params, file_paths):
         dc_dets = dc_dets.set_index("Date_and_Time_UTC")
         activity_dets_arr = pd.concat([activity_dets_arr, dc_dets], axis=1)
 
-    activity_dets_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets_TYPE_SITE_summary"]}.csv')
+    activity_dets_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets__TYPE_SITE_summary"]}.csv')
 
     return activity_dets_arr
 
@@ -97,6 +97,6 @@ def construct_activity_bouts_arr_from_dc_tags(data_params, file_paths):
         dc_bouts = dc_bouts.set_index("Date_and_Time_UTC")
         activity_bouts_arr = pd.concat([activity_bouts_arr, dc_bouts], axis=1)
 
-    activity_bouts_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts_TYPE_SITE_summary"]}.csv')
+    activity_bouts_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts__TYPE_SITE_summary"]}.csv')
 
     return activity_bouts_arr

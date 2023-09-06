@@ -166,19 +166,38 @@ def plot_dc_dets_comparisons_per_night(activity_arr, data_params, pipeline_param
     for i, date in enumerate(dates):
         plt.subplot(int(np.ceil(np.sqrt(len(dates)))), int(np.ceil(np.sqrt(len(dates)))), i+1)
         plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=24)
+        day_max = 0
         for i, dc_tag in enumerate(data_params["dc_tags"]):
             activity_df = dh.construct_activity_grid_for_number_of_dets(activity_arr, dc_tag)
             on = int(dc_tag.split('of')[0])
             total = int(dc_tag.split('of')[1])
             recover_ratio = total / on
             activity_of_date = recover_ratio*activity_df[date]
+            dc_day_max = np.max(activity_of_date)
+            if (dc_day_max > day_max):
+                day_max = dc_day_max
             bar_width = 1/(len(data_params['dc_tags']))
             plt.bar(np.arange(0, len(activity_df.index))+(bar_width*(i - 1)), height=activity_of_date, width=bar_width, 
                     color=DC_COLOR_MAPPINGS[dc_tag], label=dc_tag, alpha=0.75, edgecolor='k')
+        if (day_max > 2000):
+            day_yticks = np.arange(0, day_max+1, 1000).astype('int')
+            plt.yticks(day_yticks, day_yticks, rotation=50)
+        elif (day_max > 500 and day_max <= 2000):
+            day_yticks = np.arange(0, day_max+1, 250).astype('int')
+            plt.yticks(day_yticks, day_yticks, rotation=50)
+        elif (day_max > 100 and day_max <= 500):
+            day_yticks = np.arange(0, day_max+1, 50).astype('int')
+            plt.yticks(day_yticks, day_yticks, rotation=50)
+        elif (day_max > 10 and day_max <= 100):
+            day_yticks = np.arange(0, day_max+1, 10).astype('int')
+            plt.yticks(day_yticks, day_yticks, rotation=50)
+        else:
+            day_yticks = np.arange(0, day_max+1, 1).astype('int')
+            plt.yticks(day_yticks, day_yticks, rotation=50)
         plt.grid(axis="y")
         plt.xticks(np.arange(0, len(activity_df.index), 2)-0.5, plot_times[::2], rotation=50)
         plt.xlim(plt.xticks()[0][0], plt.xticks()[0][-1])
-        plt.ylabel('Number of Detections')
+        plt.ylabel(f'Number of Detections')
         plt.xlabel(f'{xlabel} Time (HH:MM)')
         plt.axvline(1.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
         plt.axvline(7.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
@@ -447,6 +466,94 @@ def compare_metrics_per_night(activity_bouts_arr, activity_dets_arr, data_params
         plt.text(x=7.8/21,  y=0.56, s="Midnight", color='midnightblue', transform=ax.transAxes)
         plt.text(x=(18.3/21),  y=0.56, s="Dawn", color='midnightblue', transform=ax.transAxes)
         plt.legend()
+
+    plt.tight_layout()
+    if pipeline_params["save_dc_night_comparisons"]:
+        plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_metric_comparisons_figname"]}.png', bbox_inches='tight')
+    if pipeline_params["show_plots"]:
+        plt.show()
+
+def plot_numdets_n_percentbouts(activity_bouts_arr, activity_dets_arr, data_params, pipeline_params, file_paths):
+    """
+    Plots a bar graph for each date comparing all duty-cycling schemes provided in a given location.
+    """
+
+    datetimes = pd.to_datetime(activity_dets_arr.index.values)
+    dates = datetimes.strftime("%m/%d/%y").unique()
+    times = datetimes.strftime("%H:%M").unique()
+
+    activity_times = pd.DatetimeIndex(times).tz_localize('UTC')
+    xlabel = 'UTC'
+    if pipeline_params["show_PST"]:
+        activity_times = activity_times.tz_convert(tz='US/Pacific')
+        xlabel = 'PST'
+    plot_times = activity_times.strftime("%H:%M").unique()
+
+    plt.rcParams.update({'font.size': 12.5})
+
+    plt.figure(figsize=(5*int(np.ceil(np.sqrt(2*len(dates)))),5*int(np.ceil(np.sqrt(2*len(dates))))))
+
+    i = 0
+    for date in dates:
+        plt.subplot(int(np.ceil(np.sqrt(2*len(dates)))), int(np.ceil(np.sqrt(2*len(dates)))), i+1)
+        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        dc_tag = data_params['cur_dc_tag']
+
+        activity_dets_df = dh.construct_activity_grid_for_number_of_dets(activity_dets_arr, dc_tag)
+        on = int(dc_tag.split('of')[0])
+        total = int(dc_tag.split('of')[1])
+        recover_ratio = total / on
+        detections_of_date = recover_ratio*activity_dets_df[date]
+        normalized_detections_of_date = (100*(detections_of_date / (activity_dets_arr.max()[0])))
+
+        j=0
+        bar_width = 1
+        plt.bar(np.arange(0, len(activity_dets_df.index))+(bar_width*(j - 0.5)), height=detections_of_date, width=bar_width, 
+                color='orange', label=f'% of dets', alpha=0.75, edgecolor='k')
+
+        plt.grid(axis="y")
+        plt.xticks(np.arange(0, len(activity_dets_df.index), 2)-0.5, plot_times[::2], rotation=50)
+        plt.xlim(plt.xticks()[0][0], plt.xticks()[0][-1])
+        plt.ylabel('Number of Detections')
+        plt.xlabel(f'{xlabel} Time (HH:MM)')
+        plt.axvline(1.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        plt.axvline(7.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        plt.axvline(17.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        ax = plt.gca()
+        plt.text(x=(1.5/21), y=0.56, s="Dusk", color='midnightblue', transform=ax.transAxes)
+        plt.text(x=7.8/21,  y=0.56, s="Midnight", color='midnightblue', transform=ax.transAxes)
+        plt.text(x=(18.3/21),  y=0.56, s="Dawn", color='midnightblue', transform=ax.transAxes)
+        plt.legend()
+
+
+        plt.subplot(int(np.ceil(np.sqrt(2*len(dates)))), int(np.ceil(np.sqrt(2*len(dates)))), i+2)
+        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        dc_tag = data_params['cur_dc_tag']
+
+        activity_bouts_df = dh.construct_activity_grid_for_bouts(activity_bouts_arr, dc_tag)
+        on = int(dc_tag.split('of')[0])
+        total = int(dc_tag.split('of')[1])
+        recover_ratio = total / on
+        bouts_of_date = (recover_ratio*activity_bouts_df[date])
+        j=0
+        bar_width = 1
+        plt.bar(np.arange(0, len(activity_bouts_df.index))+(bar_width*(j - 0.5)), height=bouts_of_date, width=bar_width, 
+                color='cyan', label=f'% of bout time', alpha=0.75, edgecolor='k')
+
+        plt.grid(axis="y")
+        plt.xticks(np.arange(0, len(activity_bouts_df.index), 2)-0.5, plot_times[::2], rotation=50)
+        plt.xlim(plt.xticks()[0][0], plt.xticks()[0][-1])
+        plt.ylabel(f'Percentage (%)')
+        plt.xlabel(f'{xlabel} Time (HH:MM)')
+        plt.axvline(1.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        plt.axvline(7.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        plt.axvline(17.5, ymax=0.55, linestyle='dashed', color='midnightblue', alpha=0.6)
+        ax = plt.gca()
+        plt.text(x=(1.5/21), y=0.56, s="Dusk", color='midnightblue', transform=ax.transAxes)
+        plt.text(x=7.8/21,  y=0.56, s="Midnight", color='midnightblue', transform=ax.transAxes)
+        plt.text(x=(18.3/21),  y=0.56, s="Dawn", color='midnightblue', transform=ax.transAxes)
+        plt.legend()
+        i+=2
 
     plt.tight_layout()
     if pipeline_params["save_dc_night_comparisons"]:
