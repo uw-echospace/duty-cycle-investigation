@@ -29,6 +29,15 @@ def generate_activity_bouts_results(data_params, file_paths):
     return ss.construct_activity_bouts_arr_from_dc_tags(data_params, file_paths)
 
 
+def generate_activity_inds_results(data_params, file_paths):
+    """
+    Puts together a location summary with all batdetect2 outputs in data/raw and generates a summary of activity.
+    A summary of activity is formatted as the number of detected bat calls per time interval.
+    """
+
+    assemble_initial_location_summary(data_params, file_paths) ## Use to update any bd2__(location summary).csv files
+    return ss.construct_activity_inds_arr_from_dc_tags(data_params, file_paths)
+
 def test_highest_freq_upper_bound(location_df, data_params):
     upper_freq_bound = data_params['freq_tags'][1]
     highest_freq_in_dets = float(location_df['high_freq'].max())
@@ -128,6 +137,25 @@ def construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_pat
     return pd.DataFrame(list(zip(bout_dpi_df.index, bout_dpi_df[f'percentage_time_occupied_by_bouts ({dc_tag})'].values)), columns=["Date_and_Time_UTC", f'percentage_time_occupied_by_bouts ({dc_tag})'])
 
 
+def construct_activity_indices_arr(location_df, dc_tag, file_paths, data_params):
+    location_df['ref_time'] = location_df['call_start_time']
+
+    temp = location_df.resample(f'5S', on='ref_time')['ref_time'].count()
+    temp[temp>0] = 1
+    activity_indices = temp.resample(f"{data_params['resolution_in_min']}T").sum()
+
+    col_name = f"Activity Indices ({dc_tag})"
+    incomplete_activity_arr = pd.DataFrame(activity_indices.values, index=activity_indices.index, columns=[col_name])
+
+    all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
+    all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
+    
+    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['resolution_in_min']}T").first()
+    activity_arr = activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
+
+    return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
+
+
 def construct_activity_grid_for_number_of_dets(activity_arr, dc_tag):
     """
     Reshapes a provided activity summary column to make a grid with date columns and time rows.
@@ -152,6 +180,19 @@ def construct_activity_grid_for_bouts(activity_arr, dc_tag):
     raw_times = activity_datetimes.strftime("%H:%M")
 
     col_name = f"percentage_time_occupied_by_bouts ({dc_tag})"
+    data = list(zip(raw_dates, raw_times, activity_arr[col_name]))
+    activity = pd.DataFrame(data, columns=["Date (UTC)", "Time (UTC)", col_name])
+    activity_df = activity.pivot(index="Time (UTC)", columns="Date (UTC)", values=col_name)
+
+    return activity_df
+
+
+def construct_activity_grid_for_inds(activity_arr, dc_tag):
+    activity_datetimes = pd.to_datetime(activity_arr.index.values)
+    raw_dates = activity_datetimes.strftime("%m/%d/%y")
+    raw_times = activity_datetimes.strftime("%H:%M")
+
+    col_name = f"Activity Indices ({dc_tag})"
     data = list(zip(raw_dates, raw_times, activity_arr[col_name]))
     activity = pd.DataFrame(data, columns=["Date (UTC)", "Time (UTC)", col_name])
     activity_df = activity.pivot(index="Time (UTC)", columns="Date (UTC)", values=col_name)

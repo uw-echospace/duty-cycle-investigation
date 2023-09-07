@@ -75,8 +75,9 @@ def get_file_paths(data_params):
     file_paths["bd2_TYPE_SITE_YEAR"] = f'bd2__{data_params["type_tag"]}{data_params["site_tag"]}_2022'
     file_paths["duty_cycled_folder"] = f'{file_paths["SITE_folder"]}/duty_cycled'
     Path(f'{file_paths["duty_cycled_folder"]}').mkdir(parents=True, exist_ok=True)
-    file_paths["dc_dets__TYPE_SITE_summary"] = f'dc_dets__{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_bouts__TYPE_SITE_summary"] = f'dc_bouts__{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_dets_TYPE_SITE_summary"] = f'dc_dets_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_bouts_TYPE_SITE_summary"] = f'dc_bouts_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_inds_TYPE_SITE_summary"] = f'dc_inds_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["simulated_schemes_folder"] = f'{file_paths["duty_cycled_folder"]}/simulated_schemes'
     Path(f'{file_paths["simulated_schemes_folder"]}').mkdir(parents=True, exist_ok=True)
 
@@ -86,6 +87,8 @@ def get_file_paths(data_params):
     file_paths["dc_det_comparisons_figname"] = f'dc_det_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
     file_paths["activity_bout_comparisons_figname"] = f'activity_bout_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
     file_paths["dc_bout_comparisons_figname"] = f'dc_bout_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["activity_ind_comparisons_figname"] = f'activity_ind_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["dc_ind_comparisons_figname"] = f'dc_ind_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
     file_paths["dc_metric_comparisons_figname"] = f'metric_comparisons_per_night_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
     file_paths["presence_comparisons_figname"] = f'presence_comparisons_per_dc_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
 
@@ -93,6 +96,7 @@ def get_file_paths(data_params):
     Path(file_paths["activity_grid_folder"]).mkdir(parents=True, exist_ok=True)
     file_paths["activity_dets_grid_figname"] = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_activity_dets_grid'
     file_paths["activity_bouts_grid_figname"] = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_activity_bouts_grid'
+    file_paths["activity_inds_grid_figname"] = f'{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["cur_dc_tag"]}_activity_inds_grid'
 
     file_paths["presence_grid_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}/presence_grids'
     Path(file_paths["presence_grid_folder"]).mkdir(parents=True, exist_ok=True)

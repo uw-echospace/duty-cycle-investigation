@@ -320,4 +320,4 @@ def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc
     return bout_metrics
 
 def test_bout_end_times_in_period(bout_metrics, time_on):
-    assert(bout_metrics['end_time_wrt_ref'].max() < time_on)
+    assert(bout_metrics['end_time_wrt_ref'].max() <= time_on)

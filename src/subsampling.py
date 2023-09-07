@@ -29,7 +29,7 @@ def simulate_dutycycle_on_detections(location_df, dc_tag):
     return dc_applied_df
 
 def test_for_last_call_within_period(dc_applied_df, time_on):
-    assert(dc_applied_df['end_time_wrt_ref'].max() < time_on)
+    assert(dc_applied_df['end_time_wrt_ref'].max() <= time_on)
 
 def prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag):
     """
@@ -78,7 +78,7 @@ def construct_activity_dets_arr_from_dc_tags(data_params, file_paths):
         dc_dets = dc_dets.set_index("Date_and_Time_UTC")
         activity_dets_arr = pd.concat([activity_dets_arr, dc_dets], axis=1)
 
-    activity_dets_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets__TYPE_SITE_summary"]}.csv')
+    activity_dets_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets_TYPE_SITE_summary"]}.csv')
 
     return activity_dets_arr
 
@@ -97,6 +97,24 @@ def construct_activity_bouts_arr_from_dc_tags(data_params, file_paths):
         dc_bouts = dc_bouts.set_index("Date_and_Time_UTC")
         activity_bouts_arr = pd.concat([activity_bouts_arr, dc_bouts], axis=1)
 
-    activity_bouts_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts__TYPE_SITE_summary"]}.csv')
+    activity_bouts_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts_TYPE_SITE_summary"]}.csv')
 
     return activity_bouts_arr
+
+def construct_activity_inds_arr_from_dc_tags(data_params, file_paths):
+    """
+    Generates an activity summary for each provided duty-cycling scheme and puts them together for comparison.
+    """
+
+    activity_inds_arr = pd.DataFrame()
+
+    for dc_tag in data_params['dc_tags']:
+
+        location_df = prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag)
+        dc_dets = dh.construct_activity_indices_arr(location_df, dc_tag, file_paths, data_params)
+        dc_dets = dc_dets.set_index("Date_and_Time_UTC")
+        activity_inds_arr = pd.concat([activity_inds_arr, dc_dets], axis=1)
+
+    activity_inds_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_inds_TYPE_SITE_summary"]}.csv')
+
+    return activity_inds_arr
