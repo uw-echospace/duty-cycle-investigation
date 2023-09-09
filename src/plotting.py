@@ -126,9 +126,14 @@ def plot_activity_grid_for_inds(activity_df, data_params, pipeline_params, file_
 
     plt.rcParams.update({'font.size': (len(activity_dates) + 1.5*len(activity_times))/1.5})
     plt.figure(figsize=(1*len(activity_dates), 1*len(activity_times)))
-    title = f"{data_params['type_tag'].upper()[:2]} Activity (activity indices) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
+    time_block_duration = int(data_params['index_time_block_in_secs'])
+    peak_index = (60*int(data_params['resolution_in_min'])/time_block_duration)
+    title = f"{data_params['type_tag'].upper()[:2]} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
     plt.title(title)
-    plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=361))
+    if (time_block_duration >= 60):
+        plt.imshow((recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=0, vmax=peak_index)
+    else:
+        plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=1 + peak_index))
     plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
     plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
     plt.ylabel(f'{ylabel} Time (HH:MM)')
@@ -426,8 +431,13 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
         plot_dates = [''] * len(activity_dates)
         plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity (activity indices) from {data_params['site_name']} (DC Tag : {dc_tag})")
-        plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=361))
+        time_block_duration = int(data_params['index_time_block_in_secs'])
+        peak_index = (60*int(data_params['resolution_in_min'])/time_block_duration)
+        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag : {dc_tag})")
+        if (time_block_duration >= 60):
+            plt.imshow((recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=0, vmax=peak_index)
+        else:
+            plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=1 + peak_index))
         plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
         plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
         plt.xlabel('Date (MM/DD/YY)')

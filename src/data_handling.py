@@ -140,7 +140,7 @@ def construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_pat
 def construct_activity_indices_arr(location_df, dc_tag, file_paths, data_params):
     location_df['ref_time'] = location_df['call_start_time']
 
-    temp = location_df.resample(f'5S', on='ref_time')['ref_time'].count()
+    temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='ref_time')['ref_time'].count()
     temp[temp>0] = 1
     activity_indices = temp.resample(f"{data_params['resolution_in_min']}T").sum()
 
