@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+1422.7475,1422.7537,46953.0,61614.0,Echolocation,Pipistrellus pipistrellus,0.539,0.579,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1422.9495,1422.9564,46093.0,62257.0,Echolocation,Pipistrellus pipistrellus,0.431,0.535,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1423.1575,1423.1627,46953.0,59271.0,Echolocation,Pipistrellus pipistrellus,0.466,0.523,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1423.3675,1423.3765,45234.0,67225.0,Echolocation,Pipistrellus pipistrellus,0.343,0.629,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1423.5675,1423.576,45234.0,59093.0,Echolocation,Pipistrellus pipistrellus,0.471,0.574,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1423.6815,1423.6914,45234.0,68478.0,Echolocation,Pipistrellus pipistrellus,0.495,0.692,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1423.8865,1423.8955,44375.0,67258.0,Echolocation,Pipistrellus pipistrellus,0.501,0.676,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1424.0875,1424.0963,44375.0,61682.0,Echolocation,Pipistrellus pipistrellus,0.488,0.62,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1424.1875,1424.1974,43515.0,58167.0,Echolocation,Pipistrellus pipistrellus,0.414,0.544,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1424.2745,1424.2837,42656.0,64485.0,Echolocation,Pipistrellus pipistrellus,0.3,0.56,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008
+1424.4625,1424.4681,43515.0,53358.0,Echolocation,Pipistrellus pipistrellus,0.438,0.565,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_113000.WAV,Foliage,recover-20221003,008

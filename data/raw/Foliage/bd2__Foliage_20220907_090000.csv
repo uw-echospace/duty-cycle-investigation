@@ -1,7 +1,7 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
-929.0155,929.018,46093.0,70428.0,Echolocation,Myotis alcathoe,0.331,0.531,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,recover-20220908,UBNA_002,Foliage
-929.0965,929.1004,44375.0,82522.0,Echolocation,Myotis alcathoe,0.283,0.56,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,recover-20220908,UBNA_002,Foliage
-929.6885,929.6927,46093.0,89077.0,Echolocation,Myotis alcathoe,0.501,0.641,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,recover-20220908,UBNA_002,Foliage
-929.7495,929.7536,46093.0,83632.0,Echolocation,Myotis alcathoe,0.421,0.548,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,recover-20220908,UBNA_002,Foliage
-929.8075,929.8116,52109.0,80648.0,Echolocation,Pipistrellus pygmaeus,0.288,0.59,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,recover-20220908,UBNA_002,Foliage
-929.8635,929.8664,48671.0,75920.0,Echolocation,Myotis alcathoe,0.426,0.534,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,recover-20220908,UBNA_002,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+929.0155,929.018,46093.0,70428.0,Echolocation,Myotis alcathoe,0.331,0.531,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,Foliage,recover-20220908,002
+929.0965,929.1004,44375.0,82522.0,Echolocation,Myotis alcathoe,0.283,0.56,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,Foliage,recover-20220908,002
+929.6885,929.6927,46093.0,89077.0,Echolocation,Myotis alcathoe,0.501,0.641,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,Foliage,recover-20220908,002
+929.7495,929.7536,46093.0,83632.0,Echolocation,Myotis alcathoe,0.421,0.548,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,Foliage,recover-20220908,002
+929.8075,929.8116,52109.0,80648.0,Echolocation,Pipistrellus pygmaeus,0.288,0.59,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,Foliage,recover-20220908,002
+929.8635,929.8664,48671.0,75920.0,Echolocation,Myotis alcathoe,0.426,0.534,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_090000.WAV,Foliage,recover-20220908,002

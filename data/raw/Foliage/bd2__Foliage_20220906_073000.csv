@@ -1,6 +1,6 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
-543.5905,543.5996,46093.0,60740.0,Echolocation,Pipistrellus pipistrellus,0.525,0.648,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,recover-20220908,UBNA_002,Foliage
-544.3635,544.3711,46093.0,67488.0,Echolocation,Pipistrellus pipistrellus,0.313,0.556,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,recover-20220908,UBNA_002,Foliage
-544.4315,544.4375,45234.0,68328.0,Echolocation,Pipistrellus pipistrellus,0.243,0.587,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,recover-20220908,UBNA_002,Foliage
-545.2105,545.217,44375.0,69213.0,Echolocation,Pipistrellus pipistrellus,0.192,0.521,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,recover-20220908,UBNA_002,Foliage
-545.3695,545.376,45234.0,63567.0,Echolocation,Pipistrellus pipistrellus,0.196,0.503,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,recover-20220908,UBNA_002,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+543.5905,543.5996,46093.0,60740.0,Echolocation,Pipistrellus pipistrellus,0.525,0.648,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,Foliage,recover-20220908,002
+544.3635,544.3711,46093.0,67488.0,Echolocation,Pipistrellus pipistrellus,0.313,0.556,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,Foliage,recover-20220908,002
+544.4315,544.4375,45234.0,68328.0,Echolocation,Pipistrellus pipistrellus,0.243,0.587,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,Foliage,recover-20220908,002
+545.2105,545.217,44375.0,69213.0,Echolocation,Pipistrellus pipistrellus,0.192,0.521,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,Foliage,recover-20220908,002
+545.3695,545.376,45234.0,63567.0,Echolocation,Pipistrellus pipistrellus,0.196,0.503,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220906_073000.WAV,Foliage,recover-20220908,002

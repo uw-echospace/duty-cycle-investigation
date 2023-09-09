@@ -1,0 +1,13 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+220.7225,220.7425,22890.0,26330.0,Echolocation,Nyctalus leisleri,0.514,0.543,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+233.4105,233.4316,22890.0,24929.0,Echolocation,Nyctalus leisleri,0.507,0.525,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+234.1245,234.1467,22031.0,25824.0,Echolocation,Nyctalus leisleri,0.468,0.51,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+243.9405,243.9565,22031.0,25848.0,Echolocation,Nyctalus leisleri,0.478,0.532,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+244.5825,244.6044,22031.0,25585.0,Echolocation,Nyctalus leisleri,0.521,0.55,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+247.8685,247.8871,22890.0,25821.0,Echolocation,Nyctalus leisleri,0.462,0.509,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+253.9035,253.9228,19453.0,22617.0,Echolocation,Nyctalus leisleri,0.343,0.513,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+264.2225,264.2427,21171.0,22679.0,Echolocation,Nyctalus leisleri,0.54,0.554,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+265.2815,265.3038,21171.0,23304.0,Echolocation,Nyctalus leisleri,0.577,0.59,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+268.0615,268.0784,21171.0,23958.0,Echolocation,Nyctalus leisleri,0.503,0.513,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+399.5525,399.5753,22031.0,24162.0,Echolocation,Nyctalus leisleri,0.511,0.521,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008
+588.5685,588.5738,44375.0,51347.0,Echolocation,Pipistrellus pipistrellus,0.483,0.521,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_093000.WAV,Foliage,recover-20221017,008

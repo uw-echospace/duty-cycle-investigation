@@ -1,2 +1,2 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
-408.2835,408.2921,39218.0,45401.0,Echolocation,Pipistrellus nathusii,0.571,0.615,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220915_110000.WAV,recover-20220915,UBNA_002,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+408.2835,408.2921,39218.0,45401.0,Echolocation,Pipistrellus nathusii,0.571,0.615,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220915_110000.WAV,Foliage,recover-20220915,002

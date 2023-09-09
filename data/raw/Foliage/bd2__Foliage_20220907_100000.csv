@@ -1,6 +1,6 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
-1239.3235,1239.3314,40078.0,50723.0,Echolocation,Pipistrellus nathusii,0.487,0.597,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,recover-20220908,UBNA_002,Foliage
-1239.5865,1239.5957,40078.0,47327.0,Echolocation,Pipistrellus nathusii,0.448,0.551,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,recover-20220908,UBNA_002,Foliage
-1239.6805,1239.6884,40078.0,46088.0,Echolocation,Pipistrellus nathusii,0.421,0.529,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,recover-20220908,UBNA_002,Foliage
-1239.9525,1239.9613,39218.0,48293.0,Echolocation,Pipistrellus nathusii,0.426,0.565,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,recover-20220908,UBNA_002,Foliage
-1240.2315,1240.2388,40937.0,49352.0,Echolocation,Pipistrellus nathusii,0.439,0.506,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,recover-20220908,UBNA_002,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+1239.3235,1239.3314,40078.0,50723.0,Echolocation,Pipistrellus nathusii,0.487,0.597,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,Foliage,recover-20220908,002
+1239.5865,1239.5957,40078.0,47327.0,Echolocation,Pipistrellus nathusii,0.448,0.551,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,Foliage,recover-20220908,002
+1239.6805,1239.6884,40078.0,46088.0,Echolocation,Pipistrellus nathusii,0.421,0.529,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,Foliage,recover-20220908,002
+1239.9525,1239.9613,39218.0,48293.0,Echolocation,Pipistrellus nathusii,0.426,0.565,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,Foliage,recover-20220908,002
+1240.2315,1240.2388,40937.0,49352.0,Echolocation,Pipistrellus nathusii,0.439,0.506,-1,/mnt/ubna_data_02/recover-20220908/UBNA_002/20220907_100000.WAV,Foliage,recover-20220908,002

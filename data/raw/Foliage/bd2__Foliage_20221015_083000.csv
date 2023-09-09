@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+568.9515,568.9567,50390.0,58570.0,Echolocation,Pipistrellus pipistrellus,0.435,0.502,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+569.2705,569.2751,50390.0,60831.0,Echolocation,Pipistrellus pipistrellus,0.438,0.501,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+569.4155,569.419,48671.0,64990.0,Echolocation,Myotis alcathoe,0.237,0.504,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+572.8755,572.8781,52968.0,67016.0,Echolocation,Myotis alcathoe,0.325,0.501,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+573.1645,573.1676,50390.0,75710.0,Echolocation,Myotis alcathoe,0.373,0.528,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+573.5665,573.5702,43515.0,85663.0,Echolocation,Myotis alcathoe,0.231,0.537,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+573.6225,573.6262,44375.0,83437.0,Echolocation,Myotis alcathoe,0.296,0.539,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+573.8005,573.8038,44375.0,82242.0,Echolocation,Myotis alcathoe,0.352,0.516,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+574.4915,574.495,43515.0,83808.0,Echolocation,Myotis alcathoe,0.216,0.628,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+574.9285,574.932,42656.0,75997.0,Echolocation,Myotis mystacinus,0.249,0.625,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008
+575.0935,575.0963,43515.0,74877.0,Echolocation,Myotis alcathoe,0.257,0.568,-1,/mnt/ubna_data_02/recover-20221017/UBNA_008/20221015_083000.WAV,Foliage,recover-20221017,008

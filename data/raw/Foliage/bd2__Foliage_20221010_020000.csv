@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+591.7055,591.7204,22031.0,26162.0,Echolocation,Nyctalus leisleri,0.43,0.538,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+592.7085,592.7232,22031.0,27960.0,Echolocation,Nyctalus leisleri,0.237,0.51,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+641.2145,641.2203,44375.0,60610.0,Echolocation,Pipistrellus pipistrellus,0.381,0.554,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+641.3655,641.375,45234.0,53970.0,Echolocation,Pipistrellus pipistrellus,0.412,0.501,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+642.2845,642.2905,43515.0,55835.0,Echolocation,Pipistrellus pipistrellus,0.447,0.576,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+771.6685,771.6871,22890.0,25709.0,Echolocation,Nyctalus leisleri,0.605,0.632,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+948.5125,948.5289,23750.0,29358.0,Echolocation,Nyctalus leisleri,0.342,0.553,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+951.5625,951.5786,23750.0,30126.0,Echolocation,Nyctalus leisleri,0.269,0.521,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+952.7805,952.7924,23750.0,28882.0,Echolocation,Nyctalus leisleri,0.395,0.56,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+1253.6255,1253.633,46093.0,52547.0,Echolocation,Pipistrellus pipistrellus,0.427,0.501,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008
+1253.8095,1253.8157,46093.0,52604.0,Echolocation,Pipistrellus pipistrellus,0.606,0.658,-1,/mnt/ubna_data_02/recover-20221010/UBNA_008/20221010_020000.WAV,Foliage,recover-20221010,008

@@ -1,0 +1,9 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+66.3185,66.33840000000001,21171.0,23039.0,Echolocation,Nyctalus leisleri,0.607,0.615,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_080000.WAV,Foliage,recover-20221003,008
+879.3025,879.3184,23750.0,27449.0,Echolocation,Nyctalus leisleri,0.45,0.506,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_080000.WAV,Foliage,recover-20221003,008
+1108.6785,1108.6946,23750.0,27380.0,Echolocation,Nyctalus leisleri,0.433,0.508,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_080000.WAV,Foliage,recover-20221003,008
+1548.1965,1548.2038,40937.0,50467.0,Echolocation,Pipistrellus nathusii,0.4,0.537,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_080000.WAV,Foliage,recover-20221003,008
+1548.3745,1548.381,40937.0,54453.0,Echolocation,Pipistrellus nathusii,0.36,0.533,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_080000.WAV,Foliage,recover-20221003,008
+1548.4605,1548.4671,41796.0,50647.0,Echolocation,Pipistrellus nathusii,0.408,0.52,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_080000.WAV,Foliage,recover-20221003,008
+1548.5545,1548.5617,40937.0,53119.0,Echolocation,Pipistrellus nathusii,0.521,0.606,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_080000.WAV,Foliage,recover-20221003,008
+1548.8265,1548.8327,39218.0,60761.0,Echolocation,Pipistrellus nathusii,0.413,0.548,-1,/mnt/ubna_data_02/recover-20221003/UBNA_008/20220930_080000.WAV,Foliage,recover-20221003,008

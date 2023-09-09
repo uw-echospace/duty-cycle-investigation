@@ -1,0 +1,10 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+655.9855,655.9992,23750.0,29125.0,Echolocation,Nyctalus leisleri,0.442,0.529,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002
+1516.6235,1516.629,45234.0,53780.0,Echolocation,Pipistrellus pipistrellus,0.516,0.533,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002
+1593.5125,1593.5187,43515.0,56059.0,Echolocation,Pipistrellus pipistrellus,0.332,0.595,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002
+1599.3885,1599.3933,46093.0,58779.0,Echolocation,Pipistrellus pipistrellus,0.558,0.608,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002
+1606.9645,1606.9689,47812.0,61276.0,Echolocation,Pipistrellus pipistrellus,0.545,0.596,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002
+1607.2135,1607.2188,47812.0,56456.0,Echolocation,Pipistrellus pipistrellus,0.576,0.604,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002
+1612.4365,1612.442,45234.0,53805.0,Echolocation,Pipistrellus pipistrellus,0.598,0.618,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002
+1618.7025,1618.7076,44375.0,51126.0,Echolocation,Pipistrellus pipistrellus,0.502,0.54,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002
+1619.3785,1619.3842,44375.0,55700.0,Echolocation,Pipistrellus pipistrellus,0.462,0.518,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_120000.WAV,Foliage,recover-20221006,002

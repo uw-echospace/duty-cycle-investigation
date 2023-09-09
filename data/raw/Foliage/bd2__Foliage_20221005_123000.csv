@@ -1,0 +1,6 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+330.5535,330.5603,44375.0,51125.0,Echolocation,Pipistrellus pipistrellus,0.495,0.541,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_123000.WAV,Foliage,recover-20221006,002
+1562.1035,1562.1079,46953.0,59010.0,Echolocation,Pipistrellus pipistrellus,0.457,0.511,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_123000.WAV,Foliage,recover-20221006,002
+1562.5705,1562.5759,47812.0,59201.0,Echolocation,Pipistrellus pipistrellus,0.581,0.606,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_123000.WAV,Foliage,recover-20221006,002
+1562.8295,1562.8339,46953.0,58420.0,Echolocation,Pipistrellus pipistrellus,0.587,0.615,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_123000.WAV,Foliage,recover-20221006,002
+1563.4855,1563.49,44375.0,56280.0,Echolocation,Pipistrellus pipistrellus,0.477,0.507,-1,/mnt/ubna_data_02/recover-20221006/UBNA_002/20221005_123000.WAV,Foliage,recover-20221006,002

@@ -1,11 +1,11 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
-864.1605,864.1814,16875.0,21717.0,Echolocation,Nyctalus noctula,0.499,0.619,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1283.4135,1283.4348,16875.0,20420.0,Echolocation,Nyctalus noctula,0.412,0.535,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1287.4985,1287.5176,16015.0,21639.0,Echolocation,Nyctalus noctula,0.415,0.585,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1290.6325,1290.648,16875.0,21751.0,Echolocation,Nyctalus noctula,0.491,0.644,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1293.1825,1293.2021,16875.0,20994.0,Echolocation,Nyctalus noctula,0.565,0.682,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1294.8265,1294.8396,16875.0,22882.0,Echolocation,Nyctalus noctula,0.378,0.546,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1316.3265,1316.3418,16875.0,21873.0,Echolocation,Nyctalus noctula,0.354,0.532,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1329.9445,1329.9577,16875.0,22656.0,Echolocation,Nyctalus noctula,0.478,0.583,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1332.8555,1332.8688,16875.0,21497.0,Echolocation,Nyctalus noctula,0.449,0.579,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
-1341.4175,1341.4313,16875.0,21372.0,Echolocation,Nyctalus noctula,0.4,0.548,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,recover-20220915,UBNA_002,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+864.1605,864.1814,16875.0,21717.0,Echolocation,Nyctalus noctula,0.499,0.619,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1283.4135,1283.4348,16875.0,20420.0,Echolocation,Nyctalus noctula,0.412,0.535,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1287.4985,1287.5176,16015.0,21639.0,Echolocation,Nyctalus noctula,0.415,0.585,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1290.6325,1290.648,16875.0,21751.0,Echolocation,Nyctalus noctula,0.491,0.644,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1293.1825,1293.2021,16875.0,20994.0,Echolocation,Nyctalus noctula,0.565,0.682,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1294.8265,1294.8396,16875.0,22882.0,Echolocation,Nyctalus noctula,0.378,0.546,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1316.3265,1316.3418,16875.0,21873.0,Echolocation,Nyctalus noctula,0.354,0.532,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1329.9445,1329.9577,16875.0,22656.0,Echolocation,Nyctalus noctula,0.478,0.583,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1332.8555,1332.8688,16875.0,21497.0,Echolocation,Nyctalus noctula,0.449,0.579,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002
+1341.4175,1341.4313,16875.0,21372.0,Echolocation,Nyctalus noctula,0.4,0.548,-1,/mnt/ubna_data_02/recover-20220915/UBNA_002/20220913_130000.WAV,Foliage,recover-20220915,002

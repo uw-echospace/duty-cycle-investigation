@@ -1,6 +1,6 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
-1602.3565,1602.3645,40937.0,48438.0,Echolocation,Pipistrellus nathusii,0.51,0.532,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,recover-20220828,UBNA_009,Foliage
-1618.2995,1618.3076,39218.0,54901.0,Echolocation,Pipistrellus nathusii,0.5,0.589,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,recover-20220828,UBNA_009,Foliage
-1618.4185,1618.4262,40078.0,57419.0,Echolocation,Pipistrellus nathusii,0.422,0.533,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,recover-20220828,UBNA_009,Foliage
-1656.4715,1656.4806,38359.0,54683.0,Echolocation,Pipistrellus nathusii,0.424,0.515,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,recover-20220828,UBNA_009,Foliage
-1667.8785,1667.8856,40078.0,48885.0,Echolocation,Pipistrellus nathusii,0.462,0.508,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,recover-20220828,UBNA_009,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+1602.3565,1602.3645,40937.0,48438.0,Echolocation,Pipistrellus nathusii,0.51,0.532,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,Foliage,recover-20220828,009
+1618.2995,1618.3076,39218.0,54901.0,Echolocation,Pipistrellus nathusii,0.5,0.589,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,Foliage,recover-20220828,009
+1618.4185,1618.4262,40078.0,57419.0,Echolocation,Pipistrellus nathusii,0.422,0.533,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,Foliage,recover-20220828,009
+1656.4715,1656.4806,38359.0,54683.0,Echolocation,Pipistrellus nathusii,0.424,0.515,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,Foliage,recover-20220828,009
+1667.8785,1667.8856,40078.0,48885.0,Echolocation,Pipistrellus nathusii,0.462,0.508,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220829_030000.WAV,Foliage,recover-20220828,009

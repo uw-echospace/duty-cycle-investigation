@@ -1,6 +1,6 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Recover Folder,SD Card,Site name
-196.9535,196.9594,46953.0,61532.0,Echolocation,Pipistrellus pipistrellus,0.526,0.594,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,recover-20220828,UBNA_009,Foliage
-222.2965,222.3013,46953.0,60783.0,Echolocation,Pipistrellus pipistrellus,0.509,0.54,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,recover-20220828,UBNA_009,Foliage
-222.5615,222.5666,46953.0,59295.0,Echolocation,Pipistrellus pipistrellus,0.561,0.603,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,recover-20220828,UBNA_009,Foliage
-404.2285,404.234,46953.0,57249.0,Echolocation,Pipistrellus pipistrellus,0.53,0.546,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,recover-20220828,UBNA_009,Foliage
-669.3145,669.3189,46953.0,59259.0,Echolocation,Pipistrellus pipistrellus,0.484,0.507,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,recover-20220828,UBNA_009,Foliage
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+196.9535,196.9594,46953.0,61532.0,Echolocation,Pipistrellus pipistrellus,0.526,0.594,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,Foliage,recover-20220828,009
+222.2965,222.3013,46953.0,60783.0,Echolocation,Pipistrellus pipistrellus,0.509,0.54,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,Foliage,recover-20220828,009
+222.5615,222.5666,46953.0,59295.0,Echolocation,Pipistrellus pipistrellus,0.561,0.603,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,Foliage,recover-20220828,009
+404.2285,404.234,46953.0,57249.0,Echolocation,Pipistrellus pipistrellus,0.53,0.546,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,Foliage,recover-20220828,009
+669.3145,669.3189,46953.0,59259.0,Echolocation,Pipistrellus pipistrellus,0.484,0.507,-1,/mnt/ubna_data_02/recover-20220828/UBNA_009/20220828_043000.WAV,Foliage,recover-20220828,009
