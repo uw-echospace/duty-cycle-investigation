@@ -48,7 +48,7 @@ def plot_activity_grid_for_dets(activity_df, data_params, pipeline_params, file_
 
     plt.rcParams.update({'font.size': 1*len(activity_dates) + 0.5*len(activity_times)})
     plt.figure(figsize=(1.5*len(activity_dates), 1.5*len(activity_times)))
-    title = f"{data_params['type_tag'].upper()[:2]} Activity (# of calls) from {data_params['site_name']} ({data_params['cur_dc_tag']})"
+    title = f"{data_params['type_tag']} Activity (# of calls) from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title, fontsize=1.5*len(activity_dates) + 1*len(activity_times))
     plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
     plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
@@ -87,9 +87,9 @@ def plot_activity_grid_for_bouts(activity_df, data_params, pipeline_params, file
 
     plt.rcParams.update({'font.size': (len(activity_dates) + 0.5*len(activity_times))})
     plt.figure(figsize=(1.5*len(activity_dates), 1.5*len(activity_times)))
-    title = f"{data_params['type_tag'].upper()[:2]} Activity (% of time occupied by bouts) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
+    title = f"{data_params['type_tag']} Activity (% of time occupied by bouts) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
     plt.title(title, fontsize=1.5*len(activity_dates) + 1*len(activity_times))
-    plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=100))
+    plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=1, vmax=100)
     plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
     plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
     plt.ylabel(f'{ylabel} Time (HH:MM)')
@@ -128,7 +128,7 @@ def plot_activity_grid_for_inds(activity_df, data_params, pipeline_params, file_
     plt.figure(figsize=(1.5*len(activity_dates), 1.5*len(activity_times)))
     time_block_duration = int(data_params['index_time_block_in_secs'])
     peak_index = (60*int(data_params['resolution_in_min'])/time_block_duration)
-    title = f"{data_params['type_tag'].upper()[:2]} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
+    title = f"{data_params['type_tag']} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
     plt.title(title, fontsize=1.5*len(activity_dates) + 1*len(activity_times))
     if (time_block_duration >= 60):
         plt.imshow((recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=0, vmax=peak_index)
@@ -166,7 +166,7 @@ def plot_presence_grid(presence_df, data_params, pipeline_params, file_paths):
 
     plt.rcParams.update({'font.size': 1*len(activity_dates) + 0.5*len(activity_times)})
     plt.figure(figsize=(2*len(activity_dates), 2*len(activity_times)))
-    title = f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} ({data_params['cur_dc_tag']})"
+    title = f"{data_params['type_tag']} Presence/Absence from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title, fontsize=1.5*len(activity_dates) + 1*len(activity_times))
     masked_array = np.ma.masked_where(presence_df == 1, presence_df)
     cmap = plt.get_cmap("Greys")  # Can be any colormap that you want after the cm
@@ -209,7 +209,7 @@ def plot_dc_dets_comparisons_per_night(activity_arr, data_params, pipeline_param
 
     for i, date in enumerate(dates):
         plt.subplot(int(np.ceil(np.sqrt(len(dates)))), int(np.ceil(np.sqrt(len(dates)))), i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=24)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=24)
         day_max = 0
         for i, dc_tag in enumerate(data_params["dc_tags"]):
             activity_df = dh.construct_activity_grid_for_number_of_dets(activity_arr, dc_tag)
@@ -280,7 +280,7 @@ def plot_dc_bouts_comparisons_per_night(activity_arr, data_params, pipeline_para
 
     for i, date in enumerate(dates):
         plt.subplot(int(np.ceil(np.sqrt(len(dates)))), int(np.ceil(np.sqrt(len(dates)))), i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=24)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=24)
         for i, dc_tag in enumerate(data_params["dc_tags"]):
             activity_df = dh.construct_activity_grid_for_bouts(activity_arr, dc_tag)
             on = int(dc_tag.split('of')[0])
@@ -345,7 +345,7 @@ def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipel
         plot_dates = [''] * len(activity_dates)
         plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
-        title = f"{data_params['type_tag'].upper()[:2]} Activity (# of calls) from {data_params['site_name']} (DC Tag : {dc_tag})"
+        title = f"{data_params['type_tag']} Activity (# of calls) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + len(times))
         plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
         plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
@@ -389,9 +389,9 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
         plot_dates = [''] * len(activity_dates)
         plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
-        title = f"{data_params['type_tag'].upper()[:2]} Activity (% of time occupied by bouts) from {data_params['site_name']} (DC Tag : {dc_tag})"
+        title = f"{data_params['type_tag']} Activity (% of time occupied by bouts) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
-        plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=100))
+        plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=1, vmax=100)
         plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
         plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
         plt.xlabel('Date (MM/DD/YY)')
@@ -435,7 +435,7 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         time_block_duration = int(data_params['index_time_block_in_secs'])
         peak_index = (60*int(data_params['resolution_in_min'])/time_block_duration)
-        title = f"{data_params['type_tag'].upper()[:2]} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag : {dc_tag})"
+        title = f"{data_params['type_tag']} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
         if (time_block_duration >= 60):
             plt.imshow((recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=0, vmax=peak_index)
@@ -480,7 +480,7 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
         plot_dates = [''] * len(activity_dates)
         plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params["dc_tags"]), 1, i+1)
-        title = f"{data_params['type_tag'].upper()[:2]} Presence/Absence from {data_params['site_name']} (DC : {dc_tag})"
+        title = f"{data_params['type_tag']} Presence/Absence from {data_params['site_name']} (DC : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
         masked_array = np.ma.masked_where(presence_df == 1, presence_df)
         cmap = plt.get_cmap("Greys")  # Can be any colormap that you want after the cm
@@ -523,7 +523,7 @@ def compare_metrics_per_night(activity_bouts_arr, activity_dets_arr, data_params
 
     for i, date in enumerate(dates):
         plt.subplot(int(np.ceil(np.sqrt(len(dates)))), int(np.ceil(np.sqrt(len(dates)))), i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
         dc_tag = data_params['cur_dc_tag']
 
         activity_bouts_df = dh.construct_activity_grid_for_bouts(activity_bouts_arr, dc_tag)
@@ -592,7 +592,7 @@ def plot_numdets_n_percentbouts(activity_dets_arr, activity_bouts_arr, data_para
     i = 0
     for date in dates:
         plt.subplot(int(np.ceil(np.sqrt(2*len(dates)))), int(np.ceil(np.sqrt(2*len(dates)))), i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
         dc_tag = data_params['cur_dc_tag']
 
         activity_dets_df = dh.construct_activity_grid_for_number_of_dets(activity_dets_arr, dc_tag)
@@ -623,7 +623,7 @@ def plot_numdets_n_percentbouts(activity_dets_arr, activity_bouts_arr, data_para
 
 
         plt.subplot(int(np.ceil(np.sqrt(2*len(dates)))), int(np.ceil(np.sqrt(2*len(dates)))), i+2)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
         dc_tag = data_params['cur_dc_tag']
 
         activity_bouts_df = dh.construct_activity_grid_for_bouts(activity_bouts_arr, dc_tag)
@@ -681,7 +681,7 @@ def plot_numdets_n_activityinds(activity_dets_arr, activity_inds_arr, data_param
     i = 0
     for date in dates:
         plt.subplot(int(np.ceil(np.sqrt(2*len(dates)))), int(np.ceil(np.sqrt(2*len(dates)))), i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
         dc_tag = data_params['cur_dc_tag']
 
         activity_dets_df = dh.construct_activity_grid_for_number_of_dets(activity_dets_arr, dc_tag)
@@ -712,7 +712,7 @@ def plot_numdets_n_activityinds(activity_dets_arr, activity_inds_arr, data_param
 
 
         plt.subplot(int(np.ceil(np.sqrt(2*len(dates)))), int(np.ceil(np.sqrt(2*len(dates)))), i+2)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
         dc_tag = data_params['cur_dc_tag']
 
         activity_inds_df = dh.construct_activity_grid_for_inds(activity_inds_arr, dc_tag)
@@ -770,7 +770,7 @@ def plot_percentbouts_n_activityinds(activity_bouts_arr, activity_inds_arr, data
     i = 0
     for date in dates:
         plt.subplot(int(np.ceil(np.sqrt(2*len(dates)))), int(np.ceil(np.sqrt(2*len(dates)))), i+1)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
         dc_tag = data_params['cur_dc_tag']
 
         activity_bouts_df = dh.construct_activity_grid_for_bouts(activity_bouts_arr, dc_tag)
@@ -800,7 +800,7 @@ def plot_percentbouts_n_activityinds(activity_bouts_arr, activity_inds_arr, data
 
 
         plt.subplot(int(np.ceil(np.sqrt(2*len(dates)))), int(np.ceil(np.sqrt(2*len(dates)))), i+2)
-        plt.title(f"{data_params['type_tag'].upper()[:2]} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
+        plt.title(f"{data_params['type_tag']} Activity from {data_params['site_name']} (Date : {date})", fontsize=12.5)
         dc_tag = data_params['cur_dc_tag']
 
         activity_inds_df = dh.construct_activity_grid_for_inds(activity_inds_arr, dc_tag)

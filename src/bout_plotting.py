@@ -4,7 +4,6 @@ import matplotlib.patches as patches
 import numpy as np
 
 import scipy.stats as stats
-from core import FREQ_GROUPS
 import bout_clustering as bt_clustering
 
 def plot_ipi_hist(location_df, fig_details):
@@ -343,7 +342,7 @@ def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, plot_b
     plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
 
     pink_patch = patches.Patch(facecolor='pink', edgecolor='k', label='Bout')
-    green_patch = patches.Patch(facecolor='yellowgreen', edgecolor='k', label=f"BCI: {round(bci/1000, 2)}s")
+    green_patch = patches.Patch(facecolor='yellowgreen', edgecolor='k', label=f"BCI: {np.round(bci/1000, 2)}s")
     yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label='Detections')
 
     legend_patches = [green_patch, pink_patch, yellow_patch]

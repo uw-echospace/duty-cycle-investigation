@@ -1,6 +1,6 @@
 import pipeline
 import subsampling as ss
-from core import SITE_NAMES, FREQ_GROUPS
+from core import SITE_NAMES
 
 from pathlib import Path
 
@@ -115,7 +115,6 @@ if __name__ == "__main__":
     data_params["site_name"] = SITE_NAMES[args['site_tag']]
     data_params["site_tag"] = args['site_tag']
     data_params["type_tag"] = args['type_of_calls']
-    data_params["freq_tags"] = FREQ_GROUPS[args['type_of_calls']]
     data_params["cycle_lengths"] = args['cycle_lengths']
     data_params["percent_ons"] = args['percent_ons']
     dc_tags = ss.get_list_of_dc_tags(data_params["cycle_lengths"], data_params["percent_ons"])

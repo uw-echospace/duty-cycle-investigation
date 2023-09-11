@@ -55,6 +55,22 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     Returns and saves a summary of bd2-detected bat calls within a desired frequency band.
     """
 
+    if data_params['site_tag'] == 'Carp' or data_params['site_tag'] == 'Central' or data_params['site_tag'] == 'Foliage':
+        blue_l_bound = 20000
+        blue_u_bound = 50000
+        red_l_bound = 34000
+        red_u_bound = 74000
+        yellow_l_bound = 42000
+        yellow_u_bound = 92000
+        
+    if data_params['site_tag'] == 'Telephone':
+        blue_l_bound = 20000
+        blue_u_bound = 50000
+        red_l_bound = 30000
+        red_u_bound = 78000
+        yellow_l_bound = 41000
+        yellow_u_bound = 102000
+
     location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/*.csv').compute()
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
     anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'].values.astype('float64'), unit='S')
@@ -63,13 +79,19 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     location_df.insert(0, 'call_end_time', anchor_end_times)
     location_df.insert(0, 'call_start_time', anchor_start_times)
     location_df.insert(0, 'ref_time', anchor_start_times)
- 
-    location_df = location_df.loc[(location_df["high_freq"]).astype('float64') < data_params["freq_tags"][1]]
-    location_df = location_df.loc[(location_df["low_freq"]).astype('float64') > data_params["freq_tags"][0]]
-        
-    test_lowest_freq_lower_bound(location_df, data_params)
-    test_highest_freq_upper_bound(location_df, data_params)
+    location_df.insert(0, 'freq_group', '')
 
+    call_is_yellow = (location_df['low_freq'].astype('float')>=yellow_l_bound)&(location_df['high_freq'].astype('float')<=yellow_u_bound)
+    call_is_red = (location_df['low_freq'].astype('float')>=red_l_bound)&(location_df['high_freq'].astype('float')<=red_u_bound)
+    call_is_blue = (location_df['low_freq'].astype('float')>=blue_l_bound)&(location_df['high_freq'].astype('float')<=blue_u_bound)
+
+    location_df.loc[call_is_yellow, 'freq_group'] = 'HF2'
+    location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
+    location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
+
+    if data_params['type_tag'] != '':
+        location_df = location_df.loc[location_df['freq_group']==data_params['type_tag']]
+    
     if save:
         location_df.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv')
 
@@ -82,6 +104,22 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     of the assemble_initial_location_summary() method.
     """
 
+    if data_params['site_tag'] == 'Carp' or data_params['site_tag'] == 'Central' or data_params['site_tag'] == 'Foliage':
+        blue_l_bound = 20000
+        blue_u_bound = 50000
+        red_l_bound = 34000
+        red_u_bound = 74000
+        yellow_l_bound = 42000
+        yellow_u_bound = 92000
+        
+    if data_params['site_tag'] == 'Telephone':
+        blue_l_bound = 20000
+        blue_u_bound = 50000
+        red_l_bound = 30000
+        red_u_bound = 78000
+        yellow_l_bound = 41000
+        yellow_u_bound = 102000
+
     location_df = pd.read_csv(path_to_bd2_output)
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
 
@@ -91,12 +129,15 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     location_df.insert(0, 'call_end_time', anchor_end_times)
     location_df.insert(0, 'call_start_time', anchor_start_times)
     location_df.insert(0, 'ref_time', anchor_start_times)
+    location_df.insert(0, 'freq_group', '')
 
-    location_df = location_df.loc[(location_df["high_freq"]).astype('float64') < data_params["freq_tags"][1]]
-    location_df = location_df.loc[(location_df["low_freq"]).astype('float64') > data_params["freq_tags"][0]]
-        
-    test_lowest_freq_lower_bound(location_df, data_params)
-    test_highest_freq_upper_bound(location_df, data_params)
+    call_is_yellow = (location_df['low_freq']>=yellow_l_bound)&(location_df['high_freq']<=yellow_u_bound)
+    call_is_red = (location_df['low_freq']>=red_l_bound)&(location_df['high_freq']<=red_u_bound)
+    call_is_blue = (location_df['low_freq']>=blue_l_bound)&(location_df['high_freq']<=blue_u_bound)
+
+    location_df.loc[call_is_yellow, 'freq_group'] = 'HF2'
+    location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
+    location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
 
     return location_df
 
@@ -126,9 +167,10 @@ def construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_pat
     bout_metrics['ref_time'] = pd.DatetimeIndex(bout_metrics['start_time_of_bout'])
     bout_metrics['total_bout_duration_in_secs'] = bout_metrics['bout_duration_in_secs']
     bout_metrics = bout_metrics.set_index('ref_time')
+
     bout_duration_per_interval = bout_metrics.resample(f"{data_params['resolution_in_min']}T")['total_bout_duration_in_secs'].sum()
 
-    percent_time_occupied_by_bouts = 100*(bout_duration_per_interval.values / (60*float(data_params['resolution_in_min'])))
+    percent_time_occupied_by_bouts = (100*(bout_duration_per_interval.values / (60*float(data_params['resolution_in_min']))))
 
     bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)), columns=['ref_time', f'percentage_time_occupied_by_bouts ({dc_tag})'])
     bout_dpi_df = bout_dpi_df.set_index('ref_time')
