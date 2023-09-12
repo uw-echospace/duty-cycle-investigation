@@ -28,6 +28,24 @@ SITE_NAMES = {
 #                 '' :[0, 125000]
 #                 }
 
+FREQ_GROUPS = {
+                'Carp' : {'blue': [13000, 50000],
+                          'red': [34000, 74000],
+                          'yellow': [42000, 96000]},
+
+                'Foliage' : {'blue': [13000, 50000],
+                          'red': [34000, 74000],
+                          'yellow': [42000, 96000]},
+
+                'Telephone' : {'blue': [13000, 50000],
+                          'red': [30000, 78000],
+                          'yellow': [41000, 102000]},
+
+                'Central' : {'blue': [13000, 50000],
+                          'red': [34000, 74000],
+                          'yellow': [42000, 96000]}
+                }
+
 EXAMPLE_FILES_to_FILEPATHS = {
                             'UBNA_007/20220728_043000' : f'../data/audiomoth_recordings/recover-20220728/UBNA_007/20220728_043000.WAV',
                             'UBNA_007/20220728_050000' : f'../data/audiomoth_recordings/recover-20220728/UBNA_007/20220728_050000.WAV',

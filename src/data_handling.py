@@ -7,6 +7,7 @@ import numpy as np
 import datetime as dt
 
 import subsampling as ss
+from core import FREQ_GROUPS
 
 
 def generate_activity_dets_results(data_params, file_paths):
@@ -104,21 +105,10 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     of the assemble_initial_location_summary() method.
     """
 
-    if data_params['site_tag'] == 'Carp' or data_params['site_tag'] == 'Central' or data_params['site_tag'] == 'Foliage':
-        blue_l_bound = 20000
-        blue_u_bound = 50000
-        red_l_bound = 34000
-        red_u_bound = 74000
-        yellow_l_bound = 42000
-        yellow_u_bound = 92000
-        
-    if data_params['site_tag'] == 'Telephone':
-        blue_l_bound = 20000
-        blue_u_bound = 50000
-        red_l_bound = 30000
-        red_u_bound = 78000
-        yellow_l_bound = 41000
-        yellow_u_bound = 102000
+    groups = FREQ_GROUPS[data_params['site_tag']]
+    blue_group = groups['blue']
+    red_group = groups['red']
+    yellow_group = groups['yellow']
 
     location_df = pd.read_csv(path_to_bd2_output)
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
@@ -131,9 +121,9 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     location_df.insert(0, 'ref_time', anchor_start_times)
     location_df.insert(0, 'freq_group', '')
 
-    call_is_yellow = (location_df['low_freq']>=yellow_l_bound)&(location_df['high_freq']<=yellow_u_bound)
-    call_is_red = (location_df['low_freq']>=red_l_bound)&(location_df['high_freq']<=red_u_bound)
-    call_is_blue = (location_df['low_freq']>=blue_l_bound)&(location_df['high_freq']<=blue_u_bound)
+    call_is_yellow = (location_df['low_freq']>=yellow_group[0])&(location_df['high_freq']<=yellow_group[1])
+    call_is_red = (location_df['low_freq']>=red_group[0])&(location_df['high_freq']<=red_group[1])
+    call_is_blue = (location_df['low_freq']>=blue_group[0])&(location_df['high_freq']<=blue_group[1])
 
     location_df.loc[call_is_yellow, 'freq_group'] = 'HF2'
     location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
