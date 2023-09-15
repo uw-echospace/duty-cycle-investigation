@@ -183,69 +183,6 @@ def get_bci_from_sibly_method(intervals_ms, survival, fast_process, slow_process
 
     return nlin_results, misassigned_points_optim
 
-# def classify_bouts_in_single_bd2_output(location_df, bout_params):
-#     """
-#     Reads in the bd2 output for a single file and assigned bout tags whether a call is:
-#     within bout, outside bout, a bout start, or a bout end.
-#     """
-
-#     location_df.reset_index(inplace=True)
-#     location_df = location_df.drop(columns=location_df.columns[0])
-
-#     intervals = (pd.to_datetime(location_df['call_start_time'].values[1:]) - pd.to_datetime(location_df['call_end_time'].values[:-1]))
-#     ipis_f = intervals.to_numpy(dtype='float32')/1e6
-#     ipis_f = np.insert(ipis_f, 0, bout_params['bci'])
-
-#     location_df.insert(0, 'duration_from_last_call_ms', ipis_f)
-#     location_df.insert(0, 'bout_tag', 0)
-#     location_df.insert(0, 'call_status', '')
-#     location_df.loc[location_df['duration_from_last_call_ms'] < bout_params['bci'], 'bout_tag'] = 1
-#     location_df.loc[location_df['duration_from_last_call_ms'] >= bout_params['bci'], 'bout_tag'] = 0
-
-#     bout_tags = location_df['bout_tag'].values
-#     change_markers = (bout_tags[1:] - bout_tags[:-1])
-
-#     location_df.loc[np.where(bout_tags==1)[0], 'call_status'] = 'within bout'
-#     location_df.loc[np.where(bout_tags==0)[0], 'call_status'] = 'outside bout'
-#     location_df.loc[np.where(change_markers==-1)[0], 'call_status'] = 'bout end'
-#     location_df.loc[np.where(change_markers==1)[0], 'call_status'] = 'bout start'
-
-#     num_bout_starts = len(location_df.loc[location_df['call_status']=='bout start'])
-#     num_bout_ends = len(location_df.loc[location_df['call_status']=='bout end'])
-#     if num_bout_starts != num_bout_ends:
-#         location_df.at[len(location_df)-1, 'call_status'] = 'bout end'
-
-#     return location_df
-
-# def classify_bouts_in_location_summary(location_df, bout_params):
-#     """
-#     Reads in the bd2_summary for a single location and frequency grouping and assigns bout tags whether a call is:
-#     within bout, outside bout, a bout start, or a bout end.
-#     """
-
-#     location_df.reset_index(inplace=True)
-#     location_df = location_df.drop(columns=location_df.columns[0])
-
-#     intervals = (pd.to_datetime(location_df['call_start_time'].values[1:]) - pd.to_datetime(location_df['call_end_time'].values[:-1]))
-#     ipis_f = intervals.to_numpy(dtype='float32')/1e6
-#     ipis_f = np.insert(ipis_f, 0, bout_params['bci'])
-
-#     location_df.insert(0, 'duration_from_last_call_ms', ipis_f)
-#     location_df.insert(0, 'bout_tag', 0)
-#     location_df.insert(0, 'call_status', '')
-#     location_df.loc[location_df['duration_from_last_call_ms'] < bout_params['bci'], 'bout_tag'] = 1
-#     location_df.loc[location_df['duration_from_last_call_ms'] >= bout_params['bci'], 'bout_tag'] = 0
-
-#     bout_tags = location_df['bout_tag'].values
-#     change_markers = (bout_tags[1:] - bout_tags[:-1])
-
-#     location_df.loc[np.where(bout_tags==1)[0], 'call_status'] = 'within bout'
-#     location_df.loc[np.where(bout_tags==0)[0], 'call_status'] = 'outside bout'
-#     location_df.loc[np.where(change_markers==-1)[0], 'call_status'] = 'bout end'
-#     location_df.loc[np.where(change_markers==1)[0], 'call_status'] = 'bout start'
-
-#     return location_df
-
 def construct_bout_metrics_from_classified_dets(fgroups_with_bouttags):
     """
     Reads in the dataframe of detected calls with bout tags from above methoods.
@@ -256,7 +193,8 @@ def construct_bout_metrics_from_classified_dets(fgroups_with_bouttags):
 
     location_df = fgroups_with_bouttags.copy()
     location_df.reset_index(inplace=True)
-    location_df.drop(columns=location_df.columns[0], inplace=True)
+    if 'index' in location_df.columns:
+        location_df.drop(columns='index', inplace=True)
 
     end_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout end', 'call_end_time'])
     start_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout start', 'call_start_time'])
@@ -328,7 +266,8 @@ def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bou
         if group != '':
             freq_group_df = location_df.loc[location_df['freq_group']==group].copy()
             freq_group_df.reset_index(inplace=True)
-            freq_group_df.drop(columns=freq_group_df.columns[0], inplace=True)
+            if 'index' in freq_group_df.columns:
+                freq_group_df.drop(columns='index', inplace=True)
             if not(freq_group_df.empty):
                 intervals = (pd.to_datetime(freq_group_df['call_start_time'].values[1:]) - pd.to_datetime(freq_group_df['call_end_time'].values[:-1]))
                 ipis_f = intervals.to_numpy(dtype='float32')/1e6
@@ -337,8 +276,8 @@ def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bou
                 freq_group_df['duration_from_last_call_ms'] =  ipis_f
                 freq_group_df.loc[freq_group_df['duration_from_last_call_ms'] < bout_params[f'{group}_bci'], 'bout_tag'] = 1
                 freq_group_df.loc[freq_group_df['duration_from_last_call_ms'] >= bout_params[f'{group}_bci'], 'bout_tag'] = 0
-                wb_indices = pd.DataFrame.where(freq_group_df, freq_group_df['bout_tag']==1).dropna().index
-                ob_indices = pd.DataFrame.where(freq_group_df, freq_group_df['bout_tag']==0).dropna().index
+                wb_indices = freq_group_df.loc[freq_group_df['bout_tag']==1].index
+                ob_indices = freq_group_df.loc[freq_group_df['bout_tag']==0].index
                 freq_group_df.loc[wb_indices, 'call_status'] = 'within bout'
                 freq_group_df.loc[ob_indices, 'call_status'] = 'outside bout'
 
@@ -346,8 +285,8 @@ def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bou
                 change_markers = bout_tags.shift(-1) - bout_tags
                 change_markers[len(change_markers)-1] = 0
                 freq_group_df['change_markers'] = change_markers
-                be_indices = pd.DataFrame.where(freq_group_df, freq_group_df['change_markers']==-1).dropna().index
-                bs_indices = pd.DataFrame.where(freq_group_df, freq_group_df['change_markers']==1).dropna().index
+                be_indices = freq_group_df.loc[freq_group_df['change_markers']==-1].index
+                bs_indices = freq_group_df.loc[freq_group_df['change_markers']==1].index
                 freq_group_df.loc[be_indices, 'call_status'] = 'bout end'
                 freq_group_df.loc[bs_indices, 'call_status'] = 'bout start'
 
@@ -362,7 +301,8 @@ def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bou
 
 def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc_tag):
     location_sum_df.reset_index(inplace=True)
-    location_sum_df.drop(columns=location_sum_df.columns[0], inplace=True)
+    if 'index' in location_sum_df.columns:
+        location_sum_df.drop(columns='index', inplace=True)
 
     bout_params = get_bout_params_from_location(location_sum_df, data_params)
 

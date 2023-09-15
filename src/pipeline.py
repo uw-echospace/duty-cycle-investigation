@@ -10,6 +10,8 @@ def run_for_dets(data_params, pipeline_params, file_paths):
     """
 
     if not(pipeline_params["read_csv"]):
+        if (pipeline_params['assemble_location_summary']):
+            dh.assemble_initial_location_summary(data_params, file_paths) ## Use to update any bd2__(location summary).csv files
         activity_arr = dh.generate_activity_dets_results(data_params, file_paths)
     else:
         activity_arr = pd.read_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets_TYPE_SITE_summary"]}.csv', index_col=0)
@@ -22,6 +24,8 @@ def run_for_bouts(data_params, pipeline_params, file_paths):
     """
 
     if not(pipeline_params["read_csv"]):
+        if (pipeline_params['assemble_location_summary']):
+            dh.assemble_initial_location_summary(data_params, file_paths) ## Use to update any bd2__(location summary).csv files
         activity_arr = dh.generate_activity_bouts_results(data_params, file_paths)
     else:
         activity_arr = pd.read_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts_TYPE_SITE_summary"]}.csv', index_col=0)
@@ -34,6 +38,8 @@ def run_for_inds(data_params, pipeline_params, file_paths):
     """
 
     if not(pipeline_params["read_csv"]):
+        if (pipeline_params['assemble_location_summary']):
+            dh.assemble_initial_location_summary(data_params, file_paths) ## Use to update any bd2__(location summary).csv files
         activity_arr = dh.generate_activity_inds_results(data_params, file_paths)
     else:
         activity_arr = pd.read_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_inds_TYPE_SITE_summary"]}.csv', index_col=0)

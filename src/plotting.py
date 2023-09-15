@@ -89,7 +89,7 @@ def plot_activity_grid_for_bouts(activity_df, data_params, pipeline_params, file
     plt.figure(figsize=(1.5*len(activity_dates), 1.5*len(activity_times)))
     title = f"{data_params['type_tag']} Activity (% of time occupied by bouts) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
     plt.title(title, fontsize=1.5*len(activity_dates) + 1*len(activity_times))
-    plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=1, vmax=100)
+    plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=100))
     plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
     plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
     plt.ylabel(f'{ylabel} Time (HH:MM)')
@@ -320,17 +320,8 @@ def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipel
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
 
-    activity_times = pd.DatetimeIndex(times).tz_localize('UTC')
-    xlabel = 'UTC'
-    if pipeline_params["show_PST"]:
-        activity_times = activity_times.tz_convert(tz='US/Pacific')
-        xlabel = 'PST'
-    activity_times = activity_times.strftime("%H:%M")
-    plot_times = [''] * len(activity_times)
-    plot_times[::2] = activity_times[::2]
-
     plt.rcParams.update({'font.size': len(dates) + 0.5*len(times)})
-    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(activity_times)))
+    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         activity_df = (dh.construct_activity_grid_for_number_of_dets(activity_arr, dc_tag))
@@ -340,16 +331,24 @@ def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipel
         masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
         cmap = plt.get_cmap('viridis')
         cmap.set_bad(color='red')
-        datetimes = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y')
-        activity_dates = datetimes.strftime("%m/%d/%y").unique()
+        activity_dates = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y').strftime("%m/%d/%y").unique()
+        activity_times = pd.to_datetime(activity_df.index.values, format='%H:%M').strftime("%H:%M").unique()
+        activity_times = pd.DatetimeIndex(activity_times).tz_localize('UTC')
+        xlabel = 'UTC'
+        if pipeline_params["show_PST"]:
+            activity_times = activity_times.tz_convert(tz='US/Pacific')
+            xlabel = 'PST'
+        activity_times = activity_times.strftime("%H:%M")
+        plot_times = [''] * len(activity_times)
+        plot_times[::2] = activity_times[::2]
         plot_dates = [''] * len(activity_dates)
         plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         title = f"{data_params['type_tag']} Activity (# of calls) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + len(times))
         plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
-        plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
-        plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
+        plt.xticks(np.arange(0, len(plot_dates))-0.5, plot_dates, rotation=30)
+        plt.yticks(np.arange(0, len(plot_times))-0.5, plot_times, rotation=30)
         plt.xlabel('Date (MM/DD/YY)')
         plt.ylabel(f'{xlabel} Time (HH:MM)')
     plt.tight_layout()
@@ -364,17 +363,8 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
 
-    activity_times = pd.DatetimeIndex(times).tz_localize('UTC')
-    xlabel = 'UTC'
-    if pipeline_params["show_PST"]:
-        activity_times = activity_times.tz_convert(tz='US/Pacific')
-        xlabel = 'PST'
-    activity_times = activity_times.strftime("%H:%M")
-    plot_times = [''] * len(activity_times)
-    plot_times[::2] = activity_times[::2]
-
     plt.rcParams.update({'font.size': len(dates) + 0.5*len(times)})
-    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(activity_times)))
+    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         activity_df = (dh.construct_activity_grid_for_bouts(activity_arr, dc_tag))
@@ -384,16 +374,24 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
         masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
         cmap = plt.get_cmap('viridis')
         cmap.set_bad(color='red')
-        datetimes = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y')
-        activity_dates = datetimes.strftime("%m/%d/%y").unique()
+        activity_dates = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y').strftime("%m/%d/%y").unique()
+        activity_times = pd.to_datetime(activity_df.index.values, format='%H:%M').strftime("%H:%M").unique()
+        activity_times = pd.DatetimeIndex(activity_times).tz_localize('UTC')
+        xlabel = 'UTC'
+        if pipeline_params["show_PST"]:
+            activity_times = activity_times.tz_convert(tz='US/Pacific')
+            xlabel = 'PST'
+        activity_times = activity_times.strftime("%H:%M")
+        plot_times = [''] * len(activity_times)
+        plot_times[::2] = activity_times[::2]
         plot_dates = [''] * len(activity_dates)
         plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         title = f"{data_params['type_tag']} Activity (% of time occupied by bouts) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
-        plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=1, vmax=100)
-        plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
-        plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
+        plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=100))
+        plt.xticks(np.arange(0, len(plot_dates))-0.5, plot_dates, rotation=30)
+        plt.yticks(np.arange(0, len(plot_times))-0.5, plot_times, rotation=30)
         plt.xlabel('Date (MM/DD/YY)')
         plt.ylabel(f'{xlabel} Time (HH:MM)')
     plt.tight_layout()
@@ -408,17 +406,8 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
 
-    activity_times = pd.DatetimeIndex(times).tz_localize('UTC')
-    xlabel = 'UTC'
-    if pipeline_params["show_PST"]:
-        activity_times = activity_times.tz_convert(tz='US/Pacific')
-        xlabel = 'PST'
-    activity_times = activity_times.strftime("%H:%M")
-    plot_times = [''] * len(activity_times)
-    plot_times[::2] = activity_times[::2]
-
     plt.rcParams.update({'font.size': len(dates) + 0.5*len(times)})
-    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(activity_times)))
+    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         activity_df = (dh.construct_activity_grid_for_inds(activity_arr, dc_tag))
@@ -428,8 +417,16 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
         masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
         cmap = plt.get_cmap('viridis')
         cmap.set_bad(color='red')
-        datetimes = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y')
-        activity_dates = datetimes.strftime("%m/%d/%y").unique()
+        activity_dates = pd.to_datetime(activity_df.columns.values, format='%m/%d/%y').strftime("%m/%d/%y").unique()
+        activity_times = pd.to_datetime(activity_df.index.values, format='%H:%M').strftime("%H:%M").unique()
+        activity_times = pd.DatetimeIndex(activity_times).tz_localize('UTC')
+        xlabel = 'UTC'
+        if pipeline_params["show_PST"]:
+            activity_times = activity_times.tz_convert(tz='US/Pacific')
+            xlabel = 'PST'
+        activity_times = activity_times.strftime("%H:%M")
+        plot_times = [''] * len(activity_times)
+        plot_times[::2] = activity_times[::2]
         plot_dates = [''] * len(activity_dates)
         plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
@@ -441,8 +438,8 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
             plt.imshow((recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=0, vmax=peak_index)
         else:
             plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=1 + peak_index))
-        plt.xticks(np.arange(0, len(activity_df.columns))-0.5, plot_dates, rotation=30)
-        plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
+        plt.xticks(np.arange(0, len(plot_dates))-0.5, plot_dates, rotation=30)
+        plt.yticks(np.arange(0, len(plot_times))-0.5, plot_times, rotation=30)
         plt.xlabel('Date (MM/DD/YY)')
         plt.ylabel(f'{xlabel} Time (HH:MM)')
     plt.tight_layout()

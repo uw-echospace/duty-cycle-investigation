@@ -16,7 +16,6 @@ def generate_activity_dets_results(data_params, file_paths):
     A summary of activity is formatted as the number of detected bat calls per time interval.
     """
 
-    assemble_initial_location_summary(data_params, file_paths) ## Use to update any bd2__(location summary).csv files
     return ss.construct_activity_dets_arr_from_dc_tags(data_params, file_paths)
 
 
@@ -26,7 +25,6 @@ def generate_activity_bouts_results(data_params, file_paths):
     A summary of activity is formatted as the number of detected bat calls per time interval.
     """
 
-    assemble_initial_location_summary(data_params, file_paths) ## Use to update any bd2__(location summary).csv files
     return ss.construct_activity_bouts_arr_from_dc_tags(data_params, file_paths)
 
 
@@ -36,7 +34,6 @@ def generate_activity_inds_results(data_params, file_paths):
     A summary of activity is formatted as the number of detected bat calls per time interval.
     """
 
-    assemble_initial_location_summary(data_params, file_paths) ## Use to update any bd2__(location summary).csv files
     return ss.construct_activity_inds_arr_from_dc_tags(data_params, file_paths)
 
 def test_highest_freq_upper_bound(location_df, data_params):
@@ -56,23 +53,9 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     Returns and saves a summary of bd2-detected bat calls within a desired frequency band.
     """
 
-    if data_params['site_tag'] == 'Carp' or data_params['site_tag'] == 'Central' or data_params['site_tag'] == 'Foliage':
-        blue_l_bound = 20000
-        blue_u_bound = 50000
-        red_l_bound = 34000
-        red_u_bound = 74000
-        yellow_l_bound = 42000
-        yellow_u_bound = 92000
-        
-    if data_params['site_tag'] == 'Telephone':
-        blue_l_bound = 20000
-        blue_u_bound = 50000
-        red_l_bound = 30000
-        red_u_bound = 78000
-        yellow_l_bound = 41000
-        yellow_u_bound = 102000
-
     location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/*.csv').compute()
+    location_df['low_freq'] = location_df['low_freq'].astype('float')
+    location_df['high_freq'] = location_df['high_freq'].astype('float')
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
     anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'].values.astype('float64'), unit='S')
     anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'].values.astype('float64'), unit='S')
@@ -82,17 +65,22 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     location_df.insert(0, 'ref_time', anchor_start_times)
     location_df.insert(0, 'freq_group', '')
 
-    call_is_yellow = (location_df['low_freq'].astype('float')>=yellow_l_bound)&(location_df['high_freq'].astype('float')<=yellow_u_bound)
-    call_is_red = (location_df['low_freq'].astype('float')>=red_l_bound)&(location_df['high_freq'].astype('float')<=red_u_bound)
-    call_is_blue = (location_df['low_freq'].astype('float')>=blue_l_bound)&(location_df['high_freq'].astype('float')<=blue_u_bound)
+    groups = FREQ_GROUPS[data_params['site_tag']]
+    blue_group = groups[list(groups.keys())[0]]
+    red_group = groups[list(groups.keys())[1]]
+    yellow_group = groups[list(groups.keys())[2]]
+
+    call_is_yellow = (location_df['low_freq']>=yellow_group[0])&(location_df['high_freq']<=yellow_group[1])
+    call_is_red = (location_df['low_freq']>=red_group[0])&(location_df['high_freq']<=red_group[1])
+    call_is_blue = (location_df['low_freq']>=blue_group[0])&(location_df['high_freq']<=blue_group[1])
 
     location_df.loc[call_is_yellow, 'freq_group'] = 'HF2'
     location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
     location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
-
+    
     if data_params['type_tag'] != '':
         location_df = location_df.loc[location_df['freq_group']==data_params['type_tag']]
-    
+
     if save:
         location_df.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv')
 
@@ -105,11 +93,6 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     of the assemble_initial_location_summary() method.
     """
 
-    groups = FREQ_GROUPS[data_params['site_tag']]
-    blue_group = groups['blue']
-    red_group = groups['red']
-    yellow_group = groups['yellow']
-
     location_df = pd.read_csv(path_to_bd2_output)
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
 
@@ -120,6 +103,11 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     location_df.insert(0, 'call_start_time', anchor_start_times)
     location_df.insert(0, 'ref_time', anchor_start_times)
     location_df.insert(0, 'freq_group', '')
+
+    groups = FREQ_GROUPS[data_params['site_tag']]
+    blue_group = groups[list(groups.keys())[0]]
+    red_group = groups[list(groups.keys())[1]]
+    yellow_group = groups[list(groups.keys())[2]]
 
     call_is_yellow = (location_df['low_freq']>=yellow_group[0])&(location_df['high_freq']<=yellow_group[1])
     call_is_red = (location_df['low_freq']>=red_group[0])&(location_df['high_freq']<=red_group[1])
@@ -160,9 +148,10 @@ def construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_pat
 
     bout_duration_per_interval = bout_metrics.resample(f"{data_params['resolution_in_min']}T")['total_bout_duration_in_secs'].sum()
 
-    percent_time_occupied_by_bouts = (100*(bout_duration_per_interval.values / (60*float(data_params['resolution_in_min']))))
+    time_occupied_by_bouts  = bout_duration_per_interval.values
+    percent_time_occupied_by_bouts = (100*(time_occupied_by_bouts / (60*float(data_params['resolution_in_min']))))
 
-    bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)), columns=['ref_time', f'percentage_time_occupied_by_bouts ({dc_tag})'])
+    bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, time_occupied_by_bouts)), columns=['ref_time', f'percentage_time_occupied_by_bouts ({dc_tag})'])
     bout_dpi_df = bout_dpi_df.set_index('ref_time')
     bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['resolution_in_min']}T").first().between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
