@@ -224,7 +224,7 @@ def sample_calls_and_generate_bucket_for_location(cfg):
     for filepath in site_filepaths:
         print(filepath)
         data_params['audio_file'] = filepath
-        filename = data_params['audio_file'].name.split('.')[0]
+        filename = Path(data_params['audio_file']).name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
 
