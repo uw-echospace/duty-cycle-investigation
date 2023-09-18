@@ -181,7 +181,7 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params['site'] = cfg['site']
     print(f"Searching for files from {cfg['site']}")
 
-    drives_df = dd.read_csv(f'../data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
+    drives_df = dd.read_csv(f'{Path(__file__).parent}/../data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
     drives_df.drop(columns='Unnamed: 0', inplace=True)
     drives_df["index"] = pd.DatetimeIndex(drives_df["Datetime UTC"])
     drives_df.set_index("index", inplace=True)
@@ -216,7 +216,7 @@ def sample_calls_and_generate_bucket_for_location(cfg):
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
-    csv_files_for_location = sorted(list(glob.glob(f'../data/raw/{data_params["site_tag"]}/**.csv')))
+    csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
 
     good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
     site_filepaths = good_location_df['File path'].values
