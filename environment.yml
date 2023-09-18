@@ -1,7 +1,6 @@
 name: dc-study
 channels:
   - conda-forge
-  - defaults
 dependencies:
   - dask
   - matplotlib
