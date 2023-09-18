@@ -145,6 +145,8 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
     bd2_predictions = dh.assemble_single_bd2_output(csv_path, data_params)
     print(len(bd2_predictions))
     groups_detected = bd2_predictions['freq_group'].unique()
+    print(len(groups_detected))
+    print('' in groups_detected)
     if len(bd2_predictions)>0 and (len(groups_detected) > 0 and '' in groups_detected):
         bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params, bout_params)
         bout_metrics.reset_index(inplace=True)
