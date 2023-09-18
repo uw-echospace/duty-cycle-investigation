@@ -1,0 +1,6 @@
+dask==2023.7.1
+matplotlib==3.7.2
+numpy==1.25.1
+pandas==2.0.3
+scipy==1.11.2
+soundfile==0.12.1
