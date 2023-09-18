@@ -1,7 +1,10 @@
 name: dc-study
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - dask
   - matplotlib
+  - ipykernel
+  - scipy
 prefix: /Users/adityakrishna/miniconda3/envs/dc-study
