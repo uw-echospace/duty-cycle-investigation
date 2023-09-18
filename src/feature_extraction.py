@@ -144,8 +144,8 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
 
     bd2_predictions = dh.assemble_single_bd2_output(csv_path, data_params)
     print(len(bd2_predictions))
-    if len(bd2_predictions)>0:
-        print(bd2_predictions['freq_group'].unique())
+    groups_detected = bd2_predictions['freq_group'].unique()
+    if len(bd2_predictions)>0 and (len(groups_detected) > 0 and '' in groups_detected):
         bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params, bout_params)
         bout_metrics.reset_index(inplace=True)
         if 'index' in bout_metrics.columns:
@@ -223,7 +223,6 @@ def sample_calls_and_generate_bucket_for_location(cfg):
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
-    print(csv_files_for_location)
 
     good_location_df = get_params_relevant_to_data_at_location(cfg)
     site_filepaths = good_location_df['File path'].values
