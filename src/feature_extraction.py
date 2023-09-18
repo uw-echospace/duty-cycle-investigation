@@ -175,9 +175,9 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
 
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
-        print(bucket_for_file[0][0], bucket_for_file[0][-1])
-        bucket_for_location.append(bucket_for_file)
-        calls_sampled_from_location = pd.concat([calls_sampled_from_location, calls_sampled_from_file])
+        if bucket_for_file:
+            bucket_for_location.append(bucket_for_file)
+            calls_sampled_from_location = pd.concat([calls_sampled_from_location, calls_sampled_from_file])
 
     return bucket_for_location, calls_sampled_from_location
 
