@@ -129,36 +129,38 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
     fs = audio_file.samplerate
 
     bd2_predictions = dh.assemble_single_bd2_output(csv_path, data_params)
-    bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params, bout_params)
-    bout_metrics.reset_index(inplace=True)
-    if 'index' in bout_metrics.columns:
-        bout_metrics.drop(columns='index', inplace=True)
 
-    nyquist = fs//2
-    bucket_for_file = []
-    calls_sampled_from_file = pd.DataFrame()
-    for bout_index, row in bout_metrics.iterrows():
-        group = row['freq_group']
-        freq_group = bd2_predictions.loc[bd2_predictions['freq_group']==group]
-        bat_bout = freq_group.loc[(freq_group['start_time']>=row['start_time'])&(freq_group['end_time']<=row['end_time'])].copy()
-        call_snrs = collect_call_snrs_from_bat_bout_in_audio_file(audio_file, bat_bout)
+    if bd2_predictions.empty:
+        bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params, bout_params)
+        bout_metrics.reset_index(inplace=True)
+        if 'index' in bout_metrics.columns:
+            bout_metrics.drop(columns='index', inplace=True)
 
-        bat_bout['SNR'] = call_snrs
-        top_10_SNR =  0.90*bat_bout['SNR'].max()
-        top_10_SNR_bat_bout = bat_bout.loc[bat_bout['SNR']>=top_10_SNR]
-        bucket_for_file, sampled_calls_from_bout = collect_fft_spectra_from_calls_in_bout(audio_file, top_10_SNR_bat_bout, bucket_for_file)
+        nyquist = fs//2
+        bucket_for_file = []
+        calls_sampled_from_file = pd.DataFrame()
+        for bout_index, row in bout_metrics.iterrows():
+            group = row['freq_group']
+            freq_group = bd2_predictions.loc[bd2_predictions['freq_group']==group]
+            bat_bout = freq_group.loc[(freq_group['start_time']>=row['start_time'])&(freq_group['end_time']<=row['end_time'])].copy()
+            call_snrs = collect_call_snrs_from_bat_bout_in_audio_file(audio_file, bat_bout)
 
-        bat_bout_condensed = pd.DataFrame()
-        bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
-        bat_bout_condensed['SD Card'] = sampled_calls_from_bout['SD Card'].values
-        bat_bout_condensed['File name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
-        bat_bout_condensed['Site'] = sampled_calls_from_bout['Site name'].values
-        bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
+            bat_bout['SNR'] = call_snrs
+            top_10_SNR =  0.90*bat_bout['SNR'].max()
+            top_10_SNR_bat_bout = bat_bout.loc[bat_bout['SNR']>=top_10_SNR]
+            bucket_for_file, sampled_calls_from_bout = collect_fft_spectra_from_calls_in_bout(audio_file, top_10_SNR_bat_bout, bucket_for_file)
 
-        calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
+            bat_bout_condensed = pd.DataFrame()
+            bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
+            bat_bout_condensed['SD Card'] = sampled_calls_from_bout['SD Card'].values
+            bat_bout_condensed['File name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
+            bat_bout_condensed['Site'] = sampled_calls_from_bout['Site name'].values
+            bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
 
-    bucket_for_location.append(bucket_for_file)
-    calls_sampled_from_location = pd.concat([calls_sampled_from_location, calls_sampled_from_file])
+            calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
+
+        bucket_for_location.append(bucket_for_file)
+        calls_sampled_from_location = pd.concat([calls_sampled_from_location, calls_sampled_from_file])
 
     return bucket_for_location, calls_sampled_from_location
 
@@ -206,6 +208,7 @@ def sample_calls_and_generate_bucket_for_location(cfg):
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
+    print(csv_files_for_location)
 
     good_location_df = get_params_relevant_to_data_at_location(cfg)
     site_filepaths = good_location_df['File path'].values
@@ -216,8 +219,9 @@ def sample_calls_and_generate_bucket_for_location(cfg):
         filename = Path(data_params['audio_file']).name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
+        print(csv_path)
 
-        if data_params['csv_file'] in csv_files_for_location:
+        if str(data_params['csv_file']) in csv_files_for_location:
             bucket_for_location, calls_sampled_from_location = collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
 
     bucket_for_location = np.vstack(bucket_for_location)
