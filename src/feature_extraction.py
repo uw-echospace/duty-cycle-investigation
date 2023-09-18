@@ -177,8 +177,6 @@ def filter_df_with_location(ubna_data_df, site_name, start_time, end_time):
     return filtered_location_nightly_df
 
 def get_params_relevant_to_data_at_location(cfg):
-    data_params = dict()
-    data_params['site'] = cfg['site']
     print(f"Searching for files from {cfg['site']}")
 
     drives_df = dd.read_csv(f'{Path(__file__).parent}/../data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
@@ -186,31 +184,22 @@ def get_params_relevant_to_data_at_location(cfg):
     drives_df["index"] = pd.DatetimeIndex(drives_df["Datetime UTC"])
     drives_df.set_index("index", inplace=True)
     
-    files_from_location = filter_df_with_location(drives_df, data_params['site'], cfg['recording_start'], cfg['recording_end'])
+    files_from_location = filter_df_with_location(drives_df, cfg['site'], cfg['recording_start'], cfg['recording_end'])
 
-    data_params['ref_audio_files'] = sorted(list(files_from_location["File path"].apply(lambda x : Path(x)).values))
     file_status_cond = files_from_location["File status"] == "Usable for detection"
     file_duration_cond = np.isclose(files_from_location["File duration"].astype('float'), 1795)
     good_location_df = files_from_location.loc[file_status_cond&file_duration_cond]
-    data_params['good_audio_files'] = sorted(list(good_location_df["File path"].apply(lambda x : Path(x)).values))
 
-    if data_params['good_audio_files'] == data_params['ref_audio_files']:
-        print("All files from deployment session good!")
-    else:
-        print("Error files exist!")
-
-    print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site']}")
-
-    return good_location_df, data_params
+    return good_location_df
 
 def sample_calls_and_generate_bucket_for_location(cfg):
     freq_key = ''
     bucket_for_location = []
     calls_sampled_from_location = pd.DataFrame()
     data_params = dict()
+    data_params["site_tag"] = cfg['site']
     data_params["type_tag"] = freq_key
     data_params["cur_dc_tag"] = "1800of1800"
-    data_params["site_tag"] = cfg['site'] 
     data_params["site_name"] = SITE_NAMES[cfg['site']]
 
     file_paths = get_file_paths(data_params)
@@ -218,7 +207,7 @@ def sample_calls_and_generate_bucket_for_location(cfg):
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
 
-    good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
+    good_location_df = get_params_relevant_to_data_at_location(cfg)
     site_filepaths = good_location_df['File path'].values
 
     for filepath in site_filepaths:
