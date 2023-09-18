@@ -80,7 +80,21 @@ def collect_call_snrs_from_bat_bout_in_audio_file(audio_file, bat_bout):
 
 
 def get_bout_metrics_from_single_bd2_output(bd2_output, data_params, bout_params):
-    batdetect2_predictions = ss.simulate_dutycycle_on_detections(bd2_output, data_params['cur_dc_tag'])
+    # batdetect2_predictions = ss.simulate_dutycycle_on_detections(bd2_output, data_params['cur_dc_tag'])
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length = int(dc_tag.split('of')[1])
+    time_on = int(dc_tag.split('of')[0])
+
+    bd2_output['ref_time'] = pd.DatetimeIndex(bd2_output['ref_time'])
+    bd2_output['call_end_time'] = pd.DatetimeIndex(bd2_output['call_end_time'])
+    bd2_output['call_start_time'] = pd.DatetimeIndex(bd2_output['call_start_time'])
+    
+    resampled_df = bd2_output.resample(f'{cycle_length}S', on='ref_time')
+    bd2_output['ref_time'] = resampled_df['ref_time'].transform(lambda x: x.name)
+    bd2_output.insert(0, 'end_time_wrt_ref', (bd2_output['call_end_time'] - bd2_output['ref_time']).dt.total_seconds())
+    bd2_output.insert(0, 'start_time_wrt_ref', (bd2_output['call_start_time'] - bd2_output['ref_time']).dt.total_seconds())
+
+    batdetect2_predictions = bd2_output.loc[bd2_output['end_time_wrt_ref'] <= time_on]
     batdetect2_preds_with_bouttags = bt_clustering.classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bout_params)
     bout_metrics = bt_clustering.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_preds_with_bouttags)
 
@@ -129,8 +143,9 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
     fs = audio_file.samplerate
 
     bd2_predictions = dh.assemble_single_bd2_output(csv_path, data_params)
-
-    if bd2_predictions.empty:
+    print(len(bd2_predictions))
+    if len(bd2_predictions)>0:
+        print(bd2_predictions['freq_group'].unique())
         bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params, bout_params)
         bout_metrics.reset_index(inplace=True)
         if 'index' in bout_metrics.columns:
