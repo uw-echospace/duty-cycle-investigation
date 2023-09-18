@@ -175,6 +175,7 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
 
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
+        print(bucket_for_file[0][0], bucket_for_file[0][-1])
         bucket_for_location.append(bucket_for_file)
         calls_sampled_from_location = pd.concat([calls_sampled_from_location, calls_sampled_from_file])
 
@@ -229,15 +230,16 @@ def sample_calls_and_generate_bucket_for_location(cfg):
     site_filepaths = good_location_df['File path'].values
 
     for filepath in site_filepaths:
-        print(filepath)
         data_params['audio_file'] = filepath
         filename = Path(data_params['audio_file']).name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
-        print(csv_path)
 
         if str(data_params['csv_file']) in csv_files_for_location:
+            print(filepath)
+            print(csv_path)
             bucket_for_location, calls_sampled_from_location = collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
+            
 
     bucket_for_location = np.vstack(bucket_for_location)
 
