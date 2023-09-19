@@ -230,7 +230,7 @@ def sample_calls_and_generate_bucket_for_location(cfg):
     good_location_df = get_params_relevant_to_data_at_location(cfg)
     site_filepaths = good_location_df['File path'].values
 
-    for filepath in site_filepaths:
+    for filepath in site_filepaths[10*23:]:
         data_params['audio_file'] = filepath
         filename = Path(data_params['audio_file']).name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
