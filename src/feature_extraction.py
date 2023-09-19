@@ -151,6 +151,7 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
         bout_metrics.reset_index(inplace=True)
         if 'index' in bout_metrics.columns:
             bout_metrics.drop(columns='index', inplace=True)
+        print(f"File {file_path.name} has {len(bout_metrics)} bouts")
 
         nyquist = fs//2
         bucket_for_file = []
@@ -160,7 +161,6 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
             freq_group = bd2_predictions.loc[bd2_predictions['freq_group']==group]
             bat_bout = freq_group.loc[(freq_group['start_time']>=row['start_time'])&(freq_group['end_time']<=row['end_time'])].copy()
             call_snrs = collect_call_snrs_from_bat_bout_in_audio_file(audio_file, bat_bout)
-            print(f"Looking at bout {bout_index} in file {file_path.name}")
 
             bat_bout['SNR'] = call_snrs
             top_10_SNR =  0.90*bat_bout['SNR'].max()
@@ -177,7 +177,6 @@ def collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
         if bucket_for_file:
-            print(bucket_for_file[0])
             bucket_for_location.append(bucket_for_file)
             calls_sampled_from_location = pd.concat([calls_sampled_from_location, calls_sampled_from_file])
 
@@ -240,10 +239,10 @@ def sample_calls_and_generate_bucket_for_location(cfg):
         if str(data_params['csv_file']) in csv_files_for_location:
             print(filepath)
             print(csv_path)
-    #         bucket_for_location, calls_sampled_from_location = collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
+            bucket_for_location, calls_sampled_from_location = collect_fft_spectra_from_calls_in_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
             
 
-    # bucket_for_location = np.vstack(bucket_for_location)
+    bucket_for_location = np.vstack(bucket_for_location)
 
     np.save(f'2022_{data_params["site_tag"]}.npy', bucket_for_location)
     calls_sampled_from_location.to_csv(f'2022_{data_params["site_tag"]}.csv')
