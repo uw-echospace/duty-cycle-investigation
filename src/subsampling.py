@@ -22,14 +22,17 @@ def simulate_dutycycle_on_detections(location_df, dc_tag):
     location_df.insert(0, 'end_time_wrt_ref', (location_df['call_end_time'] - location_df['ref_time']).dt.total_seconds())
     location_df.insert(0, 'start_time_wrt_ref', (location_df['call_start_time'] - location_df['ref_time']).dt.total_seconds())
 
-    dc_applied_df = location_df.loc[location_df['end_time_wrt_ref'] <= time_on]
-
-    test_for_last_call_within_period(dc_applied_df, time_on)
+    dc_applied_df = location_df.loc[(location_df['end_time_wrt_ref'] <= time_on)&(location_df['start_time_wrt_ref'] >= 0)]
+    test_for_last_call_within_period(dc_applied_df, cycle_length, time_on)
 
     return dc_applied_df
 
-def test_for_last_call_within_period(dc_applied_df, time_on):
-    assert(dc_applied_df['end_time_wrt_ref'].max() <= time_on)
+def test_for_last_call_within_period(dc_applied_df, cycle_length, time_on):
+    calls_grouped_per_cycle = dc_applied_df.resample(f'{cycle_length}S', on='ref_time')
+    on_periods = (calls_grouped_per_cycle['ref_time'].first() + pd.to_timedelta(f'{time_on}S')).dropna()
+    last_calls_in_periods = (calls_grouped_per_cycle['call_end_time'].max().dropna()) <= on_periods
+    first_calls_in_periods = (calls_grouped_per_cycle['call_start_time'].min().dropna()) >= on_periods.index
+    assert(not(False in first_calls_in_periods) and not(False in last_calls_in_periods))
 
 def prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag):
     """
@@ -78,6 +81,8 @@ def construct_activity_dets_arr_from_dc_tags(data_params, file_paths):
         dc_dets = dc_dets.set_index("Date_and_Time_UTC")
         activity_dets_arr = pd.concat([activity_dets_arr, dc_dets], axis=1)
 
+    test_subsampled_metrics_less_than_continuous(activity_dets_arr)
+
     activity_dets_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets_TYPE_SITE_summary"]}.csv')
 
     return activity_dets_arr
@@ -97,6 +102,8 @@ def construct_activity_bouts_arr_from_dc_tags(data_params, file_paths):
         dc_bouts = dc_bouts.set_index("Date_and_Time_UTC")
         activity_bouts_arr = pd.concat([activity_bouts_arr, dc_bouts], axis=1)
 
+    test_subsampled_metrics_less_than_continuous(activity_bouts_arr)
+
     activity_bouts_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts_TYPE_SITE_summary"]}.csv')
 
     return activity_bouts_arr
@@ -115,6 +122,21 @@ def construct_activity_inds_arr_from_dc_tags(data_params, file_paths):
         dc_dets = dc_dets.set_index("Date_and_Time_UTC")
         activity_inds_arr = pd.concat([activity_inds_arr, dc_dets], axis=1)
 
+    test_subsampled_metrics_less_than_continuous(activity_inds_arr)
+
     activity_inds_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_inds_TYPE_SITE_summary"]}.csv')
 
     return activity_inds_arr
+
+def test_subsampled_metrics_less_than_continuous(activity_arr):
+    continuous_column = ''
+    for column in activity_arr.columns:
+        if ('1800of1800') in column:
+            continuous_column = column
+
+    continuous_metrics = activity_arr[continuous_column].dropna()
+
+    for column in activity_arr.columns:
+        dc_metrics = activity_arr[column].dropna()
+        assertion = (dc_metrics<=continuous_metrics).values
+        assert(not(False in assertion))
