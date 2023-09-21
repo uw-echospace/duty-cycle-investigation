@@ -303,6 +303,8 @@ def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc
     location_sum_df.reset_index(inplace=True)
     if 'index' in location_sum_df.columns:
         location_sum_df.drop(columns='index', inplace=True)
+    resampled_df = location_sum_df.resample(f'{data_params["resolution_in_min"]}T', on='ref_time')
+    location_sum_df['ref_time'] = resampled_df['ref_time'].transform(lambda x: x.name)
 
     bout_params = get_bout_params_from_location(location_sum_df, data_params)
 
@@ -318,6 +320,7 @@ def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc
 def get_bout_params_from_location(location_sum_df, data_params):
     bout_params = dict()
     bout_params['site_key'] = data_params['site_tag']
+    bout_params['freq_key'] = data_params['type_tag']
 
     for group in location_sum_df['freq_group'].unique():
         if group != '':

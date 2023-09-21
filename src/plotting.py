@@ -458,22 +458,22 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
 
-    activity_times = pd.DatetimeIndex(times).tz_localize('UTC')
-    xlabel = 'UTC'
-    if pipeline_params["show_PST"]:
-        activity_times = activity_times.tz_convert(tz='US/Pacific')
-        xlabel = 'PST'
-    activity_times = activity_times.strftime("%H:%M")
-    plot_times = [''] * len(activity_times)
-    plot_times[::2] = activity_times[::2]
-
     plt.rcParams.update({'font.size': 1*len(dates) + 0.5*len(times)})
-    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(activity_times)))
+    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         presence_df = dh.construct_presence_grid(activity_arr, dc_tag).replace(np.NaN, 156)
         datetimes = pd.to_datetime(presence_df.columns.values, format='%m/%d/%y')
         activity_dates = datetimes.strftime("%m/%d/%y").unique()
+        activity_times = pd.to_datetime(presence_df.index.values, format='%H:%M').strftime("%H:%M").unique()
+        activity_times = pd.DatetimeIndex(activity_times).tz_localize('UTC')
+        xlabel = 'UTC'
+        if pipeline_params["show_PST"]:
+            activity_times = activity_times.tz_convert(tz='US/Pacific')
+            xlabel = 'PST'
+        activity_times = activity_times.strftime("%H:%M")
+        plot_times = [''] * len(activity_times)
+        plot_times[::2] = activity_times[::2]
         plot_dates = [''] * len(activity_dates)
         plot_dates[::7] = activity_dates[::7]
         plt.subplot(len(data_params["dc_tags"]), 1, i+1)
@@ -489,8 +489,8 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
             rect(pos)
         plt.ylabel(f"{xlabel} Time (HH:MM)")
         plt.xlabel('Date (MM/DD/YY)')
-        plt.xticks(np.arange(0, len(presence_df.columns))-0.5, plot_dates, rotation=30)
-        plt.yticks(np.arange(0, len(presence_df.index))-0.5, plot_times, rotation=30)
+        plt.xticks(np.arange(0, len(plot_dates))-0.5, plot_dates, rotation=30)
+        plt.yticks(np.arange(0, len(plot_times))-0.5, plot_times, rotation=30)
         plt.grid(which="both", color='k')
     plt.tight_layout()
     if pipeline_params["save_presence_dc_comparisons"]:

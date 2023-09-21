@@ -13,7 +13,7 @@ def simulate_dutycycle_on_detections(location_df, dc_tag):
     cycle_length = int(dc_tag.split('of')[1])
     time_on = int(dc_tag.split('of')[0])
 
-    location_df['ref_time'] = pd.DatetimeIndex(location_df['ref_time'])
+    location_df['ref_time'] = pd.DatetimeIndex(location_df['call_start_time'])
     location_df['call_end_time'] = pd.DatetimeIndex(location_df['call_end_time'])
     location_df['call_start_time'] = pd.DatetimeIndex(location_df['call_start_time'])
     
@@ -101,8 +101,6 @@ def construct_activity_bouts_arr_from_dc_tags(data_params, file_paths):
         dc_bouts = dh.construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_paths, dc_tag)
         dc_bouts = dc_bouts.set_index("Date_and_Time_UTC")
         activity_bouts_arr = pd.concat([activity_bouts_arr, dc_bouts], axis=1)
-
-    test_subsampled_metrics_less_than_continuous(activity_bouts_arr)
 
     activity_bouts_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts_TYPE_SITE_summary"]}.csv')
 

@@ -6,6 +6,8 @@ import numpy as np
 import scipy.stats as stats
 import bout_clustering as bt_clustering
 
+from core import FREQUENCY_COLOR_MAPPINGS
+
 def plot_ipi_hist(location_df, fig_details):
     """
     Plots a histogram of IPIs from a provided location and frequency group for the specified range of intervals and bin width.
@@ -272,7 +274,7 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
     plt.rcParams.update({'font.size': 24})
     plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
 
-    pink_patch = patches.Patch(facecolor='pink', edgecolor='k', label='Bout')
+    pink_patch = patches.Patch(facecolor='pink', edgecolor='k', label='Bout START/END')
     yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label='Detections')
 
     legend_patches = [pink_patch, yellow_patch]
@@ -295,7 +297,7 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
         
         ax.add_patch(rect)
 
-    dc_tag = data_params['dc_tag']
+    dc_tag = data_params['cur_dc_tag']
     cycle_length = int(dc_tag.split('of')[1])
     time_on = int(dc_tag.split('of')[0])
 
@@ -334,25 +336,24 @@ def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, plot_b
     fs = audio_features['sample_rate']
     start = audio_features['start']
     duration = audio_features['duration']
-    bci = bout_params['bci']
 
     plt.figure(figsize=(15, 5))
     plt.title(f"BCI-derived bouts using BD2 detections on {audio_features['file_path'].name}", fontsize=22)
     plt.rcParams.update({'font.size': 24})
     plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
 
-    pink_patch = patches.Patch(facecolor='pink', edgecolor='k', label='Bout')
-    green_patch = patches.Patch(facecolor='yellowgreen', edgecolor='k', label=f"BCI: {np.round(bci/1000, 2)}s")
-    yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label='Detections')
+    yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label=f'BCI = {round(bout_params["HF2_bci"], 2)}ms')
+    red_patch = patches.Patch(facecolor='red', edgecolor='k', label=f'BCI = {round(bout_params["HF1_bci"], 2)}ms')
+    blue_patch = patches.Patch(facecolor='cyan', edgecolor='k', label=f'BCI = {round(bout_params["LF1_bci"], 2)}ms')
 
-    legend_patches = [green_patch, pink_patch, yellow_patch]
+    legend_patches = [blue_patch, red_patch, yellow_patch]
     ax = plt.gca()
     for i, row in plot_bouts.iterrows():
         plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+2000)/(fs/2), 3/4), 
                             s=f"{round(row['bout_duration_in_secs'], 2)}s", color='pink', fontsize=14)
         rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
                         (row['bout_duration_in_secs'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
-                        linewidth=2, edgecolor='pink', facecolor='none', alpha=0.8)
+                        linewidth=2, edgecolor=FREQUENCY_COLOR_MAPPINGS[row['freq_group']], facecolor='none', alpha=0.8)
         ax.add_patch(rect)
 
     plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
@@ -360,7 +361,7 @@ def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, plot_b
     plt.ylabel("Frequency (kHz)")
     plt.xlabel("Time (s)")
     plt.gcf().autofmt_xdate()
-    plt.legend(handles=legend_patches, fontsize=20, ncol=int(len(legend_patches)**0.5), loc='upper right')
+    plt.legend(handles=legend_patches, fontsize=20, ncol=int(len(legend_patches)), loc='upper right')
 
     plt.tight_layout()
     plt.show()

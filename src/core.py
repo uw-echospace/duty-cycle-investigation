@@ -1,13 +1,7 @@
 # For consistence in data visualization, duty-cycles will be mapped to specific colors.
 DC_COLOR_MAPPINGS = {
                     '1800of1800' : 'cyan',
-                    '1of6' : 'violet',
-                    '5of30' : 'yellowgreen',
-                    '10of60' : 'darkgreen',
-                    '30of180' : 'purple',
                     '60of360' : 'red',
-                    '100of600' : 'deeppink',
-                    '120of720' : 'maroon',
                     '300of1800' : 'orange',
                         }
 
@@ -21,12 +15,13 @@ SITE_NAMES = {
             'Fallen' : "Fallen Tree"
                 }
 
-# # These are the observed frequency ranges for the 2 major groups of bat calls we have observed
-# FREQ_GROUPS = {
-#                 'lf_' : [13000, 43000],
-#                 'hf_' : [33000, 96000],
-#                 '' :[0, 125000]
-#                 }
+
+FREQUENCY_COLOR_MAPPINGS = {
+                    'LF1' : 'cyan',
+                    'HF1' : 'red',
+                    'HF2' : 'yellow',
+                        }
+
 
 FREQ_GROUPS = {
                 'Carp' : {'LF1': [13000, 50000],

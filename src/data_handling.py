@@ -66,9 +66,9 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     location_df.insert(0, 'freq_group', '')
 
     groups = FREQ_GROUPS[data_params['site_tag']]
-    blue_group = groups[list(groups.keys())[0]]
-    red_group = groups[list(groups.keys())[1]]
-    yellow_group = groups[list(groups.keys())[2]]
+    blue_group = groups['LF1']
+    red_group = groups['HF1']
+    yellow_group = groups['HF2']
 
     call_is_yellow = (location_df['low_freq']>=yellow_group[0])&(location_df['high_freq']<=yellow_group[1])
     call_is_red = (location_df['low_freq']>=red_group[0])&(location_df['high_freq']<=red_group[1])
@@ -78,14 +78,11 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
     location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
 
-    test_highest_freq_upper_bound(location_df.loc[location_df['freq_group']=='HF2'].copy(), yellow_group)
-    test_lowest_freq_lower_bound(location_df.loc[location_df['freq_group']=='HF2'].copy(), yellow_group)
-
-    test_highest_freq_upper_bound(location_df.loc[location_df['freq_group']=='HF1'].copy(), red_group)
-    test_lowest_freq_lower_bound(location_df.loc[location_df['freq_group']=='HF1'].copy(), red_group)
-
-    test_highest_freq_upper_bound(location_df.loc[location_df['freq_group']=='LF1'].copy(), blue_group)
-    test_lowest_freq_lower_bound(location_df.loc[location_df['freq_group']=='LF1'].copy(), blue_group)
+    for group in list(groups.keys()):
+        freq_group_df = location_df.loc[location_df['freq_group']==group].copy()
+        if len(freq_group_df)>0:
+            test_highest_freq_upper_bound(freq_group_df, groups[group])
+            test_lowest_freq_lower_bound(freq_group_df, groups[group])
     
     if data_params['type_tag'] != '':
         location_df = location_df.loc[location_df['freq_group']==data_params['type_tag']]
@@ -114,9 +111,9 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     location_df.insert(0, 'freq_group', '')
 
     groups = FREQ_GROUPS[data_params['site_tag']]
-    blue_group = groups[list(groups.keys())[0]]
-    red_group = groups[list(groups.keys())[1]]
-    yellow_group = groups[list(groups.keys())[2]]
+    blue_group = groups['LF1']
+    red_group = groups['HF1']
+    yellow_group = groups['HF2']
 
     call_is_yellow = (location_df['low_freq']>=yellow_group[0])&(location_df['high_freq']<=yellow_group[1])
     call_is_red = (location_df['low_freq']>=red_group[0])&(location_df['high_freq']<=red_group[1])
@@ -126,15 +123,12 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
     location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
 
-    test_highest_freq_upper_bound(location_df.loc[location_df['freq_group']=='HF2'].copy(), yellow_group)
-    test_lowest_freq_lower_bound(location_df.loc[location_df['freq_group']=='HF2'].copy(), yellow_group)
-
-    test_highest_freq_upper_bound(location_df.loc[location_df['freq_group']=='HF1'].copy(), red_group)
-    test_lowest_freq_lower_bound(location_df.loc[location_df['freq_group']=='HF1'].copy(), red_group)
-
-    test_highest_freq_upper_bound(location_df.loc[location_df['freq_group']=='LF1'].copy(), blue_group)
-    test_lowest_freq_lower_bound(location_df.loc[location_df['freq_group']=='LF1'].copy(), blue_group)
-
+    for group in list(groups.keys()):
+        freq_group_df = location_df.loc[location_df['freq_group']==group].copy()
+        if len(freq_group_df)>0:
+            test_highest_freq_upper_bound(freq_group_df, groups[group])
+            test_lowest_freq_lower_bound(freq_group_df, groups[group])
+    
     return location_df
 
 
