@@ -51,7 +51,8 @@ def regress_around_slow_intervals(intervals_ms, survival):
     They are also among intervals from 20 to 60min. This range is very likely between-bout.
     """
 
-    slow_inds = np.logical_and(survival >= (survival.max() * 0.22), survival <= (survival.max() * 0.32)) 
+    # slow_inds = np.logical_and(survival >= (survival.max() * 0.25), survival <= (survival.max() * 0.65)) 
+    slow_inds = np.logical_and(intervals_ms >= 60*1e3, survival >= (survival.max() * 0.1))
     slow_coeff = stats.linregress(intervals_ms[slow_inds], survival[slow_inds])
 
     slow_process = dict()
@@ -303,8 +304,6 @@ def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc
     location_sum_df.reset_index(inplace=True)
     if 'index' in location_sum_df.columns:
         location_sum_df.drop(columns='index', inplace=True)
-    resampled_df = location_sum_df.resample(f'{data_params["resolution_in_min"]}T', on='ref_time')
-    location_sum_df['ref_time'] = resampled_df['ref_time'].transform(lambda x: x.name)
 
     bout_params = get_bout_params_from_location(location_sum_df, data_params)
 

@@ -51,8 +51,8 @@ def plot_dets(activity_arr, data_params, pipeline_params, file_paths):
     Plot various figures to visualize the run() function's results and compare duty-cycling schemes.
     """
     
-    plotting.plot_activity_grid_for_dets(dh.construct_activity_grid_for_number_of_dets(activity_arr, data_params["cur_dc_tag"]), data_params, pipeline_params, file_paths)
-    plotting.plot_presence_grid(dh.construct_presence_grid(activity_arr, data_params["cur_dc_tag"]), data_params, pipeline_params, file_paths)
+    plotting.plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file_paths)
+    plotting.plot_presence_grid(activity_arr, data_params, pipeline_params, file_paths)
     plotting.plot_dc_dets_comparisons_per_night(activity_arr, data_params, pipeline_params, file_paths)
     plotting.plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
     plotting.plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
@@ -63,9 +63,18 @@ def plot_bouts(activity_arr, data_params, pipeline_params, file_paths):
     Plot various figures to visualize the run() function's results and compare duty-cycling schemes.
     """
     
-    plotting.plot_activity_grid_for_bouts(dh.construct_activity_grid_for_bouts(activity_arr, data_params['cur_dc_tag']), data_params, pipeline_params, file_paths)
+    plotting.plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, file_paths)
     plotting.plot_dc_bouts_comparisons_per_night(activity_arr, data_params, pipeline_params, file_paths)
     plotting.plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
+
+
+def plot_inds(activity_arr, data_params, pipeline_params, file_paths):
+    """
+    Plot various figures to visualize the run() function's results and compare duty-cycling schemes.
+    """
+    
+    plotting.plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file_paths)
+    plotting.plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
 
 
 def compare_bout_and_det_metrics(data_params, pipeline_params, file_paths):
