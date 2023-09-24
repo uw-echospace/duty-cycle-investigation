@@ -138,7 +138,7 @@ def construct_activity_arr_from_location_summary(location_df, dc_tag, file_paths
     Will be used later to assembled an activity summary for each duty-cycling scheme to compare effects.
     """
     location_df.insert(0, 'call_durations', (location_df['call_end_time'] - location_df['call_start_time']))
-    df_resampled_every_30 = location_df.resample(f"{data_params['data_resolution_in_min']}T", on='ref_time')
+    df_resampled_every_30 = location_df.resample(f"{data_params['data_resolution_in_min']}T", on='ref_time', origin='start')
     shortest_call_per_30 = pd.to_numeric(df_resampled_every_30['call_durations'].min())/1e6
     max_allowable_calls_per_30 = np.abs(((int(data_params['data_resolution_in_min'])*60*60) / shortest_call_per_30))
     num_of_detections = df_resampled_every_30['ref_time'].count()
@@ -148,7 +148,8 @@ def construct_activity_arr_from_location_summary(location_df, dc_tag, file_paths
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     col_name = f"Number_of_Detections ({dc_tag})"
     incomplete_activity_arr = pd.DataFrame(num_of_detections.values, index=num_of_detections.index, columns=[col_name])
-    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['data_resolution_in_min']}T").first()
+    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0)
+    activity_arr = activity_arr.resample(f"{data_params['data_resolution_in_min']}T", origin='start').first()
     activity_arr = activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
@@ -165,7 +166,7 @@ def construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_pat
     bout_metrics['total_bout_duration_in_secs'] = bout_metrics['bout_duration_in_secs']
     bout_metrics = bout_metrics.set_index('ref_time')
 
-    bout_duration_per_interval = bout_metrics.resample(f"{data_params['data_resolution_in_min']}T")['total_bout_duration_in_secs'].sum()
+    bout_duration_per_interval = bout_metrics.resample(f"{data_params['data_resolution_in_min']}T", origin='start')['total_bout_duration_in_secs'].sum()
 
     time_occupied_by_bouts  = bout_duration_per_interval.values
     percent_time_occupied_by_bouts = (100*(time_occupied_by_bouts / (60*float(data_params['data_resolution_in_min']))))
@@ -173,7 +174,9 @@ def construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_pat
 
     bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)), columns=['ref_time', f'percentage_time_occupied_by_bouts ({dc_tag})'])
     bout_dpi_df = bout_dpi_df.set_index('ref_time')
-    bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['data_resolution_in_min']}T").first().between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
+    bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0)
+    bout_dpi_df = bout_dpi_df.resample(f"{data_params['data_resolution_in_min']}T", origin='start').first()
+    bout_dpi_df = bout_dpi_df.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(bout_dpi_df.index, bout_dpi_df[f'percentage_time_occupied_by_bouts ({dc_tag})'].values)), columns=["Date_and_Time_UTC", f'percentage_time_occupied_by_bouts ({dc_tag})'])
 
@@ -181,20 +184,25 @@ def test_bout_percentages_less_than_100(percent_time_occupied_by_bouts):
     assert(percent_time_occupied_by_bouts.max() <= 100)
 
 def construct_activity_indices_arr(location_df, dc_tag, file_paths, data_params):
-    location_df['ref_time'] = location_df['call_start_time']
 
-    temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='ref_time')['ref_time'].count()
+    first_call_time = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='call_start_time')['call_start_time'].count().index[0]
+    start_of_recording = pd.Timedelta(f"{data_params['recording_start']}:00")
+    offset_time = pd.Timedelta(f'{((first_call_time - start_of_recording).time())}') * -1
+
+    temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='call_start_time')['call_start_time'].count()
     temp[temp>0] = 1
-    activity_indices = temp.resample(f"{data_params['data_resolution_in_min']}T").sum()
+    activity_indices = temp.resample(f"{data_params['data_resolution_in_min']}T", origin='start', offset=offset_time).sum()
     test_activity_indices_less_than_max(activity_indices.values, data_params)
 
+    time_intervals = location_df.resample(f"{data_params['data_resolution_in_min']}T", on='ref_time', origin='start', offset=offset_time).first().index
     col_name = f"Activity Indices ({dc_tag})"
     incomplete_activity_arr = pd.DataFrame(activity_indices.values, index=activity_indices.index, columns=[col_name])
 
     all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
-    
-    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['data_resolution_in_min']}T").first()
+
+    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0)
+    activity_arr = activity_arr.resample(f"{data_params['data_resolution_in_min']}T", origin='start').first()
     activity_arr = activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
