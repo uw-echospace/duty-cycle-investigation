@@ -1,0 +1,5 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+165.2055,165.2218,20312.0,23626.0,Echolocation,Nyctalus leisleri,0.63,0.66,-1,/mnt/ubna_data_02/recover-20220929/UBNA_003/20220928_110000.WAV,Central Pond,recover-20220929,003
+1178.6075,1178.6208,21171.0,24669.0,Echolocation,Nyctalus leisleri,0.53,0.561,-1,/mnt/ubna_data_02/recover-20220929/UBNA_003/20220928_110000.WAV,Central Pond,recover-20220929,003
+1183.7375,1183.7730999999999,17734.0,20291.0,Echolocation,Nyctalus noctula,0.439,0.538,-1,/mnt/ubna_data_02/recover-20220929/UBNA_003/20220928_110000.WAV,Central Pond,recover-20220929,003
+1184.1135,1184.1436,16875.0,20328.0,Echolocation,Nyctalus noctula,0.381,0.514,-1,/mnt/ubna_data_02/recover-20220929/UBNA_003/20220928_110000.WAV,Central Pond,recover-20220929,003

@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+774.9435,774.9494,46953.0,60262.0,Echolocation,Pipistrellus pipistrellus,0.451,0.51,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+774.9985,775.0032,45234.0,62665.0,Echolocation,Pipistrellus pipistrellus,0.372,0.52,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+775.0695,775.0745,46953.0,58388.0,Echolocation,Pipistrellus pipistrellus,0.529,0.578,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+775.1495,775.1558,47812.0,57538.0,Echolocation,Pipistrellus pipistrellus,0.504,0.547,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+775.2205,775.2258,46953.0,59649.0,Echolocation,Pipistrellus pipistrellus,0.468,0.51,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+775.3585,775.364,45234.0,60679.0,Echolocation,Pipistrellus pipistrellus,0.273,0.522,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+775.4375,775.4434,45234.0,58564.0,Echolocation,Pipistrellus pipistrellus,0.362,0.556,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+775.4895,775.4955,48671.0,61570.0,Echolocation,Pipistrellus pipistrellus,0.536,0.576,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+776.1425,776.1462,47812.0,58441.0,Echolocation,Pipistrellus pipistrellus,0.488,0.54,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+776.4825,776.486,48671.0,63878.0,Echolocation,Pipistrellus pipistrellus,0.467,0.51,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
+777.8895,777.8938,45234.0,69844.0,Echolocation,Myotis alcathoe,0.215,0.503,-1,/mnt/ubna_data_02/recover-20221003/UBNA_009/20220930_083000.WAV,Central Pond,recover-20221003,009
