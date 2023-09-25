@@ -219,13 +219,16 @@ def construct_bout_metrics_from_classified_dets(fgroups_with_bouttags):
 
     low_freqs = []
     high_freqs = []
+    num_calls_per_bout = []
     j=0
     for i in range(len(bout_starts)):
         if (i+j < len(bout_starts)) and bout_ends[i+j] > bout_starts[i]:
-            pass_low_freq = np.min((location_df.iloc[bout_starts[i]:bout_ends[i+j]]['low_freq']).values)
-            pass_high_freq = np.max((location_df.iloc[bout_starts[i]:bout_ends[i+j]]['high_freq']).values)
+            pass_low_freq = np.min((location_df.iloc[bout_starts[i]:bout_ends[i+j]+1]['low_freq']).values)
+            pass_high_freq = np.max((location_df.iloc[bout_starts[i]:bout_ends[i+j]+1]['high_freq']).values)
+            num_calls = len(location_df.iloc[bout_starts[i]:bout_ends[i+j]]) + 1
             low_freqs += [pass_low_freq]
             high_freqs += [pass_high_freq]
+            num_calls_per_bout += [num_calls]
         else:
             j+=1
 
@@ -238,6 +241,7 @@ def construct_bout_metrics_from_classified_dets(fgroups_with_bouttags):
     bout_metrics['end_time'] = end_times.values
     bout_metrics['low_freq'] = low_freqs
     bout_metrics['high_freq'] = high_freqs
+    bout_metrics['number_of_dets'] = num_calls_per_bout
     bout_metrics['bout_duration'] = end_times_of_bouts.values - start_times_of_bouts.values
     bout_metrics['bout_duration_in_secs'] = bout_metrics['bout_duration'].apply(lambda x : x.total_seconds())
     return bout_metrics

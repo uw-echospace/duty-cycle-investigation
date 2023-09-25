@@ -281,13 +281,6 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
     ax = plt.gca()
     for i, row in plot_dets.iterrows():
         if row['call_status'] != 'within bout' and row['call_status'] != 'outside bout':
-            if duration < 300:
-                if row['call_status'] == 'bout end':
-                    plt.text(x=(row['start_time'] - start - duration/15)*(fs/2), y=(data_params['freq_tags'][0]-6000)/(fs/2), 
-                            s=f"{row['call_status'].upper()}", color='pink', fontsize=12)
-                if row['call_status'] == 'bout start':
-                    plt.text(x=(row['start_time'] - start + 0.01)*(fs/2), y=min((data_params['freq_tags'][1]+2000)/(fs/2), 3/4), 
-                            s=f"{row['call_status'].upper()}", color='pink', fontsize=12)
             rect = patches.Rectangle(((row['start_time'] - start - 0.01)*(fs/2), (row['low_freq']-2000)/(fs/2)), 
                         0.04*(fs/2), 12000/(fs/2), linewidth=4, edgecolor='pink', facecolor='none', alpha=0.8)
         else:
