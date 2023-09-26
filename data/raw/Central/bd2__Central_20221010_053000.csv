@@ -1,0 +1,3 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+710.4465,710.474,17734.0,19928.0,Echolocation,Nyctalus noctula,0.322,0.519,-1,/mnt/ubna_data_02/recover-20221010/UBNA_009/20221010_053000.WAV,Central Pond,recover-20221010,009
+715.9315,715.9558,17734.0,19725.0,Echolocation,Nyctalus noctula,0.36,0.564,-1,/mnt/ubna_data_02/recover-20221010/UBNA_009/20221010_053000.WAV,Central Pond,recover-20221010,009
