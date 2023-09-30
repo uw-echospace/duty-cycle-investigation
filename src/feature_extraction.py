@@ -270,7 +270,7 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params['site'] = cfg['site']
     print(f"Searching for files from {cfg['site']}")
 
-    drives_df = dd.read_csv(f'../data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
+    drives_df = dd.read_csv(f'{Path(__file__).parent}/../data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
     drives_df.drop(columns='Unnamed: 0', inplace=True)
     drives_df["index"] = pd.DatetimeIndex(drives_df["Datetime UTC"])
     drives_df.set_index("index", inplace=True)
@@ -305,7 +305,7 @@ def sample_calls_and_generate_fft_bucket_for_location(cfg):
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
-    csv_files_for_location = sorted(list(glob.glob(f'../data/raw/{data_params["site_tag"]}/**.csv')))
+    csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
 
     good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
     site_filepaths = good_location_df['File path'].values
@@ -314,7 +314,7 @@ def sample_calls_and_generate_fft_bucket_for_location(cfg):
         print(filepath)
         data_params['audio_file'] = filepath
         filename = data_params['audio_file'].name.split('.')[0]
-        csv_path = Path(f'../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
+        csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
 
         if data_params['csv_file'] in csv_files_for_location:
@@ -322,8 +322,8 @@ def sample_calls_and_generate_fft_bucket_for_location(cfg):
 
     bucket_for_location = np.vstack(bucket_for_location)
 
-    np.save(f'2022_{data_params["site_tag"]}_fft_spectra.npy', bucket_for_location)
-    calls_sampled_from_location.to_csv(f'2022_{data_params["site_tag"]}.csv')
+    np.save(f'{Path(__file__).parent}/../output_dir/2022_{data_params["site_tag"]}_fft_spectra.npy', bucket_for_location)
+    calls_sampled_from_location.to_csv(f'{Path(__file__).parent}/../output_dir/2022_{data_params["site_tag"]}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
@@ -340,7 +340,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
-    csv_files_for_location = sorted(list(glob.glob(f'../data/raw/{data_params["site_tag"]}/**.csv')))
+    csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
 
     good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
     site_filepaths = good_location_df['File path'].values
@@ -349,7 +349,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         print(filepath)
         data_params['audio_file'] = EXAMPLE_FILES_to_FILEPATHS[filepath]
         filename = Path(data_params['audio_file']).name.split('.')[0]
-        csv_path = Path(f'../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
+        csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
 
         if str(data_params['csv_file']) in csv_files_for_location:
@@ -357,8 +357,8 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     np_bucket = np.array(bucket_for_location, dtype='object')
 
-    np.save(f'2022_{data_params["site_tag"]}_call_signals.npy', np_bucket)
-    calls_sampled_from_location.to_csv(f'2022_{data_params["site_tag"]}.csv')
+    np.save(f'{Path(__file__).parent}/../output_dir/2022_{data_params["site_tag"]}_call_signals.npy', np_bucket)
+    calls_sampled_from_location.to_csv(f'{Path(__file__).parent}/../output_dir/2022_{data_params["site_tag"]}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
