@@ -327,8 +327,8 @@ def sample_calls_and_generate_fft_bucket_for_location(cfg):
 
     bucket_for_location = np.vstack(bucket_for_location)
 
-    np.save(f'{Path(__file__).parent}/../output_dir/2022_{data_params["site_tag"]}_fft_spectra.npy', bucket_for_location)
-    calls_sampled_from_location.to_csv(f'{Path(__file__).parent}/../output_dir/2022_{data_params["site_tag"]}.csv')
+    np.save(f'{Path(__file__).parent}/../2022_{data_params["site_tag"]}_fft_spectra.npy', bucket_for_location)
+    calls_sampled_from_location.to_csv(f'{Path(__file__).parent}/../2022_{data_params["site_tag"]}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
@@ -366,8 +366,8 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     np_bucket = np.array(bucket_for_location, dtype='object')
 
-    np.save(f'{Path(__file__).parent}/../output_dir/2022_{data_params["site_tag"]}_call_signals.npy', np_bucket)
-    calls_sampled_from_location.to_csv(f'{Path(__file__).parent}/../output_dir/2022_{data_params["site_tag"]}.csv')
+    np.save(f'{Path(__file__).parent}/../2022_{data_params["site_tag"]}_call_signals.npy', np_bucket)
+    calls_sampled_from_location.to_csv(f'{Path(__file__).parent}/../2022_{data_params["site_tag"]}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
