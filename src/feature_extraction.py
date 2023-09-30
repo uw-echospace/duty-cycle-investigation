@@ -308,6 +308,10 @@ def sample_calls_and_generate_fft_bucket_for_location(cfg):
     csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
 
     good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
+    data_params["type_tag"] = freq_key
+    data_params["cur_dc_tag"] = "1800of1800"
+    data_params["site_tag"] = cfg['site'] 
+    data_params["site_name"] = SITE_NAMES[cfg['site']]
     site_filepaths = good_location_df['File path'].values
 
     for filepath in site_filepaths:
@@ -343,6 +347,10 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
 
     good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
+    data_params["type_tag"] = freq_key
+    data_params["cur_dc_tag"] = "1800of1800"
+    data_params["site_tag"] = cfg['site'] 
+    data_params["site_name"] = SITE_NAMES[cfg['site']]
     site_filepaths = good_location_df['File path'].values
 
     for filepath in site_filepaths:
