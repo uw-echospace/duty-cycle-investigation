@@ -217,8 +217,9 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
     fs = audio_file.samplerate
 
     bd2_predictions = dh.assemble_single_bd2_output(csv_path, data_params)
-
-    if len(bd2_predictions)>0:
+    valid_group_in_preds = 'LF1' in bd2_predictions['freq_group'] or 'HF1' in bd2_predictions['freq_group'] or 'HF2' in bd2_predictions['freq_group']
+    print(f"Groups found in this file: {bd2_predictions['freq_group'].unique()}")
+    if len(bd2_predictions)>0 and valid_group_in_preds:
         print(len(bd2_predictions))
         bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params, bout_params)
         bout_metrics.reset_index(inplace=True)
