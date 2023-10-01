@@ -310,7 +310,6 @@ def sample_calls_and_generate_fft_bucket_for_location(cfg):
     site_filepaths = good_location_df['File path'].values
 
     for filepath in site_filepaths:
-        print(filepath)
         data_params['audio_file'] = Path(filepath)
         filename = data_params['audio_file'].name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
@@ -337,17 +336,13 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
     site_filepaths = good_location_df['File path'].values
 
-    print(csv_files_for_location)
     for filepath in site_filepaths:
         data_params['audio_file'] = Path(filepath)
         filename = data_params['audio_file'].name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
-        print(csv_path in csv_files_for_location)
         if (data_params['csv_file']) in csv_files_for_location:
-            print(csv_path)
             bucket_for_location, calls_sampled_from_location = collect_call_signals_from_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
-            print(len(bucket_for_location))
 
     np_bucket = np.array(bucket_for_location, dtype='object')
 
