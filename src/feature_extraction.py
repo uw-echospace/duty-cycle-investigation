@@ -345,7 +345,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
-    csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
+    csv_files_for_location = sorted(list(Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
 
     good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
     data_params["type_tag"] = freq_key
@@ -354,14 +354,15 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     data_params["site_name"] = SITE_NAMES[cfg['site']]
     site_filepaths = good_location_df['File path'].values
 
+    print(csv_files_for_location)
     for filepath in site_filepaths:
-        print(filepath)
         data_params['audio_file'] = Path(filepath)
         filename = data_params['audio_file'].name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
+        print(csv_path)
 
-        if str(data_params['csv_file']) in csv_files_for_location:
+        if (data_params['csv_file']) in csv_files_for_location:
             bucket_for_location, calls_sampled_from_location = collect_call_signals_from_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
             print(len(bucket_for_location))
 
