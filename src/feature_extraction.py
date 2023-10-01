@@ -363,6 +363,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
         if str(data_params['csv_file']) in csv_files_for_location:
             bucket_for_location, calls_sampled_from_location = collect_call_signals_from_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
+            print(len(bucket_for_location))
 
     np_bucket = np.array(bucket_for_location, dtype='object')
 
