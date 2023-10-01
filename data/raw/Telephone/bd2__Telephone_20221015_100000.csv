@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+46.7215,46.7288,46093.0,53263.0,Echolocation,Pipistrellus pipistrellus,0.525,0.555,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1174.3135,1174.3163,51250.0,71759.0,Echolocation,Myotis alcathoe,0.259,0.506,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1175.1805,1175.1841,46093.0,84936.0,Echolocation,Myotis alcathoe,0.446,0.522,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1175.5255,1175.5292,45234.0,85995.0,Echolocation,Myotis alcathoe,0.454,0.544,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1175.6845,1175.689,45234.0,92876.0,Echolocation,Myotis alcathoe,0.434,0.552,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1176.0685,1176.0719,44375.0,75147.0,Echolocation,Myotis alcathoe,0.417,0.538,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1176.1275,1176.131,46953.0,77848.0,Echolocation,Myotis alcathoe,0.297,0.592,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1176.2645,1176.2676,41796.0,77139.0,Echolocation,Myotis alcathoe,0.233,0.533,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1176.4255,1176.4279,46093.0,64755.0,Echolocation,Myotis alcathoe,0.31,0.602,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007
+1176.5925,1176.5957,43515.0,65621.0,Echolocation,Myotis mystacinus,0.193,0.515,-1,/mnt/ubna_data_02/recover-20221017/UBNA_007/20221015_100000.WAV,Telephone Field,recover-20221017,007

@@ -1,0 +1,13 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+1475.8265,1475.8317,47812.0,58751.0,Echolocation,Pipistrellus pipistrellus,0.519,0.535,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1475.9195,1475.9245,46093.0,62228.0,Echolocation,Pipistrellus pipistrellus,0.418,0.523,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1476.1095,1476.1144,46093.0,60947.0,Echolocation,Pipistrellus pipistrellus,0.377,0.505,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1476.3005,1476.3054,46093.0,60022.0,Echolocation,Pipistrellus pipistrellus,0.476,0.575,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1519.7055,1519.7101,48671.0,61716.0,Echolocation,Pipistrellus pipistrellus,0.583,0.618,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1520.3865,1520.391,43515.0,81049.0,Echolocation,Myotis alcathoe,0.357,0.586,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1520.6165,1520.6199,42656.0,73602.0,Echolocation,Myotis mystacinus,0.35,0.612,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1520.7855,1520.7886,44375.0,74986.0,Echolocation,Myotis alcathoe,0.26,0.544,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1520.8695,1520.8732,46953.0,74016.0,Echolocation,Myotis alcathoe,0.272,0.515,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1521.0505,1521.0542,43515.0,81729.0,Echolocation,Myotis alcathoe,0.266,0.537,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1521.2455,1521.2495,45234.0,76858.0,Echolocation,Myotis alcathoe,0.282,0.522,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
+1521.6405,1521.6446,40937.0,84952.0,Echolocation,Myotis alcathoe,0.315,0.645,-1,/mnt/ubna_data_02/recover-20221010/UBNA_007/20221010_130000.WAV,Telephone Field,recover-20221010,007
