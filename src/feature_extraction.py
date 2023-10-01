@@ -270,6 +270,9 @@ def filter_df_with_location(ubna_data_df, site_name, start_time, end_time):
 
 def get_params_relevant_to_data_at_location(cfg):
     data_params = dict()
+    data_params["type_tag"] = ''
+    data_params["cur_dc_tag"] = "1800of1800"
+    data_params["site_tag"] = cfg['site']
     data_params['site_name'] = SITE_NAMES[cfg['site']]
     print(f"Searching for files from {data_params['site_name']}")
 
@@ -291,30 +294,19 @@ def get_params_relevant_to_data_at_location(cfg):
     else:
         print("Error files exist!")
 
-    print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site']}")
+    print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site_name']}")
 
     return good_location_df, data_params
 
 def sample_calls_and_generate_fft_bucket_for_location(cfg):
-    freq_key = ''
     bucket_for_location = []
     calls_sampled_from_location = pd.DataFrame()
-    data_params = dict()
-    data_params["type_tag"] = freq_key
-    data_params["cur_dc_tag"] = "1800of1800"
-    data_params["site_tag"] = cfg['site'] 
-    data_params["site_name"] = SITE_NAMES[cfg['site']]
+    good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
 
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
-
-    good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
-    data_params["type_tag"] = freq_key
-    data_params["cur_dc_tag"] = "1800of1800"
-    data_params["site_tag"] = cfg['site'] 
-    data_params["site_name"] = SITE_NAMES[cfg['site']]
     site_filepaths = good_location_df['File path'].values
 
     for filepath in site_filepaths:
@@ -335,25 +327,14 @@ def sample_calls_and_generate_fft_bucket_for_location(cfg):
     return bucket_for_location, calls_sampled_from_location
 
 def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
-    freq_key = ''
     bucket_for_location = []
     calls_sampled_from_location = pd.DataFrame()
-    data_params = dict()
-    data_params["type_tag"] = freq_key
-    data_params["cur_dc_tag"] = "1800of1800"
-    data_params["site_tag"] = cfg['site'] 
-    data_params["site_name"] = SITE_NAMES[cfg['site']]
+    good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
 
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bt_clustering.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
-
-    good_location_df, data_params = get_params_relevant_to_data_at_location(cfg)
-    data_params["type_tag"] = freq_key
-    data_params["cur_dc_tag"] = "1800of1800"
-    data_params["site_tag"] = cfg['site'] 
-    data_params["site_name"] = SITE_NAMES[cfg['site']]
     site_filepaths = good_location_df['File path'].values
 
     print(csv_files_for_location)
