@@ -270,15 +270,15 @@ def filter_df_with_location(ubna_data_df, site_name, start_time, end_time):
 
 def get_params_relevant_to_data_at_location(cfg):
     data_params = dict()
-    data_params['site'] = cfg['site']
-    print(f"Searching for files from {cfg['site']}")
+    data_params['site_name'] = SITE_NAMES[cfg['site']]
+    print(f"Searching for files from {data_params['site_name']}")
 
     drives_df = dd.read_csv(f'{Path(__file__).parent}/../data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
     drives_df.drop(columns='Unnamed: 0', inplace=True)
     drives_df["index"] = pd.DatetimeIndex(drives_df["Datetime UTC"])
     drives_df.set_index("index", inplace=True)
     
-    files_from_location = filter_df_with_location(drives_df, data_params['site'], cfg['recording_start'], cfg['recording_end'])
+    files_from_location = filter_df_with_location(drives_df, data_params['site_name'], cfg['recording_start'], cfg['recording_end'])
 
     data_params['ref_audio_files'] = sorted(list(files_from_location["File path"].apply(lambda x : Path(x)).values))
     file_status_cond = files_from_location["File status"] == "Usable for detection"
