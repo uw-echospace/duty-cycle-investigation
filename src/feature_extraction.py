@@ -251,6 +251,9 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
         calls_sampled_from_location = pd.concat([calls_sampled_from_location, calls_sampled_from_file])
+    
+    print(f'There are now {len(bucket_for_location)} calls in bucket')
+    print(f'There are now {len(calls_sampled_from_location)} rows in call catalogue')
 
     return bucket_for_location, calls_sampled_from_location
 
