@@ -57,7 +57,7 @@ def collect_call_snrs_from_bat_bout_in_audio_file(audio_file, bat_bout):
             audio_seg = audio_file.read(int(fs*duration))
             
             low_freq_cutoff = call['low_freq']-2000
-            high_freq_cutoff = min(nyquist, call['high_freq']+2000)
+            high_freq_cutoff = min(nyquist-1, call['high_freq']+2000)
             band_limited_audio_seg = bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
 
             signal = band_limited_audio_seg.copy()
@@ -150,7 +150,7 @@ def collect_call_signals_from_bout(audio_file, bat_bout, bucket):
             audio_seg = audio_file.read(int(fs*duration))
 
             low_freq_cutoff = call['low_freq']-2000
-            high_freq_cutoff = min(nyq, call['high_freq']+2000)
+            high_freq_cutoff = min(nyq-1, call['high_freq']+2000)
             band_limited_audio_seg = bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
             signal = band_limited_audio_seg.copy()
             cleaned_call_signal = signal[-int(fs*(call_dur+(2*pad))):]
