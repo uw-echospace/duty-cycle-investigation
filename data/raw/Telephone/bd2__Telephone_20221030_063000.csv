@@ -1,0 +1,24 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+64.4285,64.4322,53828.0,66522.0,Echolocation,Pipistrellus pygmaeus,0.507,0.589,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+65.3275,65.3309,43515.0,74187.0,Echolocation,Myotis alcathoe,0.313,0.564,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+65.3945,65.3977,45234.0,72159.0,Echolocation,Myotis alcathoe,0.347,0.543,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+65.4735,65.477,43515.0,71371.0,Echolocation,Myotis mystacinus,0.247,0.545,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+66.2235,66.228,42656.0,91922.0,Echolocation,Myotis brandtii,0.206,0.576,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+66.3085,66.3127,40078.0,78982.0,Echolocation,Myotis mystacinus,0.242,0.615,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+66.3895,66.3938,41796.0,90117.0,Echolocation,Myotis alcathoe,0.225,0.597,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+66.4705,66.4742,41796.0,80642.0,Echolocation,Myotis mystacinus,0.224,0.517,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+66.5345,66.538,42656.0,75355.0,Echolocation,Myotis mystacinus,0.309,0.649,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+66.5895,66.5934,41796.0,80375.0,Echolocation,Myotis mystacinus,0.255,0.541,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+66.6705,66.6748,41796.0,88926.0,Echolocation,Myotis mystacinus,0.189,0.534,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+66.7655,66.7691,40078.0,82470.0,Echolocation,Myotis brandtii,0.311,0.639,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+67.0185,67.0226,41796.0,80236.0,Echolocation,Myotis mystacinus,0.286,0.594,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+67.4555,67.4597,40937.0,83458.0,Echolocation,Myotis mystacinus,0.226,0.623,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+67.5455,67.5505,40937.0,88523.0,Echolocation,Myotis brandtii,0.264,0.637,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+67.6435,67.6478,44375.0,83633.0,Echolocation,Myotis mystacinus,0.226,0.559,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+67.7335,67.7379,40937.0,91464.0,Echolocation,Myotis brandtii,0.21,0.554,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+67.8035,67.8076,41796.0,83526.0,Echolocation,Myotis brandtii,0.275,0.689,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+67.8735,67.8775,40078.0,88464.0,Echolocation,Myotis brandtii,0.244,0.571,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+67.9565,67.9611,41796.0,86999.0,Echolocation,Myotis brandtii,0.214,0.518,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+68.4555,68.4603,40078.0,77614.0,Echolocation,Myotis brandtii,0.5,0.56,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+68.6225,68.6264,41796.0,72152.0,Echolocation,Myotis brandtii,0.42,0.538,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
+68.7065,68.7118,39218.0,82837.0,Echolocation,Myotis brandtii,0.465,0.522,-1,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221030_063000.WAV,Telephone Field,recover-20221110,007,300
