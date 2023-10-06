@@ -237,17 +237,18 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
             call_snrs = collect_call_snrs_from_bat_bout_in_audio_file(audio_file, bat_bout)
 
             bat_bout['SNR'] = call_snrs
+            print(f"{len(bat_bout)} high calls in bout {bout_index}")
             top_10_SNR =  0.90*bat_bout['SNR'].max()
             top_10_SNR_bat_bout = bat_bout.loc[bat_bout['SNR']>=top_10_SNR]
+            print(f"{len(top_10_SNR_bat_bout)} high SNR calls in bout {bout_index}")
             bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_bout(audio_file, top_10_SNR_bat_bout, bucket_for_location)
 
             bat_bout_condensed = pd.DataFrame()
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
-            bat_bout_condensed['SD Card'] = f"{bd2_predictions['SD Card'].values[0]}"
-            bat_bout_condensed['File name'] = str(Path(bd2_predictions['input_file'].values[0]).name)
-            bat_bout_condensed['Site'] = f"{bd2_predictions['Site name'].values[0]}"
+            bat_bout_condensed['SD Card'] = sampled_calls_from_bout['SD Card'].values
+            bat_bout_condensed['File name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
+            bat_bout_condensed['Site'] = sampled_calls_from_bout['Site name'].values
             bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
-            print(f'SNR values in bout {bout_index} in file: {file_path.name} = {bat_bout_condensed["SNR"]}')
 
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
