@@ -243,10 +243,11 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
 
             bat_bout_condensed = pd.DataFrame()
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
-            bat_bout_condensed['SD Card'] = sampled_calls_from_bout['SD Card'].values
-            bat_bout_condensed['File name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
-            bat_bout_condensed['Site'] = sampled_calls_from_bout['Site name'].values
+            bat_bout_condensed['SD Card'] = f"{bd2_predictions['SD Card'].values[0]}"
+            bat_bout_condensed['File name'] = str(Path(bd2_predictions['input_file'].values[0]).name)
+            bat_bout_condensed['Site'] = f"{bd2_predictions['Site name'].values[0]}"
             bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
+            print(f'SNR values in bout {bout_index} in file: {file_path.name} = {bat_bout_condensed["SNR"]}')
 
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
