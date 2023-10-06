@@ -237,7 +237,7 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
             call_snrs = collect_call_snrs_from_bat_bout_in_audio_file(audio_file, bat_bout)
 
             bat_bout['SNR'] = call_snrs
-            print(f"{len(bat_bout)} high calls in bout {bout_index}")
+            print(f"{len(bat_bout)} calls in bout {bout_index}")
             top_10_SNR =  0.90*bat_bout['SNR'].max()
             top_10_SNR_bat_bout = bat_bout.loc[bat_bout['SNR']>=top_10_SNR]
             print(f"{len(top_10_SNR_bat_bout)} high SNR calls in bout {bout_index}")
