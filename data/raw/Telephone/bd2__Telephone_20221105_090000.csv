@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+29.7085,29.7142,46093.0,66151.0,Pipistrellus pipistrellus,0.377,0.518,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+29.7935,29.7988,45234.0,74598.0,Pipistrellus pipistrellus,0.293,0.526,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+30.8805,30.886,50390.0,73888.0,Pipistrellus pipistrellus,0.526,0.599,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+31.0655,31.07,51250.0,63860.0,Pipistrellus pipistrellus,0.494,0.566,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+31.3025,31.3081,50390.0,59143.0,Pipistrellus pipistrellus,0.453,0.514,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+31.5695,31.5762,51250.0,59995.0,Pipistrellus pipistrellus,0.474,0.559,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+31.6645,31.6695,50390.0,65902.0,Pipistrellus pipistrellus,0.405,0.532,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+32.033500000000004,32.0376,51250.0,68055.0,Pipistrellus pipistrellus,0.427,0.541,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+33.158500000000004,33.1639,41796.0,84401.0,Myotis alcathoe,0.282,0.514,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+34.6115,34.6164,41796.0,84186.0,Myotis alcathoe,0.256,0.507,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
+36.5555,36.5601,52109.0,67450.0,Pipistrellus pipistrellus,0.441,0.53,-1,Echolocation,/mnt/ubna_data_02/recover-20221110/UBNA_007/20221105_090000.WAV,Telephone Field,recover-20221110,007,300
