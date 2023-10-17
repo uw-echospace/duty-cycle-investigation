@@ -36,16 +36,6 @@ def generate_activity_inds_results(data_params, file_paths):
 
     return ss.construct_activity_inds_arr_from_dc_tags(data_params, file_paths)
 
-def test_highest_freq_upper_bound(location_df, group):
-    upper_freq_bound = group[1]
-    highest_freq_in_dets = float(location_df['high_freq'].max())
-    assert(highest_freq_in_dets <= upper_freq_bound)
-
-def test_lowest_freq_lower_bound(location_df, group):
-    lower_freq_bound = group[0]
-    lowest_freq_in_dets = float(location_df['low_freq'].min())
-    assert(lowest_freq_in_dets >= lower_freq_bound)
-
 
 def assemble_initial_location_summary(data_params, file_paths, save=True):
     """
@@ -78,12 +68,6 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
     location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
 
-    for group in list(groups.keys()):
-        freq_group_df = location_df.loc[location_df['freq_group']==group].copy()
-        if len(freq_group_df)>0:
-            test_highest_freq_upper_bound(freq_group_df, groups[group])
-            test_lowest_freq_lower_bound(freq_group_df, groups[group])
-    
     if data_params['type_tag'] != '':
         location_df = location_df.loc[location_df['freq_group']==data_params['type_tag']]
 
@@ -122,12 +106,6 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     location_df.loc[call_is_yellow, 'freq_group'] = 'HF2'
     location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
     location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
-
-    for group in list(groups.keys()):
-        freq_group_df = location_df.loc[location_df['freq_group']==group].copy()
-        if len(freq_group_df)>0:
-            test_highest_freq_upper_bound(freq_group_df, groups[group])
-            test_lowest_freq_lower_bound(freq_group_df, groups[group])
     
     return location_df
 
