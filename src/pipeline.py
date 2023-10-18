@@ -77,13 +77,21 @@ def plot_inds(activity_arr, data_params, pipeline_params, file_paths):
     plotting.plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
 
 
-def compare_bout_and_det_metrics(data_params, pipeline_params, file_paths):
+def compare_det_and_bout_metrics(data_params, pipeline_params, file_paths):
+    """
+    Run the pipeline for both % of time by bouts and # of detection metrics and plot a comparison figure
+    """
+    
     activity_dets_arr = run_for_dets(data_params, pipeline_params, file_paths)
     activity_bouts_arr = run_for_bouts(data_params, pipeline_params, file_paths)
     plotting.plot_numdets_n_percentbouts(activity_dets_arr, activity_bouts_arr, data_params, pipeline_params, file_paths)
 
 
-def compare_bout_and_det_metrics(data_params, pipeline_params, file_paths):
+def compare_det_and_ind_metrics(data_params, pipeline_params, file_paths):
+    """
+    Run the pipeline for both # of detection and activity index metrics and plot a comparison figure
+    """
+    
     activity_dets_arr = run_for_dets(data_params, pipeline_params, file_paths)
     activity_inds_arr = run_for_inds(data_params, pipeline_params, file_paths)
     plotting.plot_numdets_n_activityinds(activity_dets_arr, activity_inds_arr, data_params, pipeline_params, file_paths)

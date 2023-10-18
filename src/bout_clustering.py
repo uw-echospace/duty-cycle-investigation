@@ -186,10 +186,11 @@ def get_bci_from_sibly_method(intervals_ms, survival, fast_process, slow_process
 
 def construct_bout_metrics_from_classified_dets(fgroups_with_bouttags):
     """
-    Reads in the dataframe of detected calls with bout tags from above methoods.
+    Reads in the dataframe of detected calls with bout tags.
     Uses these bout tags to create a new dataframe of bout metrics for the start and end times of each bout.
     Also includes the lowest frequency of a call within a bout as the lower bound for the bout
-    and the highest frequency of a call within a bout as the upper bound frequency for the bour.
+    and the highest frequency of a call within a bout as the upper bound frequency for the bout.
+    Now, also included the number of detections captured within each bout.
     """
 
     location_df = fgroups_with_bouttags.copy()
@@ -247,6 +248,10 @@ def construct_bout_metrics_from_classified_dets(fgroups_with_bouttags):
     return bout_metrics
 
 def construct_bout_metrics_from_location_df_for_freqgroups(location_df):
+    """
+    Given a location summary with tagged bout markers, construct and concatenate together bout metrics for each group
+    """
+
     bout_metrics = pd.DataFrame()
     for group in location_df['freq_group'].unique():
         if group != '':
@@ -259,6 +264,13 @@ def construct_bout_metrics_from_location_df_for_freqgroups(location_df):
     return bout_metrics
 
 def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bout_params):
+    """
+    Given a location summary and BCIs calculated for each group in location summary, tag each call in summary as the following:
+    - Within Bout : Call existing inside a bout
+    - Outside Bout: Call that is not a part of any bout
+    - Bout Start: Within-bout call that starts a new bout
+    - Bout End: Within-bout call that ends the bout
+    """
 
     location_df = batdetect2_predictions.copy()
     location_df.insert(0, 'duration_from_last_call_ms', 0)
@@ -305,6 +317,13 @@ def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bou
     return result_df
 
 def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc_tag):
+    """
+    Given a location summary of calls dataframe, create an analogous location summary of bouts by:
+    1) Calculating the BCI for each frequency group in the summary.
+    2) Use the calculated BCI for each group to cluster bouts for that group.
+    3) Put together all bout characteristics into the analogous dataframe.
+    """
+
     location_sum_df.reset_index(inplace=True)
     if 'index' in location_sum_df.columns:
         location_sum_df.drop(columns='index', inplace=True)
@@ -315,15 +334,17 @@ def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc
     bout_metrics = construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_predictions)
 
     time_on = int(dc_tag.split('of')[0])
-
     test_bout_end_times_in_period(bout_metrics, time_on)
 
     return bout_metrics
 
 def get_bout_params_from_location(location_sum_df, data_params):
+    """
+    Given a location summary and the location it corresponds to, calculate the BCIs for each frequency group in the summary
+    """
+
     bout_params = dict()
     bout_params['site_key'] = data_params['site_tag']
-    bout_params['freq_key'] = data_params['type_tag']
 
     for group in location_sum_df['freq_group'].unique():
         if group != '':
@@ -341,4 +362,7 @@ def get_bout_params_from_location(location_sum_df, data_params):
     return bout_params
 
 def test_bout_end_times_in_period(bout_metrics, time_on):
+    """
+    A test function to see if the duty cycle effects from the location summary of all calls carried over to the location summary of all bouts.
+    """
     assert(bout_metrics['end_time_wrt_ref'].max() <= time_on)

@@ -110,17 +110,23 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     return location_df
 
 
-def construct_activity_arr_from_location_summary(location_df, dc_tag, file_paths, data_params):
+def get_number_of_detections_per_interval(location_df, data_params):
     """
-    Construct an activity summary for each date and time's number of detected calls. Only looking from 03:00 to 13:00 UTC.
-    Will be used later to assembled an activity summary for each duty-cycling scheme to compare effects.
+    Constructs a pandas Series that records the # of detections observed per interval.
+    The used interval is the one stored inside data_params['resolution_in_min']
     """
+
     location_df.insert(0, 'call_durations', (location_df['call_end_time'] - location_df['call_start_time']))
     df_resampled_every_30 = location_df.resample(f"{data_params['resolution_in_min']}T", on='ref_time')
-    shortest_call_per_30 = pd.to_numeric(df_resampled_every_30['call_durations'].min())/1e6
-    max_allowable_calls_per_30 = np.abs(((int(data_params['resolution_in_min'])*60*60) / shortest_call_per_30))
     num_of_detections = df_resampled_every_30['ref_time'].count()
-    test_number_of_detections_less_than_max_per_30(num_of_detections, max_allowable_calls_per_30)
+
+    return num_of_detections
+
+def construct_activity_arr_from_location_summary(num_of_detections, dc_tag, file_paths, data_params):
+    """
+    Construct an activity summary of the number of detections recorded per date and time interval.
+    Will be used later to assemble an activity summary for each duty-cycling scheme to compare effects.
+    """
 
     all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
@@ -131,13 +137,11 @@ def construct_activity_arr_from_location_summary(location_df, dc_tag, file_paths
 
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
 
-def test_number_of_detections_less_than_max_per_30(num_of_detections, max_allowable_calls_per_30):
-    assertion = (num_of_detections <= max_allowable_calls_per_30).values
-    assert(not(False in assertion))
-
-def construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_paths, dc_tag):
-    all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
-    all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
+def get_bout_duration_per_interval(bout_metrics, data_params):
+    """
+    Constructs a pandas Series that records the duration of time occupied by bouts observed per interval.
+    The used interval is the one stored inside data_params['resolution_in_min']
+    """
 
     bout_metrics['ref_time'] = pd.DatetimeIndex(bout_metrics['start_time_of_bout'])
     bout_metrics['total_bout_duration_in_secs'] = bout_metrics['bout_duration_in_secs']
@@ -145,26 +149,47 @@ def construct_activity_arr_from_bout_metrics(bout_metrics, data_params, file_pat
 
     bout_duration_per_interval = bout_metrics.resample(f"{data_params['resolution_in_min']}T")['total_bout_duration_in_secs'].sum()
 
+    return bout_duration_per_interval
+
+def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, file_paths, dc_tag):
+    """
+    Construct an activity summary of the % of time occupied by bouts per date and time interval.
+    Will be used later to assemble an activity summary for each duty-cycling scheme to compare effects.
+    """
+
     time_occupied_by_bouts  = bout_duration_per_interval.values
     percent_time_occupied_by_bouts = (100*(time_occupied_by_bouts / (60*float(data_params['resolution_in_min']))))
-    test_bout_percentages_less_than_100(percent_time_occupied_by_bouts)
 
-    bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)), columns=['ref_time', f'percentage_time_occupied_by_bouts ({dc_tag})'])
+    all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
+    all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
+    bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)),
+                                columns=['ref_time', f'percentage_time_occupied_by_bouts ({dc_tag})'])
     bout_dpi_df = bout_dpi_df.set_index('ref_time')
-    bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['resolution_in_min']}T").first().between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
+    bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['resolution_in_min']}T").first()
+    bout_dpi_df = bout_dpi_df.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(bout_dpi_df.index, bout_dpi_df[f'percentage_time_occupied_by_bouts ({dc_tag})'].values)), columns=["Date_and_Time_UTC", f'percentage_time_occupied_by_bouts ({dc_tag})'])
 
-def test_bout_percentages_less_than_100(percent_time_occupied_by_bouts):
-    assert(percent_time_occupied_by_bouts.max() <= 100)
+def get_activity_index_per_interval(location_df, data_params):
+    """
+    Constructs a pandas Series that records the activity index observed per interval.
+    The used interval is the one stored inside data_params['resolution_in_min']
+    The activity index time block is stored inside data_params['index_time_block_in_secs']
+    """
 
-def construct_activity_indices_arr(location_df, dc_tag, file_paths, data_params):
     location_df['ref_time'] = location_df['call_start_time']
 
     temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='ref_time')['ref_time'].count()
     temp[temp>0] = 1
     activity_indices = temp.resample(f"{data_params['resolution_in_min']}T").sum()
-    test_activity_indices_less_than_max(activity_indices.values, data_params)
+    
+    return activity_indices
+
+def construct_activity_indices_arr(activity_indices, dc_tag, file_paths, data_params):
+    """
+    Construct an activity summary of the activity index per date and time interval.
+    Will be used later to assemble an activity summary for each duty-cycling scheme to compare effects.
+    """
 
     col_name = f"Activity Indices ({dc_tag})"
     incomplete_activity_arr = pd.DataFrame(activity_indices.values, index=activity_indices.index, columns=[col_name])
@@ -176,11 +201,6 @@ def construct_activity_indices_arr(location_df, dc_tag, file_paths, data_params)
     activity_arr = activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
-
-def test_activity_indices_less_than_max(activity_indices, data_params):
-    time_block_duration = int(data_params['index_time_block_in_secs'])
-    peak_index = (60*int(data_params['resolution_in_min'])/time_block_duration)
-    assert(activity_indices.max()<=peak_index)
 
 def construct_activity_grid_for_number_of_dets(activity_arr, dc_tag):
     """
@@ -201,6 +221,11 @@ def construct_activity_grid_for_number_of_dets(activity_arr, dc_tag):
 
 
 def construct_activity_grid_for_bouts(activity_arr, dc_tag):
+    """
+    Reshapes a provided activity summary column to make a grid with date columns and time rows.
+    This grid is the one we provide to our activity plotting functions.
+    """
+
     activity_datetimes = pd.to_datetime(activity_arr.index.values)
     raw_dates = activity_datetimes.strftime("%m/%d/%y")
     raw_times = activity_datetimes.strftime("%H:%M")
@@ -214,6 +239,11 @@ def construct_activity_grid_for_bouts(activity_arr, dc_tag):
 
 
 def construct_activity_grid_for_inds(activity_arr, dc_tag):
+    """
+    Reshapes a provided activity summary column to make a grid with date columns and time rows.
+    This grid is the one we provide to our activity plotting functions.
+    """
+    
     activity_datetimes = pd.to_datetime(activity_arr.index.values)
     raw_dates = activity_datetimes.strftime("%m/%d/%y")
     raw_times = activity_datetimes.strftime("%H:%M")

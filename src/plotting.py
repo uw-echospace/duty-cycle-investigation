@@ -24,6 +24,7 @@ def rect(pos):
 def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file_paths):
     """
     Plots an activity grid generated from an activity summary for a specific duty-cycling scheme.
+    The activity summary here is of the number of detections observed per date and time interval.
     """
     activity_df = dh.construct_activity_grid_for_number_of_dets(activity_arr, data_params["cur_dc_tag"])
 
@@ -65,7 +66,10 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
 
 
 def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, file_paths):
-
+    """
+    Plots an activity grid generated from an activity summary for a specific duty-cycling scheme.
+    The activity summary here is of the % of time occupied by bouts per date and time interval.
+    """
     activity_df = dh.construct_activity_grid_for_bouts(activity_arr, data_params['cur_dc_tag'])
 
     activity_times = pd.DatetimeIndex(activity_df.index).tz_localize('UTC')
@@ -106,7 +110,10 @@ def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, fil
 
 
 def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file_paths):
-
+    """
+    Plots an activity grid generated from an activity summary for a specific duty-cycling scheme.
+    The activity summary here is of the activity index per date and time interval.
+    """
     activity_df = dh.construct_activity_grid_for_inds(activity_arr, data_params["cur_dc_tag"])
 
     activity_times = pd.DatetimeIndex(activity_df.index).tz_localize('UTC')
@@ -318,6 +325,7 @@ def plot_dc_bouts_comparisons_per_night(activity_arr, data_params, pipeline_para
 def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths):
     """
     Plots an activity grid for each duty-cycling scheme for a given location, looking at all datetimes in data/raw.
+    The activity summaries here are of the number of detections observed per date and time interval.
     """
 
     datetimes = pd.to_datetime(activity_arr.index.values)
@@ -363,6 +371,10 @@ def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipel
 
 
 def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths):
+    """
+    Plots an activity grid for each duty-cycling scheme for a given location, looking at all datetimes in data/raw.
+    The activity summaries here are of the % of time occupied by bouts per date and time interval.
+    """
 
     datetimes = pd.to_datetime(activity_arr.index.values)
     dates = datetimes.strftime("%m/%d").unique()
@@ -407,6 +419,10 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
 
 
 def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths):
+    """
+    Plots an activity grid for each duty-cycling scheme for a given location, looking at all datetimes in data/raw.
+    The activity summaries here are of the activity indices per date and time interval.
+    """
 
     datetimes = pd.to_datetime(activity_arr.index.values)
     dates = datetimes.strftime("%m/%d").unique()
