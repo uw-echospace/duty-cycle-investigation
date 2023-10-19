@@ -1,5 +1,8 @@
 import pipeline
-import subsampling as ss
+
+import sys
+sys.path.append('../src/activity')
+import activity.subsampling as ss
 from core import SITE_NAMES
 
 from pathlib import Path

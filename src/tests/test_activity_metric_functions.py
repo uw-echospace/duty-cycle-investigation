@@ -6,13 +6,11 @@ import datetime as dt
 from scipy import stats, signal
 
 import sys
-
-sys.path.append("../src")
 sys.path.append("../src/bout")
 
-import clustering as clstr
-import data_handling as dh
-import subsampling as ss
+import bout as bt
+import activity.activity_assembly as actvt
+import activity.subsampling as ss
 
 
 def create_initial_mock_data_from_ipis(ipis):
@@ -53,7 +51,6 @@ def test_activity_metrics_using_simulated_bout_dataset():
     mock_square_ipis = A*(signal.square(2 * np.pi * 5 * t, 1/points) + 1)
     call_duration = 0.01
     desired_ipi = 0.09
-    desired_duration_of_call_and_ipi = 0.1
 
     mock_square_ipis[mock_square_ipis==0] = desired_ipi
 
@@ -61,16 +58,16 @@ def test_activity_metrics_using_simulated_bout_dataset():
     mock_bout_df = ss.simulate_dutycycle_on_detections(mock_bout_df, '1800of1800')
     bout_params = dict()
     bout_params['LF1_bci'] = 150
-    batdetect2_predictions = clstr.classify_bouts_in_bd2_predictions_for_freqgroups(mock_bout_df, bout_params)
-    bout_metrics = clstr.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_predictions)
+    batdetect2_predictions = bt.classify_bouts_in_bd2_predictions_for_freqgroups(mock_bout_df, bout_params)
+    bout_metrics = bt.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_predictions)
     data_params = dict()
     data_params['resolution_in_min'] = '30'
     data_params["index_time_block_in_secs"] = '5'
 
     test_preds = batdetect2_predictions.copy()
-    assert(dh.get_number_of_detections_per_interval(test_preds, data_params).item() == points)
-    assert(dh.get_activity_index_per_interval(test_preds, data_params).item() == len(bout_metrics))
-    assert(dh.get_bout_duration_per_interval(bout_metrics, data_params).item() == (10*call_duration + 9*desired_ipi)*len(bout_metrics))
+    assert(actvt.get_number_of_detections_per_interval(test_preds, data_params).item() == points)
+    assert(actvt.get_activity_index_per_interval(test_preds, data_params).item() == len(bout_metrics))
+    assert(actvt.get_bout_duration_per_interval(bout_metrics, data_params).item() == (10*call_duration + 9*desired_ipi)*len(bout_metrics))
 
 
 
