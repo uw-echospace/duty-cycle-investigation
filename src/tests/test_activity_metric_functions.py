@@ -2,15 +2,15 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 
-import matplotlib.pyplot as plt
 import datetime as dt
 from scipy import stats, signal
 
 import sys
 
 sys.path.append("../src")
+sys.path.append("../src/bout")
 
-import bout_clustering as bt_clustering
+import clustering as clstr
 import data_handling as dh
 import subsampling as ss
 
@@ -61,8 +61,8 @@ def test_activity_metrics_using_simulated_bout_dataset():
     mock_bout_df = ss.simulate_dutycycle_on_detections(mock_bout_df, '1800of1800')
     bout_params = dict()
     bout_params['LF1_bci'] = 150
-    batdetect2_predictions = bt_clustering.classify_bouts_in_bd2_predictions_for_freqgroups(mock_bout_df, bout_params)
-    bout_metrics = bt_clustering.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_predictions)
+    batdetect2_predictions = clstr.classify_bouts_in_bd2_predictions_for_freqgroups(mock_bout_df, bout_params)
+    bout_metrics = clstr.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_predictions)
     data_params = dict()
     data_params['resolution_in_min'] = '30'
     data_params["index_time_block_in_secs"] = '5'

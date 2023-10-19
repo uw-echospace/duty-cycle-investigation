@@ -1,6 +1,10 @@
 import pandas as pd
 import data_handling as dh
-import bout_clustering as bt_clustering
+
+import sys
+sys.path.append("../src/bout")
+
+import bout as bt
 
 from pathlib import Path
 
@@ -88,7 +92,7 @@ def construct_activity_bouts_arr_from_dc_tags(data_params, file_paths):
     for dc_tag in data_params['dc_tags']:
 
         location_df = prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag)
-        bout_metrics = bt_clustering.generate_bout_metrics_for_location_and_freq(location_df, data_params, dc_tag)
+        bout_metrics = bt.generate_bout_metrics_for_location_and_freq(location_df, data_params, dc_tag)
         bout_duration_per_interval = dh.get_bout_duration_per_interval(bout_metrics, data_params)
         dc_bouts = dh.construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, file_paths, dc_tag)
         dc_bouts = dc_bouts.set_index("Date_and_Time_UTC")
