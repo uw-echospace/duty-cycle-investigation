@@ -4,8 +4,7 @@ import pandas as pd
 import sys
 
 sys.path.append("../src")
-
-import data_handling as dh
+import activity.activity_assembly as actvt
 from core import SITE_NAMES
 
 def test_columns_in_location_summary_are_as_expected(location_df):
@@ -48,7 +47,7 @@ def run_tests_on_all_location_summary_methods():
         file_paths = dict()
         file_paths["raw_SITE_folder"] = f'{Path(__file__).resolve().parent}/../../data/raw/{data_params["site_tag"]}'
         if Path(file_paths['raw_SITE_folder']).exists():
-            location_df = dh.assemble_initial_location_summary(data_params, file_paths, save=False)
+            location_df = actvt.assemble_initial_location_summary(data_params, file_paths, save=False)
             test_location_summary_is_dataframe(location_df)
             test_columns_in_location_summary_are_as_expected(location_df)
             test_if_calls_exist_in_location_summary(location_df)

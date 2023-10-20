@@ -7,10 +7,10 @@ import datetime as dt
 
 import sys
 
-sys.path.append("../src")
+sys.path.append("../src/tests")
 
-import data_handling as dh
-import subsampling as ss
+import activity.activity_assembly as actvt
+import activity.subsampling as ss
 from core import SITE_NAMES, FREQ_GROUPS
 import test_activity_metric_functions as test_activity
 
