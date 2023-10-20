@@ -11,15 +11,15 @@ sys.path.append("../src/tests")
 
 import activity.subsampling as ss
 
-def create_initial_mock_data_of_length(num_calls):
+def create_initial_mock_data_of_length(N):
     """
-    Created a simulated dataset of calls for a period of 30-min where the provided IPIs are used to separate each call.
+    Created a simulated dataset of calls for a period of 30-min where there are N calls equally spaced from each other.
     """
 
     mock_df = pd.DataFrame()
     recording_start = dt.datetime(2022, 6, 15, 1, 00, 0)
     call_duration = 0.01
-    start_time = np.linspace(0, 1800, num_calls, endpoint=False)
+    start_time = np.linspace(0, 1800, N, endpoint=False)
     end_time = start_time + call_duration
     call_start_time = recording_start + pd.to_timedelta(start_time*1e9)
     call_end_time = recording_start + pd.to_timedelta((start_time+call_duration)*1e9)
@@ -37,10 +37,11 @@ def create_initial_mock_data_of_length(num_calls):
 
 def test_if_subsampling_reduces_number_of_calls_by_expected_factor_in_mock_dataset():
     """
-    Create a simulated dataset of calls with a constant IPI that produces N calls in 30-min period.
+    Create a simulated dataset of calls that produces N evenly-spaced calls in 30-min period.
 
     Calls the subsampling method with the main cycle lengths and percent ons including the continuous scheme.
     Checks if the N calls are reduced exactly by the listening proportion of each duty-cycle scheme.
+    We choosen N = 2520 here because it is divisable by integers 1-10. So we can potentially test for several dc-schemes.
     """
 
     data_params = dict()
