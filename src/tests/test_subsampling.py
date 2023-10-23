@@ -41,7 +41,7 @@ def test_if_subsampling_reduces_number_of_calls_by_expected_factor_in_mock_datas
 
     Calls the subsampling method with the main cycle lengths and percent ons including the continuous scheme.
     Checks if the N calls are reduced exactly by the listening proportion of each duty-cycle scheme.
-    We choosen N = 2520 here because it is divisable by integers 1-10. So we can potentially test for several dc-schemes.
+    We choose N = 2520 here because it is divisable by integers 1-10. So we can potentially test for several dc-schemes.
     """
 
     data_params = dict()
