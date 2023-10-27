@@ -1,0 +1,9 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+1512.0125,1512.0158,28046.0,41565.0,Echolocation,Plecotus austriacus,0.176,0.546,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_140000.WAV,Foliage,recover-20220712_unit2,010,1795
+1512.3565,1512.3602,27187.0,51831.0,Echolocation,Myotis nattereri,0.35,0.51,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_140000.WAV,Foliage,recover-20220712_unit2,010,1795
+1512.3835,1512.3869,26328.0,46133.0,Echolocation,Myotis nattereri,0.217,0.556,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_140000.WAV,Foliage,recover-20220712_unit2,010,1795
+1512.5765,1512.5799,25468.0,51030.0,Echolocation,Myotis nattereri,0.43,0.582,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_140000.WAV,Foliage,recover-20220712_unit2,010,1795
+1512.6035,1512.6069,25468.0,54752.0,Echolocation,Myotis nattereri,0.493,0.596,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_140000.WAV,Foliage,recover-20220712_unit2,010,1795
+1512.6295,1512.6328,24609.0,51628.0,Echolocation,Myotis nattereri,0.433,0.536,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_140000.WAV,Foliage,recover-20220712_unit2,010,1795
+1512.7095,1512.7133,27187.0,47752.0,Echolocation,Myotis nattereri,0.306,0.543,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_140000.WAV,Foliage,recover-20220712_unit2,010,1795
+1513.0815,1513.0848,26328.0,47628.0,Echolocation,Myotis nattereri,0.425,0.646,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_140000.WAV,Foliage,recover-20220712_unit2,010,1795
