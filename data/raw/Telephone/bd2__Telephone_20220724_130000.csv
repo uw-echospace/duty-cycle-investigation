@@ -1,0 +1,10 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+1136.6115,1136.6326,16875.0,20780.0,Echolocation,Nyctalus noctula,0.373,0.56,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
+1151.6105,1151.6332,17734.0,20807.0,Echolocation,Nyctalus noctula,0.499,0.583,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
+1157.4435,1157.4625,17734.0,21892.0,Echolocation,Nyctalus noctula,0.451,0.545,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
+1178.7635,1178.7811,16015.0,21511.0,Echolocation,Nyctalus noctula,0.525,0.628,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
+1183.5305,1183.5447,16875.0,21554.0,Echolocation,Nyctalus noctula,0.353,0.52,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
+1193.1405,1193.1571,16875.0,19743.0,Echolocation,Nyctalus leisleri,0.343,0.608,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
+1197.8195,1197.8348,16875.0,21851.0,Echolocation,Nyctalus noctula,0.465,0.583,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
+1197.8215,1197.8309,51250.0,55688.0,Echolocation,Pipistrellus pygmaeus,0.49,0.535,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
+1223.5555,1223.5717,16875.0,20899.0,Echolocation,Nyctalus leisleri,0.282,0.566,-1,/mnt/ubna_data_01_mir/recover-20220725/UBNA_010/20220724_130000.WAV,Telephone Field,recover-20220725,010,1795
