@@ -1,0 +1,3 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+717.7525,717.771,22890.0,26315.0,Echolocation,Nyctalus leisleri,0.508,0.537,-1,/mnt/ubna_data_01/recover-20220818/UBNA_002/20220817_093000.WAV,Carp Pond
+719.0125,719.0307,22890.0,26448.0,Echolocation,Nyctalus leisleri,0.62,0.658,-1,/mnt/ubna_data_01/recover-20220818/UBNA_002/20220817_093000.WAV,Carp Pond

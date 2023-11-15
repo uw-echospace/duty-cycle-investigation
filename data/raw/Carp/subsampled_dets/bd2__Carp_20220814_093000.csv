@@ -1,0 +1,25 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+732.3245,732.3396,20312.0,23276.0,Echolocation,Nyctalus leisleri,0.623,0.646,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1211.4025,1211.4118,37500.0,43668.0,Echolocation,Pipistrellus nathusii,0.436,0.504,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1211.7365,1211.7459,36640.0,42342.0,Echolocation,Pipistrellus nathusii,0.357,0.504,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1211.8575,1211.8674,36640.0,43396.0,Echolocation,Pipistrellus nathusii,0.386,0.558,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1212.0715,1212.0818,37500.0,45921.0,Echolocation,Pipistrellus nathusii,0.527,0.6,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1212.1815,1212.192,35781.0,47127.0,Echolocation,Pipistrellus nathusii,0.348,0.633,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1212.4485,1212.4567,36640.0,44282.0,Echolocation,Pipistrellus nathusii,0.471,0.558,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1212.6475,1212.6563,36640.0,43478.0,Echolocation,Pipistrellus nathusii,0.491,0.604,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1212.7545,1212.7648,35781.0,46862.0,Echolocation,Pipistrellus nathusii,0.397,0.525,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1213.0775,1213.0873,35781.0,47830.0,Echolocation,Pipistrellus nathusii,0.418,0.632,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1213.1915,1213.2006,36640.0,42162.0,Echolocation,Pipistrellus nathusii,0.462,0.513,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1213.3965,1213.406,36640.0,44761.0,Echolocation,Pipistrellus nathusii,0.488,0.615,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1213.5115,1213.522,36640.0,44817.0,Echolocation,Pipistrellus nathusii,0.382,0.539,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1215.7745,1215.7845,36640.0,41697.0,Echolocation,Pipistrellus nathusii,0.346,0.521,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1236.3195,1236.3266,41796.0,54489.0,Echolocation,Pipistrellus nathusii,0.483,0.547,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1236.5195,1236.5275,41796.0,51165.0,Echolocation,Pipistrellus nathusii,0.308,0.525,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1236.6195,1236.6278,41796.0,56668.0,Echolocation,Pipistrellus nathusii,0.301,0.519,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1236.9285,1236.9371,41796.0,54071.0,Echolocation,Pipistrellus nathusii,0.378,0.538,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1237.0395,1237.0458,43515.0,54868.0,Echolocation,Pipistrellus pipistrellus,0.446,0.633,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1237.6535,1237.6621,43515.0,55046.0,Echolocation,Pipistrellus pipistrellus,0.24,0.558,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1237.8745,1237.8838,40937.0,55981.0,Echolocation,Pipistrellus nathusii,0.205,0.506,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1238.4135,1238.4214,41796.0,52348.0,Echolocation,Pipistrellus nathusii,0.332,0.556,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1238.6275,1238.6344,41796.0,54102.0,Echolocation,Pipistrellus nathusii,0.401,0.574,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond
+1238.9545,1238.9625,42656.0,48526.0,Echolocation,Pipistrellus nathusii,0.244,0.504,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_093000.WAV,Carp Pond

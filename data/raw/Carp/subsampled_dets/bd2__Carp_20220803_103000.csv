@@ -1,0 +1,6 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
+276.8635,276.8707,37500.0,46542.0,Echolocation,Pipistrellus nathusii,0.537,0.606,-1,/mnt/ubna_data_01/recover-20220804/UBNA_001/20220803_103000.WAV,Carp Pond
+277.2885,277.2991,38359.0,50816.0,Echolocation,Pipistrellus nathusii,0.501,0.609,-1,/mnt/ubna_data_01/recover-20220804/UBNA_001/20220803_103000.WAV,Carp Pond
+277.7095,277.7182,39218.0,46026.0,Echolocation,Pipistrellus nathusii,0.536,0.57,-1,/mnt/ubna_data_01/recover-20220804/UBNA_001/20220803_103000.WAV,Carp Pond
+278.1355,278.1435,39218.0,46195.0,Echolocation,Pipistrellus nathusii,0.52,0.587,-1,/mnt/ubna_data_01/recover-20220804/UBNA_001/20220803_103000.WAV,Carp Pond
+278.5655,278.57280000000003,40078.0,48247.0,Echolocation,Pipistrellus nathusii,0.517,0.58,-1,/mnt/ubna_data_01/recover-20220804/UBNA_001/20220803_103000.WAV,Carp Pond

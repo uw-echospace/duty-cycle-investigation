@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+947.3025,947.3114,24609.0,32771.0,Echolocation,Nyctalus leisleri,0.377,0.678,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+947.5775,947.5893,22890.0,33203.0,Echolocation,Eptesicus serotinus,0.368,0.653,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+947.8255,947.8361,23750.0,31655.0,Echolocation,Eptesicus serotinus,0.282,0.511,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+948.3665,948.3752,25468.0,33052.0,Echolocation,Eptesicus serotinus,0.265,0.546,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+950.2135,950.2268,19453.0,24702.0,Echolocation,Nyctalus noctula,0.412,0.613,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+950.4405,950.4601,19453.0,23134.0,Echolocation,Nyctalus noctula,0.453,0.554,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+951.0345,951.0464,19453.0,25132.0,Echolocation,Nyctalus noctula,0.423,0.555,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+951.4625,951.4808,20312.0,24392.0,Echolocation,Nyctalus noctula,0.519,0.61,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+951.7435,951.7547,19453.0,25944.0,Echolocation,Nyctalus noctula,0.318,0.501,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+1586.7575,1586.7657,36640.0,46610.0,Echolocation,Pipistrellus nathusii,0.347,0.559,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
+1586.9585,1586.9657,36640.0,44144.0,Echolocation,Pipistrellus nathusii,0.514,0.599,-1,/mnt/ubna_data_02/recover-20220912/UBNA_010/20220912_043000.WAV,Carp Pond,recover-20220912,010
