@@ -1,7 +1,0 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
-76.0675,76.0726,47812.0,67106.0,Echolocation,Pipistrellus pipistrellus,0.516,0.571,-1,/mnt/ubna_data_02/recover-20220908/UBNA_004/20220906_113000.WAV,Carp Pond,recover-20220908,004
-76.2385,76.246,49531.0,60935.0,Echolocation,Pipistrellus pipistrellus,0.513,0.539,-1,/mnt/ubna_data_02/recover-20220908/UBNA_004/20220906_113000.WAV,Carp Pond,recover-20220908,004
-76.3175,76.3243,48671.0,68521.0,Echolocation,Pipistrellus pipistrellus,0.415,0.505,-1,/mnt/ubna_data_02/recover-20220908/UBNA_004/20220906_113000.WAV,Carp Pond,recover-20220908,004
-77.3155,77.32339999999999,46953.0,66823.0,Echolocation,Pipistrellus pipistrellus,0.415,0.538,-1,/mnt/ubna_data_02/recover-20220908/UBNA_004/20220906_113000.WAV,Carp Pond,recover-20220908,004
-77.4585,77.46430000000001,47812.0,65341.0,Echolocation,Pipistrellus pipistrellus,0.583,0.613,-1,/mnt/ubna_data_02/recover-20220908/UBNA_004/20220906_113000.WAV,Carp Pond,recover-20220908,004
-77.9635,77.9713,45234.0,66034.0,Echolocation,Pipistrellus pipistrellus,0.421,0.521,-1,/mnt/ubna_data_02/recover-20220908/UBNA_004/20220906_113000.WAV,Carp Pond,recover-20220908,004
