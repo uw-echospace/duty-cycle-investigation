@@ -5,4 +5,4 @@ data/audiomoth_recordings/*
 
 figures/*
 
-src/__pycache__/*
+__pycache__

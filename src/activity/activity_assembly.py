@@ -11,7 +11,7 @@ import activity.subsampling as ss
 from core import FREQ_GROUPS
 
 
-def generate_activity_dets_results(data_params, file_paths):
+def generate_activity_dets_results(data_params, file_paths, save=True):
     """
     Generates an activity summary using the detected calls for each provided duty-cycling scheme and puts them together for comparison.
     A summary of activity is formatted as the number of detected bat calls per time interval.
@@ -24,14 +24,15 @@ def generate_activity_dets_results(data_params, file_paths):
         location_df = ss.prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag)
         num_of_detections = get_number_of_detections_per_interval(location_df, data_params)
         dc_dets = construct_activity_arr_from_location_summary(num_of_detections, dc_tag, file_paths, data_params)
-        dc_dets = dc_dets.set_index("Date_and_Time_UTC")
+        dc_dets = dc_dets.set_index("datetime_UTC")
         activity_dets_arr = pd.concat([activity_dets_arr, dc_dets], axis=1)
 
-    activity_dets_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets_TYPE_SITE_summary"]}.csv')
+    if save:
+        activity_dets_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets_TYPE_SITE_summary"]}.csv')
 
     return activity_dets_arr
 
-def generate_activity_bouts_results(data_params, file_paths):
+def generate_activity_bouts_results(data_params, file_paths, save=True):
     """
     Generates an activity summary using the activity bouts for each provided duty-cycling scheme and puts them together for comparison.
     A summary of activity is formatted as the % of time occupied by bouts per time interval.
@@ -45,14 +46,15 @@ def generate_activity_bouts_results(data_params, file_paths):
         bout_metrics = bt.generate_bout_metrics_for_location_and_freq(location_df, data_params, dc_tag)
         bout_duration_per_interval = get_bout_duration_per_interval(bout_metrics, data_params)
         dc_bouts = construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, file_paths, dc_tag)
-        dc_bouts = dc_bouts.set_index("Date_and_Time_UTC")
+        dc_bouts = dc_bouts.set_index("datetime_UTC")
         activity_bouts_arr = pd.concat([activity_bouts_arr, dc_bouts], axis=1)
 
-    activity_bouts_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts_TYPE_SITE_summary"]}.csv')
+    if save:
+        activity_bouts_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_bouts_TYPE_SITE_summary"]}.csv')
 
     return activity_bouts_arr
 
-def generate_activity_inds_results(data_params, file_paths):
+def generate_activity_inds_results(data_params, file_paths, save=True):
     """
     Generates an activity summary using the Activity Index for each provided duty-cycling scheme and puts them together for comparison.
     A summary of activity is formatted as the activity index per time interval.
@@ -65,10 +67,11 @@ def generate_activity_inds_results(data_params, file_paths):
         location_df = ss.prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag)
         activity_indices = get_activity_index_per_interval(location_df, data_params)
         dc_dets = construct_activity_indices_arr(activity_indices, dc_tag, file_paths, data_params)
-        dc_dets = dc_dets.set_index("Date_and_Time_UTC")
+        dc_dets = dc_dets.set_index("datetime_UTC")
         activity_inds_arr = pd.concat([activity_inds_arr, dc_dets], axis=1)
 
-    activity_inds_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_inds_TYPE_SITE_summary"]}.csv')
+    if save:
+        activity_inds_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_inds_TYPE_SITE_summary"]}.csv')
 
     return activity_inds_arr
 
@@ -79,7 +82,7 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     Returns and saves a summary of bd2-detected bat calls within a desired frequency band.
     """
 
-    location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/*.csv').compute()
+    location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/*.csv', dtype=str).compute()
     location_df['low_freq'] = location_df['low_freq'].astype('float')
     location_df['high_freq'] = location_df['high_freq'].astype('float')
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
@@ -166,12 +169,12 @@ def construct_activity_arr_from_location_summary(num_of_detections, dc_tag, file
 
     all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
-    col_name = f"Number_of_Detections ({dc_tag})"
+    col_name = f"num_dets ({dc_tag})"
     incomplete_activity_arr = pd.DataFrame(num_of_detections.values, index=num_of_detections.index, columns=[col_name])
     activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['resolution_in_min']}T").first()
     activity_arr = activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
-    return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
+    return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["datetime_UTC", col_name])
 
 def get_bout_duration_per_interval(bout_metrics, data_params):
     """
@@ -199,12 +202,12 @@ def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_pa
     all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)),
-                                columns=['ref_time', f'percentage_time_occupied_by_bouts ({dc_tag})'])
+                                columns=['ref_time', f'bout_time ({dc_tag})'])
     bout_dpi_df = bout_dpi_df.set_index('ref_time')
     bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['resolution_in_min']}T").first()
     bout_dpi_df = bout_dpi_df.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
-    return pd.DataFrame(list(zip(bout_dpi_df.index, bout_dpi_df[f'percentage_time_occupied_by_bouts ({dc_tag})'].values)), columns=["Date_and_Time_UTC", f'percentage_time_occupied_by_bouts ({dc_tag})'])
+    return pd.DataFrame(list(zip(bout_dpi_df.index, bout_dpi_df[f'bout_time ({dc_tag})'].values)), columns=["datetime_UTC", f'bout_time ({dc_tag})'])
 
 def get_activity_index_per_interval(location_df, data_params):
     """
@@ -227,7 +230,7 @@ def construct_activity_indices_arr(activity_indices, dc_tag, file_paths, data_pa
     Will be used later to assemble an activity summary for each duty-cycling scheme to compare effects.
     """
 
-    col_name = f"Activity Indices ({dc_tag})"
+    col_name = f"activity_index ({dc_tag})"
     incomplete_activity_arr = pd.DataFrame(activity_indices.values, index=activity_indices.index, columns=[col_name])
 
     all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
@@ -236,7 +239,7 @@ def construct_activity_indices_arr(activity_indices, dc_tag, file_paths, data_pa
     activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['resolution_in_min']}T").first()
     activity_arr = activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
-    return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["Date_and_Time_UTC", col_name])
+    return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["datetime_UTC", col_name])
 
 def construct_activity_grid_for_number_of_dets(activity_arr, dc_tag):
     """
@@ -248,7 +251,7 @@ def construct_activity_grid_for_number_of_dets(activity_arr, dc_tag):
     raw_dates = activity_datetimes.strftime("%m/%d/%y")
     raw_times = activity_datetimes.strftime("%H:%M")
 
-    col_name = f"Number_of_Detections ({dc_tag})"
+    col_name = f"num_dets ({dc_tag})"
     data = list(zip(raw_dates, raw_times, activity_arr[col_name]))
     activity = pd.DataFrame(data, columns=["Date (UTC)", "Time (UTC)", col_name])
     activity_df = activity.pivot(index="Time (UTC)", columns="Date (UTC)", values=col_name)
@@ -266,7 +269,7 @@ def construct_activity_grid_for_bouts(activity_arr, dc_tag):
     raw_dates = activity_datetimes.strftime("%m/%d/%y")
     raw_times = activity_datetimes.strftime("%H:%M")
 
-    col_name = f"percentage_time_occupied_by_bouts ({dc_tag})"
+    col_name = f"bout_time ({dc_tag})"
     data = list(zip(raw_dates, raw_times, activity_arr[col_name]))
     activity = pd.DataFrame(data, columns=["Date (UTC)", "Time (UTC)", col_name])
     activity_df = activity.pivot(index="Time (UTC)", columns="Date (UTC)", values=col_name)
@@ -284,7 +287,7 @@ def construct_activity_grid_for_inds(activity_arr, dc_tag):
     raw_dates = activity_datetimes.strftime("%m/%d/%y")
     raw_times = activity_datetimes.strftime("%H:%M")
 
-    col_name = f"Activity Indices ({dc_tag})"
+    col_name = f"activity_index ({dc_tag})"
     data = list(zip(raw_dates, raw_times, activity_arr[col_name]))
     activity = pd.DataFrame(data, columns=["Date (UTC)", "Time (UTC)", col_name])
     activity_df = activity.pivot(index="Time (UTC)", columns="Date (UTC)", values=col_name)
@@ -302,7 +305,10 @@ def construct_presence_grid(activity_arr, dc_tag):
     raw_dates = activity_datetimes.strftime("%m/%d/%y")
     raw_times = activity_datetimes.strftime("%H:%M")
 
-    col_name = f"Number_of_Detections ({dc_tag})"
+    for column in activity_arr.columns:
+        if dc_tag in column:
+            col_name = column
+
     data = list(zip(raw_dates, raw_times, activity_arr[col_name]))
     presence = pd.DataFrame(data, columns=["Date (UTC)", "Time (UTC)", col_name])
     presence.loc[presence[col_name] > 0, col_name] = 1

@@ -57,7 +57,6 @@ def plot_dets(activity_arr, data_params, pipeline_params, file_paths):
     
     plot.plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file_paths)
     plot.plot_presence_grid(activity_arr, data_params, pipeline_params, file_paths)
-    plot.plot_dc_dets_comparisons_per_night(activity_arr, data_params, pipeline_params, file_paths)
     plot.plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
     plot.plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
 
@@ -68,8 +67,9 @@ def plot_bouts(activity_arr, data_params, pipeline_params, file_paths):
     """
     
     plot.plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, file_paths)
-    plot.plot_dc_bouts_comparisons_per_night(activity_arr, data_params, pipeline_params, file_paths)
+    plot.plot_presence_grid(activity_arr, data_params, pipeline_params, file_paths)
     plot.plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
+    plot.plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
 
 
 def plot_inds(activity_arr, data_params, pipeline_params, file_paths):
@@ -78,7 +78,9 @@ def plot_inds(activity_arr, data_params, pipeline_params, file_paths):
     """
     
     plot.plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file_paths)
+    plot.plot_presence_grid(activity_arr, data_params, pipeline_params, file_paths)
     plot.plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
+    plot.plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_params, file_paths)
 
 
 def compare_det_and_bout_metrics(data_params, pipeline_params, file_paths):

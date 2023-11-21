@@ -17,7 +17,7 @@ import sys
 sys.path.append("../src/bout")
 
 from core import SITE_NAMES, EXAMPLE_FILES_from_LOCATIONS, EXAMPLE_FILES_to_FILEPATHS, EXAMPLE_FILES_to_DETECTIONS, FREQ_GROUPS
-import clustering as clstr
+import bout.bout as bout
 import activity.activity_assembly as actvt
 
 from cli import get_file_paths
@@ -90,8 +90,8 @@ def get_bout_metrics_from_single_bd2_output(bd2_output, data_params, bout_params
     bd2_output.insert(0, 'start_time_wrt_ref', (bd2_output['call_start_time'] - bd2_output['ref_time']).dt.total_seconds())
 
     batdetect2_predictions = bd2_output.loc[bd2_output['end_time_wrt_ref'] <= time_on]
-    batdetect2_preds_with_bouttags = clstr.classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bout_params)
-    bout_metrics = clstr.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_preds_with_bouttags)
+    batdetect2_preds_with_bouttags = bout.classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bout_params)
+    bout_metrics = bout.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_preds_with_bouttags)
 
     return bout_metrics
 
@@ -147,12 +147,13 @@ def collect_call_signals_from_bout(audio_file, bat_bout, bucket):
             audio_file.seek(int(fs*start))
             audio_seg = audio_file.read(int(fs*duration))
 
-            low_freq_cutoff = call['low_freq']-2000
-            high_freq_cutoff = min(nyq-1, call['high_freq']+2000)
-            band_limited_audio_seg = bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
-            signal = band_limited_audio_seg.copy()
+            # low_freq_cutoff = call['low_freq']-2000
+            # high_freq_cutoff = min(nyq-1, call['high_freq']+2000)
+            # band_limited_audio_seg = bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
+            # signal = band_limited_audio_seg.copy()
+            signal = audio_seg.copy()
             cleaned_call_signal = signal[-int(fs*(call_dur+(2*pad))):]
-            bucket.append(cleaned_call_signal)
+            bucket.append(signal)
             sampled_call = pd.DataFrame(columns=call.index)
             sampled_call.loc[len(sampled_call)] = call
             sampled_calls_from_bout = pd.concat([sampled_calls_from_bout, sampled_call], axis=0)
@@ -307,7 +308,7 @@ def sample_calls_and_generate_fft_bucket_for_location(cfg):
 
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    bout_params = clstr.get_bout_params_from_location(location_sum_df, data_params)
+    bout_params = bout.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(glob.glob(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/**.csv')))
     site_filepaths = good_location_df['File path'].values
 
@@ -334,7 +335,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    bout_params = clstr.get_bout_params_from_location(location_sum_df, data_params)
+    bout_params = bout.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
     site_filepaths = good_location_df['File path'].values
 
