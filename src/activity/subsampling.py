@@ -3,6 +3,12 @@ import pandas as pd
 def simulate_dutycycle_on_detections(location_df, dc_tag):
     """
     Simulates a provided duty-cycling scheme on the provided location summary of concatenated bd2 outputs.
+    Groups detections by cycle_length periods. Filters out detections outside of time with respect to grouping.
+    For cycle_length = 6-min for example. Groups are [00:00:00, 00:06:00, 00:12:00, ...] (HH:MM:SS)
+    Detections that have start times [00:06:32, 00:06:36, 00:07:12, ...] grouped to [00:06:00]
+    Start times with respect to groups are [00:06:32 => 00:00:32, 00:06:36 => 00:00:36, 00:07:12 => 00:01:12, ...]
+    Here time_on = 1-min (00:01:00) is used to filter detections within recording period.
+    Kept detections are [00:06:32, 00:06:36] for group [00:06:00]
     """
 
     cycle_length = int(dc_tag.split('of')[1])
@@ -21,14 +27,15 @@ def simulate_dutycycle_on_detections(location_df, dc_tag):
 
     return dc_applied_df
 
-def prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag):
+def prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag, save=True):
     """
     Generates a duty-cycled location summary of concatenated bd2 outputs for measuring effects of duty-cycling.
     """
 
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     plottable_location_df = simulate_dutycycle_on_detections(location_df, dc_tag)
-    plottable_location_df.to_csv(f'{file_paths["simulated_schemes_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}_{dc_tag}.csv')
+    if save:
+        plottable_location_df.to_csv(f'{file_paths["simulated_schemes_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}_{dc_tag}.csv')
 
     return plottable_location_df
 
