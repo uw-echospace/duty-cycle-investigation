@@ -165,10 +165,11 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
 
             bat_bout_condensed = pd.DataFrame()
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
-            bat_bout_condensed['SD Card'] = sampled_calls_from_bout['SD Card'].values
-            bat_bout_condensed['File name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
-            bat_bout_condensed['Site'] = sampled_calls_from_bout['Site name'].values
+            bat_bout_condensed['SD_card'] = sampled_calls_from_bout['SD Card'].values
+            bat_bout_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
+            bat_bout_condensed['site'] = sampled_calls_from_bout['Site name'].values
             bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
+            bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
 
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
@@ -248,6 +249,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     np_bucket = np.array(bucket_for_location, dtype='object')
 
+    calls_sampled_from_location.reset_index(inplace=True)
     np.save(f'{Path(__file__).parents[2]}/2022_{data_params["site_tag"]}_call_signals.npy', np_bucket)
     calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/2022_{data_params["site_tag"]}.csv')
 
