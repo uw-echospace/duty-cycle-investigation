@@ -19,7 +19,7 @@ sys.path.append(f"{Path(__file__).parent}/..")
 print(sys.path)
 
 from core import SITE_NAMES, EXAMPLE_FILES_from_LOCATIONS, EXAMPLE_FILES_to_FILEPATHS, EXAMPLE_FILES_to_DETECTIONS, FREQ_GROUPS
-import bout.bout as bout
+import bout
 import activity.activity_assembly as actvt
 
 from cli import get_file_paths
