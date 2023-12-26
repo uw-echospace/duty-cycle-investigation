@@ -16,7 +16,7 @@ from pathlib import Path
 import sys
 sys.path.append(f"{Path(__file__).parent}/../bout")
 sys.path.append(f"{Path(__file__).parent}/..")
-print(sys.path)
+print(Path(__file__).parents)
 
 from core import SITE_NAMES, EXAMPLE_FILES_from_LOCATIONS, EXAMPLE_FILES_to_FILEPATHS, EXAMPLE_FILES_to_DETECTIONS, FREQ_GROUPS
 import bout
