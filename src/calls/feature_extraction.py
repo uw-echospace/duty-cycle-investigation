@@ -16,7 +16,7 @@ from pathlib import Path
 import sys
 sys.path.append(f"{Path(__file__).parents[1]}/bout")
 sys.path.append(f"{Path(__file__).parents[1]}")
-print(Path(__file__).parents)
+print(sys.path)
 
 from core import SITE_NAMES, EXAMPLE_FILES_from_LOCATIONS, EXAMPLE_FILES_to_FILEPATHS, EXAMPLE_FILES_to_DETECTIONS, FREQ_GROUPS
 import bout
@@ -181,13 +181,13 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
 
 
 def filter_df_with_location(ubna_data_df, site_name, start_time, end_time):
-    site_name_cond = ubna_data_df["Site name"] == site_name
+    site_name_cond = ubna_data_df["site_name"] == site_name
 
     file_year_cond = ubna_data_df.index.year == 2022
     minute_cond = np.logical_or((ubna_data_df.index).minute == 30, (ubna_data_df.index).minute == 0)
     datetime_cond = np.logical_and((ubna_data_df.index).second == 0, minute_cond)
-    file_error_cond = np.logical_and((ubna_data_df["File duration"]!='File has no comment due to error!'), (ubna_data_df["File duration"]!='File has no Audiomoth-related comment'))
-    all_errors_cond = np.logical_and((ubna_data_df["File duration"]!='Is empty!'), file_error_cond)
+    file_error_cond = np.logical_and((ubna_data_df["file_duration"]!='File has no comment due to error!'), (ubna_data_df["file_duration"]!='File has no Audiomoth-related comment'))
+    all_errors_cond = np.logical_and((ubna_data_df["file_duration"]!='Is empty!'), file_error_cond)
 
     filtered_location_df = ubna_data_df.loc[site_name_cond&datetime_cond&file_year_cond&all_errors_cond].sort_index()
     filtered_location_nightly_df = filtered_location_df.between_time(start_time, end_time, inclusive="left")
@@ -204,17 +204,18 @@ def get_params_relevant_to_data_at_location(cfg):
     print(f"Searching for files from {data_params['site_name']}")
 
     drives_df = dd.read_csv(f'{Path(__file__).parents[2]}/data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
+
     drives_df.drop(columns='Unnamed: 0', inplace=True)
-    drives_df["index"] = pd.DatetimeIndex(drives_df["Datetime UTC"])
+    drives_df["index"] = pd.DatetimeIndex(drives_df["datetime_UTC"])
     drives_df.set_index("index", inplace=True)
     
     files_from_location = filter_df_with_location(drives_df, data_params['site_name'], cfg['recording_start'], cfg['recording_end'])
 
-    data_params['ref_audio_files'] = sorted(list(files_from_location["File path"].apply(lambda x : Path(x)).values))
-    file_status_cond = files_from_location["File status"] == "Usable for detection"
-    file_duration_cond = np.isclose(files_from_location["File duration"].astype('float'), 1795)
+    data_params['ref_audio_files'] = sorted(list(files_from_location["file_path"].apply(lambda x : Path(x)).values))
+    file_status_cond = files_from_location["file_status"] == "Usable for detection"
+    file_duration_cond = np.isclose(files_from_location["file_duration"].astype('float'), 1795)
     good_location_df = files_from_location.loc[file_status_cond&file_duration_cond]
-    data_params['good_audio_files'] = sorted(list(good_location_df["File path"].apply(lambda x : Path(x)).values))
+    data_params['good_audio_files'] = sorted(list(good_location_df["file_path"].apply(lambda x : Path(x)).values))
 
     if data_params['good_audio_files'] == data_params['ref_audio_files']:
         print("All files from deployment session good!")
@@ -234,21 +235,21 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     bout_params = bout.get_bout_params_from_location(location_sum_df, data_params)
-    csv_files_for_location = sorted(list(Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
-    site_filepaths = good_location_df['File path'].values
+    csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
+    site_filepaths = good_location_df['file_path'].values
 
     for filepath in site_filepaths:
         data_params['audio_file'] = Path(filepath)
         filename = data_params['audio_file'].name.split('.')[0]
-        csv_path = Path(f'{Path(__file__).parent}/../data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
+        csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
         if (data_params['csv_file']) in csv_files_for_location:
             bucket_for_location, calls_sampled_from_location = collect_call_signals_from_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
 
     np_bucket = np.array(bucket_for_location, dtype='object')
 
-    np.save(f'{Path(__file__).parent}/../2022_{data_params["site_tag"]}_call_signals.npy', np_bucket)
-    calls_sampled_from_location.to_csv(f'{Path(__file__).parent}/../2022_{data_params["site_tag"]}.csv')
+    np.save(f'{Path(__file__).parents[2]}/2022_{data_params["site_tag"]}_call_signals.npy', np_bucket)
+    calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/2022_{data_params["site_tag"]}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
