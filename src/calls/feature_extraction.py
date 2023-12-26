@@ -14,8 +14,8 @@ import matplotlib.patches as patches
 from pathlib import Path
 
 import sys
-sys.path.append(f"{Path(__file__).parent}/../bout")
-sys.path.append(f"{Path(__file__).parent}/..")
+sys.path.append(f"{Path(__file__).parents[1]}/bout")
+sys.path.append(f"{Path(__file__).parents[1]}")
 print(Path(__file__).parents)
 
 from core import SITE_NAMES, EXAMPLE_FILES_from_LOCATIONS, EXAMPLE_FILES_to_FILEPATHS, EXAMPLE_FILES_to_DETECTIONS, FREQ_GROUPS
@@ -203,7 +203,7 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params['site_name'] = SITE_NAMES[cfg['site']]
     print(f"Searching for files from {data_params['site_name']}")
 
-    drives_df = dd.read_csv(f'{Path(__file__).parent}/../data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
+    drives_df = dd.read_csv(f'{Path(__file__).parents[2]}/data/ubna_data_*_collected_audio_records.csv', dtype=str).compute()
     drives_df.drop(columns='Unnamed: 0', inplace=True)
     drives_df["index"] = pd.DatetimeIndex(drives_df["Datetime UTC"])
     drives_df.set_index("index", inplace=True)
