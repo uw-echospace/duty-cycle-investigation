@@ -1,0 +1,47 @@
+import numpy as np
+import scipy
+
+def pad_call_to_fortyms(call, fs):
+    window_dur = 0.04
+    window_samples = int(fs*window_dur)
+    call_samples = len(call)
+    padded_call = np.pad(call, np.ceil((window_samples - call_samples)/2).astype(int), mode='constant', constant_values=1e-6)
+
+    return padded_call
+
+
+def compute_fft_of_call(call, fs, audio_info):
+    audio_spectrum = scipy.fft.rfft(call)
+    freqs = len(audio_spectrum)
+    audio_spectrum_mag = np.abs(audio_spectrum[:int(freqs*(192000/fs))])
+    audio_spectrum_db =  20*np.log10(audio_spectrum_mag)
+    normalized_audio_spectrum_db = audio_spectrum_db - audio_spectrum_db.max()
+
+    thresh = -100
+    peak_db = np.zeros(len(normalized_audio_spectrum_db))+thresh
+    peak_db[normalized_audio_spectrum_db>=thresh] = normalized_audio_spectrum_db[normalized_audio_spectrum_db>=thresh]
+
+    original_freq_vector = np.arange(0, len(peak_db), 1).astype('int')
+    common_freq_vector = np.linspace(0, len(peak_db)-1, audio_info['num_points']).astype('int')
+    interp_kind = 'linear'
+    interpolated_points_from_spectrum = scipy.interpolate.interp1d(original_freq_vector, peak_db, kind=interp_kind)(common_freq_vector)
+
+    return interpolated_points_from_spectrum
+
+
+def compute_welch_psd_of_call(call, fs, audio_info):
+    freqs, welch = scipy.signal.welch(call, fs=fs, detrend=False)
+    cropped_welch = welch[(freqs<=audio_info['max_freq_visible'])]
+    audio_spectrum_mag = np.abs(cropped_welch)
+    audio_spectrum_db =  20*np.log10(audio_spectrum_mag)
+    normalized_audio_spectrum_db = audio_spectrum_db - audio_spectrum_db.max()
+    thresh = -100
+    peak_db = np.zeros(len(normalized_audio_spectrum_db))+thresh
+    peak_db[normalized_audio_spectrum_db>=thresh] = normalized_audio_spectrum_db[normalized_audio_spectrum_db>=thresh]
+    
+    original_freq_vector = np.arange(0, len(peak_db), 1).astype('int')
+    common_freq_vector = np.linspace(0, len(peak_db)-1, audio_info['num_points']).astype('int')
+    interp_kind = 'linear'
+    interpolated_points_from_welch = scipy.interpolate.interp1d(original_freq_vector, peak_db, kind=interp_kind)(common_freq_vector)
+
+    return interpolated_points_from_welch
