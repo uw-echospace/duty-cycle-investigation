@@ -11,10 +11,10 @@ from core import SITE_NAMES
 import compute_features
 
 
-def plot_call_spectrogram_centered(good_snr_location_calls_sampled, location_call_signals, audio_info):
-    call_info = good_snr_location_calls_sampled.loc[audio_info['call_index']]
+def plot_call_spectrogram_centered(calls_sampled, call_signals, audio_info):
+    call_info = calls_sampled.loc[audio_info['call_index']]
     fs = call_info['sampling_rate']
-    call = location_call_signals[call_info['index']]
+    call = call_signals[call_info['index']]
     padded_call = compute_features.pad_call_to_fortyms(call, fs)
 
     padded_call_dur = round(len(padded_call)/fs, 2)
@@ -38,12 +38,12 @@ def plot_call_spectrogram_centered(good_snr_location_calls_sampled, location_cal
     plt.grid(which='both')
 
 
-def plot_call_fft_interpolated(good_snr_location_calls_sampled, location_call_signals, audio_info):
-    call_info = good_snr_location_calls_sampled.loc[audio_info['call_index']]
+def plot_call_fft_interpolated(calls_sampled, call_signals, audio_info):
+    call_info = calls_sampled.loc[audio_info['call_index']]
     fs = call_info['sampling_rate']
-    call = location_call_signals[call_info['index']]
+    call = call_signals[call_info['index']]
     
-    interpolated_points_from_spectrum = compute_features.compute_fft_of_call(call, fs, audio_info)
+    interpolated_points_from_spectrum = compute_features.compute_fft_of_call(call, fs, audio_info['num_points'])
    
     fft_signal = interpolated_points_from_spectrum
     freqs_of_signal = np.arange(0, len(fft_signal))
@@ -60,10 +60,10 @@ def plot_call_fft_interpolated(good_snr_location_calls_sampled, location_call_si
     plt.legend(loc='lower center')
 
 
-def plot_call_welch_interpolated(good_snr_location_calls_sampled, location_call_signals, audio_info):
-    call_info = good_snr_location_calls_sampled.loc[audio_info['call_index']]
+def plot_call_welch_interpolated(calls_sampled, call_signals, audio_info):
+    call_info = calls_sampled.loc[audio_info['call_index']]
     fs = call_info['sampling_rate']
-    call = location_call_signals[call_info['index']]
+    call = call_signals[call_info['index']]
     max_visible_frequency = 96000
     audio_info['max_freq_visible'] = max_visible_frequency
 
@@ -165,10 +165,7 @@ def plot_side_by_side_calls_spectra(calls_sampled, call_signals):
 
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
-        snr = call_info['SNR']
-        fs = call_info['sampling_rate']
         datetime = dt.datetime.strptime(file_name, "%Y%m%d_%H%M%S.WAV")
-        call = call_signals[call_info['index']]
         
         audio_info = dict()
         plt.subplot(1, 3, 1)

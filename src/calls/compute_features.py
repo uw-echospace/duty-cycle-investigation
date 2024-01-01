@@ -10,7 +10,7 @@ def pad_call_to_fortyms(call, fs):
     return padded_call
 
 
-def compute_fft_of_call(call, fs, audio_info):
+def compute_fft_of_call(call, fs, num_points):
     audio_spectrum = scipy.fft.rfft(call)
     freqs = len(audio_spectrum)
     audio_spectrum_mag = np.abs(audio_spectrum[:int(freqs*(192000/fs))])
@@ -22,7 +22,7 @@ def compute_fft_of_call(call, fs, audio_info):
     peak_db[normalized_audio_spectrum_db>=thresh] = normalized_audio_spectrum_db[normalized_audio_spectrum_db>=thresh]
 
     original_freq_vector = np.arange(0, len(peak_db), 1).astype('int')
-    common_freq_vector = np.linspace(0, len(peak_db)-1, audio_info['num_points']).astype('int')
+    common_freq_vector = np.linspace(0, len(peak_db)-1, num_points).astype('int')
     interp_kind = 'linear'
     interpolated_points_from_spectrum = scipy.interpolate.interp1d(original_freq_vector, peak_db, kind=interp_kind)(common_freq_vector)
 
@@ -45,3 +45,35 @@ def compute_welch_psd_of_call(call, fs, audio_info):
     interpolated_points_from_welch = scipy.interpolate.interp1d(original_freq_vector, peak_db, kind=interp_kind)(common_freq_vector)
 
     return interpolated_points_from_welch
+
+
+def generate_ffts_for_calls(calls_sampled, call_signals):
+    fft_signals = []
+    for call_index, call_info in calls_sampled.iterrows():
+        num_points = 500
+        call_info = calls_sampled.loc[call_index]
+        fs = call_info['sampling_rate']
+        call = call_signals[call_info['index']]
+        interpolated_points_from_spectrum = compute_fft_of_call(call, fs, num_points)
+        fft_signals.append(interpolated_points_from_spectrum)
+
+    fft_signals = np.vstack(fft_signals)
+
+    return fft_signals
+
+
+def generate_welchs_for_calls(calls_sampled, call_signals):
+    welch_signals = []
+    for call_index, call_info in calls_sampled.iterrows():
+        audio_info = dict()
+        audio_info['max_freq_visible'] = 96000
+        audio_info['num_points'] = 100
+        call_info = calls_sampled.loc[call_index]
+        fs = call_info['sampling_rate']
+        call = call_signals[call_info['index']]
+        interpolated_points_from_welch = compute_welch_psd_of_call(call, fs, audio_info)
+        welch_signals.append(interpolated_points_from_welch)
+
+    welch_signals = np.vstack(welch_signals)
+
+    return welch_signals
