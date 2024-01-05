@@ -1,12 +1,12 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
-588.6255,588.6301,49531.0,62251.0,Echolocation,Pipistrellus pipistrellus,0.547,0.569,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-588.8055,588.8108,48671.0,60421.0,Echolocation,Pipistrellus pipistrellus,0.493,0.527,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-588.9845,588.9903,52109.0,62142.0,Echolocation,Pipistrellus pipistrellus,0.496,0.531,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-589.1525,589.1573,50390.0,66596.0,Echolocation,Pipistrellus pipistrellus,0.465,0.503,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-589.3335,589.3384,48671.0,65436.0,Echolocation,Pipistrellus pipistrellus,0.523,0.588,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-589.4195,589.4246,48671.0,64277.0,Echolocation,Pipistrellus pipistrellus,0.539,0.595,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-589.5865,589.5922,46093.0,65111.0,Echolocation,Pipistrellus pipistrellus,0.426,0.535,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-589.8165,589.8217,48671.0,70276.0,Echolocation,Pipistrellus pipistrellus,0.558,0.65,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-589.8545,589.8612,49531.0,72131.0,Echolocation,Pipistrellus pipistrellus,0.399,0.541,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-589.9165,589.9239,45234.0,69464.0,Echolocation,Pipistrellus pipistrellus,0.361,0.538,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
-590.3255,590.3299,42656.0,87874.0,Echolocation,Myotis alcathoe,0.329,0.502,-1,/mnt/ubna_data_01/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+588.6255,588.6301,49531.0,62251.0,Echolocation,Pipistrellus pipistrellus,0.547,0.569,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+588.8055,588.8108,48671.0,60421.0,Echolocation,Pipistrellus pipistrellus,0.493,0.527,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+588.9845,588.9903,52109.0,62142.0,Echolocation,Pipistrellus pipistrellus,0.496,0.531,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+589.1525,589.1573,50390.0,66596.0,Echolocation,Pipistrellus pipistrellus,0.465,0.503,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+589.3335,589.3384,48671.0,65436.0,Echolocation,Pipistrellus pipistrellus,0.523,0.588,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+589.4195,589.4246,48671.0,64277.0,Echolocation,Pipistrellus pipistrellus,0.539,0.595,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+589.5865,589.5922,46093.0,65111.0,Echolocation,Pipistrellus pipistrellus,0.426,0.535,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+589.8165,589.8217,48671.0,70276.0,Echolocation,Pipistrellus pipistrellus,0.558,0.65,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+589.8545,589.8612,49531.0,72131.0,Echolocation,Pipistrellus pipistrellus,0.399,0.541,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+589.9165,589.9239,45234.0,69464.0,Echolocation,Pipistrellus pipistrellus,0.361,0.538,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795
+590.3255,590.3299,42656.0,87874.0,Echolocation,Myotis alcathoe,0.329,0.502,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_005/20220814_120000.WAV,Carp Pond,recover-20220815,005,1795

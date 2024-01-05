@@ -1,12 +1,12 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name
-1428.5195,1428.5271,41796.0,49150.0,Echolocation,Pipistrellus nathusii,0.457,0.55,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1428.6245,1428.6334,40937.0,47381.0,Echolocation,Pipistrellus nathusii,0.431,0.504,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1429.0955,1429.1048,41796.0,52037.0,Echolocation,Pipistrellus nathusii,0.41,0.563,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1430.1195,1430.1273,40937.0,50093.0,Echolocation,Pipistrellus nathusii,0.46,0.53,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1430.3145,1430.3234,40937.0,47806.0,Echolocation,Pipistrellus nathusii,0.496,0.646,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1430.4975,1430.5064,40937.0,51988.0,Echolocation,Pipistrellus nathusii,0.533,0.675,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1430.6885,1430.6986,40937.0,51368.0,Echolocation,Pipistrellus nathusii,0.525,0.642,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1430.9715,1430.9801,41796.0,50765.0,Echolocation,Pipistrellus nathusii,0.546,0.583,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1431.1705,1431.18,40078.0,46364.0,Echolocation,Pipistrellus nathusii,0.491,0.528,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1431.3525,1431.3619,42656.0,51581.0,Echolocation,Pipistrellus nathusii,0.42,0.575,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
-1431.8265,1431.8351,40937.0,47863.0,Echolocation,Pipistrellus nathusii,0.502,0.565,-1,/mnt/ubna_data_01/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+1428.5195,1428.5271,41796.0,49150.0,Echolocation,Pipistrellus nathusii,0.457,0.55,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1428.6245,1428.6334,40937.0,47381.0,Echolocation,Pipistrellus nathusii,0.431,0.504,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1429.0955,1429.1048,41796.0,52037.0,Echolocation,Pipistrellus nathusii,0.41,0.563,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1430.1195,1430.1273,40937.0,50093.0,Echolocation,Pipistrellus nathusii,0.46,0.53,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1430.3145,1430.3234,40937.0,47806.0,Echolocation,Pipistrellus nathusii,0.496,0.646,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1430.4975,1430.5064,40937.0,51988.0,Echolocation,Pipistrellus nathusii,0.533,0.675,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1430.6885,1430.6986,40937.0,51368.0,Echolocation,Pipistrellus nathusii,0.525,0.642,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1430.9715,1430.9801,41796.0,50765.0,Echolocation,Pipistrellus nathusii,0.546,0.583,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1431.1705,1431.18,40078.0,46364.0,Echolocation,Pipistrellus nathusii,0.491,0.528,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1431.3525,1431.3619,42656.0,51581.0,Echolocation,Pipistrellus nathusii,0.42,0.575,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
+1431.8265,1431.8351,40937.0,47863.0,Echolocation,Pipistrellus nathusii,0.502,0.565,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_013/20220805_100000.WAV,Carp Pond,recover-20220808,013,1795
