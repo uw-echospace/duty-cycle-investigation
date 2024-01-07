@@ -264,22 +264,22 @@ def parse_args():
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "site",
+        "--site",
         type=str,
         help="the site key",
     )
     parser.add_argument(
-        "recording_start",
+        "--recording_start",
         type=str,
         help="the start of recording period",
     )
     parser.add_argument(
-        "recording_end",
+        "--recording_end",
         type=str,
         help="the end of recording period",
     )
     parser.add_argument(
-        "threshold",
+        "--threshold",
         type=float,
         help="the threshold; the top (100*X)% will be considered in each bout",
     )
