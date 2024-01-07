@@ -283,6 +283,8 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
         data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
+        data_params['use_bouts'] = cfg['use_bouts']
+        data_params['use_file'] = cfg['use_file']
         if (data_params['csv_file']) in csv_files_for_location:
             bucket_for_location, calls_sampled_from_location = collect_call_signals_from_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
 
@@ -327,12 +329,12 @@ def parse_args():
     )
     parser.add_argument(
         "--use_bouts",
-        type='store_true',
+        action='store_true',
         help="Collect calls using each bout as a pool",
     )
     parser.add_argument(
         "--use_file",
-        type='store_true',
+        action='store_true',
         help="Collect calls using entire file as a pool",
     )
     return vars(parser.parse_args())
@@ -345,5 +347,7 @@ if __name__ == "__main__":
     cfg['recording_start'] = args['recording_start']
     cfg['recording_end'] = args['recording_end']
     cfg['percent_threshold_for_snr'] = args['threshold']
+    cfg['use_bouts'] = args['use_bouts']
+    cfg['use_file'] = args['use_file']
 
     sample_calls_and_generate_call_signal_bucket_for_location(cfg)
