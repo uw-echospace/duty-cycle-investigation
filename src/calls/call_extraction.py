@@ -130,7 +130,7 @@ def select_top_percentage_from_detections(detections, percentage):
     return selected_set
 
 
-def sample_calls_using_bouts(bd2_predictions, data_params, bout_params):
+def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, bout_params):
     bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params, bout_params)
     bout_metrics.reset_index(inplace=True)
     if 'index' in bout_metrics.columns:
@@ -163,10 +163,10 @@ def sample_calls_using_bouts(bd2_predictions, data_params, bout_params):
 
         calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
-    return calls_sampled_from_file
+    return bucket_for_location, calls_sampled_from_file
 
 
-def sample_calls__from_file(bd2_predictions, data_params, bout_params):
+def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
     file_path = Path(data_params['audio_file'])
     audio_file = sf.SoundFile(file_path)
     fs = audio_file.samplerate
@@ -191,7 +191,7 @@ def sample_calls__from_file(bd2_predictions, data_params, bout_params):
 
         calls_sampled_from_file = pd.concat([calls_sampled_from_file, detections_condensed])
 
-    return calls_sampled_from_file
+    return bucket_for_location, calls_sampled_from_file
 
 
 
@@ -205,9 +205,9 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
     print(valid_group_in_preds)
     if len(bd2_predictions)>0 and valid_group_in_preds:
         if data_params['use_bouts']:
-            calls_sampled_from_file = sample_calls_using_bouts(bd2_predictions, data_params, bout_params)
+            bucket_for_location, calls_sampled_from_file = sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, bout_params)
         if data_params['use_file']:
-            calls_sampled_from_file = sample_calls__from_file(bd2_predictions, data_params, bout_params)
+            bucket_for_location, calls_sampled_from_file = sample_calls_from_file(bd2_predictions, bucket_for_location, data_params)
         else:
             calls_sampled_from_file = pd.DataFrame()
 
