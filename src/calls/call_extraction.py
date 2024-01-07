@@ -20,9 +20,9 @@ from cli import get_file_paths
 
 
 def get_snr_from_band_limited_signal(snr_call_signal, snr_noise_signal): 
-    signal_power = np.sqrt(np.square(snr_call_signal).mean())
-    noise_power = np.sqrt(np.square(snr_noise_signal).mean())
-    snr = abs(20 * np.log10(signal_power / noise_power))
+    signal_power_rms = np.sqrt(np.square(snr_call_signal).mean())
+    noise_power_rms = np.sqrt(np.square(snr_noise_signal).mean())
+    snr = abs(20 * np.log10(signal_power_rms / noise_power_rms))
 
     return snr
 
@@ -31,7 +31,7 @@ def bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff):
     nyq = fs // 2
     low_cutoff = (low_freq_cutoff) / nyq
     high_cutoff =  (high_freq_cutoff) / nyq
-    b, a = scipy.signal.butter(5, [low_cutoff, high_cutoff], btype='band', analog=False)
+    b, a = scipy.signal.butter(4, [low_cutoff, high_cutoff], btype='band', analog=False)
     band_limited_audio_seg = scipy.signal.filtfilt(b, a, audio_seg)
 
     return band_limited_audio_seg
@@ -120,6 +120,16 @@ def collect_call_signals_from_bout(audio_file, bat_bout, bucket):
     return bucket, sampled_calls_from_bout
 
 
+def select_top_percentage_from_bout(bat_bout, percentage):
+    print(f"SNRs in bout: {bat_bout['SNR'].values}")
+    top_SNR =  (1-percentage)*bat_bout['SNR'].max()
+    print(f"Highest SNR in bout: {bat_bout['SNR'].max()}")
+    print(f"SNR threshold for bout: {top_SNR}")
+    selected_set = bat_bout.loc[bat_bout['SNR']>=top_SNR]
+
+    return selected_set
+
+
 def collect_call_signals_from_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location):
     file_path = Path(data_params['audio_file'])
     csv_path = Path(data_params['csv_file'])
@@ -146,16 +156,12 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
             freq_group = bd2_predictions.loc[bd2_predictions['freq_group']==group]
             bat_bout = freq_group.loc[(freq_group['start_time']>=row['start_time'])&(freq_group['end_time']<=row['end_time'])].copy()
             call_snrs = collect_call_snrs_from_bat_bout_in_audio_file(audio_file, bat_bout)
-
             bat_bout['SNR'] = call_snrs
             print(f"{len(bat_bout)} calls in bout {bout_index}")
-            print(f"SNRs in bout: {bat_bout['SNR'].values}")
-            top_10_SNR =  0.90*bat_bout['SNR'].max()
-            print(f"Highest SNR in bout: {bat_bout['SNR'].max()}")
-            print(f"SNR threshold for bout: {top_10_SNR}")
-            top_10_SNR_bat_bout = bat_bout.loc[bat_bout['SNR']>=top_10_SNR]
-            print(f"{len(top_10_SNR_bat_bout)} high SNR calls in bout {bout_index}")
-            bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_bout(audio_file, top_10_SNR_bat_bout, bucket_for_location)
+            selected_set = select_top_percentage_from_bout(bat_bout, data_params['percent_threshold_for_snr'])
+            print(f"{len(selected_set)} high SNR calls in bout {bout_index}")
+
+            bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_bout(audio_file, selected_set, bucket_for_location)
 
             bat_bout_condensed = pd.DataFrame()
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
@@ -238,14 +244,15 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         filename = data_params['audio_file'].name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         data_params['csv_file'] = csv_path
+        data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
         if (data_params['csv_file']) in csv_files_for_location:
             bucket_for_location, calls_sampled_from_location = collect_call_signals_from_file(data_params, bout_params, bucket_for_location, calls_sampled_from_location)
 
     np_bucket = np.array(bucket_for_location, dtype='object')
 
     calls_sampled_from_location.reset_index(inplace=True)
-    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/2022_{data_params["site_tag"]}_call_signals.npy', np_bucket)
-    calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/2022_{data_params["site_tag"]}.csv')
+    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/2022_{data_params["site_tag"]}_top{data_params["percent_threshold_for_snr"]}_call_signals.npy', np_bucket)
+    calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/2022_{data_params["site_tag"]}_top{data_params["percent_threshold_for_snr"]}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
@@ -271,6 +278,11 @@ def parse_args():
         type=str,
         help="the end of recording period",
     )
+    parser.add_argument(
+        "threshold",
+        type=float,
+        help="the threshold; the top (100*X)% will be considered in each bout",
+    )
     return vars(parser.parse_args())
 
 if __name__ == "__main__":
@@ -280,5 +292,6 @@ if __name__ == "__main__":
     cfg['site'] = args['site']
     cfg['recording_start'] = args['recording_start']
     cfg['recording_end'] = args['recording_end']
+    cfg['percent_threshold_for_snr'] = args['threshold']
 
     sample_calls_and_generate_call_signal_bucket_for_location(cfg)
