@@ -160,6 +160,7 @@ def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, 
         bat_bout_condensed['site'] = sampled_calls_from_bout['Site name'].values
         bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
         bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
+        print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
 
         calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
