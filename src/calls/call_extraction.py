@@ -189,6 +189,7 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
         detections_condensed['site'] = sampled_calls_from_bout['Site name'].values
         detections_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
         detections_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
+        print(f"{len(detections_condensed)} high SNR calls added to call catalogue")
 
         calls_sampled_from_file = pd.concat([calls_sampled_from_file, detections_condensed])
 
@@ -207,7 +208,7 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
     if len(bd2_predictions)>0 and valid_group_in_preds:
         if data_params['use_bouts']:
             bucket_for_location, calls_sampled_from_file = sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, bout_params)
-        if data_params['use_file']:
+        elif data_params['use_file']:
             bucket_for_location, calls_sampled_from_file = sample_calls_from_file(bd2_predictions, bucket_for_location, data_params)
         else:
             calls_sampled_from_file = pd.DataFrame()
