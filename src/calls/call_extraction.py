@@ -251,8 +251,8 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     np_bucket = np.array(bucket_for_location, dtype='object')
 
     calls_sampled_from_location.reset_index(inplace=True)
-    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/2022_{data_params["site_tag"]}_top{data_params["percent_threshold_for_snr"]}_call_signals.npy', np_bucket)
-    calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/2022_{data_params["site_tag"]}_top{data_params["percent_threshold_for_snr"]}.csv')
+    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_call_signals.npy', np_bucket)
+    calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
