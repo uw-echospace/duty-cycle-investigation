@@ -122,7 +122,7 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
 
 def select_top_percentage_from_detections(detections, percentage):
     print(f"SNRs in this section: {detections['SNR'].values}")
-    top_SNR =  (1-percentage)*detections['SNR'].max()
+    top_SNR =  max(1, (1-percentage)*detections['SNR'].max())
     print(f"Highest SNR in section: {detections['SNR'].max()}")
     print(f"SNR threshold for section: {top_SNR}")
     selected_set = detections.loc[detections['SNR']>=top_SNR]
