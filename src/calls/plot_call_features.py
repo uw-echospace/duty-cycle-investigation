@@ -15,7 +15,7 @@ def plot_call_spectrogram_centered(calls_sampled, call_signals, audio_info):
     call_info = calls_sampled.loc[audio_info['call_index']]
     fs = call_info['sampling_rate']
     call = call_signals[call_info['index']]
-    padded_call = compute_features.pad_call_to_fortyms(call, fs)
+    padded_call = compute_features.pad_call_to_sixtyms(call, fs)
 
     padded_call_dur = round(len(padded_call)/fs, 2)
     plt.title(audio_info['plot_title'], fontsize=12, weight='bold')

@@ -10,6 +10,24 @@ def pad_call_to_fortyms(call, fs):
     return padded_call
 
 
+def pad_call_to_fiftyms(call, fs):
+    window_dur = 0.05
+    window_samples = int(fs*window_dur)
+    call_samples = len(call)
+    padded_call = np.pad(call, np.ceil((window_samples - call_samples)/2).astype(int), mode='constant', constant_values=1e-6)
+
+    return padded_call
+
+
+def pad_call_to_sixtyms(call, fs):
+    window_dur = 0.06
+    window_samples = int(fs*window_dur)
+    call_samples = len(call)
+    padded_call = np.pad(call, np.ceil((window_samples - call_samples)/2).astype(int), mode='constant', constant_values=1e-6)
+
+    return padded_call
+
+
 def compute_fft_of_call(call, fs, num_points):
     audio_spectrum = scipy.fft.rfft(call)
     freqs = len(audio_spectrum)
