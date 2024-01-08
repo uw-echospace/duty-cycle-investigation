@@ -151,18 +151,19 @@ def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, 
         print(f"{len(bat_bout)} calls in bout {bout_index}")
         selected_set = select_top_percentage_from_detections(bat_bout, data_params['percent_threshold_for_snr'])
         print(f"{len(selected_set)} high SNR calls in bout {bout_index}")
-        bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, bucket_for_location)
+        if len(selected_set) > 0:
+            bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, bucket_for_location)
 
-        bat_bout_condensed = pd.DataFrame()
-        bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
-        bat_bout_condensed['SD_card'] = sampled_calls_from_bout['SD Card'].values
-        bat_bout_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
-        bat_bout_condensed['site'] = sampled_calls_from_bout['Site name'].values
-        bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
-        bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
-        print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
+            bat_bout_condensed = pd.DataFrame()
+            bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
+            bat_bout_condensed['SD_card'] = sampled_calls_from_bout['SD Card'].values
+            bat_bout_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
+            bat_bout_condensed['site'] = sampled_calls_from_bout['Site name'].values
+            bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
+            bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
+            print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
 
-        calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
+            calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
 
     return bucket_for_location, calls_sampled_from_file
 
@@ -181,17 +182,18 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
         print(f"{len(freq_group)} {group} calls in file: {file_path.name}")
         selected_set = select_top_percentage_from_detections(freq_group, data_params['percent_threshold_for_snr'])
         print(f"{len(selected_set)} high SNR {group} calls in file: {file_path.name}")
-        bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, bucket_for_location)
+        if len(selected_set) > 0:
+            bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, bucket_for_location)
 
-        detections_condensed = pd.DataFrame()
-        detections_condensed['SD_card'] = sampled_calls_from_bout['SD Card'].values
-        detections_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
-        detections_condensed['site'] = sampled_calls_from_bout['Site name'].values
-        detections_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
-        detections_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
-        print(f"{len(detections_condensed)} high SNR calls added to call catalogue")
+            detections_condensed = pd.DataFrame()
+            detections_condensed['SD_card'] = sampled_calls_from_bout['SD Card'].values
+            detections_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
+            detections_condensed['site'] = sampled_calls_from_bout['Site name'].values
+            detections_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
+            detections_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
+            print(f"{len(detections_condensed)} high SNR calls added to call catalogue")
 
-        calls_sampled_from_file = pd.concat([calls_sampled_from_file, detections_condensed])
+            calls_sampled_from_file = pd.concat([calls_sampled_from_file, detections_condensed])
 
     return bucket_for_location, calls_sampled_from_file
 
