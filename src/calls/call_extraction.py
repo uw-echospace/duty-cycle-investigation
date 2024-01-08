@@ -278,6 +278,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     bout_params = bout.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
     site_filepaths = good_location_df['file_path'].values
+    print(site_filepaths)
 
     for filepath in site_filepaths:
         data_params['audio_file'] = Path(filepath)
