@@ -283,6 +283,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         data_params['audio_file'] = Path(filepath)
         filename = data_params['audio_file'].name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
+        print(f'Looking at audio file with detection file: {csv_path}')
         data_params['csv_file'] = csv_path
         data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
         data_params['use_bouts'] = cfg['use_bouts']
