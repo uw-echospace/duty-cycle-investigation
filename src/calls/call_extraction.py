@@ -180,7 +180,7 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
         freq_group['SNR'] = call_snrs
         print(f"{len(freq_group)} {group} calls in file: {file_path.name}")
         selected_set = select_top_percentage_from_detections(freq_group, data_params['percent_threshold_for_snr'])
-        print(f"{len(selected_set)} {group} high SNR calls in file: {file_path.name}")
+        print(f"{len(selected_set)} high SNR {group} calls in file: {file_path.name}")
         bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, bucket_for_location)
 
         detections_condensed = pd.DataFrame()
@@ -203,8 +203,7 @@ def collect_call_signals_from_file(data_params, bout_params, bucket_for_location
     bd2_predictions = actvt.assemble_single_bd2_output(csv_path, data_params)
     groups_in_preds = bd2_predictions['freq_group'].unique()
     valid_group_in_preds = np.logical_or(np.logical_or('LF1' in groups_in_preds, 'HF1' in groups_in_preds), 'HF2' in groups_in_preds)
-    print(f"Groups found in this file: {bd2_predictions['freq_group'].unique()}")
-    print(valid_group_in_preds)
+    print(f"Groups found in this file: {bd2_predictions['freq_group'].unique()}, valid? {valid_group_in_preds}")
     if len(bd2_predictions)>0 and valid_group_in_preds:
         if data_params['use_bouts']:
             bucket_for_location, calls_sampled_from_file = sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, bout_params)
@@ -278,13 +277,12 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     bout_params = bout.get_bout_params_from_location(location_sum_df, data_params)
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
     site_filepaths = good_location_df['file_path'].values
-    print(site_filepaths)
 
     for filepath in site_filepaths:
         data_params['audio_file'] = Path(filepath)
         filename = data_params['audio_file'].name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
-        print(f'Looking at audio file with detection file: {csv_path}')
+        print(f'Looking at {filepath} with detection file: {csv_path}')
         data_params['csv_file'] = csv_path
         data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
         data_params['use_bouts'] = cfg['use_bouts']
