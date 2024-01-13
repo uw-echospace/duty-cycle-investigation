@@ -12,12 +12,14 @@ sys.path.append(f"{Path(__file__).parents[1]}")
 from core import SITE_NAMES
 import compute_features
 
+PADDED_CALL_LENGTH = 0.06
+
 
 def plot_call_centered(calls_sampled, call_signals, audio_info):
     call_info = calls_sampled.loc[audio_info['call_index']]
     fs = call_info['sampling_rate']
     call = call_signals[call_info['index']]
-    padded_call = compute_features.pad_call_to_sixtyms(call, fs)
+    padded_call = compute_features.pad_call_ms(call, fs, PADDED_CALL_LENGTH)
 
     plt.title(audio_info['plot_title'], fontsize=12, weight='bold')
     plt.plot(padded_call)
@@ -36,7 +38,7 @@ def plot_cumenergy_of_call(calls_sampled, call_signals, audio_info):
     call_info = calls_sampled.loc[audio_info['call_index']]
     fs = call_info['sampling_rate']
     call = call_signals[call_info['index']]
-    padded_call = compute_features.pad_call_to_sixtyms(call, fs)
+    padded_call = compute_features.pad_call_ms(call, fs, PADDED_CALL_LENGTH)
 
     plt.title(audio_info['plot_title'], fontsize=12, weight='bold')
     cum_energy = np.cumsum(padded_call**2)
@@ -64,7 +66,7 @@ def plot_timeenergy_of_call(calls_sampled, call_signals, audio_info):
     call_info = calls_sampled.loc[audio_info['call_index']]
     fs = call_info['sampling_rate']
     call = call_signals[call_info['index']]
-    padded_call = compute_features.pad_call_to_sixtyms(call, fs)
+    padded_call = compute_features.pad_call_ms(call, fs, PADDED_CALL_LENGTH)
 
     plt.title(audio_info['plot_title'], fontsize=12, weight='bold')
     plot_signal = compute_features.compute_energy_of_call(padded_call, fs, audio_info['num_points'])
@@ -86,7 +88,7 @@ def plot_call_spectrogram_centered(calls_sampled, call_signals, audio_info):
     call_info = calls_sampled.loc[audio_info['call_index']]
     fs = call_info['sampling_rate']
     call = call_signals[call_info['index']]
-    padded_call = compute_features.pad_call_to_sixtyms(call, fs)
+    padded_call = compute_features.pad_call_ms(call, fs, PADDED_CALL_LENGTH)
 
     padded_call_dur = round(len(padded_call)/fs, 2)
     plt.title(audio_info['plot_title'], fontsize=12, weight='bold')
