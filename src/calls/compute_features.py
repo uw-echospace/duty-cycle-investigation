@@ -28,6 +28,19 @@ def pad_call_to_sixtyms(call, fs):
     return padded_call
 
 
+def compute_energy_of_call(call, fs, num_points):
+    energy = call**2
+    energy_db = 10*np.log10(energy)
+
+    original_freq_vector = np.arange(0, len(energy_db), 1).astype('int')
+    common_freq_vector = np.linspace(0, len(energy_db)-1, num_points).astype('int')
+    interp_kind = 'linear'
+    interpolated_points_from_energy = scipy.interpolate.interp1d(original_freq_vector, energy_db, kind=interp_kind)(common_freq_vector)
+    interpolated_points_from_energy = interpolated_points_from_energy - interpolated_points_from_energy.min()
+
+    return interpolated_points_from_energy
+
+
 def compute_fft_of_call(call, fs, num_points):
     audio_spectrum = scipy.fft.rfft(call)
     freqs = len(audio_spectrum)
@@ -48,11 +61,12 @@ def compute_fft_of_call(call, fs, num_points):
 
 
 def compute_welch_psd_of_call(call, fs, audio_info):
-    freqs, welch = scipy.signal.welch(call, fs=fs, detrend=False)
+    freqs, welch = scipy.signal.welch(call, fs=fs, detrend=False, scaling='spectrum')
     cropped_welch = welch[(freqs<=audio_info['max_freq_visible'])]
     audio_spectrum_mag = np.abs(cropped_welch)
-    audio_spectrum_db =  20*np.log10(audio_spectrum_mag)
+    audio_spectrum_db =  10*np.log10(audio_spectrum_mag)
     normalized_audio_spectrum_db = audio_spectrum_db - audio_spectrum_db.max()
+
     thresh = -100
     peak_db = np.zeros(len(normalized_audio_spectrum_db))+thresh
     peak_db[normalized_audio_spectrum_db>=thresh] = normalized_audio_spectrum_db[normalized_audio_spectrum_db>=thresh]

@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 import datetime as dt
+import random
+random.seed(0)
 
 import sys
 sys.path.append(f"{Path(__file__).parents[0]}")
@@ -9,6 +11,75 @@ sys.path.append(f"{Path(__file__).parents[1]}")
 
 from core import SITE_NAMES
 import compute_features
+
+
+def plot_call_centered(calls_sampled, call_signals, audio_info):
+    call_info = calls_sampled.loc[audio_info['call_index']]
+    fs = call_info['sampling_rate']
+    call = call_signals[call_info['index']]
+    padded_call = compute_features.pad_call_to_sixtyms(call, fs)
+
+    plt.title(audio_info['plot_title'], fontsize=12, weight='bold')
+    plt.plot(padded_call)
+    time_labels = (np.linspace(0,1000*round(len(padded_call)/fs, 2), 11).astype('int')).astype('str')
+    time_labels[1::2] = ''
+    plt.xticks(ticks=np.linspace(0,len(padded_call), 11), labels=time_labels, rotation=45)
+    ax = plt.gca()
+    plt.text(x=0.4, y=0.05, s=f'SNR:{round(call_info["SNR"], 1)}', color='black', fontweight='bold', transform=ax.transAxes)
+
+    plt.xlabel('Time (ms)')
+    plt.ylabel('Amplitude (V)')
+    plt.grid(which='both')
+
+
+def plot_cumenergy_of_call(calls_sampled, call_signals, audio_info):
+    call_info = calls_sampled.loc[audio_info['call_index']]
+    fs = call_info['sampling_rate']
+    call = call_signals[call_info['index']]
+    padded_call = compute_features.pad_call_to_sixtyms(call, fs)
+
+    plt.title(audio_info['plot_title'], fontsize=12, weight='bold')
+    cum_energy = np.cumsum(padded_call**2)
+    cum_energy_percent = 100*(cum_energy/cum_energy.max())
+    plt.plot(cum_energy_percent)
+
+    time_signal = np.arange(0, len(cum_energy_percent))
+    time_labels = (np.linspace(0,1000*round(len(cum_energy_percent)/fs, 2), 11).astype('int')).astype('str')
+    time_labels[1::2] = ''
+    plt.xticks(ticks=np.linspace(0, len(cum_energy_percent), 11), labels=time_labels, rotation=45)
+    plt.axhline(y=5, linestyle='dashed', color='green', alpha=0.6)
+    plt.axhline(y=95, linestyle='dashed', color='green', alpha=0.6)
+    plt.axvline(x=time_signal[cum_energy_percent<=5][-1], linestyle='dashed', color='green', alpha=0.6)
+    plt.axvline(x=time_signal[cum_energy_percent>=95][0], linestyle='dashed', color='green', alpha=0.6)
+    plt.ylim(-10, 110)
+    ax = plt.gca()
+    plt.text(x=0.4, y=0.05, s=f'SNR:{round(call_info["SNR"], 1)}', color='black', fontweight='bold', transform=ax.transAxes)
+
+    plt.xlabel('Time (ms)')
+    plt.ylabel("Cum. Energy (%)")
+    plt.grid(which='both')
+
+
+def plot_timeenergy_of_call(calls_sampled, call_signals, audio_info):
+    call_info = calls_sampled.loc[audio_info['call_index']]
+    fs = call_info['sampling_rate']
+    call = call_signals[call_info['index']]
+    padded_call = compute_features.pad_call_to_sixtyms(call, fs)
+
+    plt.title(audio_info['plot_title'], fontsize=12, weight='bold')
+    plot_signal = compute_features.compute_energy_of_call(padded_call, fs, audio_info['num_points'])
+    plt.plot(plot_signal)
+
+    time_labels = (np.linspace(0,1000*round(len(padded_call)/fs, 2), 11).astype('int')).astype('str')
+    time_labels[1::2] = ''
+    plt.xticks(ticks=np.linspace(0,len(plot_signal), 11), labels=time_labels, rotation=45)
+    plt.ylim(-10, 130)
+    ax = plt.gca()
+    plt.text(x=0.4, y=0.05, s=f'SNR:{round(call_info["SNR"], 1)}', color='black', fontweight='bold', transform=ax.transAxes)
+
+    plt.xlabel('Time (ms)')
+    plt.ylabel("Energy (dB)")
+    plt.grid(which='both')
 
 
 def plot_call_spectrogram_centered(calls_sampled, call_signals, audio_info):
@@ -56,6 +127,7 @@ def plot_call_fft_interpolated(calls_sampled, call_signals, audio_info):
     plt.ylabel("FFT Magnitude (dB)")
     plt.xlabel("Frequency (kHz)")
     plt.xlim(0, len(fft_signal))
+    plt.ylim(-110, 10)
     plt.grid(which='both')
     plt.legend(loc='lower center')
 
@@ -80,16 +152,81 @@ def plot_call_welch_interpolated(calls_sampled, call_signals, audio_info):
     plt.ylabel("FFT Magnitude (dB)")
     plt.xlabel("Frequency (kHz)")
     plt.xlim(0, max_visible_frequency)
+    plt.ylim(-110, 10)
     plt.grid(which='both')
     plt.legend(loc='lower center')
 
 
-def plot_hundred_calls(calls_sampled, call_signals, site_key):
-    side = 10
-    call_indices = np.linspace(0, len(calls_sampled)-1, side**2).astype('int')
+def plot_n_calls(call_indices, calls_sampled, call_signals, site_key):
+    side = np.sqrt(len(call_indices)).astype('int')
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
-    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} call signals', y=1, fontsize=50)
+    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} call signals (waveform)', y=1, fontsize=50)
+    for subplot_i, call_index in enumerate(call_indices):
+        call_info = calls_sampled.loc[call_index]
+        file_name = call_info['file_name']
+        datetime = dt.datetime.strptime(file_name, "%Y%m%d_%H%M%S.WAV")
+
+        plt.subplot(side, side, subplot_i+1)
+        audio_info = dict()
+        audio_info['call_index'] = call_index
+        audio_info['plot_title'] = f'{(datetime).strftime("%m/%d/%y %H:%M")}'
+        audio_info['show_yaxis_fine'] = False
+        plot_call_centered(calls_sampled, call_signals, audio_info)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_n_cumenergies(call_indices, calls_sampled, call_signals, site_key):
+    side = np.sqrt(len(call_indices)).astype('int')
+    plt.figure(figsize=(2.5*side, 2.5*side))
+    plt.rcParams.update({'font.size': 12})
+    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} cumulative energy signals', y=1, fontsize=50)
+    for subplot_i, call_index in enumerate(call_indices):
+        call_info = calls_sampled.loc[call_index]
+        file_name = call_info['file_name']
+        datetime = dt.datetime.strptime(file_name, "%Y%m%d_%H%M%S.WAV")
+
+        plt.subplot(side, side, subplot_i+1)
+        audio_info = dict()
+        audio_info['call_index'] = call_index
+        audio_info['plot_title'] = f'{(datetime).strftime("%m/%d/%y %H:%M")}'
+        audio_info['show_yaxis_fine'] = False
+        plot_cumenergy_of_call(calls_sampled, call_signals, audio_info)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_n_energies(call_indices, calls_sampled, call_signals, site_key):
+    side = np.sqrt(len(call_indices)).astype('int')
+    num_points = 100
+    plt.figure(figsize=(2.5*side, 2.5*side))
+    plt.rcParams.update({'font.size': 12})
+    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} energy signals ({num_points} points per signal)', y=1, fontsize=50)
+    for subplot_i, call_index in enumerate(call_indices):
+        call_info = calls_sampled.loc[call_index]
+        file_name = call_info['file_name']
+        datetime = dt.datetime.strptime(file_name, "%Y%m%d_%H%M%S.WAV")
+
+        plt.subplot(side, side, subplot_i+1)
+        audio_info = dict()
+        audio_info['call_index'] = call_index
+        audio_info['plot_title'] = f'{(datetime).strftime("%m/%d/%y %H:%M")}'
+        audio_info['num_points'] = num_points
+        audio_info['show_yaxis_fine'] = False
+        plot_timeenergy_of_call(calls_sampled, call_signals, audio_info)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_n_specs(call_indices, calls_sampled, call_signals, site_key):
+    side = np.sqrt(len(call_indices)).astype('int')
+    plt.figure(figsize=(2.5*side, 2.5*side))
+    plt.rcParams.update({'font.size': 12})
+    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} call signals (spectrogram)', y=1, fontsize=50)
     for subplot_i, call_index in enumerate(call_indices):
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
@@ -106,13 +243,12 @@ def plot_hundred_calls(calls_sampled, call_signals, site_key):
     plt.show()
 
 
-def plot_hundred_ffts(calls_sampled, call_signals, site_key):
-    side = 10
-    call_indices = np.linspace(0, len(calls_sampled)-1, side**2).astype('int')
+def plot_n_ffts(call_indices, calls_sampled, call_signals, site_key):
+    side = np.sqrt(len(call_indices)).astype('int')
     num_points = 500
     plt.figure(figsize=(2.8*side, 2.8*side))
     plt.rcParams.update({'font.size': 12})
-    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} FFT signals {num_points} points per signal)', y=1, fontsize=50)
+    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} FFT signals ({num_points} points per signal)', y=1, fontsize=50)
     for subplot_i, call_index in enumerate(call_indices):
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
@@ -131,10 +267,8 @@ def plot_hundred_ffts(calls_sampled, call_signals, site_key):
     plt.show()
 
 
-def plot_hundred_welch(calls_sampled, call_signals, site_key):
-    side = 10
-    call_indices = np.linspace(0, len(calls_sampled)-1, side**2).astype('int')
-
+def plot_n_welch(call_indices, calls_sampled, call_signals, site_key):
+    side = np.sqrt(len(call_indices)).astype('int')
     num_points = 100
     plt.figure(figsize=(2.8*side, 2.8*side))
     plt.rcParams.update({'font.size': 12})
@@ -159,7 +293,7 @@ def plot_hundred_welch(calls_sampled, call_signals, site_key):
 
 def plot_side_by_side_calls_spectra(calls_sampled, call_signals):
     num_calls = 10
-    call_indices = np.linspace(0, len(calls_sampled)-1, num_calls).astype('int')
+    call_indices = random.sample(range(0, len(calls_sampled)), num_calls)
     for call_index in call_indices:
         plt.figure(figsize=(12, 4))
 

@@ -160,6 +160,7 @@ def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, 
             bat_bout_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
             bat_bout_condensed['site'] = sampled_calls_from_bout['Site name'].values
             bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
+            bat_bout_condensed['call_dur'] = sampled_calls_from_bout['end_time'] - sampled_calls_from_bout['start_time']
             bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
             print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
 
