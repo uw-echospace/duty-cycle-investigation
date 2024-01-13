@@ -113,9 +113,11 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
             signal = band_limited_audio_seg.copy()
             cleaned_call_signal = signal[-int(fs*(call_dur+(2*pad))):]
             bucket.append(cleaned_call_signal)
-            sampled_calls_from_bout = pd.concat([sampled_calls_from_bout, call], axis=0)
+            sampled_call = pd.DataFrame(columns=call.index)
+            sampled_call.loc[len(sampled_call)] = call
+            sampled_call.index = [i]
+            sampled_calls_from_bout = pd.concat([sampled_calls_from_bout, sampled_call], axis=0)
 
-    print(sampled_calls_from_bout)
     return bucket, sampled_calls_from_bout
 
 
