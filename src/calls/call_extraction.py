@@ -113,9 +113,7 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
             signal = band_limited_audio_seg.copy()
             cleaned_call_signal = signal[-int(fs*(call_dur+(2*pad))):]
             bucket.append(cleaned_call_signal)
-            sampled_call = pd.DataFrame(columns=call.index)
-            sampled_call.loc[len(sampled_call)] = call
-            sampled_calls_from_bout = pd.concat([sampled_calls_from_bout, sampled_call], axis=0)
+            sampled_calls_from_bout = pd.concat([sampled_calls_from_bout, call], axis=0)
 
     return bucket, sampled_calls_from_bout
 
@@ -154,12 +152,9 @@ def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, 
         if len(selected_set) > 0:
             bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, bucket_for_location)
 
-            bat_bout_condensed = pd.DataFrame()
+            bat_bout_condensed = sampled_calls_from_bout
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
-            bat_bout_condensed['SD_card'] = sampled_calls_from_bout['SD Card'].values
             bat_bout_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
-            bat_bout_condensed['site'] = sampled_calls_from_bout['Site name'].values
-            bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
             bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
             print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
 
@@ -185,11 +180,8 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
         if len(selected_set) > 0:
             bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, bucket_for_location)
 
-            detections_condensed = pd.DataFrame()
-            detections_condensed['SD_card'] = sampled_calls_from_bout['SD Card'].values
+            detections_condensed = sampled_calls_from_bout
             detections_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
-            detections_condensed['site'] = sampled_calls_from_bout['Site name'].values
-            detections_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
             detections_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
             print(f"{len(detections_condensed)} high SNR calls added to call catalogue")
 
