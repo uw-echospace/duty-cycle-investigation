@@ -156,13 +156,13 @@ def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params, 
 
             bat_bout_condensed = pd.DataFrame()
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
-            bat_bout_condensed['SD_card'] = sampled_calls_from_bout['SD Card']
+            bat_bout_condensed['SD_card'] = sampled_calls_from_bout['SD Card'].values
             bat_bout_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
-            bat_bout_condensed['site'] = sampled_calls_from_bout['Site name']
-            bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR']
-            bat_bout_condensed['start_time'] = sampled_calls_from_bout['start_time']
-            bat_bout_condensed['end_time'] = sampled_calls_from_bout['end_time']
-            bat_bout_condensed['call_dur'] = sampled_calls_from_bout['end_time'] - sampled_calls_from_bout['start_time']
+            bat_bout_condensed['site'] = sampled_calls_from_bout['Site name'].values
+            bat_bout_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
+            bat_bout_condensed['start_time'] = sampled_calls_from_bout['start_time'].values
+            bat_bout_condensed['end_time'] = sampled_calls_from_bout['end_time'].values
+            bat_bout_condensed['call_dur'] = sampled_calls_from_bout['end_time'].values - sampled_calls_from_bout['start_time'].values
             bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
             print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
 
@@ -193,9 +193,9 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
             detections_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
             detections_condensed['site'] = sampled_calls_from_bout['Site name'].values
             detections_condensed['SNR'] = sampled_calls_from_bout['SNR'].values
-            detections_condensed['start_time'] = sampled_calls_from_bout['start_time']
-            detections_condensed['end_time'] = sampled_calls_from_bout['end_time']
-            detections_condensed['call_dur'] = sampled_calls_from_bout['end_time'] - sampled_calls_from_bout['start_time']
+            detections_condensed['start_time'] = sampled_calls_from_bout['start_time'].values
+            detections_condensed['end_time'] = sampled_calls_from_bout['end_time'].values
+            detections_condensed['call_dur'] = sampled_calls_from_bout['end_time'].values - sampled_calls_from_bout['start_time'].values
             detections_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
             print(f"{len(detections_condensed)} high SNR calls added to call catalogue")
 
