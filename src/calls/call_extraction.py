@@ -115,6 +115,7 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
             bucket.append(cleaned_call_signal)
             sampled_calls_from_bout = pd.concat([sampled_calls_from_bout, call], axis=0)
 
+    print(sampled_calls_from_bout)
     return bucket, sampled_calls_from_bout
 
 
