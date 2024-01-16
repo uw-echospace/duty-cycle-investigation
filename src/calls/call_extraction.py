@@ -112,9 +112,9 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
     for i, call in detections.iterrows():
         call_dur = (call['end_time'] - call['start_time'])
         pad = 0.002
-        start = call['start_time'] - call_dur - (3*pad)
-        duration = (2 * call_dur) + (4*pad)
-        end = call['end_time']
+        start = call['start_time'] - pad
+        duration = call_dur + 2*pad
+        end = call['end_time'] + pad
         if start >= 0 and end <= 1795:
             audio_file.seek(int(fs*start))
             audio_seg = audio_file.read(int(fs*duration))
@@ -122,8 +122,7 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
             low_freq_cutoff = call['low_freq']-2000
             high_freq_cutoff = min(nyq-1, call['high_freq']+2000)
             band_limited_audio_seg = bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
-            signal = band_limited_audio_seg.copy()
-            cleaned_call_signal = signal[-int(fs*(call_dur+(2*pad))):]
+            cleaned_call_signal = band_limited_audio_seg.copy()
             bucket.append(cleaned_call_signal)
             sampled_call = pd.DataFrame(columns=call.index)
             sampled_call.loc[len(sampled_call)] = call
@@ -138,7 +137,10 @@ def select_top_percentage_from_detections(detections, percentage):
     top_SNR =  max(1, (1-percentage)*detections['SNR'].max())
     print(f"Highest SNR in section: {detections['SNR'].max()}")
     print(f"SNR threshold for section: {top_SNR}")
-    selected_set = detections.loc[detections['SNR']>=top_SNR]
+    if percentage==1:
+        selected_set = detections.copy()
+    else:
+        selected_set = detections.loc[detections['SNR']>=top_SNR].copy()
 
     return selected_set
 
