@@ -175,9 +175,9 @@ def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params):
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
             bat_bout_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
             bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
-            print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
-
+            print(f"{len(bucket_for_location) - len(calls_sampled_from_file)} high SNR calls will be added to bucket")
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
+            print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
 
     return bucket_for_location, calls_sampled_from_file
 
@@ -205,9 +205,9 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
             detections_condensed = sampled_calls_from_bout
             detections_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
             detections_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
-            print(f"{len(detections_condensed)} high SNR calls added to call catalogue")
-
+            print(f"{len(bucket_for_location) - len(calls_sampled_from_file)} high SNR calls will be added to bucket")
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, detections_condensed])
+            print(f"{len(detections_condensed)} high SNR calls added to call catalogue")
 
     return bucket_for_location, calls_sampled_from_file
 
@@ -286,6 +286,10 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     calls_sampled_from_location = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
+    if data_params['use_bouts']:
+        file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_inbouts_call_signals'
+    if data_params['use_file']:
+        file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_infile_call_signals'
 
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
@@ -296,15 +300,15 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         if (data_params['csv_file']) in csv_files_for_location:
             bucket_for_location, calls_sampled_from_location = collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location)
 
-    np_bucket = np.array(bucket_for_location, dtype='object')
+    print('Resetting index for call catalogue')
     calls_sampled_from_location.reset_index(inplace=True)
-    if data_params['use_bouts']:
-        file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_inbouts_call_signals'
-    if data_params['use_file']:
-        file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_infile_call_signals'
-
-    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.npy', np_bucket)
+    print(f'Saving call catalogue to {file_title}.csv')
     calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.csv')
+
+    print('Converting bucket to np array')
+    np_bucket = np.array(bucket_for_location, dtype='float32')
+    print(f'Saving bucket to {file_title}.npy')
+    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.npy', np_bucket)
 
     return bucket_for_location, calls_sampled_from_location
 
