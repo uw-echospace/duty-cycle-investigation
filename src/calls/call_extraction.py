@@ -112,10 +112,11 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
 
     for i, call in detections.iterrows():
         call_dur = (call['end_time'] - call['start_time'])
-        pad = 0.0019
-        start = call['start_time'] - pad
-        duration = call_dur + 2*pad
-        end = call['end_time'] + pad
+        start_pad = min(call['start_time'], 0.002)
+        end_pad = min(1795 - call['end_time'], 0.002)
+        start = call['start_time'] - start_pad
+        duration = call_dur + 2*(start_pad+end_pad)
+        end = call['end_time'] + end_pad
         if start >= 0 and end <= 1795:
             audio_file.seek(int(fs*start))
             audio_seg = audio_file.read(int(fs*duration))
