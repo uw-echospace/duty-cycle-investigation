@@ -4,6 +4,7 @@ import scipy
 import dask.dataframe as dd
 import argparse
 import re
+import math
 
 import soundfile as sf
 from pathlib import Path
@@ -111,7 +112,7 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
 
     for i, call in detections.iterrows():
         call_dur = (call['end_time'] - call['start_time'])
-        pad = 0.002
+        pad = 0.0019
         start = call['start_time'] - pad
         duration = call_dur + 2*pad
         end = call['end_time'] + pad
@@ -188,7 +189,10 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
 
     calls_sampled_from_file = pd.DataFrame()
     for group in bd2_predictions['freq_group'].unique():
-        freq_group = bd2_predictions.loc[bd2_predictions['freq_group']==group].copy()
+        if data_params['for_predicting'] and type(group)!=str and math.isnan(group):
+            freq_group = bd2_predictions.loc[bd2_predictions['freq_group'].isna()].copy()
+        else:
+            freq_group = bd2_predictions.loc[bd2_predictions['freq_group']==group].copy()
         call_snrs = collect_call_snrs_from_detections_in_audio_file(audio_file, freq_group)
         freq_group['SNR'] = call_snrs
         print(f"{len(freq_group)} {group} calls in file: {file_path.name}")
@@ -207,38 +211,18 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
     return bucket_for_location, calls_sampled_from_file
 
 
-
-def collect_call_signals_from_file(data_params, bucket_for_location, calls_sampled_from_location):
-    csv_path = Path(data_params['csv_file'])
-
-    bd2_predictions = actvt.assemble_single_bd2_output(csv_path, data_params)
-    groups_in_preds = bd2_predictions['freq_group'].unique()
-    valid_group_in_preds = np.logical_or(np.logical_or('LF1' in groups_in_preds, 'HF1' in groups_in_preds), 'HF2' in groups_in_preds)
-    print(f"Groups found in this file: {bd2_predictions['freq_group'].unique()}, valid? {valid_group_in_preds}")
-    if len(bd2_predictions)>0 and valid_group_in_preds:
-        if data_params['use_bouts']:
-            bucket_for_location, calls_sampled_from_file = sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params)
-        elif data_params['use_file']:
-            bucket_for_location, calls_sampled_from_file = sample_calls_from_file(bd2_predictions, bucket_for_location, data_params)
-        else:
-            calls_sampled_from_file = pd.DataFrame()
-
-        calls_sampled_from_location = pd.concat([calls_sampled_from_location, calls_sampled_from_file])
-    
-    print(f'There are now {len(bucket_for_location)} calls in bucket')
-    print(f'There are now {len(calls_sampled_from_location)} rows in call catalogue')
-
-    return bucket_for_location, calls_sampled_from_location
-
-
 def collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location):
-    csv_path = Path(data_params['csv_file'])
     location_sum_df['input_file'] = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy())
     bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
     groups_in_preds = bd2_predictions['freq_group'].unique()
     valid_group_in_preds = np.logical_or(np.logical_or('LF1' in groups_in_preds, 'HF1' in groups_in_preds), 'HF2' in groups_in_preds)
     print(f"Groups found in this file: {bd2_predictions['freq_group'].unique()}, valid? {valid_group_in_preds}")
-    if len(bd2_predictions)>0 and valid_group_in_preds:
+    if data_params['for_training']:
+        is_valid_params = len(bd2_predictions)>0 and valid_group_in_preds
+    if data_params['for_predicting']:
+        is_valid_params = len(bd2_predictions)>0
+
+    if is_valid_params:
         if data_params['use_bouts']:
             bucket_for_location, calls_sampled_from_file = sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params)
         elif data_params['use_file']:
@@ -275,6 +259,11 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params["cur_dc_tag"] = "1800of1800"
     data_params["site_tag"] = cfg['site']
     data_params['site_name'] = SITE_NAMES[cfg['site']]
+    data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
+    data_params['use_bouts'] = cfg['use_bouts']
+    data_params['use_file'] = cfg['use_file']
+    data_params['for_training'] = cfg['for_training']
+    data_params['for_predicting'] = cfg['for_predicting']
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
@@ -299,13 +288,10 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
-        filename = data_params['audio_file'].name.split('.')[0]
+        filename =  Path(filepath).name.split('.')[0]
         csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
         print(f'Looking at {filepath} with detection file: {csv_path}')
         data_params['csv_file'] = csv_path
-        data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
-        data_params['use_bouts'] = cfg['use_bouts']
-        data_params['use_file'] = cfg['use_file']
         if (data_params['csv_file']) in csv_files_for_location:
             bucket_for_location, calls_sampled_from_location = collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location)
 
@@ -358,6 +344,16 @@ def parse_args():
         action='store_true',
         help="Collect calls using entire file as a pool",
     )
+    parser.add_argument(
+        "--for_training",
+        action='store_true',
+        help="Collect calls using pre-labels of LF1, HF1, HF2",
+    )
+    parser.add_argument(
+        "--for_predicting",
+        action='store_true',
+        help="Collect calls regardless of pre-labels",
+    )
     return vars(parser.parse_args())
 
 if __name__ == "__main__":
@@ -370,5 +366,7 @@ if __name__ == "__main__":
     cfg['percent_threshold_for_snr'] = args['threshold']
     cfg['use_bouts'] = args['use_bouts']
     cfg['use_file'] = args['use_file']
+    cfg['for_training'] = args['for_training']
+    cfg['for_predicting'] = args['for_predicting']
 
     sample_calls_and_generate_call_signal_bucket_for_location(cfg)
