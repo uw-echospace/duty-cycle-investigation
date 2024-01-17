@@ -175,7 +175,6 @@ def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params):
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
             bat_bout_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
             bat_bout_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
-            print(f"{len(bucket_for_location) - len(calls_sampled_from_file)} high SNR calls will be added to bucket")
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, bat_bout_condensed])
             print(f"{len(bat_bout_condensed)} high SNR calls added to call catalogue")
 
@@ -205,7 +204,6 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
             detections_condensed = sampled_calls_from_bout
             detections_condensed['file_name'] = str(Path(sampled_calls_from_bout['input_file'].values[0]).name)
             detections_condensed['sampling_rate'] = [fs]*len(sampled_calls_from_bout)
-            print(f"{len(bucket_for_location) - len(calls_sampled_from_file)} high SNR calls will be added to bucket")
             calls_sampled_from_file = pd.concat([calls_sampled_from_file, detections_condensed])
             print(f"{len(detections_condensed)} high SNR calls added to call catalogue")
 
@@ -306,9 +304,18 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.csv')
 
     print('Converting bucket to np array')
-    np_bucket = np.array(bucket_for_location, dtype='float32')
-    print(f'Saving bucket to {file_title}.npy')
-    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.npy', np_bucket)
+    if len(bucket_for_location) > 900000:
+        np_bucket = np.array(bucket_for_location[:500000], dtype='object')
+        print(f'Saving first 500000 rows of bucket to {file_title}_part1.npy')
+        np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_part1.npy', np_bucket)
+
+        np_bucket = np.array(bucket_for_location[500000:], dtype='object')
+        print(f'Saving rest of the rows of bucket to {file_title}_part2.npy')
+        np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_part2.npy', np_bucket)
+    else:
+        np_bucket = np.array(bucket_for_location, dtype='object')
+        print(f'Saving bucket to {file_title}.npy')
+        np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.npy', np_bucket)
 
     return bucket_for_location, calls_sampled_from_location
 
