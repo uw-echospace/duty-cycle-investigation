@@ -305,13 +305,18 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     print('Converting bucket to np array')
     if len(bucket_for_location) > 900000:
-        np_bucket = np.array(bucket_for_location[:500000], dtype='object')
-        print(f'Saving first 500000 rows of bucket to {file_title}_part1.npy')
+        div = 400000
+        np_bucket = np.array(bucket_for_location[:div], dtype='object')
+        print(f'Saving first {div} rows of bucket to {file_title}_part1.npy')
         np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_part1.npy', np_bucket)
 
-        np_bucket = np.array(bucket_for_location[500000:], dtype='object')
-        print(f'Saving rest of the rows of bucket to {file_title}_part2.npy')
+        np_bucket = np.array(bucket_for_location[div:2*div], dtype='object')
+        print(f'Saving first {div} rows of bucket to {file_title}_part2.npy')
         np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_part2.npy', np_bucket)
+
+        np_bucket = np.array(bucket_for_location[2*div:], dtype='object')
+        print(f'Saving rest of the rows of bucket to {file_title}_part3.npy')
+        np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_part3.npy', np_bucket)
     else:
         np_bucket = np.array(bucket_for_location, dtype='object')
         print(f'Saving bucket to {file_title}.npy')
