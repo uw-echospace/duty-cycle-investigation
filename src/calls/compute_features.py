@@ -65,7 +65,6 @@ def generate_ffts_for_calls(calls_sampled, call_signals):
     fft_signals = []
     for call_index, call_info in calls_sampled.iterrows():
         num_points = 500
-        call_info = calls_sampled.loc[call_index]
         fs = call_info['sampling_rate']
         call = call_signals[call_info['index']]
         interpolated_points_from_spectrum = compute_fft_of_call(call, fs, num_points)
@@ -82,7 +81,6 @@ def generate_welchs_for_calls(calls_sampled, call_signals):
         audio_info = dict()
         audio_info['max_freq_visible'] = 96000
         audio_info['num_points'] = 100
-        call_info = calls_sampled.loc[call_index]
         fs = call_info['sampling_rate']
         call = call_signals[call_info['index']]
         interpolated_points_from_welch = compute_welch_psd_of_call(call, fs, audio_info)
