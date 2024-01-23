@@ -160,7 +160,7 @@ def plot_call_welch_interpolated(calls_sampled, call_signals, audio_info):
 
 
 def plot_n_calls(call_indices, calls_sampled, call_signals, site_key):
-    side = np.sqrt(len(call_indices)).astype('int')
+    side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
     plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} call signals (waveform)', y=1, fontsize=50)
@@ -181,7 +181,7 @@ def plot_n_calls(call_indices, calls_sampled, call_signals, site_key):
 
 
 def plot_n_cumenergies(call_indices, calls_sampled, call_signals, site_key):
-    side = np.sqrt(len(call_indices)).astype('int')
+    side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
     plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} cumulative energy signals', y=1, fontsize=50)
@@ -202,7 +202,7 @@ def plot_n_cumenergies(call_indices, calls_sampled, call_signals, site_key):
 
 
 def plot_n_energies(call_indices, calls_sampled, call_signals, site_key):
-    side = np.sqrt(len(call_indices)).astype('int')
+    side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     num_points = 100
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
@@ -225,7 +225,7 @@ def plot_n_energies(call_indices, calls_sampled, call_signals, site_key):
 
 
 def plot_n_specs(call_indices, calls_sampled, call_signals, site_key):
-    side = np.sqrt(len(call_indices)).astype('int')
+    side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
     plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} call signals (spectrogram)', y=1, fontsize=50)
@@ -246,7 +246,7 @@ def plot_n_specs(call_indices, calls_sampled, call_signals, site_key):
 
 
 def plot_n_ffts(call_indices, calls_sampled, call_signals, site_key):
-    side = np.sqrt(len(call_indices)).astype('int')
+    side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     num_points = 500
     plt.figure(figsize=(2.8*side, 2.8*side))
     plt.rcParams.update({'font.size': 12})
@@ -270,7 +270,7 @@ def plot_n_ffts(call_indices, calls_sampled, call_signals, site_key):
 
 
 def plot_n_welch(call_indices, calls_sampled, call_signals, site_key):
-    side = np.sqrt(len(call_indices)).astype('int')
+    side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     num_points = 100
     plt.figure(figsize=(2.8*side, 2.8*side))
     plt.rcParams.update({'font.size': 12})
