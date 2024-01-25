@@ -14,7 +14,7 @@ sys.path.append(f"{Path(__file__).parents[1]}/bout")
 sys.path.append(f"{Path(__file__).parents[1]}")
 print(sys.path)
 
-from core import SITE_NAMES, EXAMPLE_FILES_from_LOCATIONS, EXAMPLE_FILES_to_FILEPATHS, EXAMPLE_FILES_to_DETECTIONS, FREQ_GROUPS
+from core import SITE_NAMES, FREQ_GROUPS
 import bout
 import activity.activity_assembly as actvt
 
