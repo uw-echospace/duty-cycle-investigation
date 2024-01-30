@@ -17,9 +17,7 @@ def construct_bout_metrics_from_classified_dets(fgroups_with_bouttags):
     """
 
     location_df = fgroups_with_bouttags.copy()
-    location_df.reset_index(inplace=True)
-    if 'index' in location_df.columns:
-        location_df.drop(columns='index', inplace=True)
+    location_df.reset_index(drop=True, inplace=True)
 
     end_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout end', 'call_end_time'])
     start_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout start', 'call_start_time'])
@@ -105,9 +103,7 @@ def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bou
     for group in location_df['freq_group'].unique():
         if group != '':
             freq_group_df = location_df.loc[location_df['freq_group']==group].copy()
-            freq_group_df.reset_index(inplace=True)
-            if 'index' in freq_group_df.columns:
-                freq_group_df.drop(columns='index', inplace=True)
+            freq_group_df.reset_index(drop=True, inplace=True)
             if not(freq_group_df.empty):
                 intervals = (pd.to_datetime(freq_group_df['call_start_time'].values[1:]) - pd.to_datetime(freq_group_df['call_end_time'].values[:-1]))
                 ipis_f = intervals.to_numpy(dtype='float32')/1e6
@@ -147,9 +143,7 @@ def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc
     3) Put together all bout characteristics into the analogous dataframe.
     """
 
-    location_sum_df.reset_index(inplace=True)
-    if 'index' in location_sum_df.columns:
-        location_sum_df.drop(columns='index', inplace=True)
+    location_sum_df.reset_index(drop=True, inplace=True)
 
     bout_params = get_bout_params_from_location(location_sum_df, data_params)
 
