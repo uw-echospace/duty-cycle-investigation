@@ -1,0 +1,13 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+666.1755,666.1875,16015.0,21948.0,Echolocation,Nyctalus noctula,0.235,0.524,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+683.4245,683.4382,15156.0,21689.0,Echolocation,Eptesicus serotinus,0.198,0.5,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+683.5565,683.571,15156.0,21189.0,Echolocation,Nyctalus noctula,0.27,0.575,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+683.6905,683.7041,15156.0,21435.0,Echolocation,Nyctalus noctula,0.216,0.575,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+783.0755,783.0897,15156.0,20535.0,Echolocation,Nyctalus noctula,0.243,0.524,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+823.9125,823.9241,15156.0,21319.0,Echolocation,Nyctalus leisleri,0.235,0.513,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+839.7385,839.7508,15156.0,21705.0,Echolocation,Nyctalus leisleri,0.265,0.555,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+886.9985,887.0188,16875.0,21941.0,Echolocation,Nyctalus noctula,0.387,0.512,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+920.5365,920.5533,16875.0,22651.0,Echolocation,Nyctalus noctula,0.375,0.518,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+934.6995,934.7158,22890.0,25784.0,Echolocation,Nyctalus leisleri,0.5,0.553,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+935.0605,935.0791,22031.0,25634.0,Echolocation,Nyctalus leisleri,0.45,0.501,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795
+1042.1535,1042.1732,16875.0,22173.0,Echolocation,Nyctalus noctula,0.37,0.511,-1,/mnt/ubna_data_01_mir/recover-20220709_unit3/20220709_150000.WAV,Foliage,recover-20220709_unit3,No Valid Info,1795

@@ -1,0 +1,5 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+929.0125,929.0299,17734.0,21934.0,Echolocation,Nyctalus noctula,0.388,0.52,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_150000.WAV,Foliage,recover-20220712_unit2,010,1795
+929.1445,929.1662,16875.0,20791.0,Echolocation,Nyctalus noctula,0.426,0.546,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_150000.WAV,Foliage,recover-20220712_unit2,010,1795
+929.2715,929.2927,16875.0,21923.0,Echolocation,Nyctalus noctula,0.416,0.555,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_150000.WAV,Foliage,recover-20220712_unit2,010,1795
+929.4025,929.4224,16875.0,21683.0,Echolocation,Nyctalus noctula,0.382,0.522,-1,/mnt/ubna_data_01_mir/recover-20220712_unit2/20220712_150000.WAV,Foliage,recover-20220712_unit2,010,1795
