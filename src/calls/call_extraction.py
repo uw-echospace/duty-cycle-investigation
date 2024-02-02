@@ -14,7 +14,7 @@ sys.path.append(f"{Path(__file__).parents[1]}/bout")
 sys.path.append(f"{Path(__file__).parents[1]}")
 print(sys.path)
 
-from core import SITE_NAMES, EXAMPLE_FILES_from_LOCATIONS, EXAMPLE_FILES_to_FILEPATHS, EXAMPLE_FILES_to_DETECTIONS, FREQ_GROUPS
+from core import SITE_NAMES, FREQ_GROUPS
 import bout
 import activity.activity_assembly as actvt
 
@@ -149,9 +149,7 @@ def select_top_percentage_from_detections(detections, percentage):
 
 def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params):
     bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params)
-    bout_metrics.reset_index(inplace=True)
-    if 'index' in bout_metrics.columns:
-        bout_metrics.drop(columns='index', inplace=True)
+    bout_metrics.reset_index(drop=True, inplace=True)
         
     file_path = Path(data_params['audio_file'])
     audio_file = sf.SoundFile(file_path)

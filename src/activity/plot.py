@@ -48,8 +48,8 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
     cmap = plt.get_cmap('viridis')
     cmap.set_bad(color='red')
 
-    plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.8*len(activity_times))})
-    plt.figure(figsize=(1*len(activity_dates), 1*len(activity_times)))
+    plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.6*len(activity_times))})
+    plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
     title = f"{data_params['type_tag']} Activity (# of calls) from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title, fontsize=0.8*len(activity_dates) + 1.4*len(activity_times))
     plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
@@ -93,8 +93,8 @@ def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, fil
     cmap = plt.get_cmap('viridis')
     cmap.set_bad(color='red')
 
-    plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.8*len(activity_times))})
-    plt.figure(figsize=(1*len(activity_dates), 1*len(activity_times)))
+    plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.6*len(activity_times))})
+    plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
     title = f"{data_params['type_tag']} Activity (% of bout-time) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
     plt.title(title, fontsize=0.8*len(activity_dates) + 1.4*len(activity_times))
     plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=0.1, vmax=100))
@@ -138,8 +138,8 @@ def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file
     cmap = plt.get_cmap('viridis')
     cmap.set_bad(color='red')
 
-    plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.8*len(activity_times))})
-    plt.figure(figsize=(1*len(activity_dates), 1*len(activity_times)))
+    plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.6*len(activity_times))})
+    plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
     time_block_duration = int(data_params['index_time_block_in_secs'])
     peak_index = (60*int(data_params['resolution_in_min'])/time_block_duration)
     title = f"{data_params['type_tag']} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
@@ -189,8 +189,8 @@ def plot_presence_grid(activity_arr, data_params, pipeline_params, file_paths):
     plot_dates = [''] * len(activity_dates)
     plot_dates[::7] = activity_dates[::7]
 
-    plt.rcParams.update({'font.size': 0.2*len(activity_dates) + 2*len(activity_times)})
-    plt.figure(figsize=(1*len(activity_dates), 1*len(activity_times)))
+    plt.rcParams.update({'font.size': 0.2*len(activity_dates) + 1.8*len(activity_times)})
+    plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
     title = f"{data_params['type_tag']} Presence/Absence ({metric_name}) from {data_params['site_name']} ({data_params['cur_dc_tag']})"
     plt.title(title,fontsize=0.8*len(activity_dates) + 1*len(activity_times))
     masked_array = np.ma.masked_where(presence_df == 1, presence_df)
@@ -346,8 +346,8 @@ def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipel
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
 
-    plt.rcParams.update({'font.size': 0.4*len(dates) + 3*len(times)})
-    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(times)))
+    plt.rcParams.update({'font.size': 0.4*len(dates) + 2.8*len(times)})
+    plt.figure(figsize=((4/3)*len(data_params['dc_tags'])*len(dates), (4/3)*len(data_params['dc_tags'])*len(times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         activity_df = (actvt.construct_activity_grid_for_number_of_dets(activity_arr, dc_tag))
@@ -395,8 +395,8 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
 
-    plt.rcParams.update({'font.size': 0.4*len(dates) + 3*len(times)})
-    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(times)))
+    plt.rcParams.update({'font.size': 0.4*len(dates) + 2.8*len(times)})
+    plt.figure(figsize=((4/3)*len(data_params['dc_tags'])*len(dates), (4/3)*len(data_params['dc_tags'])*len(times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         activity_df = (actvt.construct_activity_grid_for_bouts(activity_arr, dc_tag))
@@ -444,8 +444,8 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
 
-    plt.rcParams.update({'font.size': 0.4*len(dates) + 3*len(times)})
-    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(times)))
+    plt.rcParams.update({'font.size': 0.4*len(dates) + 2.8*len(times)})
+    plt.figure(figsize=((4/3)*len(data_params['dc_tags'])*len(dates), (4/3)*len(data_params['dc_tags'])*len(times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         activity_df = (actvt.construct_activity_grid_for_inds(activity_arr, dc_tag))
@@ -508,8 +508,8 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
     dates = datetimes.strftime("%m/%d").unique()
     times = datetimes.strftime("%H:%M").unique()
 
-    plt.rcParams.update({'font.size': 0.4*len(dates) + 3*len(times)})
-    plt.figure(figsize=((5/3)*len(data_params['dc_tags'])*len(dates), (5/3)*len(data_params['dc_tags'])*len(times)))
+    plt.rcParams.update({'font.size': 0.4*len(dates) + 2.8*len(times)})
+    plt.figure(figsize=((4/3)*len(data_params['dc_tags'])*len(dates), (4/3)*len(data_params['dc_tags'])*len(times)))
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         presence_df = actvt.construct_presence_grid(activity_arr, dc_tag).replace(np.NaN, 156)
