@@ -214,10 +214,7 @@ def collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_
     groups_in_preds = bd2_predictions['freq_group'].unique()
     valid_group_in_preds = np.logical_or(np.logical_or('LF1' in groups_in_preds, 'HF1' in groups_in_preds), 'HF2' in groups_in_preds)
     print(f"Groups found in this file: {bd2_predictions['freq_group'].unique()}, valid? {valid_group_in_preds}")
-    if data_params['for_training']:
-        is_valid_params = len(bd2_predictions)>0 and valid_group_in_preds
-    if data_params['for_predicting']:
-        is_valid_params = len(bd2_predictions)>0
+    is_valid_params = len(bd2_predictions)>0 and valid_group_in_preds
 
     if is_valid_params:
         if data_params['use_bouts']:
@@ -301,21 +298,8 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     print(f'Saving call catalogue to {file_title}.csv')
     calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.csv')
 
-    print('Converting bucket to np array')
-    if len(bucket_for_location) > 900000:
-        div = 400000
-        np_bucket = np.array(bucket_for_location[:div], dtype='object')
-        print(f'Saving first {div} rows of bucket to {file_title}_part1.npy')
-        np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_part1.npy', np_bucket)
-
-        np_bucket = np.array(bucket_for_location[div:2*div], dtype='object')
-        print(f'Saving first {div} rows of bucket to {file_title}_part2.npy')
-        np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_part2.npy', np_bucket)
-
-        np_bucket = np.array(bucket_for_location[2*div:], dtype='object')
-        print(f'Saving rest of the rows of bucket to {file_title}_part3.npy')
-        np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_part3.npy', np_bucket)
-    else:
+    if len(bucket_for_location) < 500000:
+        print('Converting bucket to np array')
         np_bucket = np.array(bucket_for_location, dtype='object')
         print(f'Saving bucket to {file_title}.npy')
         np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.npy', np_bucket)
