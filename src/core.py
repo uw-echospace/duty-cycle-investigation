@@ -44,3 +44,6 @@ FREQ_GROUPS = {
                           'HF1': [34000, 74000],
                           'HF2': [42000, 96000]}
                 }
+
+SEATTLE_LATITUDE = 47.655181
+SEATTLE_LONGITUDE = -122.293123
