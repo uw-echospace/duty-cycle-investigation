@@ -90,7 +90,7 @@ def gather_features_of_interest(dets, kmean_welch, audio_file):
 
 def open_and_get_call_info(audio_file, dets):
     welch_key = 'all_locations'
-    output_dir = Path(f'../data/generated_welch/{welch_key}')
+    output_dir = Path(f'{Path(__file__).parents[2]}/data/generated_welch/{welch_key}')
     output_file_type = 'top1_inbouts_welch_signals'
     welch_data = pd.read_csv(output_dir / f'2022_{welch_key}_{output_file_type}.csv', index_col=0, low_memory=False)
     k = 2
