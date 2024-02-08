@@ -133,7 +133,7 @@ def classify_calls_from_file(bd2_predictions, data_params):
     lf_dets = dets[lf_inds&(dets['KMEANS_CLASSES']=='LF')]
     hf_dets = dets[hf_inds&(dets['KMEANS_CLASSES']=='HF')]
 
-    all_dets = pd.concat([hf_dets, lf_dets])
+    all_dets = pd.concat([hf_dets, lf_dets]).sort_index()
 
     return all_dets
 
