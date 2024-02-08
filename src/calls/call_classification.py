@@ -127,8 +127,8 @@ def classify_calls_from_file(bd2_predictions, data_params):
     median_peak_LF_freq = dets[dets['KMEANS_CLASSES']=='LF']['peak_frequency'].median()
     print(f'Median LF frequency in File: {median_peak_LF_freq}')
     print(f'Median HF frequency in File: {median_peak_HF_freq}')
-    lf_inds = np.isclose(dets['peak_frequency'], median_peak_LF_freq, atol=7000)
-    hf_inds = np.isclose(dets['peak_frequency'], median_peak_HF_freq, atol=7000)
+    lf_inds = (dets['peak_frequency']<median_peak_LF_freq+7000)&(dets['peak_frequency']>median_peak_LF_freq-7000)
+    hf_inds = (dets['peak_frequency']>median_peak_HF_freq-7000)
 
     lf_dets = dets[lf_inds&(dets['KMEANS_CLASSES']=='LF')]
     hf_dets = dets[hf_inds&(dets['KMEANS_CLASSES']=='HF')]
