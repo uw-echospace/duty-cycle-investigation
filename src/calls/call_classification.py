@@ -116,7 +116,7 @@ def classify_calls_from_file(bd2_predictions, data_params):
     audio_file = sf.SoundFile(file_path)
     
     audio_features = dict()
-    audio_features['site_name'] = SITE_NAMES[file_path.parent.name]
+    audio_features['site_name'] = SITE_NAMES[data_params["site_tag"]]
     audio_features['file_datetime'] = dt.datetime.strptime(file_path.name, "%Y%m%d_%H%M%S.WAV").strftime('%Y/%m/%d %H:%M')
     audio_features['file_path'] = file_path
 
