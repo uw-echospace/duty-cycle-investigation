@@ -190,7 +190,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
-    file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_call_classes'
+    file_title = f'2022_{data_params["site_tag"]}_call_classes'
    
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
