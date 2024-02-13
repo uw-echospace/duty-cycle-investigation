@@ -170,11 +170,6 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params["cur_dc_tag"] = "1800of1800"
     data_params["site_tag"] = cfg['site']
     data_params['site_name'] = SITE_NAMES[cfg['site']]
-    data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
-    data_params['use_bouts'] = cfg['use_bouts']
-    data_params['use_file'] = cfg['use_file']
-    data_params['for_training'] = cfg['for_training']
-    data_params['for_predicting'] = cfg['for_predicting']
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
@@ -195,11 +190,8 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
-    if data_params['use_bouts']:
-        file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_inbouts_call_signals'
-    if data_params['use_file']:
-        file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_infile_call_signals'
-
+    file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_call_classes'
+   
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
         filename =  Path(filepath).name.split('.')[0]
