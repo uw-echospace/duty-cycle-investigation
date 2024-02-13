@@ -30,11 +30,12 @@ LABEL_FOR_GROUPS = {
 
 def get_section_of_call_in_file(detection, audio_file):
     fs = audio_file.samplerate
+
     call_dur = (detection['end_time'] - detection['start_time'])
-    pad = 0.004
+    pad = min(min(detection['start_time'] - call_dur, 1795 - detection['end_time']), 0.002)
     start = detection['start_time'] - call_dur - (3*pad)
     duration = (2 * call_dur) + (4*pad)
-    end = detection['end_time']
+
     audio_file.seek(int(fs*start))
     audio_seg = audio_file.read(int(fs*duration))
 
