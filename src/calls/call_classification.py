@@ -114,8 +114,7 @@ def open_and_get_call_info(audio_file, dets):
 def classify_calls_from_file(bd2_predictions, data_params):
     file_path = Path(data_params['audio_file'])
     audio_file = sf.SoundFile(file_path)
-    fs = audio_file.sample_rate
-
+    
     audio_features = dict()
     audio_features['site_name'] = SITE_NAMES[file_path.parent.name]
     audio_features['file_datetime'] = dt.datetime.strptime(file_path.name, "%Y%m%d_%H%M%S.WAV").strftime('%Y/%m/%d %H:%M')
