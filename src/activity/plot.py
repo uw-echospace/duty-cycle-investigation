@@ -56,7 +56,6 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
     masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
     cmap = plt.get_cmap('viridis')
     cmap.set_bad(color='red')
-    print(plot_times)
     plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.6*len(activity_times))})
     plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
     title = f"{data_params['type_tag']} Activity (# of calls) from {data_params['site_name']} ({data_params['cur_dc_tag']})"
@@ -72,11 +71,12 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
     plt.ylabel(f'{ylabel} Time (HH:MM)')
     plt.xlabel('Date (MM/DD/YY)')
     plt.grid(which='both', linewidth=2)
-    plt.legend(loc=3, ncol=3, fontsize=(0.5*len(activity_dates) + 0.6*len(activity_times)))
+    plt.legend(loc=3, ncol=3, fontsize=0.7*len(activity_dates) + 1*len(activity_times))
     plt.colorbar()
     plt.tight_layout()
     if pipeline_params["save_activity_grid"]:
         plt.savefig(f'{file_paths["activity_grid_folder"]}/{file_paths["activity_dets_grid_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -131,11 +131,12 @@ def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, fil
     plt.ylabel(f'{ylabel} Time (HH:MM)')
     plt.xlabel('Date (MM/DD/YY)')
     plt.grid(which='both', linewidth=2)
-    plt.legend(loc=3, ncol=3, fontsize=(0.5*len(activity_dates) + 0.6*len(activity_times)))
+    plt.legend(loc=3, ncol=3, fontsize=0.7*len(activity_dates) + 1*len(activity_times))
     plt.colorbar()
     plt.tight_layout()
     if pipeline_params["save_activity_grid"]:
         plt.savefig(f'{file_paths["activity_grid_folder"]}/{file_paths["activity_bouts_grid_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -192,11 +193,12 @@ def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file
     plt.ylabel(f'{ylabel} Time (HH:MM)')
     plt.xlabel('Date (MM/DD/YY)')
     plt.grid(which='both', linewidth=2)
-    plt.legend(loc=3, ncol=3, fontsize=(0.5*len(activity_dates) + 0.6*len(activity_times)))
+    plt.legend(loc=3, ncol=3, fontsize=0.7*len(activity_dates) + 1*len(activity_times))
     plt.colorbar()
     plt.tight_layout()
     if pipeline_params["save_activity_grid"]:
         plt.savefig(f'{file_paths["activity_grid_folder"]}/{file_paths["activity_inds_grid_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -261,11 +263,14 @@ def plot_presence_grid(activity_arr, data_params, pipeline_params, file_paths):
     plt.xlabel('Date (MM/DD/YY)')
     plt.yticks(np.arange(0, len(presence_df.index))-0.5, plot_times, rotation=30)
     plt.xticks(np.arange(0, len(presence_df.columns))-0.5, plot_dates, rotation=30)
+    plt.xlim(0, len(plot_dates))
+    plt.ylim(len(plot_times)-0.5,-0.5)
     plt.grid(which="both", color='k')
-    plt.legend(loc=3, ncol=3, fontsize=(0.5*len(activity_dates) + 0.6*len(activity_times)))
+    plt.legend(loc=3, ncol=3, fontsize=0.7*len(activity_dates) + 0.6*len(activity_times))
     plt.tight_layout()
     if pipeline_params["save_presence_grid"]:
         plt.savefig(f'{file_paths["presence_grid_folder"]}/{fig_name}_{file_paths["presence_grid_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -337,6 +342,7 @@ def plot_dc_dets_comparisons_per_night(activity_arr, data_params, pipeline_param
     plt.tight_layout()
     if pipeline_params["save_dc_night_comparisons"]:
         plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_det_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -389,6 +395,7 @@ def plot_dc_bouts_comparisons_per_night(activity_arr, data_params, pipeline_para
     plt.tight_layout()
     if pipeline_params["save_dc_night_comparisons"]:
         plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["dc_bout_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -451,6 +458,7 @@ def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipel
     plt.tight_layout()
     if pipeline_params["save_activity_dc_comparisons"]:
         plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["activity_det_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -513,6 +521,7 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
     plt.tight_layout()
     if pipeline_params["save_activity_dc_comparisons"]:
         plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["activity_bout_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -580,6 +589,7 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
     plt.tight_layout()
     if pipeline_params["save_activity_dc_comparisons"]:
         plt.savefig(f'{file_paths["figures_SITE_folder"]}/{file_paths["activity_ind_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
@@ -656,6 +666,7 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
     plt.tight_layout()
     if pipeline_params["save_presence_dc_comparisons"]:
         plt.savefig(f'{file_paths["figures_SITE_folder"]}/{fig_name}_{file_paths["presence_comparisons_figname"]}.png', bbox_inches='tight')
+        plt.close()
     if pipeline_params["show_plots"]:
         plt.show()
 
