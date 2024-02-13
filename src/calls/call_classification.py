@@ -32,7 +32,7 @@ def get_section_of_call_in_file(detection, audio_file):
     fs = audio_file.samplerate
 
     call_dur = (detection['end_time'] - detection['start_time'])
-    pad = min(min(detection['start_time'] - call_dur, 1795 - detection['end_time']), 0.002)
+    pad = min(min(detection['start_time'] - call_dur, 1795 - detection['end_time']), 0.006) / 3
     start = detection['start_time'] - call_dur - (3*pad)
     duration = (2 * call_dur) + (4*pad)
 
