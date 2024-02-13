@@ -238,31 +238,6 @@ def parse_args():
         type=str,
         help="the end of recording period",
     )
-    parser.add_argument(
-        "--threshold",
-        type=float,
-        help="the threshold; the top (100*X)% will be considered in each bout",
-    )
-    parser.add_argument(
-        "--use_bouts",
-        action='store_true',
-        help="Collect calls using each bout as a pool",
-    )
-    parser.add_argument(
-        "--use_file",
-        action='store_true',
-        help="Collect calls using entire file as a pool",
-    )
-    parser.add_argument(
-        "--for_training",
-        action='store_true',
-        help="Collect calls using pre-labels of LF1, HF1, HF2",
-    )
-    parser.add_argument(
-        "--for_predicting",
-        action='store_true',
-        help="Collect calls regardless of pre-labels",
-    )
     return vars(parser.parse_args())
 
 if __name__ == "__main__":
