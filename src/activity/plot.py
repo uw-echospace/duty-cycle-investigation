@@ -179,7 +179,7 @@ def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file
     plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.6*len(activity_times))})
     plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
     time_block_duration = int(data_params['index_time_block_in_secs'])
-    peak_index = (60*int(data_params['resolution_in_min'])/time_block_duration)
+    peak_index = (60*int(data_params['bin_size'])/time_block_duration)
     title = f"{data_params['type_tag']} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
     plt.title(title, fontsize=0.8*len(activity_dates) + 1.4*len(activity_times))
     plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=1 + peak_index))
@@ -568,7 +568,7 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
         sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         time_block_duration = int(data_params['index_time_block_in_secs'])
-        peak_index = (60*int(data_params['resolution_in_min'])/time_block_duration)
+        peak_index = (60*int(data_params['bin_size'])/time_block_duration)
         title = f"{data_params['type_tag']} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
         if (time_block_duration >= 60):

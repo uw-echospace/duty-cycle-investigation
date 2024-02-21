@@ -182,4 +182,4 @@ def test_bout_end_times_in_period(bout_metrics, time_on):
     """
     A test function to see if the duty cycle effects from the location summary of all calls carried over to the location summary of all bouts.
     """
-    assert(bout_metrics['end_time_wrt_ref'].max() <= time_on)
+    assert(bout_metrics['end_time_wrt_ref'].max() <= 60*time_on)

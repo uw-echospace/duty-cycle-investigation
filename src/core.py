@@ -1,8 +1,8 @@
 # For consistence in data visualization, duty-cycles will be mapped to specific colors.
 DC_COLOR_MAPPINGS = {
-                    '1800of1800' : 'cyan',
-                    '60of360' : 'red',
-                    '300of1800' : 'orange',
+                    '30of30' : 'cyan',
+                    '1of6' : 'red',
+                    '5of30' : 'orange',
                         }
 
 # These are the 6 locations studied using Audiomoths in 2022
