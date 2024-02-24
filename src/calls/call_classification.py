@@ -102,7 +102,8 @@ def open_and_get_call_info(audio_file, dets):
     dets.reset_index(drop=True, inplace=True)
 
     call_infos = pd.DataFrame()
-    call_infos['index'] = dets.index
+    call_infos['index_in_file'] = dets['index_in_file']
+    call_infos['index_in_summary'] = dets['index_in_summary']
     call_infos['file_name'] = pd.DatetimeIndex(pd.to_datetime(dets['input_file'], format='%Y%m%d_%H%M%S', exact=False)).strftime('%Y%m%d_%H%M%S.WAV')
     call_infos['sampling_rate'] = len(dets) * [audio_file.samplerate]
     call_infos.insert(0, 'SNR', features_of_interest['snrs'])
@@ -176,6 +177,8 @@ def get_params_relevant_to_data_at_location(cfg):
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     location_sum_df.reset_index(inplace=True)
     location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)
+    location_sum_df.reset_index(inplace=True)
+    location_sum_df.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
     site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
     bout_params = bout.get_bout_params_from_location(location_sum_df, data_params)
 
