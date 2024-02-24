@@ -51,7 +51,13 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
 
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
-    recover_ratio = total / on
+    bin_size = int(data_params['bin_size'])
+    recover_ratio = min(total, bin_size) / min(on, bin_size)
+
+    if total-on >= bin_size:
+        activity_df = activity_df.replace(np.NaN, -1).replace(0, np.NaN)
+        activity_df = activity_df.ffill(limit=(min((14*60)-on, total-on)//bin_size))
+        activity_df = activity_df.replace(np.NaN, 0).replace(-1, np.NaN)
 
     masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
     cmap = plt.get_cmap('viridis')
@@ -110,7 +116,13 @@ def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, fil
 
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
-    recover_ratio = total / on
+    bin_size = int(data_params['bin_size'])
+    recover_ratio = min(total, bin_size) / min(on, bin_size)
+
+    if total-on >= bin_size:
+        activity_df = activity_df.replace(np.NaN, -1).replace(0, np.NaN)
+        activity_df = activity_df.ffill(limit=(min((14*60)-on, total-on)//bin_size))
+        activity_df = activity_df.replace(np.NaN, 0).replace(-1, np.NaN)
 
     masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
     cmap = plt.get_cmap('viridis')
@@ -170,7 +182,13 @@ def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file
 
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
-    recover_ratio = total / on
+    bin_size = int(data_params['bin_size'])
+    recover_ratio = min(total, bin_size) / min(on, bin_size)
+
+    if total-on >= bin_size:
+        activity_df = activity_df.replace(np.NaN, -1).replace(0, np.NaN)
+        activity_df = activity_df.ffill(limit=(min((14*60)-on, total-on)//bin_size))
+        activity_df = activity_df.replace(np.NaN, 0).replace(-1, np.NaN)
 
     masked_array_for_nodets = np.ma.masked_where(activity_df.values==np.NaN, activity_df.values)
     cmap = plt.get_cmap('viridis')
