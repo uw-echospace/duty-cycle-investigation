@@ -23,6 +23,27 @@ def regress_around_peakIPI(intervals_ms, survival, values):
     fast_process['indices'] = fast_inds
     return fast_process
 
+
+def regress_around_fast_intervals(intervals_ms, survival, values):
+    """
+    Use scipy.stats to compute linear regression coefficients around points
+    we associate with between-bout intervals.
+
+    These interval points to regress around are chosen using values between 30-40% of the max survival.
+    We have observed that these points have a strong linear relationship.
+    They are also among intervals from 20 to 60min. This range is very likely between-bout.
+    """
+
+
+    fast_inds = intervals_ms <= 2*1e3
+    fast_coeff = stats.linregress(intervals_ms[fast_inds], survival[fast_inds])
+
+    fast_process = dict()
+    fast_process['metrics'] = fast_coeff
+    fast_process['indices'] = fast_inds
+    return fast_process
+
+
 def regress_around_survival_threshold(intervals_ms, survival):
     """
     Use scipy.stats to compute linear regression coefficients around points

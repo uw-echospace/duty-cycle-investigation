@@ -3,6 +3,8 @@ DC_COLOR_MAPPINGS = {
                     '30of30' : 'cyan',
                     '1of6' : 'red',
                     '5of30' : 'orange',
+                    '30of180' : 'purple',
+                    '10of60' : 'pink'
                         }
 
 # These are the 6 locations studied using Audiomoths in 2022
@@ -17,9 +19,11 @@ SITE_NAMES = {
 
 
 FREQUENCY_COLOR_MAPPINGS = {
+                    'LF' : 'cyan',
                     'LF1' : 'cyan',
                     'HF1' : 'red',
                     'HF2' : 'yellow',
+                    'HF' : 'yellow',
                         }
 
 
