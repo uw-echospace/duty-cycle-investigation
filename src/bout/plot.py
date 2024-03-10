@@ -337,11 +337,13 @@ def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, plot_b
     plt.rcParams.update({'font.size': 24})
     plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
 
-    yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label=f'BCI = {round(bout_params["HF2_bci"], 2)}ms')
-    red_patch = patches.Patch(facecolor='red', edgecolor='k', label=f'BCI = {round(bout_params["HF1_bci"], 2)}ms')
-    blue_patch = patches.Patch(facecolor='cyan', edgecolor='k', label=f'BCI = {round(bout_params["LF1_bci"], 2)}ms')
+    legend_patches = []
+    for group in bout_params.keys():
+        if group != 'site_key':
+            group_tag = group.split('_')[0]
+            group_patch = patches.Patch(facecolor=FREQUENCY_COLOR_MAPPINGS[group_tag], edgecolor='k', label=f'BCI = {round(bout_params[group], 2)}ms')
+            legend_patches += [group_patch]
 
-    legend_patches = [blue_patch, red_patch, yellow_patch]
     ax = plt.gca()
     for i, row in plot_bouts.iterrows():
         plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+2000)/(fs/2), 3/4), 

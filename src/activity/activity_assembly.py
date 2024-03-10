@@ -76,7 +76,7 @@ def generate_activity_inds_results(data_params, file_paths, save=True):
     return activity_inds_arr
 
 
-def assemble_initial_location_summary(data_params, file_paths, save=True):
+def assemble_initial_location_summary(file_paths):
     """
     Puts together all bd2 outputs in data/raw and converts detection start_times to datetime objects.
     Returns and saves a summary of bd2-detected bat calls within a desired frequency band.
@@ -92,8 +92,12 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
     location_df.insert(0, 'call_end_time', anchor_end_times)
     location_df.insert(0, 'call_start_time', anchor_start_times)
     location_df.insert(0, 'ref_time', anchor_start_times)
-    location_df.insert(0, 'freq_group', '')
 
+    return location_df
+
+def add_frequency_groups_to_summary_using_thresholds(location_df, file_paths, data_params, save=True):
+    
+    location_df.insert(0, 'freq_group', '')
     groups = FREQ_GROUPS[data_params['site_tag']]
     blue_group = groups['LF1']
     red_group = groups['HF1']
@@ -115,8 +119,23 @@ def assemble_initial_location_summary(data_params, file_paths, save=True):
 
     return location_df
 
+def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_params, save=True):
 
-def assemble_single_bd2_output(path_to_bd2_output, data_params):
+    location_df.insert(0, 'freq_group', '')
+    location_classes = pd.read_csv(Path(file_paths['SITE_classes_file']), index_col=0)
+    kept_calls_from_location = location_df.iloc[location_classes['index_in_summary'].values].copy()
+    kept_calls_from_location['freq_group'] = location_classes['KMEANS_CLASSES'].values
+
+    if data_params['type_tag'] != '':
+        kept_calls_from_location = kept_calls_from_location.loc[kept_calls_from_location['freq_group']==data_params['type_tag']]
+
+    if save:
+        kept_calls_from_location.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv')
+
+    return kept_calls_from_location
+
+
+def assemble_single_bd2_output_use_thresholds_to_group(path_to_bd2_output, data_params):
     """
     Adds columns to bd2 output for a single file to be of the same format as the output
     of the assemble_initial_location_summary() method.
@@ -147,6 +166,31 @@ def assemble_single_bd2_output(path_to_bd2_output, data_params):
     location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
     
     return location_df
+
+
+
+def assemble_single_bd2_output_use_kmeans_to_group(path_to_bd2_output, file_paths):
+    """
+    Adds columns to bd2 output for a single file to be of the same format as the output
+    of the assemble_initial_location_summary() method.
+    """
+
+    location_df = pd.read_csv(path_to_bd2_output)
+    file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
+
+    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'].values.astype('float64'), unit='S')
+    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'].values.astype('float64'), unit='S') 
+
+    location_df.insert(0, 'call_end_time', anchor_end_times)
+    location_df.insert(0, 'call_start_time', anchor_start_times)
+    location_df.insert(0, 'ref_time', anchor_start_times)
+    location_df.insert(0, 'freq_group', '')
+    location_classes = pd.read_csv(Path(file_paths['SITE_classes_file']), index_col=0)
+    file_classes = location_classes.loc[location_classes['file_name']==Path(location_df['input_file'].unique().item()).name].copy()
+    kept_calls_from_location = location_df.iloc[file_classes['index_in_file'].values].copy()
+    kept_calls_from_location['freq_group'] = file_classes['KMEANS_CLASSES'].values
+    
+    return kept_calls_from_location
 
 
 def get_number_of_detections_per_interval(location_df, data_params):
