@@ -52,7 +52,7 @@ def compute_welch_psd_of_call(call, fs, audio_info):
     thresh = -100
     peak_db = np.zeros(len(normalized_audio_spectrum_db))+thresh
     peak_db[normalized_audio_spectrum_db>=thresh] = normalized_audio_spectrum_db[normalized_audio_spectrum_db>=thresh]
-    
+
     original_freq_vector = np.arange(0, len(peak_db), 1).astype('int')
     common_freq_vector = np.linspace(0, len(peak_db)-1, audio_info['num_points']).astype('int')
     interp_kind = 'linear'

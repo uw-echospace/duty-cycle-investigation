@@ -83,8 +83,6 @@ def get_file_paths(data_params):
     file_paths["dc_dets_TYPE_SITE_summary"] = f'dc_dets_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["dc_bouts_TYPE_SITE_summary"] = f'dc_bouts_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["dc_inds_TYPE_SITE_summary"] = f'dc_inds_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["simulated_schemes_folder"] = f'{file_paths["duty_cycled_folder"]}/simulated_schemes'
-    Path(f'{file_paths["simulated_schemes_folder"]}').mkdir(parents=True, exist_ok=True)
 
     file_paths["figures_SITE_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}'
     Path(file_paths["figures_SITE_folder"]).mkdir(parents=True, exist_ok=True)

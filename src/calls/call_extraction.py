@@ -72,7 +72,6 @@ def collect_call_snrs_from_detections_in_audio_file(audio_file, detections):
             signal[:int(fs*(call_dur+(2*pad)))] = 0
 
             noise = band_limited_audio_seg - signal
-
             snr_call_signal = signal[-int(fs*(call_dur+(2*pad))):]
             snr_noise_signal = noise[:int(fs*(call_dur+(2*pad)))]
 

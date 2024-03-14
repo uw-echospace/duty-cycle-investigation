@@ -652,6 +652,13 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
 
     for i, dc_tag in enumerate(data_params['dc_tags']):
         presence_df = actvt.construct_presence_grid(activity_arr, dc_tag).replace(np.NaN, 156)
+        on = int(dc_tag.split('of')[0])
+        total = int(dc_tag.split('of')[1])
+        bin_size = int(data_params['bin_size'])
+        if total-on >= bin_size:
+            presence_df = presence_df.replace(np.NaN, -1).replace(0, np.NaN)
+            presence_df = presence_df.ffill(limit=(min((14*60)-on, total-on)//bin_size))
+            presence_df = presence_df.replace(np.NaN, 0).replace(-1, np.NaN)
         datetimes = pd.to_datetime(presence_df.columns.values, format='%m/%d/%y')
         activity_dates = datetimes.strftime("%m/%d/%y").unique()
         activity_times = pd.to_datetime(presence_df.index.values, format='%H:%M').strftime("%H:%M").unique()
