@@ -135,7 +135,7 @@ def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bou
 
     return result_df
 
-def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc_tag):
+def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, time_on):
     """
     Given a location summary of calls dataframe, create an analogous location summary of bouts by:
     1) Calculating the BCI for each frequency group in the summary.
@@ -150,7 +150,6 @@ def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, dc
     batdetect2_predictions = classify_bouts_in_bd2_predictions_for_freqgroups(location_sum_df, bout_params)
     bout_metrics = construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_predictions)
 
-    time_on = int(dc_tag.split('of')[0])
     test_bout_end_times_in_period(bout_metrics, time_on)
 
     return bout_metrics

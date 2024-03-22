@@ -241,10 +241,11 @@ def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_pa
     """
 
     time_occupied_by_bouts  = bout_duration_per_interval.values
+    percent_time_occupied_by_bouts = (100*(time_occupied_by_bouts / (60*float(data_params['bin_size']))))
 
     all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
-    bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, time_occupied_by_bouts)),
+    bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)),
                                 columns=['ref_time', f'bout_time ({dc_tag})'])
     bout_dpi_df = bout_dpi_df.set_index('ref_time')
     bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['bin_size']}T").first()
