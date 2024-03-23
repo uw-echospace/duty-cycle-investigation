@@ -272,8 +272,8 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
     duration = audio_features['duration']
 
     plt.figure(figsize=(15, 5))
-    plt.title(f"BatDetect2 detections for simulated recording period on {audio_features['file_path'].name}", fontsize=22)
     plt.rcParams.update({'font.size': 24})
+    plt.title(f"BatDetect2 detections for simulated recording period on {audio_features['file_path'].name}", fontsize=22)
     plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
 
     pink_patch = patches.Patch(facecolor='pink', edgecolor='k', label='Bout START/END')
@@ -293,8 +293,8 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
         ax.add_patch(rect)
 
     dc_tag = data_params['cur_dc_tag']
-    cycle_length = int(dc_tag.split('of')[1])
-    time_on = int(dc_tag.split('of')[0])
+    cycle_length = 60*(int(dc_tag.split('of')[1]))
+    time_on = 60*(int(dc_tag.split('of')[0]))
 
     window_starts = np.arange(0, 1800, cycle_length)
     for window_start in window_starts:
@@ -333,8 +333,8 @@ def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, plot_b
     duration = audio_features['duration']
 
     plt.figure(figsize=(15, 5))
-    plt.title(f"BCI-derived bouts using BD2 detections on {audio_features['file_path'].name}", fontsize=22)
     plt.rcParams.update({'font.size': 24})
+    plt.title(f"BCI-derived bouts using BD2 detections on {audio_features['file_path'].name}", fontsize=22)
     plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
 
     legend_patches = []

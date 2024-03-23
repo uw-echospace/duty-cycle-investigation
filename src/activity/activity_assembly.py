@@ -169,7 +169,7 @@ def assemble_single_bd2_output_use_thresholds_to_group(path_to_bd2_output, data_
 
 
 
-def assemble_single_bd2_output_use_kmeans_to_group(path_to_bd2_output, file_paths):
+def assemble_single_bd2_output_use_kmeans_to_group(path_to_bd2_output, file_paths, data_params):
     """
     Adds columns to bd2 output for a single file to be of the same format as the output
     of the assemble_initial_location_summary() method.
@@ -189,6 +189,9 @@ def assemble_single_bd2_output_use_kmeans_to_group(path_to_bd2_output, file_path
     file_classes = location_classes.loc[location_classes['file_name']==Path(location_df['input_file'].unique().item()).name].copy()
     kept_calls_from_location = location_df.iloc[file_classes['index_in_file'].values].copy()
     kept_calls_from_location['freq_group'] = file_classes['KMEANS_CLASSES'].values
+
+    if data_params['type_tag'] != '':
+        kept_calls_from_location = kept_calls_from_location.loc[kept_calls_from_location['freq_group']==data_params['type_tag']]
     
     return kept_calls_from_location
 

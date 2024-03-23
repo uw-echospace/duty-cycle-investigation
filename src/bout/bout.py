@@ -147,8 +147,8 @@ def generate_bout_metrics_for_location_and_freq(location_sum_df, data_params, ti
 
     bout_params = get_bout_params_from_location(location_sum_df, data_params)
 
-    batdetect2_predictions = classify_bouts_in_bd2_predictions_for_freqgroups(location_sum_df, bout_params)
-    bout_metrics = construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_predictions)
+    tagged_dets = classify_bouts_in_bd2_predictions_for_freqgroups(location_sum_df, bout_params)
+    bout_metrics = construct_bout_metrics_from_location_df_for_freqgroups(tagged_dets)
 
     test_bout_end_times_in_period(bout_metrics, time_on)
 
