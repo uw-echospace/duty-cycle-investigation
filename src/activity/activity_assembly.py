@@ -195,16 +195,22 @@ def assemble_single_bd2_output_use_kmeans_to_group(path_to_bd2_output, file_path
     
     return kept_calls_from_location
 
+def get_metric_per_time_on(metric, time_on):
 
-def get_number_of_detections_per_interval(location_df, data_params):
-    """
-    Constructs a pandas Series that records the # of detections observed per interval.
-    The used interval is the one stored inside data_params['bin_size']
-    """
+    return metric / (time_on)
 
-    location_df.insert(0, 'call_durations', (location_df['call_end_time'] - location_df['call_start_time']))
-    df_resampled_every_30 = location_df.resample(f"{data_params['bin_size']}T", on='ref_time')
-    num_of_detections = df_resampled_every_30['ref_time'].count()
+def filter_and_prepare_metric(metric, dc_tag, data_params):
+
+    col_name = f"{data_params['metric_tag']} ({dc_tag})"
+    incomplete_activity_arr = pd.DataFrame(metric.values, index=metric.index, columns=[col_name])
+    activity_arr = incomplete_activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
+
+    return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["datetime_UTC", col_name])
+
+def get_number_of_detections_per_cycle(location_df, cycle_length):
+
+    df_resampled_every_30 = location_df.resample(f"{cycle_length}T", on='cycle_ref_time')
+    num_of_detections = df_resampled_every_30['cycle_ref_time'].count()
 
     return num_of_detections
 
@@ -223,17 +229,17 @@ def construct_activity_arr_from_location_summary(num_of_detections, dc_tag, file
 
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["datetime_UTC", col_name])
 
-def get_bout_duration_per_interval(bout_metrics, data_params):
+def get_bout_duration_per_cycle(bout_metrics, cycle_length_in_mins):
     """
     Constructs a pandas Series that records the duration of time occupied by bouts observed per interval.
-    The used interval is the one stored inside data_params['bin_size']
+    The used interval is the cycle_length in minutes
     """
 
     bout_metrics['ref_time'] = pd.DatetimeIndex(bout_metrics['start_time_of_bout'])
     bout_metrics['total_bout_duration_in_secs'] = bout_metrics['bout_duration_in_secs']
     bout_metrics = bout_metrics.set_index('ref_time')
 
-    bout_duration_per_interval = bout_metrics.resample(f"{data_params['bin_size']}T")['total_bout_duration_in_secs'].sum()
+    bout_duration_per_interval = bout_metrics.resample(f"{cycle_length_in_mins}T")['total_bout_duration_in_secs'].sum()
 
     return bout_duration_per_interval
 

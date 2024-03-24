@@ -4,8 +4,9 @@ import pandas as pd
 import sys
 
 sys.path.append("../src")
-import activity.activity_assembly as actvt
+import pipeline
 from core import SITE_NAMES
+from cli import get_file_paths
 
 def test_columns_in_location_summary_are_as_expected(location_df):
     """
@@ -20,11 +21,18 @@ def test_columns_in_location_summary_are_as_expected(location_df):
         assert column in existing_columns
 
 
-def test_if_calls_exist_in_location_summary(location_df):
+def test_if_good_amount_of_calls_exist_in_location_summary(location_df, data_params):
     """
     Test if the location summary has at least 1 call
     """
-    assert len(location_df) > 0
+    date_of_first_call = location_df['call_start_time'].iloc[0].date()
+    date_of_last_call = location_df['call_start_time'].iloc[-1].date()
+
+    mock = pd.date_range(date_of_first_call, date_of_last_call, freq='1S')
+    between_time_mock = mock[mock.indexer_between_time(pd.to_datetime(data_params['recording_start'], format='%H:%M').time(), 
+                               pd.to_datetime(data_params['recording_end'], format='%H:%M').time())]
+    
+    assert (400000 < len(location_df))&(len(location_df) < len(between_time_mock))
 
 def test_location_summary_is_dataframe(location_df):
     """
@@ -43,13 +51,20 @@ def run_tests_on_all_location_summary_methods():
         data_params["site_name"] = SITE_NAMES[site_key]
         data_params["site_tag"] = site_key
         data_params["type_tag"] = type_key
+        data_params['cur_dc_tag'] = '30of30'
+        data_params["site_name"] = SITE_NAMES[site_key]
+        data_params['recording_start'] = '0:00'
+        data_params['recording_end'] = '16:00'
 
-        file_paths = dict()
-        file_paths["raw_SITE_folder"] = f'{Path(__file__).resolve().parent}/../../data/raw/{data_params["site_tag"]}'
+        pipeline_params = dict()
+        pipeline_params['use_threshold_to_group'] = False
+        pipeline_params['use_kmeans_to_group'] = True
+
+        file_paths = get_file_paths(data_params)
+
         if Path(file_paths['raw_SITE_folder']).exists():
-            location_df = actvt.assemble_initial_location_summary(data_params, file_paths, save=False)
+            print(site_key)
+            location_df = pipeline.prepare_location_sumary(data_params, pipeline_params, file_paths)
             test_location_summary_is_dataframe(location_df)
             test_columns_in_location_summary_are_as_expected(location_df)
-            test_if_calls_exist_in_location_summary(location_df)
-
-
+            test_if_good_amount_of_calls_exist_in_location_summary(location_df, data_params)
