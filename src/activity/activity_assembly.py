@@ -21,7 +21,7 @@ def generate_activity_dets_results(data_params, file_paths, save=True):
 
     for dc_tag in data_params['dc_tags']:
 
-        location_df = ss.prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag, data_params['bin_size'])
+        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
         num_of_detections = get_number_of_detections_per_interval(location_df, data_params)
         dc_dets = construct_activity_arr_from_location_summary(num_of_detections, dc_tag, file_paths, data_params)
         dc_dets = dc_dets.set_index("datetime_UTC")
@@ -41,8 +41,8 @@ def generate_activity_bouts_results(data_params, file_paths, save=True):
     activity_bouts_arr = pd.DataFrame()
 
     for dc_tag in data_params['dc_tags']:
-
-        location_df = ss.prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag, data_params['bin_size'])
+        
+        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
         bout_metrics = bt.generate_bout_metrics_for_location_and_freq(location_df, data_params, dc_tag)
         bout_duration_per_interval = get_bout_duration_per_interval(bout_metrics, data_params)
         dc_bouts = construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, file_paths, dc_tag)
@@ -64,7 +64,7 @@ def generate_activity_inds_results(data_params, file_paths, save=True):
 
     for dc_tag in data_params['dc_tags']:
 
-        location_df = ss.prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag, data_params['bin_size'])
+        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
         activity_indices = get_activity_index_per_interval(location_df, data_params)
         dc_dets = construct_activity_indices_arr(activity_indices, dc_tag, file_paths, data_params)
         dc_dets = dc_dets.set_index("datetime_UTC")
@@ -199,9 +199,9 @@ def get_metric_per_time_on(metric, time_on):
 
     return metric / (time_on)
 
-def filter_and_prepare_metric(metric, dc_tag, data_params):
+def filter_and_prepare_metric(metric, data_params):
 
-    col_name = f"{data_params['metric_tag']} ({dc_tag})"
+    col_name = f"{data_params['metric_tag']} ({data_params['cur_dc_tag']})"
     incomplete_activity_arr = pd.DataFrame(metric.values, index=metric.index, columns=[col_name])
     activity_arr = incomplete_activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
@@ -211,6 +211,18 @@ def get_number_of_detections_per_cycle(location_df, cycle_length):
 
     df_resampled_every_30 = location_df.resample(f"{cycle_length}T", on='cycle_ref_time')
     num_of_detections = df_resampled_every_30['cycle_ref_time'].count()
+
+    return num_of_detections
+
+def get_number_of_detections_per_interval(location_df, data_params):
+    """
+    Constructs a pandas Series that records the # of detections observed per interval.
+    The used interval is the one stored inside data_params['bin_size']
+    """
+
+    location_df.insert(0, 'call_durations', (location_df['call_end_time'] - location_df['call_start_time']))
+    df_resampled_every_30 = location_df.resample(f"{data_params['bin_size']}T", on='ref_time')
+    num_of_detections = df_resampled_every_30['ref_time'].count()
 
     return num_of_detections
 
@@ -240,6 +252,20 @@ def get_bout_duration_per_cycle(bout_metrics, cycle_length_in_mins):
     bout_metrics = bout_metrics.set_index('ref_time')
 
     bout_duration_per_interval = bout_metrics.resample(f"{cycle_length_in_mins}T")['total_bout_duration_in_secs'].sum()
+
+    return bout_duration_per_interval
+
+def get_bout_duration_per_interval(bout_metrics, data_params):
+    """
+    Constructs a pandas Series that records the duration of time occupied by bouts observed per interval.
+    The used interval is the one stored inside data_params['bin_size']
+    """
+
+    bout_metrics['ref_time'] = pd.DatetimeIndex(bout_metrics['start_time_of_bout'])
+    bout_metrics['total_bout_duration_in_secs'] = bout_metrics['bout_duration_in_secs']
+    bout_metrics = bout_metrics.set_index('ref_time')
+
+    bout_duration_per_interval = bout_metrics.resample(f"{data_params['bin_size']}T")['total_bout_duration_in_secs'].sum()
 
     return bout_duration_per_interval
 

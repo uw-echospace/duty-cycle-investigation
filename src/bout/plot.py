@@ -292,6 +292,73 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
         
         ax.add_patch(rect)
 
+    plot_recording_periods(ax, audio_features, data_params)
+
+    plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
+    plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
+    plt.ylabel("Frequency (kHz)")
+    plt.xlabel("Time (s)")
+    plt.gcf().autofmt_xdate()
+    plt.legend(handles=legend_patches, fontsize=20, ncol=int(len(legend_patches)**0.5), loc='upper right')
+
+    plt.tight_layout()
+    plt.show()
+
+def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, data_params, plot_bouts):
+    """
+    Function to plot the spectrogram of a provided audio segment with overlayed bouts and bout duurations.
+    """
+    
+    audio_seg = audio_features['audio_seg']
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    plt.figure(figsize=(15, 5))
+    plt.rcParams.update({'font.size': 24})
+    plt.title(f"BCI-derived bouts using BD2 detections on {audio_features['file_path'].name}", fontsize=22)
+    plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
+
+    legend_patches = []
+    for group in bout_params.keys():
+        if group != 'site_key':
+            group_tag = group.split('_')[0]
+            group_patch = patches.Patch(facecolor=FREQUENCY_COLOR_MAPPINGS[group_tag], edgecolor='k', label=f'BCI = {round(bout_params[group], 2)}ms')
+            legend_patches += [group_patch]
+
+    ax = plt.gca()
+    plot_bout_info(ax, audio_features, plot_bouts)
+    plot_recording_periods(ax, audio_features, data_params)
+
+    plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
+    plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
+    plt.ylabel("Frequency (kHz)")
+    plt.xlabel("Time (s)")
+    plt.gcf().autofmt_xdate()
+    plt.legend(handles=legend_patches, fontsize=20, ncol=int(len(legend_patches)), loc='upper right')
+
+    plt.tight_layout()
+    plt.show()
+
+def plot_bout_info(ax, audio_features, plot_bouts):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+
+    for i, row in plot_bouts.iterrows():
+        plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+2000)/(fs/2), 3/4), 
+                            s=f"{round(row['bout_duration_in_secs'], 2)}s", color='pink', weight='bold', fontsize=14)
+        plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+12000)/(fs/2), 3/4), 
+                            s=f"{round(row['number_of_dets'], 2)} dets", color='pink', weight='bold', fontsize=14)
+        rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
+                        (row['bout_duration_in_secs'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
+                        linewidth=2, edgecolor=FREQUENCY_COLOR_MAPPINGS[row['freq_group']], facecolor='none', alpha=0.8)
+        ax.add_patch(rect)
+
+def plot_recording_periods(ax, audio_features, data_params):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
     dc_tag = data_params['cur_dc_tag']
     cycle_length = 60*(int(dc_tag.split('of')[1]))
     time_on = 60*(int(dc_tag.split('of')[0]))
@@ -311,54 +378,3 @@ def plot_dets_with_bout_ID_over_audio_seg(audio_features, spec_features, data_pa
                                             (time_on)*fs/2, fs/2, 
                                             linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.3)
             ax.add_patch(rect)
-
-    plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
-    plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
-    plt.ylabel("Frequency (kHz)")
-    plt.xlabel("Time (s)")
-    plt.gcf().autofmt_xdate()
-    plt.legend(handles=legend_patches, fontsize=20, ncol=int(len(legend_patches)**0.5), loc='upper right')
-
-    plt.tight_layout()
-    plt.show()
-
-def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, plot_bouts):
-    """
-    Function to plot the spectrogram of a provided audio segment with overlayed bouts and bout duurations.
-    """
-
-    audio_seg = audio_features['audio_seg']
-    fs = audio_features['sample_rate']
-    start = audio_features['start']
-    duration = audio_features['duration']
-
-    plt.figure(figsize=(15, 5))
-    plt.rcParams.update({'font.size': 24})
-    plt.title(f"BCI-derived bouts using BD2 detections on {audio_features['file_path'].name}", fontsize=22)
-    plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
-
-    legend_patches = []
-    for group in bout_params.keys():
-        if group != 'site_key':
-            group_tag = group.split('_')[0]
-            group_patch = patches.Patch(facecolor=FREQUENCY_COLOR_MAPPINGS[group_tag], edgecolor='k', label=f'BCI = {round(bout_params[group], 2)}ms')
-            legend_patches += [group_patch]
-
-    ax = plt.gca()
-    for i, row in plot_bouts.iterrows():
-        plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+2000)/(fs/2), 3/4), 
-                            s=f"{round(row['bout_duration_in_secs'], 2)}s", color='pink', fontsize=14)
-        rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
-                        (row['bout_duration_in_secs'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
-                        linewidth=2, edgecolor=FREQUENCY_COLOR_MAPPINGS[row['freq_group']], facecolor='none', alpha=0.8)
-        ax.add_patch(rect)
-
-    plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
-    plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
-    plt.ylabel("Frequency (kHz)")
-    plt.xlabel("Time (s)")
-    plt.gcf().autofmt_xdate()
-    plt.legend(handles=legend_patches, fontsize=20, ncol=int(len(legend_patches)), loc='upper right')
-
-    plt.tight_layout()
-    plt.show()
