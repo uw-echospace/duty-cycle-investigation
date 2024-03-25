@@ -224,7 +224,7 @@ def plot_audio_seg(audio_features, spec_features):
     plt.tight_layout()
     plt.show()
 
-def plot_dets_over_audio_seg(audio_features, spec_features, plot_dets):
+def plot_dets_over_audio_seg(audio_features, spec_features, plot_dets, data_params):
     """
     Function to plot the spectrogram of a provided audio segment with overlayed detections
     """
@@ -249,6 +249,8 @@ def plot_dets_over_audio_seg(audio_features, spec_features, plot_dets):
                         linewidth=2, edgecolor='yellow', facecolor='none', alpha=0.8)
         
         ax.add_patch(rect)
+
+    plot_recording_periods(ax, audio_features, data_params)
 
     plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
     plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
