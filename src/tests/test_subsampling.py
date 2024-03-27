@@ -56,11 +56,9 @@ def test_if_subsampling_reduces_number_of_calls_by_expected_factor_in_mock_datas
     mock_start = dt.datetime(2022, 6, 15, 0, 0, 0)
     mock_df = create_initial_mock_data_from_ipis(mock_start)
     for dc_tag in data_params['dc_tags']:
-        
+        data_params['cur_dc_tag'] = dc_tag
         cycle_length = int(dc_tag.split('of')[-1])
         time_on = int(dc_tag.split('of')[0])
-        time_on_in_secs = (60*time_on)
 
-        mock_df_subsampled = ss.simulate_dutycycle_on_detections(mock_df.copy(), cycle_length, 
-                                                              time_on_in_secs, data_params)
+        mock_df_subsampled = ss.simulate_dutycycle_on_detections(mock_df.copy(), data_params)
         assert np.isclose(len(mock_df_subsampled), len(mock_df)/(cycle_length/time_on), atol=3)

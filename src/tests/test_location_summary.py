@@ -8,7 +8,7 @@ import pipeline
 from core import SITE_NAMES
 from cli import get_file_paths
 
-def test_columns_in_location_summary_are_as_expected(location_df):
+def assert_columns_in_location_summary_are_as_expected(location_df):
     """
     Test if the location summary has all the expected columns?
     """
@@ -21,7 +21,7 @@ def test_columns_in_location_summary_are_as_expected(location_df):
         assert column in existing_columns
 
 
-def test_if_good_amount_of_calls_exist_in_location_summary(location_df, data_params):
+def assert_good_amount_of_calls_exist_in_location_summary(location_df, data_params):
     """
     Test if the location summary has at least 1 call
     """
@@ -34,13 +34,13 @@ def test_if_good_amount_of_calls_exist_in_location_summary(location_df, data_par
     
     assert (400000 < len(location_df))&(len(location_df) < len(between_time_mock))
 
-def test_location_summary_is_dataframe(location_df):
+def assert_location_summary_is_dataframe(location_df):
     """
     Test if the location summary is a pandas DataFrame.
     """
     assert isinstance(location_df, pd.DataFrame)
 
-def run_tests_on_all_location_summary_methods():
+def test_on_all_location_summary_methods():
     """
     Generates a location summary dataframe for each location and runs some basic tests to make sure output is valid
     """
@@ -65,6 +65,6 @@ def run_tests_on_all_location_summary_methods():
         if Path(file_paths['raw_SITE_folder']).exists():
             print(site_key)
             location_df = pipeline.prepare_location_sumary(data_params, pipeline_params, file_paths)
-            test_location_summary_is_dataframe(location_df)
-            test_columns_in_location_summary_are_as_expected(location_df)
-            test_if_good_amount_of_calls_exist_in_location_summary(location_df, data_params)
+            assert_location_summary_is_dataframe(location_df)
+            assert_columns_in_location_summary_are_as_expected(location_df)
+            assert_good_amount_of_calls_exist_in_location_summary(location_df, data_params)

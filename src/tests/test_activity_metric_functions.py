@@ -7,9 +7,8 @@ from scipy import stats, signal
 
 import sys
 sys.path.append("../src")
-sys.path.append("../src/bout")
 
-import bout as bt
+import bout.assembly as bt
 import activity.activity_assembly as actvt
 import activity.subsampling as ss
 from cli import get_file_paths
@@ -57,25 +56,20 @@ def test_bout_metrics_using_simulated_bout_dataset():
     data_params['recording_end'] = '16:00'
 
     data_params['cur_dc_tag'] = '6of6'
-    data_params['cycle_length'] = int(data_params['cur_dc_tag'].split('of')[-1])
-    data_params['time_on'] = int(data_params['cur_dc_tag'].split('of')[0])
-    data_params['time_on_in_secs'] = 60*data_params['time_on']
-    test_bout_metric_calculation(data_params, bout_params)
+    assert_bout_metric_calculation(data_params, bout_params)
 
     data_params['cur_dc_tag'] = '5of30'
-    data_params['cycle_length'] = int(data_params['cur_dc_tag'].split('of')[-1])
-    data_params['time_on'] = int(data_params['cur_dc_tag'].split('of')[0])
-    data_params['time_on_in_secs'] = 60*data_params['time_on']
-    test_bout_metric_calculation(data_params, bout_params)
+    assert_bout_metric_calculation(data_params, bout_params)
 
     data_params['cur_dc_tag'] = '1of6'
+    assert_bout_metric_calculation(data_params, bout_params)
+
+
+def assert_bout_metric_calculation(data_params, bout_params):
     data_params['cycle_length'] = int(data_params['cur_dc_tag'].split('of')[-1])
     data_params['time_on'] = int(data_params['cur_dc_tag'].split('of')[0])
     data_params['time_on_in_secs'] = 60*data_params['time_on']
-    test_bout_metric_calculation(data_params, bout_params)
 
-
-def test_bout_metric_calculation(data_params, bout_params):
     points = 50
     t = np.linspace(0, 1, points, endpoint=False)
 
@@ -90,10 +84,10 @@ def test_bout_metric_calculation(data_params, bout_params):
     mock_square_ipis[mock_square_ipis==0] = desired_ipi
 
     mock_bout_df = create_initial_mock_data_from_ipis(mock_square_ipis)
-    mock_bout_df = ss.simulate_dutycycle_on_detections(mock_bout_df, data_params['cycle_length'], data_params['time_on_in_secs'], data_params)
+    mock_bout_df = ss.simulate_dutycycle_on_detections(mock_bout_df, data_params)
     tagged_dets = bt.classify_bouts_in_bd2_predictions_for_freqgroups(mock_bout_df, bout_params)
-    fixed_dets = tagged_dets.groupby('cycle_ref_time').apply(lambda x: bt.add_placeholder_to_tag_dets_wrt_cycle(x, data_params['cycle_length']))
-    fixed_dets.reset_index(drop=True, inplace=True)
+    cycle_length_groups = tagged_dets.groupby('cycle_ref_time', group_keys=False)
+    fixed_dets = cycle_length_groups.apply(lambda x: bt.add_placeholder_to_tag_dets_wrt_cycle(x, data_params['cycle_length']))
     bout_metrics = bt.construct_bout_metrics_from_classified_dets(fixed_dets)
     bout_duration = actvt.get_bout_duration_per_cycle(bout_metrics, data_params['cycle_length'])
     assert(bout_duration.sum() == expected_dur_of_1bout*len(bout_metrics))
@@ -120,29 +114,24 @@ def test_num_dets_metric_using_simulated_dataset():
     data_params['recording_start'] = '00:00'
     data_params['recording_end'] = '16:00'
     data_params['cur_dc_tag'] = '6of6'
-    data_params['cycle_length'] = int(data_params['cur_dc_tag'].split('of')[-1])
-    data_params['time_on'] = int(data_params['cur_dc_tag'].split('of')[0])
-    data_params['time_on_in_secs'] = 60*data_params['time_on']
     expected_num_dets = total_num_dets
-    test_num_dets_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_dets)
+    assert_num_dets_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_dets)
 
     data_params['cur_dc_tag'] = '1of6'
-    data_params['cycle_length'] = int(data_params['cur_dc_tag'].split('of')[-1])
-    data_params['time_on'] = int(data_params['cur_dc_tag'].split('of')[0])
-    data_params['time_on_in_secs'] = 60*data_params['time_on']
     expected_num_dets = total_num_dets
-    test_num_dets_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_dets)
+    assert_num_dets_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_dets)
     
     data_params['cur_dc_tag'] = '5of30'
+    calls_per_bout = total_num_dets / desired_num_bouts
+    expected_num_dets = calls_per_bout
+    assert_num_dets_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_dets)
+
+
+def assert_num_dets_metric_calculation(data_params, desired_num_dets, desired_num_bouts, expected_num_dets):
     data_params['cycle_length'] = int(data_params['cur_dc_tag'].split('of')[-1])
     data_params['time_on'] = int(data_params['cur_dc_tag'].split('of')[0])
     data_params['time_on_in_secs'] = 60*data_params['time_on']
-    calls_per_bout = total_num_dets / desired_num_bouts
-    expected_num_dets = calls_per_bout
-    test_num_dets_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_dets)
 
-
-def test_num_dets_metric_calculation(data_params, desired_num_dets, desired_num_bouts, expected_num_dets):
     calls_per_bout = desired_num_dets / desired_num_bouts
     t = np.linspace(0, 1, desired_num_dets, endpoint=False)
 
@@ -155,7 +144,7 @@ def test_num_dets_metric_calculation(data_params, desired_num_dets, desired_num_
     mock_square_ipis[mock_square_ipis==0] = desired_ipi
 
     mock_df = create_initial_mock_data_from_ipis(mock_square_ipis)
-    mock_df = ss.simulate_dutycycle_on_detections(mock_df, data_params['cycle_length'], data_params['time_on_in_secs'], data_params)
+    mock_df = ss.simulate_dutycycle_on_detections(mock_df, data_params)
     bout_params = dict()
     bout_params['LF_bci'] = 150
     tagged_dets = bt.classify_bouts_in_bd2_predictions_for_freqgroups(mock_df, bout_params)
@@ -163,8 +152,66 @@ def test_num_dets_metric_calculation(data_params, desired_num_dets, desired_num_
     assert(actvt.get_number_of_detections_per_cycle(test_preds, data_params['cycle_length']).sum() == expected_num_dets)
 
 
-def test_bout_metric_fixing_on_location_df(location_df, data_params, bout_params):
-    dc_applied_df = ss.simulate_dutycycle_on_detections(location_df.copy(), data_params['cycle_length'], data_params['time_on_in_secs'], data_params)
+def test_num_dets_metric_using_simulated_dataset():
+    """
+    Create a simulated dataset of calls with 5 bouts of calls where within-bout calls are separated by IPI of 90ms.
+    Bouts are separated by intervals of 5-min. 
+    The BCI is set to be 150ms so we test the bout clustering functions to see if we get 5 bouts exactly.
+
+    The number of detections should be equal to the number of IPIs (including the IPI required before the first call)
+    The activity index should be equal to the number of bouts because each bout falls completely within just a single time block.
+    The measured bout duration should be equal to the derived bout duration.
+    Bout duration derived by calculating the duration of 10 calls and 9 IPIs per bout.
+    """
+
+    total_num_dets = 100
+    desired_num_bouts = 5
+
+    data_params = dict()
+    data_params['resolution_in_min'] = '30'
+    data_params["index_time_block"] = '5'
+    data_params['recording_start'] = '00:00'
+    data_params['recording_end'] = '16:00'
+    data_params['cur_dc_tag'] = '6of6'
+    expected_num_inds = desired_num_bouts
+    assert_activity_index_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_inds)
+
+    data_params['cur_dc_tag'] = '1of6'
+    expected_num_inds = desired_num_bouts
+    assert_activity_index_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_inds)
+    
+    data_params['cur_dc_tag'] = '5of30'
+    expected_num_inds = 1
+    assert_activity_index_metric_calculation(data_params, total_num_dets, desired_num_bouts, expected_num_inds)
+
+
+def assert_activity_index_metric_calculation(data_params, desired_num_dets, desired_num_bouts, expected_num_inds):
+    data_params['cycle_length'] = int(data_params['cur_dc_tag'].split('of')[-1])
+    data_params['time_on'] = int(data_params['cur_dc_tag'].split('of')[0])
+    data_params['time_on_in_secs'] = 60*data_params['time_on']
+
+    calls_per_bout = desired_num_dets / desired_num_bouts
+    t = np.linspace(0, 1, desired_num_dets, endpoint=False)
+
+    call_duration = 0.01
+    desired_ipi = 0.09
+    bout_break_time = 360 - ((calls_per_bout*call_duration)+((calls_per_bout-1)*desired_ipi))
+    A = bout_break_time/2
+    mock_square_ipis = A*(signal.square(2 * np.pi * desired_num_bouts * t, duty=1/desired_num_dets) + 1)
+    mock_square_ipis[0] = desired_ipi
+    mock_square_ipis[mock_square_ipis==0] = desired_ipi
+
+    mock_df = create_initial_mock_data_from_ipis(mock_square_ipis)
+    mock_df = ss.simulate_dutycycle_on_detections(mock_df, data_params)
+    bout_params = dict()
+    bout_params['LF_bci'] = 150
+    tagged_dets = bt.classify_bouts_in_bd2_predictions_for_freqgroups(mock_df, bout_params)
+    test_preds = tagged_dets.copy()
+    assert(actvt.get_activity_index_per_cycle(test_preds, data_params).sum() == expected_num_inds)
+
+
+def compare_bout_metric_fixing_on_location_df(location_df, data_params, bout_params):
+    dc_applied_df = ss.simulate_dutycycle_on_detections(location_df.copy(), data_params)
 
     tagged_dets = bt.classify_bouts_in_bd2_predictions_for_freqgroups(dc_applied_df, bout_params)
     bout_metrics = bt.construct_bout_metrics_from_location_df_for_freqgroups(tagged_dets)
@@ -175,6 +222,7 @@ def test_bout_metric_fixing_on_location_df(location_df, data_params, bout_params
     assert bout_metrics['bout_duration'].sum() == bout_metrics_mod['bout_duration'].sum()
 
     return bout_metrics, bout_metrics_mod
+
 
 def test_bout_calculation_on_location_sums():
     type_keys = ['', 'LF', 'HF']
@@ -196,4 +244,4 @@ def test_bout_calculation_on_location_sums():
                 location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0, low_memory=False)
                 bout_params = bt.get_bout_params_from_location(location_df, data_params)
 
-                bout_metrics, bout_metrics_mod = test_bout_metric_fixing_on_location_df(location_df, data_params, bout_params)
+                bout_metrics, bout_metrics_mod = compare_bout_metric_fixing_on_location_df(location_df, data_params, bout_params)
