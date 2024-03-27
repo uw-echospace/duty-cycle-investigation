@@ -87,6 +87,8 @@ def get_file_paths(data_params):
     file_paths["cont_callrate_TYPE_SITE_summary"] = f'cont_callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["dc_btp_TYPE_SITE_summary"] = f'dc_btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["cont_btp_TYPE_SITE_summary"] = f'cont_btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_actind_TYPE_SITE_summary"] = f'dc_actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["cont_actind_TYPE_SITE_summary"] = f'cont_actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
 
     file_paths["figures_SITE_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}'
     Path(file_paths["figures_SITE_folder"]).mkdir(parents=True, exist_ok=True)

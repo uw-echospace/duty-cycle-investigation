@@ -15,7 +15,7 @@ sys.path.append(f"{Path(__file__).parents[0]}")
 print(sys.path)
 
 from core import SITE_NAMES
-import bout
+import bout.assembly as bout
 import compute_features, call_extraction
 
 from cli import get_file_paths

@@ -4,9 +4,9 @@ import dask.dataframe as dd
 import pandas as pd
 
 import sys
-sys.path.append("../src/bout")
+sys.path.append("../src")
 
-import bout as bt
+import bout.assembly as bt
 import activity.subsampling as ss
 from core import FREQ_GROUPS
 
@@ -287,6 +287,23 @@ def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_pa
     bout_dpi_df = bout_dpi_df.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(bout_dpi_df.index, bout_dpi_df[f'bout_time ({dc_tag})'].values)), columns=["datetime_UTC", f'bout_time ({dc_tag})'])
+
+def get_activity_index_per_cycle(location_df, data_params):
+    """
+    Constructs a pandas Series that records the activity index observed per interval.
+    The used interval is the one stored inside data_params['bin_size']
+    The activity index time block is stored inside data_params['index_time_block_in_secs']
+    """
+
+    location_df['ref_time'] = location_df['call_start_time']
+    temp = location_df.resample(f'{data_params["index_time_block"]}S', on='ref_time')['ref_time'].count()
+    temp[temp>0] = 1
+    activity_indices = temp.resample(f"{data_params['cycle_length']}T").sum()
+    
+    return activity_indices
+
+def get_activity_index_per_time_on_index(num_blocks_presence, data_params):
+    return num_blocks_presence / (data_params["time_on_in_secs"] / data_params["index_time_block"])
 
 def get_activity_index_per_interval(location_df, data_params):
     """

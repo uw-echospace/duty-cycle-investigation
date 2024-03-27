@@ -15,7 +15,7 @@ sys.path.append(f"{Path(__file__).parents[1]}")
 print(sys.path)
 
 from core import SITE_NAMES, FREQ_GROUPS
-import bout
+import bout.assembly as bout
 import activity.activity_assembly as actvt
 
 from cli import get_file_paths

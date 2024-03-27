@@ -145,3 +145,63 @@ def get_continuous_call_rates_partitioned_for_dc_scheme(metric_col_name, file_pa
     ss.are_there_expected_number_of_cycles(location_df, call_rate_cont_column, cycle_length, data_params)
 
     return call_rate_cont_column
+
+def generate_activity_index_percent_for_dc_schemes_and_cont(data_params, file_paths, save=False):
+    activity_arr = pd.DataFrame()
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
+
+    dc_schemes = data_params['dc_tags'][1:]
+    cont_scheme = data_params['dc_tags'][0]
+    actvtind_arr = pd.DataFrame()
+    prev_cycle = 0
+    for dc_tag in dc_schemes:
+        metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
+        cycle_length = int(dc_tag.split('of')[1])
+        if prev_cycle != cycle_length:
+            prev_cycle = cycle_length
+            actvtind_cont_column = get_continuous_activity_index_partitioned_for_dc_scheme(metric_col_name, file_paths, data_params)
+            actvtind_arr = pd.concat([actvtind_arr, actvtind_cont_column], axis=1)
+
+        data_params['cur_dc_tag'] = dc_tag
+        cycle_length_in_mins = int(dc_tag.split('of')[1])
+        time_on_in_mins = int(dc_tag.split('of')[0])
+        time_on_in_secs = (60*time_on_in_mins)
+        data_params['cycle_length'] = cycle_length_in_mins
+        data_params['time_on_in_secs'] = time_on_in_secs
+        
+        dc_applied_df = ss.simulate_dutycycle_on_detections(location_df.copy(), data_params)
+        does_duty_cycled_df_have_less_dets_than_original(dc_applied_df, location_df)
+
+        num_blocks_of_presence = actvt.get_activity_index_per_cycle(dc_applied_df, data_params)        
+        activity_ind_percent = actvt.get_activity_index_per_time_on_index(num_blocks_of_presence, data_params)
+        ind_percent_dc_column = actvt.filter_and_prepare_metric(activity_ind_percent, data_params)
+        ind_percent_dc_column = ind_percent_dc_column.set_index("datetime_UTC")
+        ss.are_there_expected_number_of_cycles(dc_applied_df, ind_percent_dc_column, cycle_length_in_mins, data_params)
+        
+        activity_arr = pd.concat([activity_arr, ind_percent_dc_column], axis=1)
+
+    if save:
+        activity_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_actind_TYPE_SITE_summary"]}.csv')
+        actvtind_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["cont_actind_TYPE_SITE_summary"]}.csv')
+
+    return activity_arr, actvtind_arr
+
+def get_continuous_activity_index_partitioned_for_dc_scheme(metric_col_name, file_paths, data_params):
+    dc_tag_split = re.findall(r"\d+", metric_col_name)
+    cycle_length = int(dc_tag_split[-1])
+    cycle_length_in_secs = 60*cycle_length
+
+    cont_tag = f'{cycle_length}of{cycle_length}'
+    data_params['cur_dc_tag'] = cont_tag
+    data_params['cycle_length'] = cycle_length
+    data_params['time_on_in_secs'] = cycle_length_in_secs
+
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
+    location_df = ss.assign_cycle_groups_to_each_call(location_df, cycle_length, data_params)
+    num_blocks_of_presence = actvt.get_activity_index_per_cycle(location_df, data_params)
+    activity_ind_percent = actvt.get_activity_index_per_time_on_index(num_blocks_of_presence, data_params)
+    ind_percent_cont_column = actvt.filter_and_prepare_metric(activity_ind_percent, data_params)
+    ind_percent_cont_column = ind_percent_cont_column.set_index("datetime_UTC")
+    ss.are_there_expected_number_of_cycles(location_df, ind_percent_cont_column, cycle_length, data_params)
+
+    return ind_percent_cont_column

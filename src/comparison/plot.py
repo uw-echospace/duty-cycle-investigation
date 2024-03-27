@@ -33,5 +33,8 @@ def plot_indiv_dc_control_comp_over_cycle(single_col_dc_metr1, single_col_c_metr
     elif (data_params['metric_tag'] == 'call_rate'):
         plt.xlim(1e-3, 1e3)
         plt.ylim(1e-3, 1e3)
+    else:
+        plt.xlim(1e-4, 2e0)
+        plt.ylim(1e-4, 2e0)
     plt.ylabel(f'DC Measured {metrictag1}')
     plt.grid(which='both')
