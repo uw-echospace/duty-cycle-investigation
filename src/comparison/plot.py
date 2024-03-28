@@ -18,10 +18,10 @@ def plot_indiv_dc_control_comp_over_cycle(single_col_dc_metr1, single_col_c_metr
                     columns=paired_col_c_metr.index.date, 
                     values=paired_col_c_metr.columns[0])
     plt.title(f'{dctag1} and continuous scheme')
-    plt.plot([0, np.amax(c_metr)], [0, np.amax(c_metr)], linestyle='dashed', color='k')
+    plt.plot([0, c_metr.max().max()], [0, c_metr.max().max()], linestyle='dashed', color='k')
     colors = np.tile(np.arange(0, c_metr.shape[0]),(c_metr.shape[1],1)).T
     labels = pd.to_datetime(c_metr.index, format='%H:%M:%S').strftime('%H:%M')
-    sc = plt.scatter(c_metr, dc_metr1, c=colors, cmap='YlOrRd', edgecolors='k', s=50, alpha=0.8)
+    sc = plt.scatter(c_metr, dc_metr1, c=colors, cmap='YlOrRd', edgecolors='k', s=80, alpha=1)
     cbar = plt.colorbar(sc, ticks=[0, (colors.shape[0]-1)//2, colors.shape[0]-1])
     cbar.ax.set_yticklabels([labels[0], labels[len(labels)//2], labels[-1]])
     plt.xlabel(f'Continuous Measured {metrictag1}')
@@ -34,7 +34,7 @@ def plot_indiv_dc_control_comp_over_cycle(single_col_dc_metr1, single_col_c_metr
         plt.xlim(1e-3, 1e3)
         plt.ylim(1e-3, 1e3)
     else:
-        plt.xlim(1e-4, 2e0)
-        plt.ylim(1e-4, 2e0)
+        plt.xlim(1e-2, 2e2)
+        plt.ylim(1e-2, 2e2)
     plt.ylabel(f'DC Measured {metrictag1}')
     plt.grid(which='both')

@@ -6,7 +6,7 @@ import sys
 sys.path.append("../src")
 sys.path.append("../src/bout")
 
-import bout as bt
+import bout.assembly as bt
 import activity.subsampling as ss
 import activity.activity_assembly as actvt
 
@@ -58,7 +58,7 @@ def generate_activity_btp_for_dc_schemes_and_cont(data_params, file_paths, save=
         bout_params = bt.get_bout_params_from_location(dc_applied_df, data_params)
         bout_metrics = bt.generate_bout_metrics_for_location_and_freq(dc_applied_df, data_params, bout_params)
         bout_duration = actvt.get_bout_duration_per_cycle(bout_metrics, cycle_length_in_mins)
-        bout_time_percentage = 100*actvt.get_metric_per_time_on(bout_duration, time_on_in_secs)
+        bout_time_percentage = actvt.get_btp_per_time_on(bout_duration, time_on_in_secs)
         bout_time_percentage_dc_column = actvt.filter_and_prepare_metric(bout_time_percentage, data_params)
         bout_time_percentage_dc_column = bout_time_percentage_dc_column.set_index("datetime_UTC")
         ss.are_there_expected_number_of_cycles(dc_applied_df, bout_time_percentage_dc_column, cycle_length_in_mins, data_params)
@@ -84,7 +84,7 @@ def get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, file_paths, da
     bout_metrics = bt.generate_bout_metrics_for_location_and_freq(dc_applied_df, data_params, bout_params)
 
     bout_duration = actvt.get_bout_duration_per_cycle(bout_metrics, cycle_length)
-    bout_time_percentage = 100*actvt.get_metric_per_time_on(bout_duration, cycle_length_in_secs)
+    bout_time_percentage = actvt.get_btp_per_time_on(bout_duration, cycle_length_in_secs)
     bout_time_percentage_cont_column = actvt.filter_and_prepare_metric(bout_time_percentage, data_params)
     bout_time_percentage_cont_column = bout_time_percentage_cont_column.set_index("datetime_UTC")
     ss.are_there_expected_number_of_cycles(location_df, bout_time_percentage_cont_column, cycle_length, data_params)

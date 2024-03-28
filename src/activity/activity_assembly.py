@@ -269,6 +269,12 @@ def get_bout_duration_per_interval(bout_metrics, data_params):
 
     return bout_duration_per_interval
 
+
+def get_btp_per_time_on(metric, time_on):
+
+    return 100*(metric / (time_on))
+
+
 def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, file_paths, dc_tag):
     """
     Construct an activity summary of the % of time occupied by bouts per date and time interval.
@@ -303,7 +309,7 @@ def get_activity_index_per_cycle(location_df, data_params):
     return activity_indices
 
 def get_activity_index_per_time_on_index(num_blocks_presence, data_params):
-    return num_blocks_presence / (data_params["time_on_in_secs"] / data_params["index_time_block"])
+    return 100*(num_blocks_presence / (data_params["time_on_in_secs"] / data_params["index_time_block"]))
 
 def get_activity_index_per_interval(location_df, data_params):
     """
