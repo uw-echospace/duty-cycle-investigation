@@ -23,7 +23,7 @@ FREQUENCY_COLOR_MAPPINGS = {
                     'LF1' : 'cyan',
                     'HF1' : 'red',
                     'HF2' : 'yellow',
-                    'HF' : 'yellow',
+                    'HF' : 'red',
                         }
 
 

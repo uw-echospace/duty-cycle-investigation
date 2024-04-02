@@ -83,11 +83,13 @@ def assemble_initial_location_summary(file_paths):
     """
 
     location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/*.csv', dtype=str).compute()
-    location_df['low_freq'] = location_df['low_freq'].astype('float')
-    location_df['high_freq'] = location_df['high_freq'].astype('float')
+    location_df['start_time'] = location_df['start_time'].astype('float64')
+    location_df['end_time'] = location_df['end_time'].astype('float64')
+    location_df['low_freq'] = location_df['low_freq'].astype('float64')
+    location_df['high_freq'] = location_df['high_freq'].astype('float64')
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
-    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'].values.astype('float64'), unit='S')
-    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'].values.astype('float64'), unit='S')
+    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'], unit='S')
+    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'], unit='S')
 
     location_df.insert(0, 'call_end_time', anchor_end_times)
     location_df.insert(0, 'call_start_time', anchor_start_times)
@@ -119,20 +121,45 @@ def add_frequency_groups_to_summary_using_thresholds(location_df, file_paths, da
 
     return location_df
 
-def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_params, save=True):
+def add_frequency_group_to_file_dets(file_dets, location_classes):
+    file_classes = location_classes[pd.to_datetime(location_classes['file_name'], 
+                                                   format='%Y%m%d_%H%M%S.WAV', exact=False)==file_dets.name].copy()
 
+    file_dets.insert(0, 'index_in_summary', file_dets.index)
+    file_dets.set_index('index_in_file', inplace=True)
+
+    classified = file_classes['KMEANS_CLASSES']!=''
+    file_classes.loc[classified, 'peak_frequency'] = file_classes.loc[classified, 'peak_frequency'].astype('float64')
+
+    file_dets.insert(0, 'peak_frequency', [np.NaN]*len(file_dets))
+    file_dets.loc[file_classes['index_in_file'], 'freq_group'] = file_classes['KMEANS_CLASSES'].values
+    file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency'].values
+
+    classified_dets = file_dets['freq_group']!=''
+    assert (file_dets.loc[classified_dets, 'peak_frequency'] >= file_dets.loc[classified_dets, 'low_freq']-5000).all()
+    assert (file_dets.loc[classified_dets, 'peak_frequency'] <= file_dets.loc[classified_dets, 'high_freq']+5000).all()
+
+    return file_dets
+
+def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_params, save=True):
     location_df.insert(0, 'freq_group', '')
     location_classes = pd.read_csv(Path(file_paths['SITE_classes_file']), index_col=0)
-    kept_calls_from_location = location_df.iloc[location_classes['index_in_summary'].values].copy()
-    kept_calls_from_location['freq_group'] = location_classes['KMEANS_CLASSES'].values
+    location_df.insert(0, 'input_file_dt', pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S.WAV', exact=False))
+    location_df_grouped = location_df.groupby('input_file_dt', group_keys=True)
+
+    location_df_classified = location_df_grouped.apply(lambda x: add_frequency_group_to_file_dets(x, location_classes))
+
+    location_df_only_classified = location_df_classified.loc[location_df_classified['freq_group']!='']
+    location_df_only_classified = location_df_only_classified.droplevel(level=0)
+    location_df_only_classified = location_df_only_classified.reset_index()
 
     if data_params['type_tag'] != '':
-        kept_calls_from_location = kept_calls_from_location.loc[kept_calls_from_location['freq_group']==data_params['type_tag']]
+        location_df_only_classified = location_df_only_classified.loc[location_df_only_classified['freq_group']==data_params['type_tag']]
 
     if save:
-        kept_calls_from_location.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv')
+        location_df_only_classified.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv')
 
-    return kept_calls_from_location
+    return location_df_only_classified
 
 
 def assemble_single_bd2_output_use_thresholds_to_group(path_to_bd2_output, data_params):
