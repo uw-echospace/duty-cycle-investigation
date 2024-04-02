@@ -12,9 +12,7 @@ SITE_NAMES = {
             'Central' : "Central Pond",
             'Foliage' : "Foliage",
             'Carp' : "Carp Pond",
-            'Telephone' : "Telephone Field",
-            'Opposite' : "Opposite Carp Pond",
-            'Fallen' : "Fallen Tree"
+            'Telephone' : "Telephone Field"
                 }
 
 
