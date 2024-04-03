@@ -2,6 +2,7 @@ from pathlib import Path
 
 import dask.dataframe as dd
 import pandas as pd
+import numpy as np
 
 import sys
 sys.path.append("../src")
@@ -43,7 +44,8 @@ def generate_activity_bouts_results(data_params, file_paths, save=True):
     for dc_tag in data_params['dc_tags']:
         
         location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
-        bout_metrics = bt.generate_bout_metrics_for_location_and_freq(location_df, data_params, dc_tag)
+        bout_params = bt.get_bout_params_from_location(location_df, data_params)
+        bout_metrics = bt.generate_bout_metrics_for_location_and_freq(location_df, data_params, bout_params)
         bout_duration_per_interval = get_bout_duration_per_interval(bout_metrics, data_params)
         dc_bouts = construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, file_paths, dc_tag)
         dc_bouts = dc_bouts.set_index("datetime_UTC")

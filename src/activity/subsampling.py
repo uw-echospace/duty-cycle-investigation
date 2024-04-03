@@ -96,7 +96,7 @@ def prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, bi
     """
 
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    plottable_location_df = simulate_dutycycle_on_detections(location_df, dc_tag, bin_size)
+    plottable_location_df = simulate_dutycycle_on_detections_with_bins(location_df, dc_tag, bin_size)
 
     return plottable_location_df
 
