@@ -210,8 +210,9 @@ def assert_activity_index_metric_calculation(data_params, desired_num_dets, desi
     assert(actvt.get_activity_index_per_cycle(test_preds, data_params).sum() == expected_num_inds)
 
 
-def compare_bout_metric_fixing_on_location_df(location_df, data_params, bout_params):
+def compare_bout_metric_fixing_on_location_df(location_df, data_params):
     dc_applied_df = ss.simulate_dutycycle_on_detections(location_df.copy(), data_params)
+    bout_params = bt.get_bout_params_from_location(dc_applied_df, data_params)
 
     tagged_dets = bt.classify_bouts_in_bd2_predictions_for_freqgroups(dc_applied_df, bout_params)
     bout_metrics = bt.construct_bout_metrics_from_location_df_for_freqgroups(tagged_dets)
@@ -242,6 +243,5 @@ def test_bout_calculation_on_location_sums():
 
             if Path(file_paths['raw_SITE_folder']).exists():
                 location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0, low_memory=False)
-                bout_params = bt.get_bout_params_from_location(location_df, data_params)
 
-                bout_metrics, bout_metrics_mod = compare_bout_metric_fixing_on_location_df(location_df, data_params, bout_params)
+                bout_metrics, bout_metrics_mod = compare_bout_metric_fixing_on_location_df(location_df, data_params)

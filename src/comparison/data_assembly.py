@@ -34,7 +34,7 @@ def select_dates_from_metrics(metric_for_scheme_for_comparison, call_rate_cont_c
 
 def generate_activity_btp_for_dc_schemes_and_cont(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
-    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
 
     dc_schemes = data_params['dc_tags'][1:]
     cont_scheme = data_params['dc_tags'][0]
@@ -78,7 +78,7 @@ def get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, file_paths, da
     cycle_length_in_secs = 60*cycle_length
     data_params['cur_dc_tag'] = cont_tag
 
-    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     dc_applied_df = ss.simulate_dutycycle_on_detections(location_df.copy(), data_params)
     bout_params = bt.get_bout_params_from_location(dc_applied_df, data_params)
     bout_metrics = bt.generate_bout_metrics_for_location_and_freq(dc_applied_df, data_params, bout_params)
@@ -93,7 +93,7 @@ def get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, file_paths, da
 
 def generate_activity_call_rate_for_dc_schemes_and_cont(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
-    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
 
     dc_schemes = data_params['dc_tags'][1:]
     cont_scheme = data_params['dc_tags'][0]
@@ -136,7 +136,7 @@ def get_continuous_call_rates_partitioned_for_dc_scheme(metric_col_name, file_pa
     cont_tag = f'{cycle_length}of{cycle_length}'
     data_params['cur_dc_tag'] = cont_tag
 
-    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     location_df = ss.assign_cycle_groups_to_each_call(location_df, cycle_length, data_params)
     num_of_detections = actvt.get_number_of_detections_per_cycle(location_df, cycle_length)
     call_rate = actvt.get_metric_per_time_on(num_of_detections, cycle_length)
@@ -148,7 +148,7 @@ def get_continuous_call_rates_partitioned_for_dc_scheme(metric_col_name, file_pa
 
 def generate_activity_index_percent_for_dc_schemes_and_cont(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
-    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
 
     dc_schemes = data_params['dc_tags'][1:]
     cont_scheme = data_params['dc_tags'][0]
@@ -196,7 +196,7 @@ def get_continuous_activity_index_partitioned_for_dc_scheme(metric_col_name, fil
     data_params['cycle_length'] = cycle_length
     data_params['time_on_in_secs'] = cycle_length_in_secs
 
-    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', index_col=0)
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     location_df = ss.assign_cycle_groups_to_each_call(location_df, cycle_length, data_params)
     num_blocks_of_presence = actvt.get_activity_index_per_cycle(location_df, data_params)
     activity_ind_percent = actvt.get_activity_index_per_time_on_index(num_blocks_of_presence, data_params)

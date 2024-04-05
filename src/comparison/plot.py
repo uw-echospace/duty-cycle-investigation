@@ -53,8 +53,8 @@ def plot_indiv_dc_control_comp_over_cycle_log_scale(plt_dcmetr, plt_cmetr, data_
         plt.xlim(1e-4, 1e3)
         plt.ylim(1e-4, 1e3)
     else:
-        plt.xlim(1e-3, 2e2)
-        plt.ylim(1e-3, 2e2)
+        plt.xlim(1e-4, 2e2)
+        plt.ylim(1e-4, 2e2)
     plt.ylabel(f'DC Measured {metrictag1}')
     plt.grid(which='both')
     plt.legend(loc=3)
@@ -115,7 +115,7 @@ def plot_indiv_dc_control_comp_error_over_cycle_log_scale(plt_dcmetr, plt_cmetr,
         plt.xlim(1e-3, 1e3)
         plt.ylim(1e-4, 1e1)
     else:
-        plt.xlim(1e-2, 2e2)
+        plt.xlim(1e-4, 2e2)
         plt.ylim(1e-3, 1e1)
     plt.yscale('log')
     plt.xscale('log')
