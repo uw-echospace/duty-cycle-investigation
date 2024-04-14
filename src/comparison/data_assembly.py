@@ -19,22 +19,23 @@ def does_reindexed_match_original_at_original_indices(metric_for_scheme_for_comp
 def do_calls_exist_in_reindexed_version(metric_for_scheme_for_comparison):
     assert metric_for_scheme_for_comparison.values.all() >= 0
 
-def get_associated_metric_for_cont_column(metric_for_scheme, call_rate_cont_column):
-    metric_for_scheme_for_comparison = metric_for_scheme.reindex(call_rate_cont_column.index, fill_value=0)
+def get_associated_metric_for_cont_column(metric_for_scheme, cont_column):
+    metric_for_scheme_for_comparison = metric_for_scheme.reindex(cont_column.index, fill_value=0)
     does_reindexed_match_original_at_original_indices(metric_for_scheme_for_comparison, metric_for_scheme)
     do_calls_exist_in_reindexed_version(metric_for_scheme_for_comparison)
 
-    return metric_for_scheme
+    return metric_for_scheme_for_comparison
 
-def select_dates_from_metrics(metric_for_scheme_for_comparison, call_rate_cont_column, data_params):
+def select_dates_from_metrics(metric_for_scheme_for_comparison, cont_column, data_params):
     plt_dcmetr = metric_for_scheme_for_comparison.loc[data_params['start']:data_params['end']].copy()
-    plt_cmetr = call_rate_cont_column.loc[data_params['start']:data_params['end']].copy()
+    plt_cmetr = cont_column.loc[data_params['start']:data_params['end']].copy()
 
     return plt_dcmetr, plt_cmetr
 
 def generate_activity_btp_for_dc_schemes_and_cont(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+    bout_params = bt.get_bout_params_from_location(location_df, data_params)
 
     dc_schemes = data_params['dc_tags'][1:]
     cont_scheme = data_params['dc_tags'][0]
@@ -45,7 +46,8 @@ def generate_activity_btp_for_dc_schemes_and_cont(data_params, file_paths, save=
         cycle_length = int(dc_tag.split('of')[1])
         if prev_cycle != cycle_length:
             prev_cycle = cycle_length
-            btp_cont_column = get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, file_paths, data_params)
+            btp_cont_column = get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, location_df.copy(),
+                                                                           data_params, bout_params)
             btp_arr = pd.concat([btp_arr, btp_cont_column], axis=1)
 
         data_params['cur_dc_tag'] = dc_tag
@@ -55,7 +57,6 @@ def generate_activity_btp_for_dc_schemes_and_cont(data_params, file_paths, save=
 
         dc_applied_df = ss.simulate_dutycycle_on_detections(location_df.copy(), data_params)
         does_duty_cycled_df_have_less_dets_than_original(dc_applied_df, location_df)
-        bout_params = bt.get_bout_params_from_location(dc_applied_df, data_params)
         bout_metrics = bt.generate_bout_metrics_for_location_and_freq(dc_applied_df, data_params, bout_params)
         bout_duration = actvt.get_bout_duration_per_cycle(bout_metrics, cycle_length_in_mins)
         bout_time_percentage = actvt.get_btp_per_time_on(bout_duration, time_on_in_secs)
@@ -71,16 +72,14 @@ def generate_activity_btp_for_dc_schemes_and_cont(data_params, file_paths, save=
 
     return activity_arr, btp_arr
 
-def get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, file_paths, data_params):
+def get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, location_df, data_params, bout_params):
     dc_tag_split = re.findall(r"\d+", metric_col_name)
     cycle_length = int(dc_tag_split[-1])
     cont_tag = f'{cycle_length}of{cycle_length}'
     cycle_length_in_secs = 60*cycle_length
     data_params['cur_dc_tag'] = cont_tag
 
-    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     dc_applied_df = ss.simulate_dutycycle_on_detections(location_df.copy(), data_params)
-    bout_params = bt.get_bout_params_from_location(dc_applied_df, data_params)
     bout_metrics = bt.generate_bout_metrics_for_location_and_freq(dc_applied_df, data_params, bout_params)
 
     bout_duration = actvt.get_bout_duration_per_cycle(bout_metrics, cycle_length)
