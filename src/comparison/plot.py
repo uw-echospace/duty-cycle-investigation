@@ -251,7 +251,9 @@ def plot_indiv_dc_control_comp_error_over_cycle_linear_scale(plt_dcmetr, plt_cme
 
 
 def plot_all_dc_scheme_comps_log_scale(dc_activity_arr, c_activity_arr, data_params):
-    plt.figure(figsize=(6*len(data_params['percent_ons']), 4.5*len(data_params['cycle_lengths'])))
+    plt.figure(figsize=(6*len(data_params['percent_ons']), 5*len(data_params['cycle_lengths'])))
+    plt.suptitle(f'{data_params["site_name"]} {data_params["type_tag"]} from {data_params["start"]} to {data_params["end"]}', 
+                 y=1.01, fontsize=24)
     plt.rcParams.update({'font.size':14})
     for i, dc_col in enumerate(data_params["dc_tags"][1:]):
         plt.subplot(len(data_params['cycle_lengths']), len(data_params['percent_ons']), i+1)
@@ -270,7 +272,9 @@ def plot_all_dc_scheme_comps_log_scale(dc_activity_arr, c_activity_arr, data_par
 
 
 def plot_all_dc_scheme_comp_errors_log_scale(dc_activity_arr, c_activity_arr, data_params):
-    plt.figure(figsize=(6*len(data_params['percent_ons']), 4.5*len(data_params['cycle_lengths'])))
+    plt.figure(figsize=(6*len(data_params['percent_ons']), 5*len(data_params['cycle_lengths'])))
+    plt.suptitle(f'{data_params["site_name"]} {data_params["type_tag"]} from {data_params["start"]} to {data_params["end"]}', 
+                 y=1.01, fontsize=24)
     plt.rcParams.update({'font.size':14})
     for i, dc_col in enumerate(data_params["dc_tags"][1:]):
         plt.subplot(len(data_params['cycle_lengths']), len(data_params['percent_ons']), i+1)
@@ -289,7 +293,9 @@ def plot_all_dc_scheme_comp_errors_log_scale(dc_activity_arr, c_activity_arr, da
 
 
 def plot_all_dc_scheme_comps_linear_scale(dc_activity_arr, c_activity_arr, data_params):
-    plt.figure(figsize=(6*len(data_params['percent_ons']), 4.5*len(data_params['cycle_lengths'])))
+    plt.figure(figsize=(6*len(data_params['percent_ons']), 5*len(data_params['cycle_lengths'])))
+    plt.suptitle(f'{data_params["site_name"]} {data_params["type_tag"]} from {data_params["start"]} to {data_params["end"]}', 
+                 y=1.01, fontsize=24)
     plt.rcParams.update({'font.size':14})
     for i, dc_col in enumerate(data_params["dc_tags"][1:]):
         plt.subplot(len(data_params['cycle_lengths']), len(data_params['percent_ons']), i+1)
@@ -308,7 +314,9 @@ def plot_all_dc_scheme_comps_linear_scale(dc_activity_arr, c_activity_arr, data_
 
 
 def plot_all_dc_scheme_comp_errors_linear_scale(dc_activity_arr, c_activity_arr, data_params):
-    plt.figure(figsize=(6*len(data_params['percent_ons']), 4.5*len(data_params['cycle_lengths'])))
+    plt.figure(figsize=(6*len(data_params['percent_ons']), 5*len(data_params['cycle_lengths'])))
+    plt.suptitle(f'{data_params["site_name"]} {data_params["type_tag"]} from {data_params["start"]} to {data_params["end"]}', 
+                 y=1.01, fontsize=24)
     plt.rcParams.update({'font.size':14})
     for i, dc_col in enumerate(data_params["dc_tags"][1:]):
         plt.subplot(len(data_params['cycle_lengths']), len(data_params['percent_ons']), i+1)

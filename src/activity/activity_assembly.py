@@ -331,14 +331,14 @@ def get_activity_index_per_cycle(location_df, data_params):
     """
 
     location_df['ref_time'] = location_df['call_start_time']
-    temp = location_df.resample(f'{data_params["index_time_block"]}S', on='ref_time')['ref_time'].count()
+    temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='ref_time')['ref_time'].count()
     temp[temp>0] = 1
     activity_indices = temp.resample(f"{data_params['cycle_length']}T").sum()
     
     return activity_indices
 
 def get_activity_index_per_time_on_index(num_blocks_presence, data_params):
-    return 100*(num_blocks_presence / (data_params["time_on_in_secs"] / data_params["index_time_block"]))
+    return 100*(num_blocks_presence / (data_params["time_on_in_secs"] / data_params["index_time_block_in_secs"]))
 
 def get_activity_index_per_interval(location_df, data_params):
     """
