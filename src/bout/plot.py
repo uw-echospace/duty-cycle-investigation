@@ -235,8 +235,8 @@ def plot_dets_over_audio_seg(audio_features, spec_features, plot_dets, data_para
     duration = audio_features['duration']
 
     plt.figure(figsize=(15, 5))
-    plt.title(f"BatDetect2 detections on {audio_features['file_path'].name}", fontsize=22)
     plt.rcParams.update({'font.size': 24})
+    plt.title(f"BatDetect2 detections on {audio_features['file_path'].name}", fontsize=22)
     plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
 
     yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label='Detections')
@@ -345,12 +345,14 @@ def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, data_p
 def plot_bout_info(ax, audio_features, plot_bouts):
     fs = audio_features['sample_rate']
     start = audio_features['start']
+    duration = audio_features['duration']
 
     for i, row in plot_bouts.iterrows():
-        plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+2000)/(fs/2), 9/10), 
-                            s=f"{round(row['bout_duration_in_secs'], 2)}s", color='pink', weight='bold', fontsize=14)
-        plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+12000)/(fs/2), 9/10), 
-                            s=f"{round(row['number_of_dets'], 2)} dets", color='pink', weight='bold', fontsize=14)
+        if duration < 600:
+            plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+2000)/(fs/2), 9/10), 
+                                s=f"{round(row['bout_duration_in_secs'], 2)}s", color='pink', weight='bold', fontsize=14)
+            plt.text(x=(row['start_time'] - start + (row['bout_duration_in_secs']/5))*(fs/2), y=min((row['high_freq']+12000)/(fs/2), 9/10), 
+                                s=f"{round(row['number_of_dets'], 2)} dets", color='pink', weight='bold', fontsize=14)
         rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
                         (row['bout_duration_in_secs'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
                         linewidth=2, edgecolor=FREQUENCY_COLOR_MAPPINGS[row['freq_group']], facecolor='none', alpha=0.8)
