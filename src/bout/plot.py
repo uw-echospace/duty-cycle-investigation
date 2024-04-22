@@ -3,8 +3,10 @@ import matplotlib.patches as patches
 import numpy as np
 
 import sys
+sys.path.append('../src')
 sys.path.append('../src/bout')
 
+import activity.activity_assembly as actvt
 import clustering as clstr
 
 from core import FREQUENCY_COLOR_MAPPINGS
@@ -342,6 +344,333 @@ def plot_bouts_over_audio_seg(audio_features, spec_features, bout_params, data_p
     plt.tight_layout()
     plt.show()
 
+def plot_normalized_metrics_over_audio_seg(audio_features, spec_features, plot_dets, plot_bouts, bout_params, data_params):
+    """
+    Function to plot the spectrogram of a provided audio segment with overlayed detections
+    """
+
+    audio_seg = audio_features['audio_seg']
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    plt.figure(figsize=(15, 5))
+    plt.rcParams.update({'font.size': 24})
+    plt.title(audio_features['plot_title'], fontsize=22)
+    plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
+
+    yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label='Detections')
+
+    legend_patches = [yellow_patch]
+    ax = plt.gca()
+    for i, row in plot_dets.iterrows():
+        rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
+                        (row['end_time'] - row['start_time'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
+                        linewidth=2, edgecolor='yellow', facecolor='none', alpha=0.8)
+        
+        ax.add_patch(rect)
+
+    legend_patches = []
+    for group in bout_params.keys():
+        if group != 'site_key':
+            group_tag = group.split('_')[0]
+            group_patch = patches.Patch(facecolor=FREQUENCY_COLOR_MAPPINGS[group_tag], edgecolor='k', label=f'BCI = {round(bout_params[group], 2)}ms')
+            legend_patches += [group_patch]
+    plot_bout_info(ax, audio_features, plot_bouts)
+
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length_in_mins = int(dc_tag.split('of')[1])
+    data_params['index_time_block_in_secs'] = 5
+
+    bout_dur_per_cycle = actvt.get_bout_duration_per_cycle(plot_bouts.copy(), cycle_length_in_mins)
+    btp_per_cycle = actvt.get_btp_per_time_on(bout_dur_per_cycle, data_params['time_on_in_secs'])
+    plot_recording_periods_with_btp(ax, audio_features, data_params, np.round(btp_per_cycle,2))
+    num_dets_per_cycle = actvt.get_number_of_detections_per_cycle(plot_dets.copy(), cycle_length_in_mins)
+    callrate_per_cycle = actvt.get_metric_per_time_on(num_dets_per_cycle, cycle_length_in_mins)
+    plot_recording_periods_with_callrate(ax, audio_features, data_params, np.round(callrate_per_cycle,2))
+    blocks_per_cycle = actvt.get_activity_index_per_cycle(plot_dets.copy(), data_params)
+    inds_percent_per_cycle = actvt.get_activity_index_per_time_on_index(blocks_per_cycle, data_params)
+    plot_activity_index_time_blocks(ax, audio_features, data_params)
+    plot_recording_periods_with_activity_inds_percent(ax, audio_features, data_params, np.round(inds_percent_per_cycle,2))
+
+    plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
+    plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
+    plt.ylabel("Frequency (kHz)")
+    plt.xlabel("Time (s)")
+    plt.gcf().autofmt_xdate()
+    plt.legend(handles=legend_patches, fontsize=14, ncol=len(legend_patches), loc=1)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_recording_periods_with_callrate(ax, audio_features, data_params, callrate_per_cycle):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length = 60*(int(dc_tag.split('of')[1]))
+    time_on = 60*(int(dc_tag.split('of')[0]))
+
+    window_starts = np.arange(0, 1800, cycle_length)
+    window_count = 0
+    for window_start in window_starts:
+        if (window_start < start+duration and window_start+time_on > start):
+            if (window_start <= start):
+                rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc = (min(time_on, ((window_start+time_on)-start)))/4
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            elif (window_start+time_on) >= (start+duration):
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                        (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc =  (window_start-start) +(min(time_on, (start+duration) - window_start)/4)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            else:
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                            (time_on)*fs/2, fs/2, 
+                                            linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc =  (window_start-start) + (time_on/4)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            ax.add_patch(rect)
+
+def plot_recording_periods_with_btp(ax, audio_features, data_params, btp_per_cycle):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length = 60*(int(dc_tag.split('of')[1]))
+    time_on = 60*(int(dc_tag.split('of')[0]))
+
+    window_starts = np.arange(0, 1800, cycle_length)
+    window_count = 0
+    for window_start in window_starts:
+        if (window_start < start+duration and window_start+time_on > start):
+            if (window_start <= start):
+                rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc = (min(time_on, ((window_start+time_on)-start)))/4
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            elif (window_start+time_on) >= (start+duration):
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                        (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc =  (window_start-start) + (min(time_on, (start+duration) - window_start)/4)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            else:
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                            (time_on)*fs/2, fs/2, 
+                                            linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc =  (window_start-start) + (time_on/4)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            ax.add_patch(rect)
+
+def plot_recording_periods_with_activity_inds_percent(ax, audio_features, data_params, inds_per_cycle):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length = 60*(int(dc_tag.split('of')[1]))
+    time_on = 60*(int(dc_tag.split('of')[0]))
+
+    window_starts = np.arange(0, 1800, cycle_length)
+    window_count = 0
+    for window_start in window_starts:
+        if (window_start < start+duration and window_start+time_on > start):
+            if (window_start <= start):
+                rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
+                text_loc = (min(time_on, ((window_start+time_on)-start)))/4
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            elif (window_start+time_on) >= (start+duration):
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                        (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
+                text_loc =  (window_start-start) +(min(time_on, (start+duration) - window_start)/4)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            else:
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                            (time_on)*fs/2, fs/2, 
+                                            linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
+                text_loc =  (window_start-start) + (time_on/4)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            ax.add_patch(rect)
+
+def plot_raw_metrics_over_audio_seg(audio_features, spec_features, plot_dets, plot_bouts, bout_params, data_params):
+    """
+    Function to plot the spectrogram of a provided audio segment with overlayed detections
+    """
+
+    audio_seg = audio_features['audio_seg']
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    plt.figure(figsize=(15, 5))
+    plt.rcParams.update({'font.size': 24})
+    plt.title(f"BatDetect2 detections on {audio_features['file_path'].name}", fontsize=22)
+    plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
+
+    yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label='Detections')
+
+    legend_patches = [yellow_patch]
+    ax = plt.gca()
+    for i, row in plot_dets.iterrows():
+        rect = patches.Rectangle(((row['start_time'] - start)*(fs/2), row['low_freq']/(fs/2)), 
+                        (row['end_time'] - row['start_time'])*(fs/2), (row['high_freq'] - row['low_freq'])/(fs/2), 
+                        linewidth=2, edgecolor='yellow', facecolor='none', alpha=0.8)
+        
+        ax.add_patch(rect)
+
+    legend_patches = []
+    for group in bout_params.keys():
+        if group != 'site_key':
+            group_tag = group.split('_')[0]
+            group_patch = patches.Patch(facecolor=FREQUENCY_COLOR_MAPPINGS[group_tag], edgecolor='k', label=f'BCI = {round(bout_params[group], 2)}ms')
+            legend_patches += [group_patch]
+    plot_bout_info(ax, audio_features, plot_bouts)
+
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length_in_mins = int(dc_tag.split('of')[1])
+    data_params['index_time_block_in_secs'] = 5
+
+    bout_duration_per_cycle = actvt.get_bout_duration_per_cycle(plot_bouts.copy(), cycle_length_in_mins)
+    plot_recording_periods_with_bout_duration(ax, audio_features, data_params, np.round(bout_duration_per_cycle,2))
+    num_dets_per_cycle = actvt.get_number_of_detections_per_cycle(plot_dets.copy(), cycle_length_in_mins)
+    plot_recording_periods_with_num_calls(ax, audio_features, data_params, num_dets_per_cycle)
+    inds_per_cycle = actvt.get_activity_index_per_cycle(plot_dets.copy(), data_params)
+    plot_activity_index_time_blocks(ax, audio_features, data_params)
+    plot_recording_periods_with_activity_inds(ax, audio_features, data_params, inds_per_cycle)
+
+    plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
+    plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
+    plt.ylabel("Frequency (kHz)")
+    plt.xlabel("Time (s)")
+    plt.gcf().autofmt_xdate()
+    plt.legend(handles=legend_patches, fontsize=14, ncol=len(legend_patches), loc=1)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_recording_periods_with_num_calls(ax, audio_features, data_params, num_dets_per_cycle):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length = 60*(int(dc_tag.split('of')[1]))
+    time_on = 60*(int(dc_tag.split('of')[0]))
+
+    window_starts = np.arange(0, 1800, cycle_length)
+    window_count = 0
+    for window_start in window_starts:
+        if (window_start < start+duration and window_start+time_on > start):
+            if (window_start <= start):
+                rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc = (min(time_on, ((window_start+time_on)-start)))/4
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            elif (window_start+time_on) >= (start+duration):
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                        (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc =  (window_start-start) +(min(time_on, (start+duration) - window_start)/4)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            else:
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                            (time_on)*fs/2, fs/2, 
+                                            linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc =  (window_start-start) + (time_on/4)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            ax.add_patch(rect)
+
+def plot_recording_periods_with_bout_duration(ax, audio_features, data_params, bout_duration_per_cycle):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length = 60*(int(dc_tag.split('of')[1]))
+    time_on = 60*(int(dc_tag.split('of')[0]))
+
+    window_starts = np.arange(0, 1800, cycle_length)
+    window_count = 0
+    for window_start in window_starts:
+        if (window_start < start+duration and window_start+time_on > start):
+            if (window_start <= start):
+                rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc = (min(time_on, ((window_start+time_on)-start)))/4
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            elif (window_start+time_on) >= (start+duration):
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                        (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc =  (window_start-start) + (min(time_on, (start+duration) - window_start)/4)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            else:
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                            (time_on)*fs/2, fs/2, 
+                                            linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
+                text_loc =  (window_start-start) + (time_on/4)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            ax.add_patch(rect)
+
+def plot_recording_periods_with_activity_inds(ax, audio_features, data_params, inds_per_cycle):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+
+    dc_tag = data_params['cur_dc_tag']
+    cycle_length = 60*(int(dc_tag.split('of')[1]))
+    time_on = 60*(int(dc_tag.split('of')[0]))
+
+    window_starts = np.arange(0, 1800, cycle_length)
+    window_count = 0
+    for window_start in window_starts:
+        if (window_start < start+duration and window_start+time_on > start):
+            if (window_start <= start):
+                rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
+                text_loc = (min(time_on, ((window_start+time_on)-start)))/4
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            elif (window_start+time_on) >= (start+duration):
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                        (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
+                text_loc =  (window_start-start) +(min(time_on, (start+duration) - window_start)/4)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            else:
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                            (time_on)*fs/2, fs/2, 
+                                            linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
+                text_loc =  (window_start-start) + (time_on/4)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold', fontsize=14)
+                window_count+=1
+            ax.add_patch(rect)
+
 def plot_bout_info(ax, audio_features, plot_bouts):
     fs = audio_features['sample_rate']
     start = audio_features['start']
@@ -372,13 +701,42 @@ def plot_recording_periods(ax, audio_features, data_params):
         if (window_start <= start+duration and window_start+time_on > start):
             if (window_start <= start):
                 rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
-                                        linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.3)
+                                        linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
             elif (window_start+time_on) >= (start+duration):
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                         (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
-                                        linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.3)
+                                        linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
             else:
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                             (time_on)*fs/2, fs/2, 
-                                            linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.3)
+                                            linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
+            ax.add_patch(rect)
+
+def plot_activity_index_time_blocks(ax, audio_features, data_params):
+    fs = audio_features['sample_rate']
+    start = audio_features['start']
+    duration = audio_features['duration']
+    index_time_block = data_params['index_time_block_in_secs']
+
+    cycle_length = index_time_block
+    time_on = index_time_block
+
+    window_starts = np.arange(0, 1800, cycle_length)
+    window_count = 0
+    for window_start in window_starts:
+        if (window_start < start+duration and window_start+time_on > start):
+            if (window_start <= start):
+                rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='pink', facecolor=None, alpha=0.1)
+                window_count+=1
+            elif (window_start+time_on) >= (start+duration):
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                        (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
+                                        linewidth=4, edgecolor='pink', facecolor=None, alpha=0.1)
+                window_count+=1
+            else:
+                rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
+                                            (time_on)*fs/2, fs/2, 
+                                            linewidth=4, edgecolor='pink', facecolor=None, alpha=0.1)
+                window_count+=1
             ax.add_patch(rect)

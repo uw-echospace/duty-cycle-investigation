@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+from tqdm import tqdm
 
 import sys
 
@@ -41,7 +42,8 @@ def generate_activity_btp_for_dc_schemes_and_cont(data_params, file_paths, save=
     cont_scheme = data_params['dc_tags'][0]
     btp_arr = pd.DataFrame()
     prev_cycle = 0
-    for dc_tag in dc_schemes:
+    for i in tqdm(range(len(dc_schemes))):
+        dc_tag = dc_schemes[i]
         metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
         cycle_length = int(dc_tag.split('of')[1])
         if prev_cycle != cycle_length:
@@ -98,7 +100,8 @@ def generate_activity_call_rate_for_dc_schemes_and_cont(data_params, file_paths,
     cont_scheme = data_params['dc_tags'][0]
     callrate_arr = pd.DataFrame()
     prev_cycle = 0
-    for dc_tag in dc_schemes:
+    for i in tqdm(range(len(dc_schemes))):
+        dc_tag = dc_schemes[i]
         metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
         cycle_length = int(dc_tag.split('of')[1])
         if prev_cycle != cycle_length:
@@ -153,7 +156,8 @@ def generate_activity_index_percent_for_dc_schemes_and_cont(data_params, file_pa
     cont_scheme = data_params['dc_tags'][0]
     actvtind_arr = pd.DataFrame()
     prev_cycle = 0
-    for dc_tag in dc_schemes:
+    for i in tqdm(range(len(dc_schemes))):
+        dc_tag = dc_schemes[i]
         metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
         cycle_length = int(dc_tag.split('of')[1])
         if prev_cycle != cycle_length:
