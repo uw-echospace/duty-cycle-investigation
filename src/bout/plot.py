@@ -389,7 +389,7 @@ def plot_normalized_metrics_over_audio_seg(audio_features, spec_features, plot_d
         plot_bout_info(ax, audio_features, plot_bouts)
         bout_duration_per_cycle = actvt.get_bout_duration_per_cycle(plot_bouts.copy(), cycle_length_in_mins)
         bout_duration_per_cycle = bout_duration_per_cycle.reindex(windows, fill_value=0)
-        btp_per_cycle = actvt.get_btp_per_time_on(bout_dur_per_cycle, data_params['time_on_in_secs'])
+        btp_per_cycle = actvt.get_btp_per_time_on(bout_duration_per_cycle, data_params['time_on_in_secs'])
         plot_recording_periods_with_btp(ax, audio_features, data_params, np.round(btp_per_cycle,2))
     if not(plot_dets.empty):
         num_dets_per_cycle = actvt.get_number_of_detections_per_cycle(plot_dets.copy(), cycle_length_in_mins)
