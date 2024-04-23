@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
+import datetime as dt
+import pandas as pd
 
 import sys
 sys.path.append('../src')
@@ -356,7 +358,7 @@ def plot_normalized_metrics_over_audio_seg(audio_features, spec_features, plot_d
 
     plt.figure(figsize=(15, 5))
     plt.rcParams.update({'font.size': 24})
-    plt.title(audio_features['plot_title'], fontsize=22)
+    plt.title(f"BatDetect2 detections on {audio_features['file_path'].name}", fontsize=22)
     plt.specgram(audio_seg, NFFT=spec_features['NFFT'], cmap=spec_features['cmap'], vmin=spec_features['vmin'])
 
     yellow_patch = patches.Patch(facecolor='yellow', edgecolor='k', label='Detections')
@@ -376,22 +378,29 @@ def plot_normalized_metrics_over_audio_seg(audio_features, spec_features, plot_d
             group_tag = group.split('_')[0]
             group_patch = patches.Patch(facecolor=FREQUENCY_COLOR_MAPPINGS[group_tag], edgecolor='k', label=f'BCI = {round(bout_params[group], 2)}ms')
             legend_patches += [group_patch]
-    plot_bout_info(ax, audio_features, plot_bouts)
 
     dc_tag = data_params['cur_dc_tag']
     cycle_length_in_mins = int(dc_tag.split('of')[1])
     data_params['index_time_block_in_secs'] = 5
+    file_dt = dt.datetime.strptime(audio_features['file_path'].name, '%Y%m%d_%H%M%S.WAV')
+    windows = pd.date_range(file_dt, file_dt+pd.Timedelta(minutes=30), freq=f'{cycle_length_in_mins}T', inclusive='left')
 
-    bout_dur_per_cycle = actvt.get_bout_duration_per_cycle(plot_bouts.copy(), cycle_length_in_mins)
-    btp_per_cycle = actvt.get_btp_per_time_on(bout_dur_per_cycle, data_params['time_on_in_secs'])
-    plot_recording_periods_with_btp(ax, audio_features, data_params, np.round(btp_per_cycle,2))
-    num_dets_per_cycle = actvt.get_number_of_detections_per_cycle(plot_dets.copy(), cycle_length_in_mins)
-    callrate_per_cycle = actvt.get_metric_per_time_on(num_dets_per_cycle, cycle_length_in_mins)
-    plot_recording_periods_with_callrate(ax, audio_features, data_params, np.round(callrate_per_cycle,2))
-    blocks_per_cycle = actvt.get_activity_index_per_cycle(plot_dets.copy(), data_params)
-    inds_percent_per_cycle = actvt.get_activity_index_per_time_on_index(blocks_per_cycle, data_params)
-    plot_activity_index_time_blocks(ax, audio_features, data_params)
-    plot_recording_periods_with_activity_inds_percent(ax, audio_features, data_params, np.round(inds_percent_per_cycle,2))
+    if not(plot_bouts.empty):
+        plot_bout_info(ax, audio_features, plot_bouts)
+        bout_duration_per_cycle = actvt.get_bout_duration_per_cycle(plot_bouts.copy(), cycle_length_in_mins)
+        bout_duration_per_cycle = bout_duration_per_cycle.reindex(windows, fill_value=0)
+        btp_per_cycle = actvt.get_btp_per_time_on(bout_dur_per_cycle, data_params['time_on_in_secs'])
+        plot_recording_periods_with_btp(ax, audio_features, data_params, np.round(btp_per_cycle,2))
+    if not(plot_dets.empty):
+        num_dets_per_cycle = actvt.get_number_of_detections_per_cycle(plot_dets.copy(), cycle_length_in_mins)
+        num_dets_per_cycle = num_dets_per_cycle.reindex(windows, fill_value=0)
+        callrate_per_cycle = actvt.get_metric_per_time_on(num_dets_per_cycle, cycle_length_in_mins)
+        plot_recording_periods_with_callrate(ax, audio_features, data_params, np.round(callrate_per_cycle,2))
+        blocks_per_cycle = actvt.get_activity_index_per_cycle(plot_dets.copy(), data_params)
+        blocks_per_cycle = blocks_per_cycle.reindex(windows, fill_value=0)
+        inds_percent_per_cycle = actvt.get_activity_index_per_time_on_index(blocks_per_cycle, data_params)
+        plot_activity_index_time_blocks(ax, audio_features, data_params)
+        plot_recording_periods_with_activity_inds_percent(ax, audio_features, data_params, np.round(inds_percent_per_cycle,2))
 
     plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
     plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
@@ -541,19 +550,27 @@ def plot_raw_metrics_over_audio_seg(audio_features, spec_features, plot_dets, pl
             group_tag = group.split('_')[0]
             group_patch = patches.Patch(facecolor=FREQUENCY_COLOR_MAPPINGS[group_tag], edgecolor='k', label=f'BCI = {round(bout_params[group], 2)}ms')
             legend_patches += [group_patch]
-    plot_bout_info(ax, audio_features, plot_bouts)
 
     dc_tag = data_params['cur_dc_tag']
     cycle_length_in_mins = int(dc_tag.split('of')[1])
     data_params['index_time_block_in_secs'] = 5
+    file_dt = dt.datetime.strptime(audio_features['file_path'].name, '%Y%m%d_%H%M%S.WAV')
+    windows = pd.date_range(file_dt, file_dt+pd.Timedelta(minutes=30), freq=f'{cycle_length_in_mins}T', inclusive='left')
 
-    bout_duration_per_cycle = actvt.get_bout_duration_per_cycle(plot_bouts.copy(), cycle_length_in_mins)
-    plot_recording_periods_with_bout_duration(ax, audio_features, data_params, np.round(bout_duration_per_cycle,2))
-    num_dets_per_cycle = actvt.get_number_of_detections_per_cycle(plot_dets.copy(), cycle_length_in_mins)
-    plot_recording_periods_with_num_calls(ax, audio_features, data_params, num_dets_per_cycle)
-    inds_per_cycle = actvt.get_activity_index_per_cycle(plot_dets.copy(), data_params)
-    plot_activity_index_time_blocks(ax, audio_features, data_params)
-    plot_recording_periods_with_activity_inds(ax, audio_features, data_params, inds_per_cycle)
+    if not(plot_bouts.empty):
+        plot_bout_info(ax, audio_features, plot_bouts)
+        bout_duration_per_cycle = actvt.get_bout_duration_per_cycle(plot_bouts.copy(), cycle_length_in_mins)
+        bout_duration_per_cycle = bout_duration_per_cycle.reindex(windows, fill_value=0)
+        plot_recording_periods_with_bout_duration(ax, audio_features, data_params, np.round(bout_duration_per_cycle,2))
+
+    if not(plot_dets.empty):
+        num_dets_per_cycle = actvt.get_number_of_detections_per_cycle(plot_dets.copy(), cycle_length_in_mins)
+        num_dets_per_cycle = num_dets_per_cycle.reindex(windows, fill_value=0)
+        plot_recording_periods_with_num_calls(ax, audio_features, data_params, num_dets_per_cycle)
+        inds_per_cycle = actvt.get_activity_index_per_cycle(plot_dets.copy(), data_params)
+        inds_per_cycle = inds_per_cycle.reindex(windows, fill_value=0)
+        plot_activity_index_time_blocks(ax, audio_features, data_params)
+        plot_recording_periods_with_activity_inds(ax, audio_features, data_params, inds_per_cycle)
 
     plt.yticks(ticks=np.linspace(0, 1, 6), labels=np.linspace(0, fs/2000, 6).astype('int'))
     plt.xticks(ticks=np.linspace(0, duration*(fs/2), 11), labels=np.round(np.linspace(start, start+duration, 11, dtype='float'), 2), rotation=30)
