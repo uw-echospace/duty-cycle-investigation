@@ -381,6 +381,7 @@ def plot_normalized_metrics_over_audio_seg(audio_features, spec_features, plot_d
 
     dc_tag = data_params['cur_dc_tag']
     cycle_length_in_mins = int(dc_tag.split('of')[1])
+    time_on_in_mins = int(dc_tag.split('of')[0])
     data_params['index_time_block_in_secs'] = 5
     file_dt = dt.datetime.strptime(audio_features['file_path'].name, '%Y%m%d_%H%M%S.WAV')
     windows = pd.date_range(file_dt, file_dt+pd.Timedelta(minutes=30), freq=f'{cycle_length_in_mins}T', inclusive='left')
@@ -394,7 +395,7 @@ def plot_normalized_metrics_over_audio_seg(audio_features, spec_features, plot_d
     if not(plot_dets.empty):
         num_dets_per_cycle = actvt.get_number_of_detections_per_cycle(plot_dets.copy(), cycle_length_in_mins)
         num_dets_per_cycle = num_dets_per_cycle.reindex(windows, fill_value=0)
-        callrate_per_cycle = actvt.get_metric_per_time_on(num_dets_per_cycle, cycle_length_in_mins)
+        callrate_per_cycle = actvt.get_metric_per_time_on(num_dets_per_cycle, time_on_in_mins)
         plot_recording_periods_with_callrate(ax, audio_features, data_params, np.round(callrate_per_cycle,2))
         blocks_per_cycle = actvt.get_activity_index_per_cycle(plot_dets.copy(), data_params)
         blocks_per_cycle = blocks_per_cycle.reindex(windows, fill_value=0)

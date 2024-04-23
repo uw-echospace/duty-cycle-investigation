@@ -29,7 +29,9 @@ def get_associated_metric_for_cont_column(metric_for_scheme, cont_column):
 
 def select_dates_from_metrics(metric_for_scheme_for_comparison, cont_column, data_params):
     plt_dcmetr = metric_for_scheme_for_comparison.loc[data_params['start']:data_params['end']].copy()
+    plt_dcmetr = plt_dcmetr.between_time(data_params['recording_start'], data_params['recording_end'])
     plt_cmetr = cont_column.loc[data_params['start']:data_params['end']].copy()
+    plt_cmetr = plt_cmetr.between_time(data_params['recording_start'], data_params['recording_end'])
 
     return plt_dcmetr, plt_cmetr
 
