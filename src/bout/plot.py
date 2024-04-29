@@ -431,21 +431,21 @@ def plot_recording_periods_with_callrate(ax, audio_features, data_params, callra
                 rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc = (min(time_on, ((window_start+time_on)-start)))/4
-                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold')
                 window_count+=1
             elif (window_start+time_on) >= (start+duration):
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                         (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc =  (window_start-start) +(min(time_on, (start+duration) - window_start)/4)
-                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold')
                 window_count+=1
             else:
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                             (time_on)*fs/2, fs/2, 
                                             linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc =  (window_start-start) + (time_on/4)
-                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{callrate_per_cycle[window_count]} calls/min", color='pink', weight='bold')
                 window_count+=1
             ax.add_patch(rect)
 
@@ -466,21 +466,21 @@ def plot_recording_periods_with_btp(ax, audio_features, data_params, btp_per_cyc
                 rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc = (min(time_on, ((window_start+time_on)-start)))/4
-                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold')
                 window_count+=1
             elif (window_start+time_on) >= (start+duration):
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                         (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc =  (window_start-start) + (min(time_on, (start+duration) - window_start)/4)
-                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold')
                 window_count+=1
             else:
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                             (time_on)*fs/2, fs/2, 
                                             linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc =  (window_start-start) + (time_on/4)
-                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{btp_per_cycle[window_count]}% BTP", color='pink', weight='bold')
                 window_count+=1
             ax.add_patch(rect)
 
@@ -501,21 +501,21 @@ def plot_recording_periods_with_activity_inds_percent(ax, audio_features, data_p
                 rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
                 text_loc = (min(time_on, ((window_start+time_on)-start)))/4
-                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold')
                 window_count+=1
             elif (window_start+time_on) >= (start+duration):
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                         (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
                 text_loc =  (window_start-start) +(min(time_on, (start+duration) - window_start)/4)
-                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold')
                 window_count+=1
             else:
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                             (time_on)*fs/2, fs/2, 
                                             linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
                 text_loc =  (window_start-start) + (time_on/4)
-                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]}% AI", color='pink', weight='bold')
                 window_count+=1
             ax.add_patch(rect)
 
@@ -601,21 +601,21 @@ def plot_recording_periods_with_num_calls(ax, audio_features, data_params, num_d
                 rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc = (min(time_on, ((window_start+time_on)-start)))/4
-                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold')
                 window_count+=1
             elif (window_start+time_on) >= (start+duration):
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                         (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc =  (window_start-start) +(min(time_on, (start+duration) - window_start)/4)
-                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold')
                 window_count+=1
             else:
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                             (time_on)*fs/2, fs/2, 
                                             linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc =  (window_start-start) + (time_on/4)
-                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.65, s=f"{num_dets_per_cycle[window_count]} calls", color='pink', weight='bold')
                 window_count+=1
             ax.add_patch(rect)
 
@@ -636,21 +636,21 @@ def plot_recording_periods_with_bout_duration(ax, audio_features, data_params, b
                 rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc = (min(time_on, ((window_start+time_on)-start)))/4
-                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold')
                 window_count+=1
             elif (window_start+time_on) >= (start+duration):
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                         (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc =  (window_start-start) + (min(time_on, (start+duration) - window_start)/4)
-                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold')
                 window_count+=1
             else:
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                             (time_on)*fs/2, fs/2, 
                                             linewidth=4, edgecolor='yellow', facecolor=None, alpha=0.1)
                 text_loc =  (window_start-start) + (time_on/4)
-                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.75, s=f"{bout_duration_per_cycle[window_count]}s of bouts", color='pink', weight='bold')
                 window_count+=1
             ax.add_patch(rect)
 
@@ -671,21 +671,21 @@ def plot_recording_periods_with_activity_inds(ax, audio_features, data_params, i
                 rect = patches.Rectangle((0, 0), (min(time_on, ((window_start+time_on)-start)))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
                 text_loc = (min(time_on, ((window_start+time_on)-start)))/4
-                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold')
                 window_count+=1
             elif (window_start+time_on) >= (start+duration):
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                         (min(time_on, (start+duration) - window_start))*fs/2, fs/2, 
                                         linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
                 text_loc =  (window_start-start) +(min(time_on, (start+duration) - window_start)/4)
-                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold')
                 window_count+=1
             else:
                 rect = patches.Rectangle(((window_start-start)*fs/2, 0), 
                                             (time_on)*fs/2, fs/2, 
                                             linewidth=4, edgecolor='yellow', facecolor='yellow', alpha=0.1)
                 text_loc =  (window_start-start) + (time_on/4)
-                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold', fontsize=14)
+                plt.text(x=text_loc*fs/2, y=0.55, s=f"{inds_per_cycle[window_count]} AI", color='pink', weight='bold')
                 window_count+=1
             ax.add_patch(rect)
 
