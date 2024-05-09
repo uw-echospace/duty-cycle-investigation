@@ -64,7 +64,7 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
     cmap.set_bad(color='red')
     plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.6*len(activity_times))})
     plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
-    title = f"{data_params['type_tag']} Activity (# of calls) from {data_params['site_name']} ({data_params['cur_dc_tag']})"
+    title = f"{data_params['type_tag']} Activity (# of calls) from {data_params['site_name']}"
     plt.title(title, fontsize=0.8*len(activity_dates) + 1.4*len(activity_times))
     plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
     plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
@@ -77,7 +77,7 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
     plt.ylabel(f'{ylabel} Time (HH:MM)')
     plt.xlabel('Date (MM/DD/YY)')
     plt.grid(which='both', linewidth=2)
-    plt.legend(loc=3, ncol=3, fontsize=0.7*len(activity_dates) + 1*len(activity_times))
+    # plt.legend(loc=3, ncol=3, fontsize=0.7*len(activity_dates) + 1*len(activity_times))
     plt.colorbar()
     plt.tight_layout()
     if pipeline_params["save_activity_grid"]:
