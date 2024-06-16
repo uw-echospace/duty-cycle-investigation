@@ -309,9 +309,13 @@ def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_pa
     Construct an activity summary of the % of time occupied by bouts per date and time interval.
     Will be used later to assemble an activity summary for each duty-cycling scheme to compare effects.
     """
+    on = int(dc_tag.split('of')[0])
+    total = int(dc_tag.split('of')[-1])
+    bin_size = float(data_params['bin_size'])
+    time_on_in_bin = (bin_size/total) * on
 
     time_occupied_by_bouts  = bout_duration_per_interval.values
-    percent_time_occupied_by_bouts = (100*(time_occupied_by_bouts / (60*float(data_params['bin_size']))))
+    percent_time_occupied_by_bouts = (100*(time_occupied_by_bouts / (60*time_on_in_bin)))
 
     all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
