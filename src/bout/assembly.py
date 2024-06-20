@@ -97,7 +97,7 @@ def construct_bout_metrics_for_freqgroups_with_cycle_interval(location_df, data_
                 cycle_length_groups = tagged_freq_dets.groupby('cycle_ref_time', group_keys=False)
                 fixed_dets = cycle_length_groups.apply(lambda x: add_placeholder_to_tag_dets_wrt_cycle(x, cycle_length))
                 freqgroup_bout_metrics = construct_bout_metrics_from_classified_dets(fixed_dets)
-                total_bout_dur_per_cycle = freqgroup_bout_metrics.groupby('cycle_ref_time_start').apply(lambda x: check_bout_duration_per_cycle(x, time_on_in_secs))
+                total_bout_dur_per_cycle = freqgroup_bout_metrics.groupby('cycle_ref_time_start', group_keys=False).apply(lambda x: check_bout_duration_per_cycle(x, time_on_in_secs))
                 bout_metrics = pd.concat([bout_metrics, freqgroup_bout_metrics])
 
     return bout_metrics
