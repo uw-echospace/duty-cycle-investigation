@@ -168,15 +168,16 @@ def relabel_drivenames_to_mirrors(filepaths):
 def get_params_relevant_to_data_at_location(cfg):
     data_params = dict()
     data_params["type_tag"] = ''
-    data_params["cur_dc_tag"] = "1800of1800"
+    data_params["cur_dc_tag"] = "30of30"
     data_params["site_tag"] = cfg['site']
     data_params['site_name'] = SITE_NAMES[cfg['site']]
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
-    location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    location_sum_df.reset_index(inplace=True)
-    location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)
+    location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{cfg["detector"]}__{data_params["type_tag"]}{data_params["site_tag"]}_2022.csv', low_memory=False, index_col=0)
+    if cfg['detector']=='bd2':
+        location_sum_df.reset_index(inplace=True)
+        location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)
     location_sum_df.reset_index(inplace=True)
     location_sum_df.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
     site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
@@ -193,7 +194,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
     csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
-    file_title = f'2022_{data_params["site_tag"]}_call_classes'
+    file_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes'
    
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
@@ -233,6 +234,11 @@ def parse_args():
         type=str,
         help="the end of recording period",
     )
+    parser.add_argument(
+        "--detector",
+        type=str,
+        help="the end of recording period",
+    )
     return vars(parser.parse_args())
 
 if __name__ == "__main__":
@@ -242,5 +248,6 @@ if __name__ == "__main__":
     cfg['site'] = args['site']
     cfg['recording_start'] = args['recording_start']
     cfg['recording_end'] = args['recording_end']
+    cfg['detector'] = args['detector']
 
     sample_calls_and_generate_call_signal_bucket_for_location(cfg)

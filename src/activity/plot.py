@@ -48,6 +48,9 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
     sunset_time = pd.DatetimeIndex(suncalc.get_times(dates_for_sunrise_sunset, activity_lon, activity_lat)['sunset_start'])
     sunrise_seconds_from_midnight = sunrise_time.hour * 3600 + sunrise_time.minute*60 + sunrise_time.second
     sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
+    midnight_time = '07:00'
+    if pipeline_params["show_PST"]:
+        midnight_time = '00:00'
 
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
@@ -69,7 +72,7 @@ def plot_activity_grid_for_dets(activity_arr, data_params, pipeline_params, file
     plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
     plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
-    plt.axhline(y=np.where(activity_times=='00:00')[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
+    plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
     plt.plot(np.arange(0, len(plot_dates)), ((sunrise_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunrise')
     plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
@@ -113,6 +116,9 @@ def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, fil
     sunset_time = pd.DatetimeIndex(suncalc.get_times(dates_for_sunrise_sunset, activity_lon, activity_lat)['sunset_start'])
     sunrise_seconds_from_midnight = sunrise_time.hour * 3600 + sunrise_time.minute*60 + sunrise_time.second
     sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
+    midnight_time = '07:00'
+    if pipeline_params["show_PST"]:
+        midnight_time = '00:00'
 
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
@@ -135,7 +141,7 @@ def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, fil
     plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=0.1, vmax=100))
     plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
-    plt.axhline(y=np.where(activity_times=='00:00')[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
+    plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
     plt.plot(np.arange(0, len(plot_dates)), ((sunrise_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunrise')
     plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
@@ -179,6 +185,9 @@ def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file
     sunset_time = pd.DatetimeIndex(suncalc.get_times(dates_for_sunrise_sunset, activity_lon, activity_lat)['sunset_start'])
     sunrise_seconds_from_midnight = sunrise_time.hour * 3600 + sunrise_time.minute*60 + sunrise_time.second
     sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
+    midnight_time = '07:00'
+    if pipeline_params["show_PST"]:
+        midnight_time = '00:00'
 
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
@@ -203,7 +212,7 @@ def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file
     plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=1 + peak_index))
     plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
-    plt.axhline(y=np.where(activity_times=='00:00')[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
+    plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
     plt.plot(np.arange(0, len(plot_dates)), ((sunrise_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunrise')
     plt.yticks(np.arange(0, len(activity_df.index))-0.5, plot_times, rotation=30)
@@ -259,6 +268,9 @@ def plot_presence_grid(activity_arr, data_params, pipeline_params, file_paths):
     sunset_time = pd.DatetimeIndex(suncalc.get_times(dates_for_sunrise_sunset, activity_lon, activity_lat)['sunset_start'])
     sunrise_seconds_from_midnight = sunrise_time.hour * 3600 + sunrise_time.minute*60 + sunrise_time.second
     sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
+    midnight_time = '07:00'
+    if pipeline_params["show_PST"]:
+        midnight_time = '00:00'
 
     plt.rcParams.update({'font.size': 0.2*len(activity_dates) + 1.8*len(activity_times)})
     plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
@@ -270,7 +282,7 @@ def plot_presence_grid(activity_arr, data_params, pipeline_params, file_paths):
     plt.imshow(masked_array, cmap=cmap, vmin=0, vmax=255)
     plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='k', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
-    plt.axhline(y=np.where(activity_times=='00:00')[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='k', label='Midnight 0:00 PST')
+    plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='k', label='Midnight 0:00 PST')
     plt.plot(np.arange(0, len(plot_dates)), ((sunrise_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='k', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunrise')
     x, y = np.meshgrid(np.arange(presence_df.shape[1]), np.arange(presence_df.shape[0]))
@@ -463,13 +475,16 @@ def plot_dc_det_activity_comparisons_per_scheme(activity_arr, data_params, pipel
         sunset_time = pd.DatetimeIndex(suncalc.get_times(dates_for_sunrise_sunset, activity_lon, activity_lat)['sunset_start'])
         sunrise_seconds_from_midnight = sunrise_time.hour * 3600 + sunrise_time.minute*60 + sunrise_time.second
         sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
+        midnight_time = '07:00'
+        if pipeline_params["show_PST"]:
+            midnight_time = '00:00'
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         title = f"{data_params['type_tag']} Activity (# of calls) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + len(times))
         plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=10e3))
         plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
-        plt.axhline(y=np.where(activity_times=='00:00')[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
+        plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
         plt.plot(np.arange(0, len(plot_dates)), ((sunrise_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunrise')
         plt.xticks(np.arange(0, len(plot_dates))-0.5, plot_dates, rotation=30)
@@ -531,13 +546,16 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
         sunset_time = pd.DatetimeIndex(suncalc.get_times(dates_for_sunrise_sunset, activity_lon, activity_lat)['sunset_start'])
         sunrise_seconds_from_midnight = sunrise_time.hour * 3600 + sunrise_time.minute*60 + sunrise_time.second
         sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
+        midnight_time = '07:00'
+        if pipeline_params["show_PST"]:
+            midnight_time = '00:00'
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         title = f"{data_params['type_tag']} Activity (% of bout-time) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
         plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=0.1, vmax=100))
         plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
-        plt.axhline(y=np.where(activity_times=='00:00')[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
+        plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
         plt.plot(np.arange(0, len(plot_dates)), ((sunrise_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunrise')
         plt.xticks(np.arange(0, len(plot_dates))-0.5, plot_dates, rotation=30)
@@ -599,6 +617,9 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
         sunset_time = pd.DatetimeIndex(suncalc.get_times(dates_for_sunrise_sunset, activity_lon, activity_lat)['sunset_start'])
         sunrise_seconds_from_midnight = sunrise_time.hour * 3600 + sunrise_time.minute*60 + sunrise_time.second
         sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
+        midnight_time = '07:00'
+        if pipeline_params["show_PST"]:
+            midnight_time = '00:00'
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         time_block_duration = int(data_params['index_time_block_in_secs'])
         peak_index = (60*int(data_params['bin_size'])/time_block_duration)
@@ -610,7 +631,7 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
             plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=1 + peak_index))
         plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
-        plt.axhline(y=np.where(activity_times=='00:00')[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
+        plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
         plt.plot(np.arange(0, len(plot_dates)), ((sunrise_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunrise')
         plt.xticks(np.arange(0, len(plot_dates))-0.5, plot_dates, rotation=30)
@@ -679,6 +700,9 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
         sunset_time = pd.DatetimeIndex(suncalc.get_times(dates_for_sunrise_sunset, activity_lon, activity_lat)['sunset_start'])
         sunrise_seconds_from_midnight = sunrise_time.hour * 3600 + sunrise_time.minute*60 + sunrise_time.second
         sunset_seconds_from_midnight = sunset_time.hour * 3600 + sunset_time.minute*60 + sunset_time.second
+        midnight_time = '07:00'
+        if pipeline_params["show_PST"]:
+            midnight_time = '00:00'
         plt.subplot(len(data_params["dc_tags"]), 1, i+1)
         title = f"{data_params['type_tag']} Presence/Absence ({metric_name}) from {data_params['site_name']} ({dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
@@ -688,7 +712,7 @@ def plot_dc_presence_comparisons_per_scheme(activity_arr, data_params, pipeline_
         plt.imshow(masked_array, cmap=cmap, vmin=0, vmax=255)
         plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='k', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
-        plt.axhline(y=np.where(activity_times=='00:00')[0]-0.5, xmin=0, linewidth=0.5*len(activity_times), linestyle='dashed', color='k', label='Midnight 0:00 PST')
+        plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, xmin=0, linewidth=0.5*len(activity_times), linestyle='dashed', color='k', label='Midnight 0:00 PST')
         plt.plot(np.arange(0, len(plot_dates)), ((sunrise_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='k', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunrise')
         x, y = np.meshgrid(np.arange(presence_df.shape[1]), np.arange(presence_df.shape[0]))
