@@ -181,10 +181,8 @@ def get_params_relevant_to_data_at_location(cfg):
     location_sum_df.reset_index(inplace=True)
     location_sum_df.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
     site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
-    bout_params = bout.get_bout_params_from_location(location_sum_df, data_params)
 
     data_params['good_audio_files'] = site_filepaths
-    data_params['bout_params'] = bout_params
     print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site_name']}")
 
     return location_sum_df, data_params

@@ -21,13 +21,7 @@ import activity.activity_assembly as actvt
 from cli import get_file_paths
 
 
-def get_snr_from_band_limited_signal(band_limited_audio_seg, sec_length): 
-    signal = band_limited_audio_seg.copy()
-    signal[:sec_length] = 0
-
-    noise = band_limited_audio_seg - signal
-    snr_call_signal = signal[-sec_length:]
-    snr_noise_signal = noise[:sec_length]
+def get_snr_from_band_limited_signal(snr_call_signal, snr_noise_signal): 
 
     signal_power_rms = np.sqrt(np.square(snr_call_signal).mean())
     noise_power_rms = np.sqrt(np.square(snr_noise_signal).mean())
@@ -76,7 +70,13 @@ def collect_call_snrs_from_detections_in_audio_file(audio_file, detections):
             band_limited_audio_seg = bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
 
             sec_length = int(fs*(pad+call_dur+pad))
-            snr = get_snr_from_band_limited_signal(band_limited_audio_seg, sec_length)
+            signal = band_limited_audio_seg.copy()
+            signal[:sec_length] = 0
+
+            noise = band_limited_audio_seg - signal
+            snr_call_signal = signal[-sec_length:]
+            snr_noise_signal = noise[:sec_length]
+            snr = get_snr_from_band_limited_signal(snr_call_signal, snr_noise_signal)
             call_snrs += [snr]
         else:
             call_snrs += [np.NaN]
