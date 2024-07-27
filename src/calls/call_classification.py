@@ -175,9 +175,8 @@ def get_params_relevant_to_data_at_location(cfg):
 
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{cfg["detector"]}__{data_params["type_tag"]}{data_params["site_tag"]}_2022.csv', low_memory=False, index_col=0)
-    if cfg['detector']=='bd2':
-        location_sum_df.reset_index(inplace=True)
-        location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)
+    location_sum_df.reset_index(inplace=True)
+    location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)
     location_sum_df.reset_index(inplace=True)
     location_sum_df.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
     site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
@@ -191,17 +190,17 @@ def get_params_relevant_to_data_at_location(cfg):
 def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
-    csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
+    # csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
     file_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes'
    
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
-        filename =  Path(filepath).name.split('.')[0]
-        csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
-        print(f'Looking at {filepath} with detection file: {csv_path}')
-        data_params['csv_file'] = csv_path
-        if (data_params['csv_file']) in csv_files_for_location:
-            classifications = open_call_signals_using_summary(location_sum_df, data_params, classifications)
+        # filename =  Path(filepath).name.split('.')[0]
+        # csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
+        # print(f'Looking at {filepath} with detection file: {csv_path}')
+        # data_params['csv_file'] = csv_path
+        # if (data_params['csv_file']) in csv_files_for_location:
+        classifications = open_call_signals_using_summary(location_sum_df, data_params, classifications)
 
     print('Resetting index for call catalogue')
     classifications.reset_index(inplace=True)
