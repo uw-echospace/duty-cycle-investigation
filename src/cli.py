@@ -74,7 +74,7 @@ def get_file_paths(data_params):
     file_paths["raw_SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/raw/{data_params["site_tag"]}'
     file_paths["detector"] = data_params['detector_tag']
 
-    file_paths["SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{data_params["site_tag"]}'
+    file_paths["SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/2022_detector_summaries/{data_params["site_tag"]}'
     Path(f'{file_paths["SITE_folder"]}').mkdir(parents=True, exist_ok=True)
     file_paths['SITE_classes_folder'] = f'{Path(__file__).resolve().parent}/../data/classifications/{data_params["site_tag"]}'
     file_paths['SITE_classes_file'] = f'{file_paths["SITE_classes_folder"]}/2022_{data_params["site_tag"]}_call_classes.csv'

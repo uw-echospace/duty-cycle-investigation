@@ -1,6 +1,6 @@
 .DS_Store
 
-data/2022_bd2_summary/*
+data/2022_detector_summaries/*
 data/audiomoth_recordings/*
 data/detected_calls/*
 data/generated_welch/*
