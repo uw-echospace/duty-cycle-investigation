@@ -72,17 +72,18 @@ def get_file_paths(data_params):
 
     file_paths = dict()
     file_paths["raw_SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/raw/{data_params["site_tag"]}'
+    file_paths["detector"] = data_params['detector_tag']
 
     file_paths["SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/2022_bd2_summary/{data_params["site_tag"]}'
     Path(f'{file_paths["SITE_folder"]}').mkdir(parents=True, exist_ok=True)
     file_paths['SITE_classes_folder'] = f'{Path(__file__).resolve().parent}/../data/classifications/{data_params["site_tag"]}'
     file_paths['SITE_classes_file'] = f'{file_paths["SITE_classes_folder"]}/2022_{data_params["site_tag"]}_call_classes.csv'
-    file_paths["bd2_TYPE_SITE_YEAR"] = f'bd2__{data_params["type_tag"]}{data_params["site_tag"]}_2022'
+    file_paths["detector_TYPE_SITE_YEAR"] = f'{file_paths["detector"]}__{data_params["type_tag"]}{data_params["site_tag"]}_2022'
     file_paths["duty_cycled_folder"] = f'{file_paths["SITE_folder"]}/duty_cycled'
     Path(f'{file_paths["duty_cycled_folder"]}').mkdir(parents=True, exist_ok=True)
-    file_paths["dc_dets_TYPE_SITE_summary"] = f'dc_dets_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_bouts_TYPE_SITE_summary"] = f'dc_bouts_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_inds_TYPE_SITE_summary"] = f'dc_inds_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_dets_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}dets_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_bouts_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}bouts_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_inds_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}inds_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["dc_callrate_TYPE_SITE_summary"] = f'dc_callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["cont_callrate_TYPE_SITE_summary"] = f'cont_callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["dc_btp_TYPE_SITE_summary"] = f'dc_btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'

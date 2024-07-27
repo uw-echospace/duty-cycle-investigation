@@ -3,6 +3,7 @@ from pathlib import Path
 import dask.dataframe as dd
 import pandas as pd
 import numpy as np
+import datetime as dt
 
 import sys
 sys.path.append("../src")
@@ -24,7 +25,7 @@ def generate_activity_dets_results(data_params, file_paths, save=True):
 
         location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
         num_of_detections = get_number_of_detections_per_interval(location_df, data_params)
-        dc_dets = construct_activity_arr_from_location_summary(num_of_detections, dc_tag, file_paths, data_params)
+        dc_dets = construct_activity_arr_from_location_summary(num_of_detections, dc_tag, data_params)
         dc_dets = dc_dets.set_index("datetime_UTC")
         activity_dets_arr = pd.concat([activity_dets_arr, dc_dets], axis=1)
 
@@ -47,7 +48,7 @@ def generate_activity_bouts_results(data_params, file_paths, save=True):
         bout_params = bt.get_bout_params_from_location(location_df, data_params)
         bout_metrics = bt.generate_bout_metrics_for_location_and_freq(location_df, data_params, bout_params)
         bout_duration_per_interval = get_bout_duration_per_interval(bout_metrics, data_params)
-        dc_bouts = construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, file_paths, dc_tag)
+        dc_bouts = construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, dc_tag)
         dc_bouts = dc_bouts.set_index("datetime_UTC")
         activity_bouts_arr = pd.concat([activity_bouts_arr, dc_bouts], axis=1)
 
@@ -68,7 +69,7 @@ def generate_activity_inds_results(data_params, file_paths, save=True):
 
         location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
         activity_indices = get_activity_index_per_interval(location_df, data_params)
-        dc_dets = construct_activity_indices_arr(activity_indices, dc_tag, file_paths, data_params)
+        dc_dets = construct_activity_indices_arr(activity_indices, dc_tag, data_params)
         dc_dets = dc_dets.set_index("datetime_UTC")
         activity_inds_arr = pd.concat([activity_inds_arr, dc_dets], axis=1)
 
@@ -77,6 +78,30 @@ def generate_activity_inds_results(data_params, file_paths, save=True):
 
     return activity_inds_arr
 
+def convert_kaleidoscopedf_to_bd2df(df):
+    bd2_df = pd.DataFrame()
+    bd2_df['start_time'] = df['OFFSET']
+    bd2_df['end_time'] = df['OFFSET'] + df['DURATION']
+    bd2_df['low_freq'] = df['Fmin']
+    bd2_df['high_freq'] = df['Fmax']
+    bd2_df['input_file'] = df['IN FILE']
+    bd2_df['input_dir'] = np.char.add(np.char.add(df['INDIR'].values.astype(str), '/'), df['FOLDER'].values.astype(str))
+    bd2_df['mean_freq'] = df['Fmean']
+    if 'TOP1MATCH*' in df.columns:
+        bd2_df['TOP1MATCH*'] = df['TOP1MATCH*']
+    if 'TOP1MATCH' in df.columns:
+        bd2_df['TOP1MATCH'] = df['TOP1MATCH']
+    bd2_df['TOP1DIST'] = df['TOP1DIST']
+    bd2_df['TOP2MATCH'] = df['TOP2MATCH']
+    bd2_df['TOP2DIST'] = df['TOP2DIST']
+    bd2_df['TOP3MATCH'] = df['TOP3MATCH']
+    bd2_df['TOP3DIST'] = df['TOP3DIST']
+    bd2_df.sort_values('input_file', inplace=True)
+    
+    return bd2_df
+
+def sort_file_group(file_group):
+    return file_group.sort_values('start_time')
 
 def assemble_initial_location_summary(file_paths):
     """
@@ -84,7 +109,12 @@ def assemble_initial_location_summary(file_paths):
     Returns and saves a summary of bd2-detected bat calls within a desired frequency band.
     """
 
-    location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/*.csv', dtype=str).compute()
+    location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/{file_paths["detector"]}__*.csv').compute()
+    if file_paths['detector']=='kd':
+        location_df = convert_kaleidoscopedf_to_bd2df(location_df)
+        location_df['file_group'] = location_df['input_file']
+        location_df = location_df.groupby('file_group', group_keys=False).apply(lambda x: sort_file_group(x))
+
     location_df['start_time'] = location_df['start_time'].astype('float64')
     location_df['end_time'] = location_df['end_time'].astype('float64')
     location_df['low_freq'] = location_df['low_freq'].astype('float64')
@@ -101,7 +131,8 @@ def assemble_initial_location_summary(file_paths):
 
 def add_frequency_groups_to_summary_using_thresholds(location_df, file_paths, data_params, save=True):
     
-    location_df.insert(0, 'freq_group', '')
+    if not('freq_group' in location_df.columns):
+        location_df.insert(0, 'freq_group', '')
     groups = FREQ_GROUPS[data_params['site_tag']]
     blue_group = groups['LF1']
     red_group = groups['HF1']
@@ -114,12 +145,14 @@ def add_frequency_groups_to_summary_using_thresholds(location_df, file_paths, da
     location_df.loc[call_is_yellow, 'freq_group'] = 'HF2'
     location_df.loc[call_is_red&(~(call_is_yellow)), 'freq_group'] = 'HF1'
     location_df.loc[call_is_blue&(~(call_is_red | call_is_yellow)), 'freq_group'] = 'LF1'
+    location_df.loc[(~(call_is_red | call_is_yellow | call_is_blue)), 'freq_group'] = np.NaN
+    location_df = location_df.loc[~location_df['freq_group'].isna()].copy()
 
     if data_params['type_tag'] != '':
         location_df = location_df.loc[location_df['freq_group']==data_params['type_tag']]
 
     if save:
-        location_df.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv')
+        location_df.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
 
     return location_df
 
@@ -159,7 +192,7 @@ def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_p
         location_df_only_classified = location_df_only_classified.loc[location_df_only_classified['freq_group']==data_params['type_tag']]
 
     if save:
-        location_df_only_classified.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv')
+        location_df_only_classified.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
 
     return location_df_only_classified
 
@@ -255,13 +288,47 @@ def get_number_of_detections_per_interval(location_df, data_params):
 
     return num_of_detections
 
-def construct_activity_arr_from_location_summary(num_of_detections, dc_tag, file_paths, data_params):
+def get_params_relevant_to_data_at_location(data_params):
+    file_params = dict()
+
+    hard_drive_df = dd.read_csv(f'../data/ubna_data_*_collected_audio_records.csv', assume_missing=True, dtype=str).compute()
+    if 'Unnamed: 0' in hard_drive_df.columns:
+        hard_drive_df.drop(columns='Unnamed: 0', inplace=True)
+    hard_drive_df["datetime_UTC"] = pd.DatetimeIndex(hard_drive_df["datetime_UTC"])
+    hard_drive_df.set_index("datetime_UTC", inplace=True)
+    
+    files_from_location = filter_df_with_location(hard_drive_df, data_params)
+
+    file_params['ref_audio_files'] = sorted(list(files_from_location["file_path"].apply(lambda x : Path(x)).values))
+    file_status_cond = files_from_location["file_status"] == "Usable for detection"
+    file_duration_cond = np.isclose(files_from_location["file_duration"].astype('float'), 1795)
+    good_location_df = files_from_location.loc[file_status_cond&file_duration_cond]
+    file_params['good_audio_files'] = sorted(list(good_location_df["file_path"].apply(lambda x : Path(x)).values))
+
+    return file_params
+
+
+def filter_df_with_location(ubna_data_df, data_params):
+    site_name_cond = ubna_data_df["site_name"] == data_params['site_name']
+    file_year_cond = ubna_data_df.index.year == (dt.datetime.strptime(data_params['year'], '%Y')).year
+    minute_cond = np.logical_or((ubna_data_df.index).minute == 30, (ubna_data_df.index).minute == 0)
+    datetime_cond = np.logical_and((ubna_data_df.index).second == 0, minute_cond)
+    file_error_cond = np.logical_and((ubna_data_df["file_duration"]!='File has no comment due to error!'), (ubna_data_df["file_duration"]!='File has no Audiomoth-related comment'))
+    all_errors_cond = np.logical_and((ubna_data_df["file_duration"]!='Is empty!'), file_error_cond)
+
+    filtered_location_df = ubna_data_df.loc[site_name_cond&datetime_cond&file_year_cond&all_errors_cond].sort_index()
+    filtered_location_nightly_df = filtered_location_df.between_time(data_params['recording_start'], data_params['recording_end'], inclusive="left")
+
+    return filtered_location_nightly_df
+
+def construct_activity_arr_from_location_summary(num_of_detections, dc_tag, data_params):
     """
     Construct an activity summary of the number of detections recorded per date and time interval.
     Will be used later to assemble an activity summary for each duty-cycling scheme to compare effects.
     """
 
-    all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
+    file_params = get_params_relevant_to_data_at_location(data_params)
+    all_processed_filepaths = file_params['good_audio_files']
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     col_name = f"num_dets ({dc_tag})"
     incomplete_activity_arr = pd.DataFrame(num_of_detections.values, index=num_of_detections.index, columns=[col_name])
@@ -304,7 +371,7 @@ def get_btp_per_time_on(metric, time_on):
     return 100*(metric / (time_on))
 
 
-def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, file_paths, dc_tag):
+def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_params, dc_tag):
     """
     Construct an activity summary of the % of time occupied by bouts per date and time interval.
     Will be used later to assemble an activity summary for each duty-cycling scheme to compare effects.
@@ -317,7 +384,8 @@ def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_pa
     time_occupied_by_bouts  = bout_duration_per_interval.values
     percent_time_occupied_by_bouts = (100*(time_occupied_by_bouts / (60*time_on_in_bin)))
 
-    all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
+    file_params = get_params_relevant_to_data_at_location(data_params)
+    all_processed_filepaths = file_params['good_audio_files']
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)),
                                 columns=['ref_time', f'bout_time ({dc_tag})'])
@@ -359,7 +427,7 @@ def get_activity_index_per_interval(location_df, data_params):
     
     return activity_indices
 
-def construct_activity_indices_arr(activity_indices, dc_tag, file_paths, data_params):
+def construct_activity_indices_arr(activity_indices, dc_tag, data_params):
     """
     Construct an activity summary of the activity index per date and time interval.
     Will be used later to assemble an activity summary for each duty-cycling scheme to compare effects.
@@ -368,7 +436,8 @@ def construct_activity_indices_arr(activity_indices, dc_tag, file_paths, data_pa
     col_name = f"activity_index ({dc_tag})"
     incomplete_activity_arr = pd.DataFrame(activity_indices.values, index=activity_indices.index, columns=[col_name])
 
-    all_processed_filepaths = sorted(list(map(str, list(Path(f'{file_paths["raw_SITE_folder"]}').glob('*.csv')))))
+    file_params = get_params_relevant_to_data_at_location(data_params)
+    all_processed_filepaths = file_params['good_audio_files']
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     
     activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['bin_size']}T").first()
