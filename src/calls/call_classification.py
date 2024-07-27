@@ -171,6 +171,7 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params["cur_dc_tag"] = "30of30"
     data_params["site_tag"] = cfg['site']
     data_params['site_name'] = SITE_NAMES[cfg['site']]
+    data_params['detector_tag'] = cfg['detector']
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
