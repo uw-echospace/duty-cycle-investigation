@@ -99,7 +99,7 @@ def get_bout_metrics_from_single_bd2_output(bd2_output, data_params):
     bd2_output.insert(0, 'start_time_wrt_ref', (bd2_output['call_start_time'] - bd2_output['ref_time']).dt.total_seconds())
 
     batdetect2_predictions = bd2_output.loc[bd2_output['end_time_wrt_ref'] <= time_on]
-    batdetect2_preds_with_bouttags = bout.classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, data_params['bout_params'])
+    batdetect2_preds_with_bouttags = bout.classify_bouts_in_detector_preds_for_freqgroups(batdetect2_predictions, data_params['bout_params'])
     bout_metrics = bout.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_preds_with_bouttags)
 
     return bout_metrics
@@ -147,19 +147,19 @@ def select_top_percentage_from_detections(detections, percentage):
     return selected_set
 
 
-def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params):
-    bout_metrics = get_bout_metrics_from_single_bd2_output(bd2_predictions, data_params)
+def sample_calls_using_bouts(detector_preds, bucket_for_location, data_params):
+    bout_metrics = get_bout_metrics_from_single_bd2_output(detector_preds, data_params)
     bout_metrics.reset_index(drop=True, inplace=True)
         
     file_path = Path(data_params['audio_file'])
     audio_file = sf.SoundFile(file_path)
     fs = audio_file.samplerate
-    print(f'{len(bd2_predictions)} calls in this file: {file_path.name}')
+    print(f'{len(detector_preds)} calls in this file: {file_path.name}')
 
     calls_sampled_from_file = pd.DataFrame()
     for bout_index, row in bout_metrics.iterrows():
         group = row['freq_group']
-        freq_group = bd2_predictions.loc[bd2_predictions['freq_group']==group]
+        freq_group = detector_preds.loc[detector_preds['freq_group']==group]
         bat_bout = freq_group.loc[(freq_group['start_time']>=row['start_time'])&(freq_group['end_time']<=row['end_time'])].copy()
         call_snrs = collect_call_snrs_from_detections_in_audio_file(audio_file, bat_bout)
         bat_bout['SNR'] = call_snrs
@@ -179,18 +179,18 @@ def sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params):
     return bucket_for_location, calls_sampled_from_file
 
 
-def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
+def sample_calls_from_file(detector_preds, bucket_for_location, data_params):
     file_path = Path(data_params['audio_file'])
     audio_file = sf.SoundFile(file_path)
     fs = audio_file.samplerate
-    print(f'{len(bd2_predictions)} calls in this file: {file_path.name}')
+    print(f'{len(detector_preds)} calls in this file: {file_path.name}')
 
     calls_sampled_from_file = pd.DataFrame()
-    for group in bd2_predictions['freq_group'].unique():
+    for group in detector_preds['freq_group'].unique():
         if data_params['for_predicting'] and type(group)!=str and math.isnan(group):
-            freq_group = bd2_predictions.loc[bd2_predictions['freq_group'].isna()].copy()
+            freq_group = detector_preds.loc[detector_preds['freq_group'].isna()].copy()
         else:
-            freq_group = bd2_predictions.loc[bd2_predictions['freq_group']==group].copy()
+            freq_group = detector_preds.loc[detector_preds['freq_group']==group].copy()
         call_snrs = collect_call_snrs_from_detections_in_audio_file(audio_file, freq_group)
         freq_group['SNR'] = call_snrs
         print(f"{len(freq_group)} {group} calls in file: {file_path.name}")
@@ -210,17 +210,17 @@ def sample_calls_from_file(bd2_predictions, bucket_for_location, data_params):
 
 def collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location):
     location_sum_df['input_file'] = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy())
-    bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
-    groups_in_preds = bd2_predictions['freq_group'].unique()
+    detector_preds = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
+    groups_in_preds = detector_preds['freq_group'].unique()
     valid_group_in_preds = np.logical_or(np.logical_or('LF1' in groups_in_preds, 'HF1' in groups_in_preds), 'HF2' in groups_in_preds)
-    print(f"Groups found in this file: {bd2_predictions['freq_group'].unique()}, valid? {valid_group_in_preds}")
-    is_valid_params = len(bd2_predictions)>0 and valid_group_in_preds
+    print(f"Groups found in this file: {detector_preds['freq_group'].unique()}, valid? {valid_group_in_preds}")
+    is_valid_params = len(detector_preds)>0 and valid_group_in_preds
 
     if is_valid_params:
         if data_params['use_bouts']:
-            bucket_for_location, calls_sampled_from_file = sample_calls_using_bouts(bd2_predictions, bucket_for_location, data_params)
+            bucket_for_location, calls_sampled_from_file = sample_calls_using_bouts(detector_preds, bucket_for_location, data_params)
         elif data_params['use_file']:
-            bucket_for_location, calls_sampled_from_file = sample_calls_from_file(bd2_predictions, bucket_for_location, data_params)
+            bucket_for_location, calls_sampled_from_file = sample_calls_from_file(detector_preds, bucket_for_location, data_params)
         else:
             calls_sampled_from_file = pd.DataFrame()
 
@@ -258,10 +258,11 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params['use_file'] = cfg['use_file']
     data_params['for_training'] = cfg['for_training']
     data_params['for_predicting'] = cfg['for_predicting']
+    data_params['detector_tag'] = cfg['detector']
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
-    location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["bd2_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+    location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     location_sum_df.reset_index(inplace=True)
     location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)
     site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
@@ -278,7 +279,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     bucket_for_location = []
     calls_sampled_from_location = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
-    csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
+    # csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
     if data_params['use_bouts']:
         file_title = f'2022_{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_inbouts_call_signals'
     if data_params['use_file']:
@@ -286,12 +287,12 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
-        filename =  Path(filepath).name.split('.')[0]
-        csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
-        print(f'Looking at {filepath} with detection file: {csv_path}')
-        data_params['csv_file'] = csv_path
-        if (data_params['csv_file']) in csv_files_for_location:
-            bucket_for_location, calls_sampled_from_location = collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location)
+        # csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
+        # print(f'Looking at {filepath} with detection file: {csv_path}')
+        print(f'Looking at {filepath}')
+        # data_params['csv_file'] = csv_path
+        # if (data_params['csv_file']) in csv_files_for_location:
+        bucket_for_location, calls_sampled_from_location = collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location)
 
     print('Resetting index for call catalogue')
     calls_sampled_from_location.reset_index(inplace=True)
@@ -353,6 +354,11 @@ def parse_args():
         action='store_true',
         help="Collect calls regardless of pre-labels",
     )
+    parser.add_argument(
+        "--detector",
+        type=str,
+        help="the end of recording period",
+    )
     return vars(parser.parse_args())
 
 if __name__ == "__main__":
@@ -367,5 +373,6 @@ if __name__ == "__main__":
     cfg['use_file'] = args['use_file']
     cfg['for_training'] = args['for_training']
     cfg['for_predicting'] = args['for_predicting']
+    cfg['detector'] = args['detector']
 
     sample_calls_and_generate_call_signal_bucket_for_location(cfg)

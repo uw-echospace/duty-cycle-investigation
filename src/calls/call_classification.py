@@ -175,7 +175,7 @@ def get_params_relevant_to_data_at_location(cfg):
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
-    location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{cfg["detector"]}__{data_params["type_tag"]}{data_params["site_tag"]}_2022.csv', low_memory=False, index_col=0)
+    location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     if cfg['detector']=='bd2':
         location_sum_df.reset_index(inplace=True)
         location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)

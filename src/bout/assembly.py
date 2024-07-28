@@ -102,7 +102,7 @@ def construct_bout_metrics_for_freqgroups_with_cycle_interval(location_df, data_
 
     return bout_metrics
 
-def classify_bouts_in_bd2_predictions_for_freqgroups(batdetect2_predictions, bout_params):
+def classify_bouts_in_detector_preds_for_freqgroups(batdetect2_predictions, bout_params):
     """
     Given a location summary and BCIs calculated for each group in location summary, tag each call in summary as the following:
     - Within Bout : Call existing inside a bout
@@ -237,7 +237,7 @@ def generate_bout_metrics_for_location_and_freq(dc_applied_df, data_params, bout
     """
     time_on_in_mins = int(data_params['cur_dc_tag'].split('of')[0])
 
-    tagged_dets = classify_bouts_in_bd2_predictions_for_freqgroups(dc_applied_df, bout_params)
+    tagged_dets = classify_bouts_in_detector_preds_for_freqgroups(dc_applied_df, bout_params)
     bout_metrics_fixed = construct_bout_metrics_for_freqgroups_with_cycle_interval(tagged_dets, data_params)
     test_bout_end_times_in_period(bout_metrics_fixed, time_on_in_mins)
 
