@@ -89,9 +89,9 @@ def convert_kaleidoscopedf_to_bd2df(df):
     bd2_df['input_file'] = np.char.add(np.char.add(bd2_df['input_dir'].values.astype(str), '/'), bd2_df['file_name'].values.astype(str))
     bd2_df['mean_freq'] = df['Fmean']
     if 'TOP1MATCH*' in df.columns:
-        bd2_df['TOP1MATCH*'] = df['TOP1MATCH*']
+        bd2_df['class'] = df['TOP1MATCH*']
     if 'TOP1MATCH' in df.columns:
-        bd2_df['TOP1MATCH'] = df['TOP1MATCH']
+        bd2_df['class'] = df['TOP1MATCH']
     bd2_df['TOP1DIST'] = df['TOP1DIST']
     bd2_df['TOP2MATCH'] = df['TOP2MATCH']
     bd2_df['TOP2DIST'] = df['TOP2DIST']

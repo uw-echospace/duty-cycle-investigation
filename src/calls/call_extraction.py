@@ -17,6 +17,7 @@ print(sys.path)
 from core import SITE_NAMES, FREQ_GROUPS
 import bout.assembly as bout
 import activity.activity_assembly as actvt
+import activity.subsampling as ss
 
 from cli import get_file_paths
 
@@ -89,17 +90,24 @@ def get_bout_metrics_from_single_bd2_output(bd2_output, data_params):
     cycle_length = int(dc_tag.split('of')[1])
     time_on = int(dc_tag.split('of')[0])
 
-    bd2_output['ref_time'] = pd.DatetimeIndex(bd2_output['ref_time'])
-    bd2_output['call_end_time'] = pd.DatetimeIndex(bd2_output['call_end_time'])
-    bd2_output['call_start_time'] = pd.DatetimeIndex(bd2_output['call_start_time'])
-    
-    resampled_df = bd2_output.resample(f'{cycle_length}S', on='ref_time')
-    bd2_output['ref_time'] = resampled_df['ref_time'].transform(lambda x: x.name)
-    bd2_output.insert(0, 'end_time_wrt_ref', (bd2_output['call_end_time'] - bd2_output['ref_time']).dt.total_seconds())
-    bd2_output.insert(0, 'start_time_wrt_ref', (bd2_output['call_start_time'] - bd2_output['ref_time']).dt.total_seconds())
+    dc_applied_df = ss.simulate_dutycycle_on_detections_with_bins(bd2_output, dc_tag, cycle_length)
 
-    batdetect2_predictions = bd2_output.loc[bd2_output['end_time_wrt_ref'] <= time_on]
-    batdetect2_preds_with_bouttags = bout.classify_bouts_in_detector_preds_for_freqgroups(batdetect2_predictions, data_params['bout_params'])
+    # bd2_output['ref_time'] = pd.DatetimeIndex(bd2_output['ref_time'])
+    # bd2_output['cycle_ref_time'] = pd.DatetimeIndex(bd2_output['call_start_time'])
+    # bd2_output['call_end_time'] = pd.DatetimeIndex(bd2_output['call_end_time'])
+    # bd2_output['call_start_time'] = pd.DatetimeIndex(bd2_output['call_start_time'])
+
+    # resampled_cycle_length_df = bd2_output.resample(f'{cycle_length}T', on='cycle_ref_time', origin='start_day')
+    # bd2_output['cycle_ref_time'] = pd.DatetimeIndex(resampled_cycle_length_df['cycle_ref_time'].transform(lambda x: x.name))
+
+    # resampled_df = bd2_output.resample(f'{cycle_length}s', on='ref_time')
+    # bd2_output['ref_time'] = resampled_df['ref_time'].transform(lambda x: x.name)
+
+    # bd2_output.insert(0, 'end_time_wrt_ref', (bd2_output['call_end_time'] - bd2_output['ref_time']).dt.total_seconds())
+    # bd2_output.insert(0, 'start_time_wrt_ref', (bd2_output['call_start_time'] - bd2_output['ref_time']).dt.total_seconds())
+
+    # batdetect2_predictions = bd2_output.loc[bd2_output['end_time_wrt_ref'] <= time_on]
+    batdetect2_preds_with_bouttags = bout.classify_bouts_in_detector_preds_for_freqgroups(dc_applied_df, data_params['bout_params'])
     bout_metrics = bout.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_preds_with_bouttags)
 
     return bout_metrics
