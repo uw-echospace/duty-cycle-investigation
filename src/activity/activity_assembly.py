@@ -84,8 +84,9 @@ def convert_kaleidoscopedf_to_bd2df(df):
     bd2_df['end_time'] = df['OFFSET'] + df['DURATION']
     bd2_df['low_freq'] = df['Fmin']
     bd2_df['high_freq'] = df['Fmax']
-    bd2_df['input_file'] = df['IN FILE']
+    bd2_df['file_name'] = df['IN FILE']
     bd2_df['input_dir'] = np.char.add(np.char.add(df['INDIR'].values.astype(str), '/'), df['FOLDER'].values.astype(str))
+    bd2_df['input_file'] = np.char.add(np.char.add(bd2_df['input_dir'].values.astype(str), '/'), bd2_df['file_name'].values.astype(str))
     bd2_df['mean_freq'] = df['Fmean']
     if 'TOP1MATCH*' in df.columns:
         bd2_df['TOP1MATCH*'] = df['TOP1MATCH*']
@@ -96,7 +97,7 @@ def convert_kaleidoscopedf_to_bd2df(df):
     bd2_df['TOP2DIST'] = df['TOP2DIST']
     bd2_df['TOP3MATCH'] = df['TOP3MATCH']
     bd2_df['TOP3DIST'] = df['TOP3DIST']
-    bd2_df.sort_values('input_file', inplace=True)
+    bd2_df.sort_values('file_name', inplace=True)
     
     return bd2_df
 
@@ -112,7 +113,7 @@ def assemble_initial_location_summary(file_paths):
     location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/{file_paths["detector"]}__*.csv').compute()
     if file_paths['detector']=='kd':
         location_df = convert_kaleidoscopedf_to_bd2df(location_df)
-        location_df['file_group'] = location_df['input_file']
+        location_df['file_group'] = location_df['file_name']
         location_df = location_df.groupby('file_group', group_keys=False).apply(lambda x: sort_file_group(x))
 
     location_df['start_time'] = location_df['start_time'].astype('float64')
