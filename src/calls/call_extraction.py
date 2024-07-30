@@ -315,6 +315,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         print(f'Saving bucket to {file_title}.npy')
         np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.npy', np_bucket)
 
+    calls_sampled_from_location['index'] = calls_sampled_from_location.index
     if data_params['use_bouts']:
         file_title = f'2022_{data_params["detector_tag"]}{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_inbouts_welch_signals'
     if data_params['use_file']:
