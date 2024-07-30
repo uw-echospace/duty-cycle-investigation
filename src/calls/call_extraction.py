@@ -18,6 +18,8 @@ from core import SITE_NAMES, FREQ_GROUPS
 import bout.assembly as bout
 import activity.activity_assembly as actvt
 import activity.subsampling as ss
+import compute_features, call_extraction
+
 
 from cli import get_file_paths
 
@@ -312,6 +314,17 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         np_bucket = np.array(bucket_for_location, dtype='object')
         print(f'Saving bucket to {file_title}.npy')
         np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.npy', np_bucket)
+
+    if data_params['use_bouts']:
+        file_title = f'2022_{data_params["detector_tag"]}{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_inbouts_welch_signals'
+    if data_params['use_file']:
+        file_title = f'2022_{data_params["detector_tag"]}{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_infile_welch_signals'
+
+    welch_signals = compute_features.generate_welchs_for_calls(calls_sampled_from_location, bucket_for_location)
+    welch_data = pd.DataFrame(welch_signals, columns=np.linspace(0, 96000, welch_signals.shape[1]).astype(int))
+    welch_data.index.name = 'Call #'
+    welch_data.columns.name = 'Frequency (kHz)'
+    welch_data.to_csv(f'{Path(__file__).parents[2]}/data/generated_welch/{data_params["site_tag"]}/{file_title}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
