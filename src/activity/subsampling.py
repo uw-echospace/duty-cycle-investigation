@@ -2,7 +2,7 @@ import pandas as pd
 import datetime as dt
 
 def all_last_calls_of_cycle_within_recording(dc_applied_df, cycle_length, time_on_in_secs):
-    resampled_cycle_length_df = dc_applied_df.resample(f'{cycle_length}t', on='cycle_ref_time', origin='start_day')
+    resampled_cycle_length_df = dc_applied_df.resample(f'{cycle_length}min', on='cycle_ref_time', origin='start_day')
     last_call_of_each_group = resampled_cycle_length_df.last()
     assert last_call_of_each_group['end_time_wrt_ref'].all() < time_on_in_secs
 
@@ -46,7 +46,7 @@ def assign_cycle_groups_to_each_call(location_df, cycle_length, data_params):
     location_df['call_end_time'] = pd.DatetimeIndex(location_df['call_end_time'])
     location_df['call_start_time'] = pd.DatetimeIndex(location_df['call_start_time'])
 
-    resampled_cycle_length_df = location_df.resample(f'{cycle_length}t', on='cycle_ref_time', origin='start_day')
+    resampled_cycle_length_df = location_df.resample(f'{cycle_length}min', on='cycle_ref_time', origin='start_day')
     first_call_of_each_group = resampled_cycle_length_df.first().between_time(data_params['recording_start'], data_params['recording_end'])
     are_there_expected_number_of_cycles(location_df, first_call_of_each_group, cycle_length, data_params)
     location_df['cycle_ref_time'] = pd.DatetimeIndex(resampled_cycle_length_df['cycle_ref_time'].transform(lambda x: x.name))
@@ -78,10 +78,10 @@ def simulate_dutycycle_on_detections_with_bins(location_df, dc_tag, bin_size):
     location_df['call_end_time'] = pd.DatetimeIndex(location_df['call_end_time'])
     location_df['call_start_time'] = pd.DatetimeIndex(location_df['call_start_time'])
 
-    resampled_cycle_length_df = location_df.resample(f'{cycle_length}t', on='cycle_ref_time', origin='start_day')
+    resampled_cycle_length_df = location_df.resample(f'{cycle_length}min', on='cycle_ref_time', origin='start_day')
     location_df['cycle_ref_time'] = pd.DatetimeIndex(resampled_cycle_length_df['cycle_ref_time'].transform(lambda x: x.name))
 
-    resampled_bin_df = location_df.resample(f'{bin_size}t', on='ref_time', origin='start_day')
+    resampled_bin_df = location_df.resample(f'{bin_size}min', on='ref_time', origin='start_day')
     location_df['ref_time'] = pd.DatetimeIndex(resampled_bin_df['ref_time'].transform(lambda x: x.name))
 
     location_df.insert(0, 'end_time_wrt_ref', (location_df['call_end_time'] - location_df['cycle_ref_time']).dt.total_seconds())
