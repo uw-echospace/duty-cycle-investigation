@@ -123,7 +123,6 @@ def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, fil
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
     bin_size = int(data_params['bin_size'])
-    recover_ratio = min(total, bin_size) / min(on, bin_size)
 
     if total-on >= bin_size:
         activity_df = activity_df.replace(np.NaN, -1).replace(0, np.NaN)
@@ -138,7 +137,7 @@ def plot_activity_grid_for_bouts(activity_arr, data_params, pipeline_params, fil
     plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
     title = f"{data_params['type_tag']} Activity (% of bout-time) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
     plt.title(title, fontsize=0.8*len(activity_dates) + 1.4*len(activity_times))
-    plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=0.1, vmax=100))
+    plt.imshow(0.1+(masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=0.1, vmax=100))
     plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
     plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
@@ -192,7 +191,6 @@ def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file
     on = int(data_params['cur_dc_tag'].split('of')[0])
     total = int(data_params['cur_dc_tag'].split('of')[1])
     bin_size = int(data_params['bin_size'])
-    recover_ratio = min(total, bin_size) / min(on, bin_size)
 
     if total-on >= bin_size:
         activity_df = activity_df.replace(np.NaN, -1).replace(0, np.NaN)
@@ -206,10 +204,9 @@ def plot_activity_grid_for_inds(activity_arr, data_params, pipeline_params, file
     plt.rcParams.update({'font.size': (0.6*len(activity_dates) + 0.6*len(activity_times))})
     plt.figure(figsize=(0.9*len(activity_dates), 0.9*len(activity_times)))
     time_block_duration = int(data_params['index_time_block_in_secs'])
-    peak_index = (60*int(data_params['bin_size'])/time_block_duration)
     title = f"{data_params['type_tag']} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag: {data_params['cur_dc_tag']})"
     plt.title(title, fontsize=0.8*len(activity_dates) + 1.4*len(activity_times))
-    plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=1 + peak_index))
+    plt.imshow(1+(masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=100))
     plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
             color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
     plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
@@ -519,7 +516,6 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
         on = int(dc_tag.split('of')[0])
         total = int(dc_tag.split('of')[1])
         bin_size = int(data_params['bin_size'])
-        recover_ratio = min(total, bin_size) / min(on, bin_size)
         if total-on >= bin_size:
             activity_df = activity_df.replace(np.NaN, -1).replace(0, np.NaN)
             activity_df = activity_df.ffill(limit=(min((14*60)-on, total-on)//bin_size))
@@ -552,7 +548,7 @@ def plot_dc_bout_activity_comparisons_per_scheme(activity_arr, data_params, pipe
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
         title = f"{data_params['type_tag']} Activity (% of bout-time) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
-        plt.imshow(0.1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=0.1, vmax=100))
+        plt.imshow(0.1+(masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=0.1, vmax=100))
         plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
         plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')
@@ -590,7 +586,6 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
         on = int(dc_tag.split('of')[0])
         total = int(dc_tag.split('of')[1])
         bin_size = int(data_params['bin_size'])
-        recover_ratio = min(total, bin_size) / min(on, bin_size)
         if total-on >= bin_size:
             activity_df = activity_df.replace(np.NaN, -1).replace(0, np.NaN)
             activity_df = activity_df.ffill(limit=(min((14*60)-on, total-on)//bin_size))
@@ -621,14 +616,13 @@ def plot_dc_indices_activity_comparisons_per_scheme(activity_arr, data_params, p
         if pipeline_params["show_PST"]:
             midnight_time = '00:00'
         plt.subplot(len(data_params['dc_tags']), 1, i+1)
-        time_block_duration = int(data_params['index_time_block_in_secs'])
-        peak_index = (60*int(data_params['bin_size'])/time_block_duration)
+        time_block_duration = (data_params['index_time_block_in_secs'])
         title = f"{data_params['type_tag']} Activity Indices (time block = {time_block_duration}s) from {data_params['site_name']} (DC Tag : {dc_tag})"
         plt.title(title, fontsize=1.5*len(dates) + 1*len(times))
         if (time_block_duration >= 60):
-            plt.imshow((recover_ratio*masked_array_for_nodets), cmap=cmap, vmin=0, vmax=peak_index)
+            plt.imshow((masked_array_for_nodets), cmap=cmap, vmin=0, vmax=100)
         else:
-            plt.imshow(1+(recover_ratio*masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=1 + peak_index))
+            plt.imshow(1+(masked_array_for_nodets), cmap=cmap, norm=colors.LogNorm(vmin=1, vmax=100))
         plt.plot(np.arange(0, len(plot_dates)), ((sunset_seconds_from_midnight / (30*60)) % len(plot_times)) - 0.5, 
                 color='white', linewidth=0.5*len(activity_times), linestyle='dashed', label=f'Time of Sunset')
         plt.axhline(y=np.where(activity_times==midnight_time)[0]-0.5, linewidth=0.5*len(activity_times), linestyle='dashed', color='white', label='Midnight 0:00 PST')

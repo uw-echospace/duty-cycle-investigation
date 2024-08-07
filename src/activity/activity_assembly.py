@@ -67,9 +67,18 @@ def generate_activity_inds_results(data_params, file_paths, save=True):
 
     for dc_tag in data_params['dc_tags']:
 
+        cycle_length_in_mins = int(dc_tag.split('of')[1])
+        time_on_in_mins = int(dc_tag.split('of')[0])
+        time_on_in_secs = (60*time_on_in_mins)
+        data_params['cycle_length'] = cycle_length_in_mins
+        data_params['time_on_in_secs'] = time_on_in_secs
+        bin_size = float(data_params['bin_size'])
+
         location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
         activity_indices = get_activity_index_per_interval(location_df, data_params)
-        dc_dets = construct_activity_indices_arr(activity_indices, dc_tag, data_params)
+        activity_ind_percent = get_activity_index_per_time_on_index(activity_indices, data_params)
+        activity_ind_percent = (cycle_length_in_mins/bin_size)*activity_ind_percent
+        dc_dets = construct_activity_indices_arr(activity_ind_percent, dc_tag, data_params)
         dc_dets = dc_dets.set_index("datetime_UTC")
         activity_inds_arr = pd.concat([activity_inds_arr, dc_dets], axis=1)
 
@@ -411,7 +420,7 @@ def get_activity_index_per_cycle(location_df, data_params):
     return activity_indices
 
 def get_activity_index_per_time_on_index(num_blocks_presence, data_params):
-    return 100*(num_blocks_presence / (data_params["time_on_in_secs"] / data_params["index_time_block_in_secs"]))
+    return 100*(num_blocks_presence / (data_params["time_on_in_secs"] / (data_params["index_time_block_in_secs"])))
 
 def get_activity_index_per_interval(location_df, data_params):
     """
