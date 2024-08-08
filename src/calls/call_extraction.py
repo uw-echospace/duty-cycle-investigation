@@ -18,7 +18,7 @@ from core import SITE_NAMES, FREQ_GROUPS
 import bout.assembly as bout
 import activity.activity_assembly as actvt
 import activity.subsampling as ss
-import compute_features, call_extraction
+import calls.compute_features as compute_features
 
 
 from cli import get_file_paths

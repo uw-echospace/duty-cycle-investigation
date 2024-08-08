@@ -199,7 +199,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         data_params['audio_file'] = Path(filepath)
         # filename =  Path(filepath).name.split('.')[0]
         # csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
-        # print(f'Looking at {filepath} with detection file: {csv_path}')
+        print(f'Looking at {filepath}')
         # data_params['csv_file'] = csv_path
         # if (data_params['csv_file']) in csv_files_for_location:
         classifications = open_call_signals_using_summary(location_sum_df, data_params, classifications)
