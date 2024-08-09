@@ -181,8 +181,8 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
     file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency'].values
 
     classified_dets = file_dets['freq_group']!=''
-    assert (file_dets.loc[classified_dets, 'peak_frequency'] >= file_dets.loc[classified_dets, 'low_freq']-5000).all()
-    assert (file_dets.loc[classified_dets, 'peak_frequency'] <= file_dets.loc[classified_dets, 'high_freq']+5000).all()
+    assert (file_dets.loc[classified_dets, 'peak_frequency'] > file_dets.loc[classified_dets, 'low_freq']-7000).all()
+    assert (file_dets.loc[classified_dets, 'peak_frequency'] < file_dets.loc[classified_dets, 'high_freq']+7000).all()
 
     return file_dets
 

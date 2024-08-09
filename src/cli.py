@@ -84,12 +84,12 @@ def get_file_paths(data_params):
     file_paths["dc_dets_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}dets_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["dc_bouts_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}bouts_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
     file_paths["dc_inds_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}inds_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_callrate_TYPE_SITE_summary"] = f'dc_callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["cont_callrate_TYPE_SITE_summary"] = f'cont_callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_btp_TYPE_SITE_summary"] = f'dc_btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["cont_btp_TYPE_SITE_summary"] = f'cont_btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_actind_TYPE_SITE_summary"] = f'dc_actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["cont_actind_TYPE_SITE_summary"] = f'cont_actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_callrate_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["cont_callrate_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_btp_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["cont_btp_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_actind_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["cont_actind_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
 
     file_paths["figures_SITE_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}'
     Path(file_paths["figures_SITE_folder"]).mkdir(parents=True, exist_ok=True)
