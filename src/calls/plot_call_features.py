@@ -159,11 +159,11 @@ def plot_call_welch_interpolated(calls_sampled, call_signals, audio_info):
     plt.legend(loc='lower center')
 
 
-def plot_n_calls(call_indices, calls_sampled, call_signals, site_key):
+def plot_n_calls(call_indices, calls_sampled, call_signals, set_name):
     side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
-    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} call signals (waveform)', y=1, fontsize=50)
+    plt.suptitle(f'{side**2} call signals (waveform) from {set_name}', y=1, fontsize=50)
     for subplot_i, call_index in enumerate(call_indices):
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
@@ -180,11 +180,11 @@ def plot_n_calls(call_indices, calls_sampled, call_signals, site_key):
     plt.show()
 
 
-def plot_n_cumenergies(call_indices, calls_sampled, call_signals, site_key):
+def plot_n_cumenergies(call_indices, calls_sampled, call_signals, set_name):
     side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
-    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} cumulative energy signals', y=1, fontsize=50)
+    plt.suptitle(f'{side**2} cumulative energy signals from {set_name}', y=1, fontsize=50)
     for subplot_i, call_index in enumerate(call_indices):
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
@@ -201,12 +201,12 @@ def plot_n_cumenergies(call_indices, calls_sampled, call_signals, site_key):
     plt.show()
 
 
-def plot_n_energies(call_indices, calls_sampled, call_signals, site_key):
+def plot_n_energies(call_indices, calls_sampled, call_signals, set_name):
     side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     num_points = 100
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
-    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} energy signals ({num_points} points per signal)', y=1, fontsize=50)
+    plt.suptitle(f'{side**2} energy signals ({num_points} points per signal) from {set_name}', y=1, fontsize=50)
     for subplot_i, call_index in enumerate(call_indices):
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
@@ -224,11 +224,11 @@ def plot_n_energies(call_indices, calls_sampled, call_signals, site_key):
     plt.show()
 
 
-def plot_n_specs(call_indices, calls_sampled, call_signals, site_key):
+def plot_n_specs(call_indices, calls_sampled, call_signals, set_name):
     side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     plt.figure(figsize=(2.5*side, 2.5*side))
     plt.rcParams.update({'font.size': 12})
-    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} call signals (spectrogram)', y=1, fontsize=50)
+    plt.suptitle(f'{side**2} call signals (spectrogram) from {set_name}', y=1, fontsize=50)
     for subplot_i, call_index in enumerate(call_indices):
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
@@ -245,12 +245,12 @@ def plot_n_specs(call_indices, calls_sampled, call_signals, site_key):
     plt.show()
 
 
-def plot_n_ffts(call_indices, calls_sampled, call_signals, site_key):
+def plot_n_ffts(call_indices, calls_sampled, call_signals, set_name):
     side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     num_points = 500
     plt.figure(figsize=(2.8*side, 2.8*side))
     plt.rcParams.update({'font.size': 12})
-    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} FFT signals ({num_points} points per signal)', y=1, fontsize=50)
+    plt.suptitle(f'{side**2} FFT signals from {set_name}', y=1, fontsize=50)
     for subplot_i, call_index in enumerate(call_indices):
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
@@ -269,12 +269,12 @@ def plot_n_ffts(call_indices, calls_sampled, call_signals, site_key):
     plt.show()
 
 
-def plot_n_welch(call_indices, calls_sampled, call_signals, site_key):
+def plot_n_welch(call_indices, calls_sampled, call_signals, set_name):
     side = np.ceil(np.sqrt(len(call_indices))).astype('int')
     num_points = 100
     plt.figure(figsize=(2.8*side, 2.8*side))
     plt.rcParams.update({'font.size': 12})
-    plt.suptitle(f'{SITE_NAMES[site_key]} {side**2} Welch spectrum signals ({num_points} points per signal)', y=1, fontsize=50)
+    plt.suptitle(f'{side**2} welch spectra from {set_name}', y=1, fontsize=50)
     for subplot_i, call_index in enumerate(call_indices):
         call_info = calls_sampled.loc[call_index]
         file_name = call_info['file_name']
