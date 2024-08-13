@@ -93,48 +93,34 @@ def get_bout_metrics_from_single_bd2_output(bd2_output, data_params):
     time_on = int(dc_tag.split('of')[0])
 
     dc_applied_df = ss.simulate_dutycycle_on_detections_with_bins(bd2_output, dc_tag, cycle_length)
-
-    # bd2_output['ref_time'] = pd.DatetimeIndex(bd2_output['ref_time'])
-    # bd2_output['cycle_ref_time'] = pd.DatetimeIndex(bd2_output['call_start_time'])
-    # bd2_output['call_end_time'] = pd.DatetimeIndex(bd2_output['call_end_time'])
-    # bd2_output['call_start_time'] = pd.DatetimeIndex(bd2_output['call_start_time'])
-
-    # resampled_cycle_length_df = bd2_output.resample(f'{cycle_length}T', on='cycle_ref_time', origin='start_day')
-    # bd2_output['cycle_ref_time'] = pd.DatetimeIndex(resampled_cycle_length_df['cycle_ref_time'].transform(lambda x: x.name))
-
-    # resampled_df = bd2_output.resample(f'{cycle_length}s', on='ref_time')
-    # bd2_output['ref_time'] = resampled_df['ref_time'].transform(lambda x: x.name)
-
-    # bd2_output.insert(0, 'end_time_wrt_ref', (bd2_output['call_end_time'] - bd2_output['ref_time']).dt.total_seconds())
-    # bd2_output.insert(0, 'start_time_wrt_ref', (bd2_output['call_start_time'] - bd2_output['ref_time']).dt.total_seconds())
-
-    # batdetect2_predictions = bd2_output.loc[bd2_output['end_time_wrt_ref'] <= time_on]
     batdetect2_preds_with_bouttags = bout.classify_bouts_in_detector_preds_for_freqgroups(dc_applied_df, data_params['bout_params'])
     bout_metrics = bout.construct_bout_metrics_from_location_df_for_freqgroups(batdetect2_preds_with_bouttags)
 
     return bout_metrics
 
 
-def collect_call_signals_from_detections(audio_file, detections, bucket):
+def collect_call_signals_from_detections(audio_file, detections, bucket, data_params):
     fs = audio_file.samplerate
     nyq = fs//2
     sampled_calls_from_bout = pd.DataFrame()
 
     for i, call in detections.iterrows():
         call_dur = (call['end_time'] - call['start_time'])
-        start_pad = min(call['start_time'], 0.002)
-        end_pad = min(1795 - call['end_time'], 0.002)
+        start_pad = min(call['start_time'], data_params['padding'])
+        end_pad = min(1795 - call['end_time'], data_params['padding'])
         start = call['start_time'] - start_pad
         duration = call_dur + 2*(start_pad+end_pad)
         end = call['end_time'] + end_pad
         if start >= 0 and end <= 1795:
             audio_file.seek(int(fs*start))
             audio_seg = audio_file.read(int(fs*duration))
-
             low_freq_cutoff = call['low_freq']-2000
             high_freq_cutoff = min(nyq-1, call['high_freq']+2000)
-            band_limited_audio_seg = bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
-            cleaned_call_signal = band_limited_audio_seg.copy()
+            if data_params['bandpass']:
+                band_limited_audio_seg = bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
+                cleaned_call_signal = band_limited_audio_seg.copy()
+            else:
+                cleaned_call_signal = audio_seg.copy()
             bucket.append(cleaned_call_signal)
             sampled_call = pd.DataFrame(columns=call.index)
             sampled_call.loc[len(sampled_call)] = call
@@ -146,7 +132,8 @@ def collect_call_signals_from_detections(audio_file, detections, bucket):
 
 def select_top_percentage_from_detections(detections, percentage):
     print(f"SNRs in this section: {detections['SNR'].values}")
-    top_SNR =  max(1, (1-percentage)*detections['SNR'].max())
+    # SNR must be at least 1 to be chosen
+    top_SNR =  max(1, (1-percentage)*detections['SNR'].max()) 
     print(f"Highest SNR in section: {detections['SNR'].max()}")
     print(f"SNR threshold for section: {top_SNR}")
     if percentage==1:
@@ -177,7 +164,8 @@ def sample_calls_using_bouts(detector_preds, bucket_for_location, data_params):
         selected_set = select_top_percentage_from_detections(bat_bout, data_params['percent_threshold_for_snr'])
         print(f"{len(selected_set)} high SNR calls in bout {bout_index}")
         if len(selected_set) > 0:
-            bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, bucket_for_location)
+            bucket_for_location, sampled_calls_from_bout = collect_call_signals_from_detections(audio_file, selected_set, 
+                                                                                                bucket_for_location, data_params)
 
             bat_bout_condensed = sampled_calls_from_bout
             bat_bout_condensed['bout_index'] = [bout_index]*len(sampled_calls_from_bout)
@@ -197,10 +185,7 @@ def sample_calls_from_file(detector_preds, bucket_for_location, data_params):
 
     calls_sampled_from_file = pd.DataFrame()
     for group in detector_preds['freq_group'].unique():
-        if data_params['for_predicting'] and type(group)!=str and math.isnan(group):
-            freq_group = detector_preds.loc[detector_preds['freq_group'].isna()].copy()
-        else:
-            freq_group = detector_preds.loc[detector_preds['freq_group']==group].copy()
+        freq_group = detector_preds.loc[detector_preds['freq_group']==group].copy()
         call_snrs = collect_call_snrs_from_detections_in_audio_file(audio_file, freq_group)
         freq_group['SNR'] = call_snrs
         print(f"{len(freq_group)} {group} calls in file: {file_path.name}")
@@ -260,14 +245,14 @@ def filter_df_with_location(ubna_data_df, site_name, start_time, end_time):
 def get_params_relevant_to_data_at_location(cfg):
     data_params = dict()
     data_params["type_tag"] = ''
-    data_params["cur_dc_tag"] = "1800of1800"
+    data_params["cur_dc_tag"] = "30of30"
     data_params["site_tag"] = cfg['site']
     data_params['site_name'] = SITE_NAMES[cfg['site']]
     data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
+    data_params['padding'] = cfg['padding']
+    data_params['bandpass'] = cfg['bandpass']
     data_params['use_bouts'] = cfg['use_bouts']
     data_params['use_file'] = cfg['use_file']
-    data_params['for_training'] = cfg['for_training']
-    data_params['for_predicting'] = cfg['for_predicting']
     data_params['detector_tag'] = cfg['detector']
     print(f"Searching for files from {data_params['site_name']}")
 
@@ -289,43 +274,40 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     bucket_for_location = []
     calls_sampled_from_location = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
-    # csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
-    if data_params['use_bouts']:
-        file_title = f'2022_{data_params["detector_tag"]}{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_inbouts_call_signals'
-    if data_params['use_file']:
-        file_title = f'2022_{data_params["detector_tag"]}{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_infile_call_signals'
+    year_detector_site_thresh = f'2022_{data_params["detector_tag"]}{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}'
+    padding = f'{int(1000*data_params["padding"])}ms'
+    if data_params['bandpass']:
+        padding_bandpass = f'{padding}_bandpass'
+    else:
+        padding_bandpass = f'{padding}_nobandpass'
 
+    if data_params['use_bouts']:
+        file_title = f'{year_detector_site_thresh}_inbouts'
+    if data_params['use_file']:
+        file_title = f'{year_detector_site_thresh}_infile'
+
+    call_signals_file_title = f'{file_title}_{padding_bandpass}_call_signals'
+    welch_signals_file_title = f'{file_title}_{padding_bandpass}_welch_signals'
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
-        # csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
-        # print(f'Looking at {filepath} with detection file: {csv_path}')
         print(f'Looking at {filepath}')
-        # data_params['csv_file'] = csv_path
-        # if (data_params['csv_file']) in csv_files_for_location:
         bucket_for_location, calls_sampled_from_location = collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location)
 
     print('Resetting index for call catalogue')
     calls_sampled_from_location.reset_index(inplace=True)
-    print(f'Saving call catalogue to {file_title}.csv')
+    print(f'Saving call catalogue to {call_signals_file_title}.csv')
     calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.csv')
-
-    if len(bucket_for_location) < 500000:
-        print('Converting bucket to np array')
-        np_bucket = np.array(bucket_for_location, dtype='object')
-        print(f'Saving bucket to {file_title}.npy')
-        np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.npy', np_bucket)
+    print('Converting bucket to np array')
+    np_bucket = np.array(bucket_for_location, dtype='object')
+    print(f'Saving bucket to {call_signals_file_title}.npy')
+    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{call_signals_file_title}.npy', np_bucket)
 
     calls_sampled_from_location['index'] = calls_sampled_from_location.index
-    if data_params['use_bouts']:
-        file_title = f'2022_{data_params["detector_tag"]}{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_inbouts_welch_signals'
-    if data_params['use_file']:
-        file_title = f'2022_{data_params["detector_tag"]}{data_params["site_tag"]}_top{int(100*data_params["percent_threshold_for_snr"])}_infile_welch_signals'
-
     welch_signals = compute_features.generate_welchs_for_calls(calls_sampled_from_location, bucket_for_location)
     welch_data = pd.DataFrame(welch_signals, columns=np.linspace(0, 96000, welch_signals.shape[1]).astype(int))
     welch_data.index.name = 'Call #'
     welch_data.columns.name = 'Frequency (kHz)'
-    welch_data.to_csv(f'{Path(__file__).parents[2]}/data/generated_welch/{data_params["site_tag"]}/{file_title}.csv')
+    welch_data.to_csv(f'{Path(__file__).parents[2]}/data/generated_welch/{data_params["site_tag"]}/{welch_signals_file_title}.csv')
 
     return bucket_for_location, calls_sampled_from_location
 
@@ -357,6 +339,17 @@ def parse_args():
         help="the threshold; the top (100*X)% will be considered in each bout",
     )
     parser.add_argument(
+        "--padding",
+        type=float,
+        default=0.002,
+        help="the padding in seconds",
+    )
+    parser.add_argument(
+        "--bandpass",
+        action='store_true',
+        help="Whether to bandpass collected call signals",
+    )
+    parser.add_argument(
         "--use_bouts",
         action='store_true',
         help="Collect calls using each bout as a pool",
@@ -365,16 +358,6 @@ def parse_args():
         "--use_file",
         action='store_true',
         help="Collect calls using entire file as a pool",
-    )
-    parser.add_argument(
-        "--for_training",
-        action='store_true',
-        help="Collect calls using pre-labels of LF1, HF1, HF2",
-    )
-    parser.add_argument(
-        "--for_predicting",
-        action='store_true',
-        help="Collect calls regardless of pre-labels",
     )
     parser.add_argument(
         "--detector",
@@ -391,10 +374,10 @@ if __name__ == "__main__":
     cfg['recording_start'] = args['recording_start']
     cfg['recording_end'] = args['recording_end']
     cfg['percent_threshold_for_snr'] = args['threshold']
+    cfg['padding'] = args['padding']
+    cfg['bandpass'] = args['bandpass']
     cfg['use_bouts'] = args['use_bouts']
     cfg['use_file'] = args['use_file']
-    cfg['for_training'] = args['for_training']
-    cfg['for_predicting'] = args['for_predicting']
     cfg['detector'] = args['detector']
 
     sample_calls_and_generate_call_signal_bucket_for_location(cfg)
