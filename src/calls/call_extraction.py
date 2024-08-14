@@ -296,7 +296,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     print('Resetting index for call catalogue')
     calls_sampled_from_location.reset_index(inplace=True)
     print(f'Saving call catalogue to {call_signals_file_title}.csv')
-    calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}.csv')
+    calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_{padding_bandpass}.csv')
     print('Converting bucket to np array')
     np_bucket = np.array(bucket_for_location, dtype='object')
     print(f'Saving bucket to {call_signals_file_title}.npy')
