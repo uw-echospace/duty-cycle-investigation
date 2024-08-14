@@ -77,7 +77,10 @@ def construct_bout_metrics_from_location_df_for_freqgroups(location_df):
             tagged_freq_dets = location_df.loc[location_df['freq_group']==group].copy()
             if not(tagged_freq_dets.empty):
                 freqgroup_bout_metrics = construct_bout_metrics_from_classified_dets(tagged_freq_dets)
-                bout_metrics = pd.concat([bout_metrics, freqgroup_bout_metrics])
+                if len(bout_metrics) > 0:
+                    bout_metrics = pd.concat([bout_metrics, freqgroup_bout_metrics])
+                else:
+                    bout_metrics = freqgroup_bout_metrics.copy()
 
     return bout_metrics
 
@@ -98,7 +101,10 @@ def construct_bout_metrics_for_freqgroups_with_cycle_interval(location_df, data_
                 fixed_dets = cycle_length_groups.apply(lambda x: add_placeholder_to_tag_dets_wrt_cycle(x, cycle_length))
                 freqgroup_bout_metrics = construct_bout_metrics_from_classified_dets(fixed_dets)
                 total_bout_dur_per_cycle = freqgroup_bout_metrics.groupby('cycle_ref_time_start', group_keys=False).apply(lambda x: check_bout_duration_per_cycle(x, time_on_in_secs))
-                bout_metrics = pd.concat([bout_metrics, freqgroup_bout_metrics])
+                if len(bout_metrics) > 0:
+                    bout_metrics = pd.concat([bout_metrics, freqgroup_bout_metrics])
+                else:
+                    bout_metrics = freqgroup_bout_metrics.copy()
 
     return bout_metrics
 

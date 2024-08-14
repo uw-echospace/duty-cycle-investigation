@@ -116,12 +116,6 @@ def open_and_get_call_info(audio_file, dets):
 def classify_calls_from_file(bd2_predictions, data_params):
     file_path = Path(data_params['audio_file'])
     audio_file = sf.SoundFile(file_path)
-    
-    audio_features = dict()
-    audio_features['site_name'] = SITE_NAMES[data_params["site_tag"]]
-    audio_features['file_datetime'] = dt.datetime.strptime(file_path.name, "%Y%m%d_%H%M%S.WAV").strftime('%Y/%m/%d %H:%M')
-    audio_features['file_path'] = file_path
-
     call_signals, dets = open_and_get_call_info(audio_file, bd2_predictions.copy())
 
     median_peak_HF_freq = dets[dets['KMEANS_CLASSES']=='HF']['peak_frequency'].median()
