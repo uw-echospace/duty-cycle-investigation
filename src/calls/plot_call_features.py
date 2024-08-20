@@ -12,7 +12,7 @@ sys.path.append(f"{Path(__file__).parents[1]}")
 from core import SITE_NAMES
 import compute_features
 
-PADDED_CALL_LENGTH = 0.06
+PADDED_CALL_LENGTH = 0.04
 
 
 def plot_call_centered(calls_sampled, call_signals, audio_info):

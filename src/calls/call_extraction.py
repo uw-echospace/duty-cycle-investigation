@@ -253,6 +253,8 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params['bandpass'] = cfg['bandpass']
     data_params['use_bouts'] = cfg['use_bouts']
     data_params['use_file'] = cfg['use_file']
+    data_params['use_thresholds'] = True
+    data_params['use_kmeans'] = False
     data_params['detector_tag'] = cfg['detector']
     print(f"Searching for files from {data_params['site_name']}")
 
