@@ -79,6 +79,7 @@ def gather_features_of_interest(dets, kmean_welch, audio_file):
         features_of_interest['welch_signals'].append(welch_signal)
 
         peak_freq = common_freq_vector[np.argmax(welch_signal)]
+        print(common_freq_vector)
         features_of_interest['peak_freqs'].append(peak_freq)
         
         welch_signal = (welch_signal).reshape(1, len(welch_signal))
