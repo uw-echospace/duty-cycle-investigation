@@ -75,11 +75,11 @@ def gather_features_of_interest(dets, kmean_welch, audio_file):
         welch_info['num_points'] = 100
         max_visible_frequency = 96000
         welch_info['max_freq_visible'] = max_visible_frequency
-        welch_signal = compute_features.compute_welch_psd_of_call(snr_call_signal, fs, welch_info)
+        common_freq_vector, welch_signal = compute_features.compute_welch_psd_of_call(snr_call_signal, fs, welch_info)
         features_of_interest['welch_signals'].append(welch_signal)
 
-        peaks = np.where(welch_signal==max(welch_signal))[0][0]
-        features_of_interest['peak_freqs'].append((max_visible_frequency/len(welch_signal))*peaks)
+        peak_freq = common_freq_vector[np.argmax(welch_signal)]
+        features_of_interest['peak_freqs'].append(peak_freq)
         
         welch_signal = (welch_signal).reshape(1, len(welch_signal))
         features_of_interest['classes'].append(kmean_welch.predict(welch_signal)[0])

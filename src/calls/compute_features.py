@@ -58,7 +58,7 @@ def compute_welch_psd_of_call(call, fs, audio_info):
     interp_kind = 'linear'
     interpolated_points_from_welch = scipy.interpolate.interp1d(original_freq_vector, peak_db, kind=interp_kind)(common_freq_vector)
 
-    return interpolated_points_from_welch
+    return common_freq_vector, interpolated_points_from_welch
 
 
 def generate_ffts_for_calls(calls_sampled, call_signals):
