@@ -53,19 +53,6 @@ def assign_cycle_groups_to_each_call(location_df, cycle_length, data_params):
 
     return location_df
 
-def prepare_summary_for_plotting_with_duty_cycle(file_paths, dc_tag, bin_size):
-    """
-    Generates a duty-cycled location summary of concatenated bd2 outputs for measuring effects of duty-cycling.
-    """
-    cycle_length = int(dc_tag.split('of')[-1])
-    time_on = int(dc_tag.split('of')[0])
-    time_on_in_secs = (60*time_on)
-
-    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    plottable_location_df = simulate_dutycycle_on_detections(location_df, cycle_length, time_on_in_secs, bin_size)
-
-    return plottable_location_df
-
 def simulate_dutycycle_on_detections_with_bins(location_df, dc_tag, bin_size):
     """
     Simulates a provided duty-cycling scheme on the provided location summary of concatenated bd2 outputs.

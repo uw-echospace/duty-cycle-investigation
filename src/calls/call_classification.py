@@ -102,7 +102,7 @@ def open_and_get_call_info(audio_file, dets):
     dets.reset_index(drop=True, inplace=True)
 
     call_infos = pd.DataFrame()
-    call_infos['index_in_file'] = dets['index_in_file']
+    # call_infos['index_in_file'] = dets['index_in_file']
     call_infos['index_in_summary'] = dets['index_in_summary']
     call_infos['file_name'] = pd.DatetimeIndex(pd.to_datetime(dets['input_file'], format='%Y%m%d_%H%M%S', exact=False)).strftime('%Y%m%d_%H%M%S.WAV')
     call_infos['sampling_rate'] = len(dets) * [audio_file.samplerate]
@@ -202,6 +202,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     print('Resetting index for call catalogue')
     classifications.reset_index(inplace=True)
+    classifications.rename({'index':'index_in_file'}, axis='columns', inplace=True)
     print(f'Saving call catalogue to {file_title}.csv')
     classifications.to_csv(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}/{file_title}.csv')
 

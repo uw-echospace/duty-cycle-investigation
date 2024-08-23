@@ -111,7 +111,9 @@ def convert_kaleidoscopedf_to_bd2df(df):
     return bd2_df
 
 def sort_file_group(file_group):
-    return file_group.sort_values('start_time')
+    mid_df = file_group.sort_values('start_time')
+    result_df = mid_df.reset_index(drop=True)
+    return result_df
 
 def assemble_initial_location_summary(file_paths):
     """
@@ -166,7 +168,7 @@ def add_frequency_groups_to_summary_using_thresholds(location_df, file_paths, da
 
     return location_df
 
-def add_frequency_group_to_file_dets(file_dets, location_classes):
+def add_frequency_group_to_file_dets(file_dets, location_classes, data_params):
     file_classes = location_classes[pd.to_datetime(location_classes['file_name'], 
                                                    format='%Y%m%d_%H%M%S.WAV', exact=False)==file_dets.name].copy()
 
@@ -175,14 +177,17 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
 
     classified = file_classes['KMEANS_CLASSES']!=''
     file_classes.loc[classified, 'peak_frequency'] = file_classes.loc[classified, 'peak_frequency'].astype('float64')
+    if data_params['detector_tag']=='kd':
+        file_classes['index_in_file'] = file_classes['index']
 
     file_dets.insert(0, 'peak_frequency', [np.NaN]*len(file_dets))
     file_dets.loc[file_classes['index_in_file'], 'freq_group'] = file_classes['KMEANS_CLASSES'].values
     file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency'].values
 
-    classified_dets = file_dets['freq_group']!=''
-    assert (file_dets.loc[classified_dets, 'peak_frequency'] > file_dets.loc[classified_dets, 'low_freq']-7000).all()
-    assert (file_dets.loc[classified_dets, 'peak_frequency'] < file_dets.loc[classified_dets, 'high_freq']+7000).all()
+    if data_params['detector_tag']=='bd2':
+        classified_dets = (file_dets['freq_group']!='')
+        assert (file_dets.loc[classified_dets, 'peak_frequency'] > (file_dets.loc[classified_dets, 'low_freq'])-7000).all()
+        assert (file_dets.loc[classified_dets, 'peak_frequency'] < (file_dets.loc[classified_dets, 'high_freq'])+7000).all()
 
     return file_dets
 
@@ -192,7 +197,7 @@ def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_p
     location_df.insert(0, 'input_file_dt', pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S.WAV', exact=False))
     location_df_grouped = location_df.groupby('input_file_dt', group_keys=True)
 
-    location_df_classified = location_df_grouped.apply(lambda x: add_frequency_group_to_file_dets(x, location_classes))
+    location_df_classified = location_df_grouped.apply(lambda x: add_frequency_group_to_file_dets(x, location_classes, data_params))
 
     location_df_only_classified = location_df_classified.loc[location_df_classified['freq_group']!='']
     location_df_only_classified = location_df_only_classified.droplevel(level=0)
