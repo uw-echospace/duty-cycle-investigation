@@ -172,9 +172,6 @@ def get_params_relevant_to_data_at_location(cfg):
 
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    if cfg['detector']=='bd2':
-        location_sum_df.reset_index(inplace=True)
-        location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)
     location_sum_df.reset_index(inplace=True)
     location_sum_df.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
     site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
