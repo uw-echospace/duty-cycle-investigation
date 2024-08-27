@@ -182,9 +182,15 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
     file_dets.loc[file_classes['index_in_file'], 'freq_group'] = file_classes['KMEANS_CLASSES'].values
     file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency'].values
 
-    classified_dets = (file_dets['freq_group']!='')
-    assert (file_dets.loc[classified_dets, 'peak_frequency'] > (file_dets.loc[classified_dets, 'low_freq'])-7000).all()
-    assert (file_dets.loc[classified_dets, 'peak_frequency'] < (file_dets.loc[classified_dets, 'high_freq'])+7000).all()
+    for group in ['LF', 'HF']:
+        group_classified_dets = (file_dets['freq_group']==group)
+
+        low_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency'] > (file_dets.loc[group_classified_dets, 'low_freq']).median()-4000)
+        low_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency'] > (file_dets.loc[group_classified_dets, 'low_freq'])-4000)
+        assert(low_assert1|low_assert2).all()
+        high_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency'] < (file_dets.loc[group_classified_dets, 'high_freq']).median()+4000)
+        high_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency'] < (file_dets.loc[group_classified_dets, 'high_freq'])+4000)
+        assert(high_assert1|high_assert2).all()
 
     return file_dets
 
