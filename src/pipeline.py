@@ -12,9 +12,9 @@ def prepare_location_sumary(data_params, pipeline_params, file_paths):
     init_location_sum = actvt.assemble_initial_location_summary(file_paths) 
     init_location_sum.reset_index(inplace=True)
     init_location_sum.rename({'index':'index_in_file'}, axis='columns', inplace=True)
-    if data_params['use_thresholds']:
+    if data_params['assembly_type']=='thresh':
         location_sum = actvt.add_frequency_groups_to_summary_using_thresholds(init_location_sum.copy(), file_paths, data_params) ## Use to update any bd2__(location summary).csv files
-    if data_params['use_kmeans']:
+    if data_params['assembly_type']=='kmeans':
         location_sum = actvt.add_frequency_groups_to_summary_using_kmeans(init_location_sum.copy(), file_paths, data_params)
 
     return location_sum

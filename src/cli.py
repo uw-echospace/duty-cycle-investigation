@@ -78,40 +78,37 @@ def get_file_paths(data_params):
     Path(f'{file_paths["SITE_folder"]}').mkdir(parents=True, exist_ok=True)
     file_paths['SITE_classes_folder'] = f'{Path(__file__).resolve().parent}/../data/classifications/{data_params["site_tag"]}'
     file_paths['SITE_classes_file'] = f'{file_paths["SITE_classes_folder"]}/2022_{file_paths["detector"]}{data_params["site_tag"]}_call_classes.csv'
-    if data_params['use_thresholds']:
-        file_paths["detector_TYPE_SITE_YEAR"] = f'{file_paths["detector"]}__{data_params["type_tag"]}{data_params["site_tag"]}_2022_thresh'
-    if data_params['use_kmeans']:
-        file_paths["detector_TYPE_SITE_YEAR"] = f'{file_paths["detector"]}__{data_params["type_tag"]}{data_params["site_tag"]}_2022_kmeans'
+    file_paths["detector_TYPE_SITE_YEAR"] = f'{file_paths["detector"]}__{data_params["type_tag"]}{data_params["site_tag"]}_2022_{data_params["assembly_type"]}'
     file_paths["duty_cycled_folder"] = f'{file_paths["SITE_folder"]}/duty_cycled'
     Path(f'{file_paths["duty_cycled_folder"]}').mkdir(parents=True, exist_ok=True)
-    file_paths["dc_dets_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}dets_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_bouts_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}bouts_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_inds_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}inds_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_callrate_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["cont_callrate_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_btp_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["cont_btp_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["dc_actind_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
-    file_paths["cont_actind_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary'
+    file_paths["dc_dets_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}dets_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["dc_bouts_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}bouts_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["dc_inds_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}inds_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["dc_callrate_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["cont_callrate_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["dc_btp_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["cont_btp_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["dc_actind_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["cont_actind_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
 
     file_paths["figures_SITE_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}'
     Path(file_paths["figures_SITE_folder"]).mkdir(parents=True, exist_ok=True)
-    file_paths["activity_det_comparisons_figname"] = f'activity_det_comparisons_per_dc_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
-    file_paths["dc_det_comparisons_figname"] = f'dc_det_comparisons_per_night_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
-    file_paths["activity_bout_comparisons_figname"] = f'activity_bout_comparisons_per_dc_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
-    file_paths["dc_bout_comparisons_figname"] = f'dc_bout_comparisons_per_night_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
-    file_paths["activity_ind_comparisons_figname"] = f'activity_ind_comparisons_per_dc_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
-    file_paths["dc_ind_comparisons_figname"] = f'dc_ind_comparisons_per_night_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
-    file_paths["dc_metric_comparisons_figname"] = f'metric_comparisons_per_night_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
-    file_paths["presence_comparisons_figname"] = f'presence_comparisons_per_dc_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}'
+    file_paths["activity_det_comparisons_figname"] = f'activity_det_comparisons_per_dc_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["assembly_type"]}'
+    file_paths["dc_det_comparisons_figname"] = f'dc_det_comparisons_per_night_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["assembly_type"]}'
+    file_paths["activity_bout_comparisons_figname"] = f'activity_bout_comparisons_per_dc_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["assembly_type"]}'
+    file_paths["dc_bout_comparisons_figname"] = f'dc_bout_comparisons_per_night_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["assembly_type"]}'
+    file_paths["activity_ind_comparisons_figname"] = f'activity_ind_comparisons_per_dc_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["assembly_type"]}'
+    file_paths["dc_ind_comparisons_figname"] = f'dc_ind_comparisons_per_night_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["assembly_type"]}'
+    file_paths["dc_metric_comparisons_figname"] = f'metric_comparisons_per_night_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["assembly_type"]}'
+    file_paths["presence_comparisons_figname"] = f'presence_comparisons_per_dc_{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_{data_params["assembly_type"]}'
 
     file_paths["activity_grid_folder"] = f'{file_paths["figures_SITE_folder"]}/activity_grids'
     Path(file_paths["activity_grid_folder"]).mkdir(parents=True, exist_ok=True)
-    file_paths["activity_dets_grid_figname"] = f'{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_activity_dets_grid'
+    file_paths["activity_dets_grid_figname"] = f'{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_activity_dets_grid_{data_params["assembly_type"]}'
 
     file_paths["presence_grid_folder"] = f'{file_paths["figures_SITE_folder"]}/presence_grids'
     Path(file_paths["presence_grid_folder"]).mkdir(parents=True, exist_ok=True)
-    file_paths["presence_grid_figname"] = f'{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_presence_grid'
+    file_paths["presence_grid_figname"] = f'{file_paths["detector"]}_{data_params["type_tag"].upper()}{data_params["site_tag"]}_presence_grid_{data_params["assembly_type"]}'
 
     return file_paths
 

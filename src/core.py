@@ -17,8 +17,8 @@ SITE_NAMES = {
 
 
 FREQUENCY_COLOR_MAPPINGS = {
-                    'LF' : 'cyan',
-                    'LF1' : 'cyan',
+                    'LF' : 'lightskyblue',
+                    'LF1' : 'lightskyblue',
                     'HF1' : 'red',
                     'HF2' : 'yellow',
                     'HF' : 'orange',
