@@ -128,24 +128,25 @@ def classify_calls_from_file(bd2_predictions, data_params):
     lf_dets = dets[lf_inds&(dets['KMEANS_CLASSES']=='LF')]
     hf_dets = dets[hf_inds&(dets['KMEANS_CLASSES']=='HF')]
 
-    all_dets = pd.concat([hf_dets, lf_dets]).sort_index()
+    fixed_dets = pd.concat([hf_dets, lf_dets]).sort_index()
 
-    return all_dets
+    return fixed_dets, dets
 
 
-def open_call_signals_using_summary(location_sum_df, data_params, classifications):
+def open_call_signals_using_summary(location_sum_df, data_params, corrected_classifications, classifications):
     location_sum_df['input_file'] = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy())
     bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
     
     is_valid_params = len(bd2_predictions)>0 
 
     if is_valid_params:
-        classifications_in_file = classify_calls_from_file(bd2_predictions, data_params)
+        corrected_classifications_in_file, classifications_in_file = classify_calls_from_file(bd2_predictions, data_params)
+        corrected_classifications = pd.concat([corrected_classifications, corrected_classifications_in_file])
         classifications = pd.concat([classifications, classifications_in_file])
     
-    print(f'There are now {len(classifications)} rows in call catalogue')
+    print(f'There are now {len(corrected_classifications)} rows in call catalogue')
 
-    return classifications
+    return corrected_classifications, classifications
 
 
 def relabel_drivenames_to_mirrors(filepaths):
@@ -183,10 +184,12 @@ def get_params_relevant_to_data_at_location(cfg):
 
 
 def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
+    corrected_classifications = pd.DataFrame()
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
     # csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
-    file_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes'
+    file_raw_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes_raw'
+    file_corrected_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes'
    
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
@@ -195,14 +198,17 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
         print(f'Looking at {filepath}')
         # data_params['csv_file'] = csv_path
         # if (data_params['csv_file']) in csv_files_for_location:
-        classifications = open_call_signals_using_summary(location_sum_df, data_params, classifications)
+        corrected_classifications, classifications = open_call_signals_using_summary(location_sum_df, data_params, corrected_classifications, classifications)
 
     print('Resetting index for call catalogue')
-    classifications.reset_index(inplace=True)
-    print(f'Saving call catalogue to {file_title}.csv')
-    classifications.to_csv(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}/{file_title}.csv')
+    corrected_classifications.reset_index(inplace=True)
+    print(f'Saving call catalogue to {file_corrected_title}.csv')
+    corrected_classifications.to_csv(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}/{file_corrected_title}.csv')
 
-    return classifications
+    classifications.reset_index(inplace=True)
+    classifications.to_csv(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}/{file_raw_title}.csv')
+
+    return corrected_classifications, classifications
 
 
 def parse_args():
