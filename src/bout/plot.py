@@ -192,15 +192,15 @@ def plot_nlin_results_over_survival(intervals_ms, survival, fast_process, slow_p
     plt.plot(x, fast_process['metrics'].intercept + fast_process['metrics'].slope*x, c='red', alpha=0.6, marker=None, label=f"R^2 = {round(fast_process['metrics'].rvalue**2, 4)}")
     plt.plot(x, slow_process['metrics'].intercept + slow_process['metrics'].slope*x, c='blue', alpha=0.6, marker=None, label=f"R^2 = {round(slow_process['metrics'].rvalue**2, 4)}")
 
-    plt.axvline(bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"BCI: {round(bci/1000, 2)}s")
-    plt.axvline(optim_bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"Optim BCI: {round(optim_bci/1000, 2)}s")
+    plt.axvline(bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"BCI (Slater et al.): {round(bci/1000, 2)}s")
+    plt.axvline(optim_bci, linestyle='dashed', linewidth=2, color='yellowgreen', label=f"BCI (Sibly et al.): {round(optim_bci/1000, 2)}s")
     plt.grid(which='both')
     plt.ylabel('log(# of intervals)', fontsize=18)
     plt.xlabel('Time (ms)', fontsize=18)
     plt.xlim(10e0, 10e6)
     plt.ylim(survival[-1]-0.2, survival[0]+0.2)
     plt.tight_layout()
-    plt.legend(loc='upper right')
+    plt.legend(loc='upper right', fontsize=14)
     plt.xscale("log")
     plt.show()
 

@@ -27,11 +27,10 @@ def regress_around_peakIPI(intervals_ms, survival, values):
 def regress_around_fast_intervals(intervals_ms, survival, values):
     """
     Use scipy.stats to compute linear regression coefficients around points
-    we associate with between-bout intervals.
+    we associate with within-bout intervals.
 
-    These interval points to regress around are chosen using values between 30-40% of the max survival.
-    We have observed that these points have a strong linear relationship.
-    They are also among intervals from 20 to 60min. This range is very likely between-bout.
+    These points are chosen to be all IPIs less than 2s.
+    We know this interval and neighboring intervals are most likely to be within bout.
     """
 
 
@@ -44,7 +43,7 @@ def regress_around_fast_intervals(intervals_ms, survival, values):
     return fast_process
 
 
-def regress_around_survival_threshold(intervals_ms, survival):
+def regress_around_survival_threshold(intervals_ms, survival, values):
     """
     Use scipy.stats to compute linear regression coefficients around points
     we associate with within-bout intervals.
@@ -164,7 +163,7 @@ def get_bci_from_fagenyoung_method(fast_process, slow_process):
 
     return bci, misassigned_points
 
-def get_bci_from_slater_method(fast_process, slow_process):
+def get_bci_from_slater_method(intervals_ms, survival, fast_process, slow_process):
     """
     Computes and returns the BCI given the lambda and N value for each process.
     Using the equation from Slater & Lester (1982) derived for minimizing # of events misassigned.
