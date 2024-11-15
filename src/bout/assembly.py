@@ -268,7 +268,12 @@ def get_bout_params_from_location(location_sum_df, data_params):
                 slow_process = clstr.regress_around_slow_intervals(intervals_ms, survival)
                 slow_process = clstr.calculate_exponential_coefficients(slow_process)
                 bci, misassigned_points = clstr.get_bci_from_slater_method(intervals_ms, survival, fast_process, slow_process)
-                bout_params[f'{group}_bci'] = bci
+                nlin_results, misassigned_points_optim = clstr.get_bci_from_sibly_method(intervals_ms, survival, fast_process, slow_process)
+                if misassigned_points<=misassigned_points_optim:
+                    bout_params[f'{group}_bci'] = bci
+                else:
+                    bout_params[f'{group}_bci'] = nlin_results['bci']
+
 
     return bout_params
 
