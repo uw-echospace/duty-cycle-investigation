@@ -177,10 +177,13 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
 
     classified = file_classes['KMEANS_CLASSES']!=''
     file_classes.loc[classified, 'peak_frequency'] = file_classes.loc[classified, 'peak_frequency'].astype('float64')
+    file_classes.loc[classified, 'SNR'] = file_classes.loc[classified, 'SNR'].astype('float64')
 
     file_dets.insert(0, 'peak_frequency', [np.NaN]*len(file_dets))
+    file_dets.insert(0, 'SNR', [np.NaN]*len(file_dets))
     file_dets.loc[file_classes['index_in_file'], 'freq_group'] = file_classes['KMEANS_CLASSES'].values
     file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency'].values
+    file_dets.loc[file_classes['index_in_file'], 'SNR'] = file_classes['SNR'].values
 
     for group in ['LF', 'HF']:
         group_classified_dets = (file_dets['freq_group']==group)

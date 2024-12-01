@@ -14,7 +14,9 @@ import sys
 import re
 
 sys.path.append(f"{Path(__file__).parent}/../src")
-import activity.activity_assembly as actvt
+sys.path.append(f"{Path(__file__).parent}/../src/bout")
+import bout.assembly as bt
+import activity.subsampling as ss
 from cli import get_file_paths
 
 import tkinter as tk
@@ -22,11 +24,11 @@ from tkinter import ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 FREQUENCY_COLOR_MAPPINGS = {
-                    'LF' : 'blue',
-                    'HF' : 'orange'
+                    'LF' : 'red',
+                    'HF' : 'red'
                         }
 
-def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, FREQUENCY_COLOR_MAPPINGS, osn_file_path, row_index, nfft):
+def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, FREQUENCY_COLOR_MAPPINGS, osn_file_path, row_index, nfft, total_bouts):
     """
     Plots a spectrogram for a given row of data with annotations.
 
@@ -51,20 +53,12 @@ def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, FREQ
 
     # Add rectangles for detections
     for _, det in plot_dets.iterrows():
-        if det['start_time'] == row['start_time']:
-            rect = patches.Rectangle(
-                ((det['start_time'] - start) * (fs / 2), det['low_freq'] / (fs / 2)),
-                (det['end_time'] - det['start_time']) * (fs / 2),
-                (det['high_freq'] - det['low_freq']) / (fs / 2),
-                linewidth=1, edgecolor='red', facecolor='none', alpha=0.8
-            )
-        else:
-            rect = patches.Rectangle(
-                ((det['start_time'] - start) * (fs / 2), det['low_freq'] / (fs / 2)),
-                (det['end_time'] - det['start_time']) * (fs / 2),
-                (det['high_freq'] - det['low_freq']) / (fs / 2),
-                linewidth=1, edgecolor=FREQUENCY_COLOR_MAPPINGS[det['freq_group']], facecolor='none', alpha=0.8
-            )
+        rect = patches.Rectangle(
+            ((det['start_time'] - start) * (fs / 2), det['low_freq'] / (fs / 2)),
+            (det['end_time'] - det['start_time']) * (fs / 2),
+            (det['high_freq'] - det['low_freq']) / (fs / 2),
+            linewidth=0.5, edgecolor=FREQUENCY_COLOR_MAPPINGS[det['freq_group']], facecolor='none', alpha=0.8
+        )
         ax.add_patch(rect)
 
     # Configure plot labels and ticks
@@ -74,7 +68,7 @@ def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, FREQ
 
     ax.text(
         x=int(fs * 0.001), y=0.85,
-        s=f'{row["freq_group"]} det{row_index}', fontweight='bold', color='white', fontsize=6
+        s=f'{row["freq_group"]} bout{row_index+1}/{total_bouts}', fontweight='bold', color='white', fontsize=6
     )
 
     ax.set_xticks(ticks=np.linspace(0, duration * fs / 2, 6))
@@ -275,9 +269,9 @@ class SpectrogramViewer:
         x2, y2 = erelease.xdata, erelease.ydata
         row = self.dataframe.iloc[self.index]
         call_dur = (row['end_time'] - row['start_time'])
-        pad = min(min(row['start_time'] - call_dur, 1795 - row['end_time']), 9.0) / 3
-        start = row['start_time'] - call_dur - (0.5 * pad)
-        duration = (2 * call_dur) + (1 * pad)
+        pad = min(min(row['start_time'] - call_dur, 1795 - row['end_time']), 15.0) / 3
+        start = row['start_time'] - (0.5 * pad)
+        duration = (1 * call_dur) + (1 * pad)
         start_time = start + (min(x1, x2) / (self.fs / 2)) * duration
         end_time = start + (max(x1, x2) / (self.fs / 2)) * duration
         low_freq = min(y1, y2) * (self.fs / 2)
@@ -331,12 +325,13 @@ class SpectrogramViewer:
             self.audio_file = sf.SoundFile(file)
             self.fs = self.audio_file.samplerate
         call_dur = (row['end_time'] - row['start_time'])
-        pad = min(min(row['start_time'] - call_dur, 1795 - row['end_time']), 9.0) / 3
-        start = row['start_time'] - call_dur - (0.5 * pad)
-        duration = (2 * call_dur) + (1 * pad)
+        pad = min(min(row['start_time'] - call_dur, 1795 - row['end_time']), 15.0) / 3
+        start = row['start_time'] - (0.5 * pad)
+        duration = (1 * call_dur) + (1 * pad)
         self.audio_file.seek(int(self.fs * start))
         audio_seg = self.audio_file.read(int(self.fs * duration))
         file_df_orig = self.location_df_kmeans_raw[self.location_df_kmeans_raw['input_file'] == row['input_file']]
+        total_bouts = self.dataframe.shape[0]
         
         # Plot the spectrogram
         plot_spectrogram(
@@ -350,7 +345,8 @@ class SpectrogramViewer:
             FREQUENCY_COLOR_MAPPINGS=self.FREQUENCY_COLOR_MAPPINGS,
             osn_file_path=osn_file_path,
             row_index=self.index,
-            nfft=self.nfft.get()
+            nfft=self.nfft.get(),
+            total_bouts=total_bouts
         )
 
         # Draw custom detections
@@ -444,32 +440,86 @@ class SpectrogramViewer:
         print(f"Saved {len(noise_indices)} rows to 'noise_spectrograms.csv'")
         print(f"Saved {len(self.custom_detections)} custom detections to 'custom_detections.csv'") 
 
-def add_frequency_group_to_file_dets(file_dets, location_classes):
-    file_classes = location_classes[pd.to_datetime(location_classes['file_name'], 
-                                                   format='%Y%m%d_%H%M%S.WAV', exact=False)==file_dets.name].copy()
-    file_dets.insert(0, 'index_in_summary', file_dets.index)
-    file_dets.set_index('index_in_file', inplace=True)
-    classified = file_classes['KMEANS_CLASSES']!=''
-    file_classes.loc[classified, 'peak_frequency'] = file_classes.loc[classified, 'peak_frequency'].astype('float64')
-    file_dets.insert(0, 'peak_frequency', [np.NaN]*len(file_dets))
-    file_dets.loc[file_classes['index_in_file'], 'freq_group'] = file_classes['KMEANS_CLASSES'].values
-    file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency'].values
-    return file_dets
+def construct_bout_metrics_from_classified_dets(fgroups_with_bouttags):
+    """
+    Reads in the dataframe of detected calls with bout tags.
+    Uses these bout tags to create a new dataframe of bout metrics for the start and end times of each bout.
+    Also includes the lowest frequency of a call within a bout as the lower bound for the bout
+    and the highest frequency of a call within a bout as the upper bound frequency for the bout.
+    Now, also included the number of detections captured within each bout.
+    """
 
-def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_params, save=True):
-    location_df.insert(0, 'freq_group', '')
-    location_classes = pd.read_csv(Path(file_paths['SITE_classes_file']), index_col=0)
-    location_df.insert(0, 'input_file_dt', pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S.WAV', exact=False))
-    location_df_grouped = location_df.groupby('input_file_dt', group_keys=True)
-    location_df_classified = location_df_grouped.apply(lambda x: add_frequency_group_to_file_dets(x, location_classes))
-    location_df_only_classified = location_df_classified.loc[location_df_classified['freq_group']!='']
-    location_df_only_classified = location_df_only_classified.droplevel(level=0)
-    location_df_only_classified = location_df_only_classified.reset_index()
-    if data_params['type_tag'] != '':
-        location_df_only_classified = location_df_only_classified.loc[location_df_only_classified['freq_group']==data_params['type_tag']]
-    if save:
-        location_df_only_classified.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
-    return location_df_only_classified
+    location_df = fgroups_with_bouttags.copy()
+    location_df.reset_index(drop=True, inplace=True)
+    group_of_tagged_dets = location_df['freq_group'].unique().item()
+
+    end_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout end', 'call_end_time'])
+    start_times_of_bouts = pd.to_datetime(location_df.loc[location_df['call_status']=='bout start', 'call_start_time'])
+    ref_end_times = location_df.loc[location_df['call_status']=='bout end', 'end_time_wrt_ref'].astype('float')
+    ref_start_times = location_df.loc[location_df['call_status']=='bout start', 'start_time_wrt_ref'].astype('float')
+    end_times = location_df.loc[location_df['call_status']=='bout end', 'end_time'].astype('float')
+    start_times = location_df.loc[location_df['call_status']=='bout start', 'start_time'].astype('float')
+    bout_starts = start_times_of_bouts.index
+    bout_ends = end_times_of_bouts.index
+
+    low_freqs = []
+    high_freqs = []
+    ref_time_cycle_start = []
+    ref_time_cycle_end = []
+    num_calls_per_bout = []
+    input_files = []
+    for i, bout_start in enumerate(bout_starts):
+        bat_bout = location_df.iloc[bout_start:bout_ends[i]+1]
+        bat_bout = bat_bout.loc[bat_bout['class']!='MADE-UP FOR DC INVESTIGATION']
+        pass_low_freq = np.min(bat_bout['low_freq'])
+        pass_high_freq = np.max(bat_bout['high_freq'])
+        start_cycle = bat_bout['cycle_ref_time'].values[0]
+        end_cycle = bat_bout['cycle_ref_time'].values[-1]
+        bout_input_file = bat_bout['input_file'].values[0]
+        num_calls = len(bat_bout)
+        low_freqs += [pass_low_freq]
+        high_freqs += [pass_high_freq]
+        ref_time_cycle_start += [start_cycle]
+        ref_time_cycle_end += [end_cycle]
+        num_calls_per_bout += [num_calls]
+        input_files += [bout_input_file]
+
+    bout_metrics = pd.DataFrame()
+    bout_metrics['start_time_of_bout'] = start_times_of_bouts.values
+    bout_metrics['end_time_of_bout'] = end_times_of_bouts.values
+    bout_metrics['start_time_wrt_ref'] = ref_start_times.values
+    bout_metrics['end_time_wrt_ref'] = ref_end_times.values
+    bout_metrics['start_time'] = start_times.values
+    bout_metrics['end_time'] = end_times.values
+    bout_metrics['low_freq'] = low_freqs
+    bout_metrics['high_freq'] = high_freqs
+    bout_metrics['freq_group'] = group_of_tagged_dets
+    bout_metrics['input_file'] = input_files
+    bout_metrics['cycle_ref_time_start'] = ref_time_cycle_start
+    bout_metrics['cycle_ref_time_end'] = ref_time_cycle_end
+    bout_metrics['number_of_dets'] = num_calls_per_bout
+    bout_metrics['bout_duration'] = end_times_of_bouts.values - start_times_of_bouts.values
+    bout_metrics['bout_duration_in_secs'] = bout_metrics['bout_duration'].apply(lambda x : x.total_seconds())
+
+    return bout_metrics
+
+def construct_bout_metrics_from_location_df_for_freqgroups(location_df):
+    """
+    Given a location summary with tagged bout markers, construct and concatenate together bout metrics for each group
+    """
+
+    bout_metrics = pd.DataFrame()
+    for group in location_df['freq_group'].unique():
+        if group != '':
+            tagged_freq_dets = location_df.loc[location_df['freq_group']==group].copy()
+            if not(tagged_freq_dets.empty):
+                freqgroup_bout_metrics = construct_bout_metrics_from_classified_dets(tagged_freq_dets)
+                if len(bout_metrics) > 0:
+                    bout_metrics = pd.concat([bout_metrics, freqgroup_bout_metrics])
+                else:
+                    bout_metrics = freqgroup_bout_metrics.copy()
+
+    return bout_metrics
 
 def get_dropped_by_kmeans(thresh_file_df, all_file_kmeans_df):
     input_file_group_name = thresh_file_df.input_file.values[0]
@@ -498,34 +548,27 @@ if __name__ == "__main__":
     data_params["type_tag"] = 'LF'
     data_params["detector_tag"] = 'bd2'
     data_params["assembly_type"] = 'kmeans'
-
-    # file_paths = get_file_paths(data_params)
-    # file_paths['SITE_classes_file'] = f"{file_paths['SITE_classes_file'][:-4]}_raw.csv"
-    # raw_location_df_filepath = Path(f'{Path(__file__).parent}/20241116__location_df_Foliage_kmeans_raw.csv')
-    # if raw_location_df_filepath.is_file():
-    #     location_df_kmeans_raw = pd.read_csv(raw_location_df_filepath, low_memory=False, index_col=0)
-    # else:
-    #     init_location_sum = actvt.assemble_initial_location_summary(file_paths) 
-    #     init_location_sum.reset_index(inplace=True)
-    #     init_location_sum.rename({'index':'index_in_file'}, axis='columns', inplace=True)
-    #     location_df_kmeans_raw = add_frequency_groups_to_summary_using_kmeans(init_location_sum.copy(), file_paths, data_params, save=False)
-    #     location_df_kmeans_raw.to_csv(raw_location_df_filepath)
-
+    data_params['recording_start'] = '00:00'
+    data_params['recording_end'] = '16:00'
+    data_params['cur_dc_tag'] = '30of30'
+    data_params['cycle_length'] = int(data_params['cur_dc_tag'].split('of')[-1])
+    data_params['time_on'] = int(data_params['cur_dc_tag'].split('of')[0])
+    data_params['time_on_in_secs'] = 60*data_params['time_on']
     file_paths = get_file_paths(data_params)
     location_df_kmeans = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-
-    # all_dropped_calls = location_df_kmeans_raw.groupby(by='input_file', group_keys=False).apply(lambda x : get_dropped_by_kmeans(x, location_df_kmeans))
-    # test_df = all_dropped_calls.reset_index().loc[:,['index_in_file', 'freq_group', 'start_time', 'end_time', 'low_freq', 'high_freq', 'input_file']]
-    test_df = location_df_kmeans.reset_index()
+    dc_applied_df = ss.simulate_dutycycle_on_detections(location_df_kmeans.copy(), data_params)
+    bout_params = bt.get_bout_params_from_location(dc_applied_df, data_params)
+    tagged_dets = bt.classify_bouts_in_detector_preds_for_freqgroups(dc_applied_df.copy(), bout_params)
+    bout_metrics = construct_bout_metrics_from_location_df_for_freqgroups(tagged_dets)
+    gui_DF = bout_metrics.reset_index()
 
     filesys = fsspec.filesystem('s3', anon=True, client_kwargs={'endpoint_url': 'https://sdsc.osn.xsede.org'})
 
-    # Launch the GUI
     root = tk.Tk()
     root.title("Spectrogram Viewer")
     app = SpectrogramViewer(
         root,
-        dataframe=test_df,
+        dataframe=gui_DF,
         location_df_kmeans_raw=location_df_kmeans,
         FREQUENCY_COLOR_MAPPINGS=FREQUENCY_COLOR_MAPPINGS,
     )
