@@ -90,6 +90,21 @@ def get_file_paths(data_params):
     file_paths["cont_btp_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
     file_paths["dc_actind_TYPE_SITE_summary"] = f'dc_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
     file_paths["cont_actind_TYPE_SITE_summary"] = f'cont_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    
+    file_paths["fp_error_mod_callrate_TYPE_SITE_summary"] = f'fp_error_mod_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fp_error_base_callrate_TYPE_SITE_summary"] = f'fp_error_base_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fp_error_mod_btp_TYPE_SITE_summary"] = f'fp_error_mod_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fp_error_base_btp_TYPE_SITE_summary"] = f'fp_error_base_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fp_error_mod_actind_TYPE_SITE_summary"] = f'fp_error_mod_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fp_error_base_actind_TYPE_SITE_summary"] = f'fp_error_base_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    
+    file_paths["fn_error_mod_callrate_TYPE_SITE_summary"] = f'fn_error_mod_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fn_error_base_callrate_TYPE_SITE_summary"] = f'fn_error_base_{file_paths["detector"]}callrate_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fn_error_mod_btp_TYPE_SITE_summary"] = f'fn_error_mod_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fn_error_base_btp_TYPE_SITE_summary"] = f'fn_error_base_{file_paths["detector"]}btp_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fn_error_mod_actind_TYPE_SITE_summary"] = f'fn_error_mod_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+    file_paths["fn_error_base_actind_TYPE_SITE_summary"] = f'fn_error_base_{file_paths["detector"]}actind_{data_params["type_tag"]}{data_params["site_tag"]}_summary_{data_params["assembly_type"]}'
+
 
     file_paths["figures_SITE_folder"] = f'{Path(__file__).resolve().parent}/../figures/{data_params["site_tag"]}'
     Path(file_paths["figures_SITE_folder"]).mkdir(parents=True, exist_ok=True)

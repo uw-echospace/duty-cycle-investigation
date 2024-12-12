@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import re
 from tqdm import tqdm
 
@@ -12,7 +13,7 @@ import activity.subsampling as ss
 import activity.activity_assembly as actvt
 
 def does_duty_cycled_df_have_less_dets_than_original(dc_applied_df, location_df):
-    assert dc_applied_df.shape[0] < location_df.shape[0]
+    assert dc_applied_df.shape[0] <= location_df.shape[0]
 
 def does_reindexed_match_original_at_original_indices(metric_for_scheme_for_comparison, metric_for_scheme):
     assert (metric_for_scheme_for_comparison.loc[metric_for_scheme.index].compare(metric_for_scheme).empty)
@@ -210,3 +211,227 @@ def get_continuous_activity_index_partitioned_for_dc_scheme(metric_col_name, fil
     ss.are_there_expected_number_of_cycles(location_df, ind_percent_cont_column, cycle_length, data_params)
 
     return ind_percent_cont_column
+
+def add_noise_to_group(group, frac):
+    noise_df = pd.DataFrame()
+    noise_start_times = np.random.uniform(0, 1800, np.floor(frac*group.shape[0]).astype(int))
+    noise_df['start_time'] = noise_start_times
+    noise_df['end_time'] = noise_start_times + 0.01
+    noise_df['low_freq'] = [24000]*noise_df.shape[0]
+    noise_df['high_freq'] = [80000]*noise_df.shape[0]
+    noise_df['class'] = ['NOISE']*noise_df.shape[0]
+
+    added_noise_hf_file_dets = pd.concat([group, noise_df])
+    file_dts = pd.to_datetime(added_noise_hf_file_dets['input_file'], format='%Y%m%d_%H%M%S', exact=False).ffill().bfill()
+
+    anchor_start_times = file_dts + pd.to_timedelta(added_noise_hf_file_dets['start_time'].values.astype('float64'), unit='S')
+    anchor_end_times = file_dts + pd.to_timedelta(added_noise_hf_file_dets['end_time'].values.astype('float64'), unit='S') 
+    added_noise_hf_file_dets['call_end_time'] = anchor_end_times
+    added_noise_hf_file_dets['call_start_time'] = anchor_start_times
+    added_noise_hf_file_dets['ref_time'] = anchor_start_times
+    added_noise_hf_file_dets = added_noise_hf_file_dets.sort_values(by='call_start_time')
+
+    return added_noise_hf_file_dets
+
+def generate_activity_btp_for_false_positives_investigation(data_params, file_paths, save=False):
+    btp_mod_columns = pd.DataFrame()
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+    bout_params = bt.get_bout_params_from_location(location_df, data_params)
+
+    dc_tag = '30of30'
+    metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
+    btp_cont_column = get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, location_df.copy(), data_params, bout_params)
+    fractions = np.arange(0.0, 0.11, 0.01)
+    for i in tqdm(range(len(fractions))):
+        frac = fractions[i]
+        data_params['cur_dc_tag'] = dc_tag
+        cycle_length_in_mins = int(data_params['cur_dc_tag'].split('of')[1])
+        time_on_in_mins = int(data_params['cur_dc_tag'].split('of')[0])
+        time_on_in_secs = (60*time_on_in_mins)
+
+        added_noise_location_df = location_df.groupby(by='input_file_dt', group_keys=False).apply(lambda x : add_noise_to_group(x, frac))
+        dc_applied_df = ss.simulate_dutycycle_on_detections(added_noise_location_df.copy(), data_params)
+        dc_applied_df['freq_group'] = [data_params['type_tag']]*dc_applied_df.shape[0]
+        does_duty_cycled_df_have_less_dets_than_original(location_df, dc_applied_df)
+        bout_metrics = bt.generate_bout_metrics_for_location_and_freq(dc_applied_df, data_params, bout_params)
+        bout_duration = actvt.get_bout_duration_per_cycle(bout_metrics, cycle_length_in_mins)
+        bout_time_percentage = actvt.get_btp_per_time_on(bout_duration, time_on_in_secs)
+        data_params['cur_dc_tag'] = f'{round(frac, 2)}'
+        bout_time_percentage_modified = actvt.filter_and_prepare_metric(bout_time_percentage, data_params)
+        bout_time_percentage_modified = bout_time_percentage_modified.set_index("datetime_UTC")
+        ss.are_there_expected_number_of_cycles(dc_applied_df, bout_time_percentage_modified, cycle_length_in_mins, data_params)
+
+        btp_mod_columns = pd.concat([btp_mod_columns, bout_time_percentage_modified], axis=1)
+
+    if save:
+        btp_mod_columns.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fp_error_mod_btp_TYPE_SITE_summary"]}.csv')
+        btp_cont_column.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fp_error_base_btp_TYPE_SITE_summary"]}.csv')
+
+    return btp_mod_columns, btp_cont_column
+
+def removed_calls_from_group(group, frac):
+    group_reduced = group.sample(frac=frac).sort_values(by='call_start_time')
+    return group_reduced
+
+def generate_activity_btp_for_false_negatives_investigation(data_params, file_paths, save=False):
+    btp_mod_columns = pd.DataFrame()
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+    bout_params = bt.get_bout_params_from_location(location_df, data_params)
+
+    dc_tag = '30of30'
+    metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
+    btp_cont_column = get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, location_df.copy(), data_params, bout_params)
+    fractions = np.arange(1.0, 0.4, -0.1)
+    for i in tqdm(range(len(fractions))):
+        frac = fractions[i]
+        data_params['cur_dc_tag'] = dc_tag
+        cycle_length_in_mins = int(data_params['cur_dc_tag'].split('of')[1])
+        time_on_in_mins = int(data_params['cur_dc_tag'].split('of')[0])
+        time_on_in_secs = (60*time_on_in_mins)
+
+        removed_calls_location_df = location_df.groupby(by='input_file_dt', group_keys=False).apply(lambda x : removed_calls_from_group(x, frac))
+        dc_applied_df_reduced = ss.simulate_dutycycle_on_detections(removed_calls_location_df.copy(), data_params)
+        does_duty_cycled_df_have_less_dets_than_original(dc_applied_df_reduced, location_df)
+        bout_metrics = bt.generate_bout_metrics_for_location_and_freq(dc_applied_df_reduced, data_params, bout_params)
+        bout_duration = actvt.get_bout_duration_per_cycle(bout_metrics, cycle_length_in_mins)
+        bout_time_percentage = actvt.get_btp_per_time_on(bout_duration, time_on_in_secs)
+        data_params['cur_dc_tag'] = f'{round(frac, 1)}'
+        bout_time_percentage_dc_column = actvt.filter_and_prepare_metric(bout_time_percentage, data_params)
+        bout_time_percentage_dc_column = bout_time_percentage_dc_column.set_index("datetime_UTC")
+        ss.are_there_expected_number_of_cycles(dc_applied_df_reduced, bout_time_percentage_dc_column, cycle_length_in_mins, data_params)
+
+        btp_mod_columns = pd.concat([btp_mod_columns, bout_time_percentage_dc_column], axis=1)
+
+    if save:
+        btp_mod_columns.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fn_error_mod_btp_TYPE_SITE_summary"]}.csv')
+        btp_cont_column.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fn_error_base_btp_TYPE_SITE_summary"]}.csv')
+
+    return btp_mod_columns, btp_cont_column
+
+def generate_activity_call_rate_for_false_positives_investigation(data_params, file_paths, save=False):
+    activity_arr = pd.DataFrame()
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+
+    dc_tag = '30of30'
+    metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
+    callrate_arr = get_continuous_call_rates_partitioned_for_dc_scheme(metric_col_name, file_paths, data_params)
+    fractions = np.arange(0, 0.11, 0.01)
+    for i in tqdm(range(len(fractions))):
+        frac = fractions[i]
+        data_params['cur_dc_tag'] = dc_tag
+        cycle_length_in_mins = int(data_params['cur_dc_tag'].split('of')[1])
+        time_on_in_mins = int(data_params['cur_dc_tag'].split('of')[0])
+
+        added_noise_location_df = location_df.groupby(by='input_file_dt', group_keys=False).apply(lambda x : add_noise_to_group(x, frac))
+        dc_applied_df = ss.simulate_dutycycle_on_detections(added_noise_location_df.copy(), data_params)
+        dc_applied_df['freq_group'] = [data_params['type_tag']]*dc_applied_df.shape[0]
+        does_duty_cycled_df_have_less_dets_than_original(location_df, dc_applied_df)
+        num_of_detections = actvt.get_number_of_detections_per_cycle(dc_applied_df, cycle_length_in_mins)        
+        call_rate = actvt.get_metric_per_time_on(num_of_detections, time_on_in_mins)
+        data_params['cur_dc_tag'] = f'{round(frac, 2)}'
+        call_rate_dc_column = actvt.filter_and_prepare_metric(call_rate, data_params)
+        call_rate_dc_column = call_rate_dc_column.set_index("datetime_UTC")
+        ss.are_there_expected_number_of_cycles(dc_applied_df, call_rate_dc_column, cycle_length_in_mins, data_params)
+        
+        activity_arr = pd.concat([activity_arr, call_rate_dc_column], axis=1)
+
+    if save:
+        activity_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fp_error_mod_callrate_TYPE_SITE_summary"]}.csv')
+        callrate_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fp_error_base_callrate_TYPE_SITE_summary"]}.csv')
+
+    return activity_arr, callrate_arr
+
+def generate_activity_call_rate_for_false_negatives_investigation(data_params, file_paths, save=False):
+    activity_arr = pd.DataFrame()
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+
+    dc_tag = '30of30'
+    metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
+    callrate_arr = get_continuous_call_rates_partitioned_for_dc_scheme(metric_col_name, file_paths, data_params)
+    fractions = np.arange(1.0, 0.4, -0.1)
+    for i in tqdm(range(len(fractions))):
+        frac = fractions[i]
+        data_params['cur_dc_tag'] = dc_tag
+        cycle_length_in_mins = int(data_params['cur_dc_tag'].split('of')[1])
+        time_on_in_mins = int(data_params['cur_dc_tag'].split('of')[0])
+
+        removed_calls_location_df = location_df.groupby(by='input_file_dt', group_keys=False).apply(lambda x : removed_calls_from_group(x, frac))
+        dc_applied_df_reduced = ss.simulate_dutycycle_on_detections(removed_calls_location_df.copy(), data_params)
+        does_duty_cycled_df_have_less_dets_than_original(dc_applied_df_reduced, location_df)
+        num_of_detections = actvt.get_number_of_detections_per_cycle(dc_applied_df_reduced, cycle_length_in_mins)        
+        call_rate = actvt.get_metric_per_time_on(num_of_detections, time_on_in_mins)
+        data_params['cur_dc_tag'] = f'{round(frac, 1)}'
+        call_rate_dc_column = actvt.filter_and_prepare_metric(call_rate, data_params)
+        call_rate_dc_column = call_rate_dc_column.set_index("datetime_UTC")
+        ss.are_there_expected_number_of_cycles(dc_applied_df_reduced, call_rate_dc_column, cycle_length_in_mins, data_params)
+        
+        activity_arr = pd.concat([activity_arr, call_rate_dc_column], axis=1)
+
+    if save:
+        activity_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fn_error_mod_callrate_TYPE_SITE_summary"]}.csv')
+        callrate_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fn_error_base_callrate_TYPE_SITE_summary"]}.csv')
+
+    return activity_arr, callrate_arr
+
+def generate_activity_index_percent_for_false_positives_investigation(data_params, file_paths, save=False):
+    activity_arr = pd.DataFrame()
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+
+    dc_tag = '30of30'
+    metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
+    actvtind_cont_column = get_continuous_activity_index_partitioned_for_dc_scheme(metric_col_name, file_paths, data_params)
+    fractions = np.arange(0, 0.11, 0.01)
+    for i in tqdm(range(len(fractions))):
+        frac = fractions[i]
+        data_params['cur_dc_tag'] = dc_tag
+        cycle_length_in_mins = int(data_params['cur_dc_tag'].split('of')[1])
+
+        added_noise_location_df = location_df.groupby(by='input_file_dt', group_keys=False).apply(lambda x : add_noise_to_group(x, frac))
+        dc_applied_df = ss.simulate_dutycycle_on_detections(added_noise_location_df.copy(), data_params)
+        dc_applied_df['freq_group'] = [data_params['type_tag']]*dc_applied_df.shape[0]
+        does_duty_cycled_df_have_less_dets_than_original(location_df, dc_applied_df)
+        num_blocks_of_presence = actvt.get_activity_index_per_cycle(dc_applied_df, data_params)        
+        activity_ind_percent = actvt.get_activity_index_per_time_on_index(num_blocks_of_presence, data_params)
+        data_params['cur_dc_tag'] = f'{round(frac, 2)}'
+        ind_percent_dc_column = actvt.filter_and_prepare_metric(activity_ind_percent, data_params)
+        ind_percent_dc_column = ind_percent_dc_column.set_index("datetime_UTC")
+        ss.are_there_expected_number_of_cycles(dc_applied_df, ind_percent_dc_column, cycle_length_in_mins, data_params)
+        
+        activity_arr = pd.concat([activity_arr, ind_percent_dc_column], axis=1)
+
+    if save:
+        activity_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fp_error_mod_actind_TYPE_SITE_summary"]}.csv')
+        actvtind_cont_column.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fp_error_base_actind_TYPE_SITE_summary"]}.csv')
+
+    return activity_arr, actvtind_cont_column
+
+def generate_activity_index_percent_for_false_negatives_investigation(data_params, file_paths, save=False):
+    activity_arr = pd.DataFrame()
+    location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+
+    dc_tag = '30of30'
+    metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
+    actvtind_cont_column = get_continuous_activity_index_partitioned_for_dc_scheme(metric_col_name, file_paths, data_params)
+    fractions = np.arange(1.0, 0.4, -0.1)
+    for i in tqdm(range(len(fractions))):
+        frac = fractions[i]
+        data_params['cur_dc_tag'] = dc_tag
+        cycle_length_in_mins = int(data_params['cur_dc_tag'].split('of')[1])
+
+        removed_calls_location_df = location_df.groupby(by='input_file_dt', group_keys=False).apply(lambda x : removed_calls_from_group(x, frac))
+        dc_applied_df_reduced = ss.simulate_dutycycle_on_detections(removed_calls_location_df.copy(), data_params)
+        does_duty_cycled_df_have_less_dets_than_original(dc_applied_df_reduced, location_df)
+        num_blocks_of_presence = actvt.get_activity_index_per_cycle(dc_applied_df_reduced, data_params)        
+        activity_ind_percent = actvt.get_activity_index_per_time_on_index(num_blocks_of_presence, data_params)
+        data_params['cur_dc_tag'] = f'{round(frac, 1)}'
+        ind_percent_dc_column = actvt.filter_and_prepare_metric(activity_ind_percent, data_params)
+        ind_percent_dc_column = ind_percent_dc_column.set_index("datetime_UTC")
+        ss.are_there_expected_number_of_cycles(dc_applied_df_reduced, ind_percent_dc_column, cycle_length_in_mins, data_params)
+        
+        activity_arr = pd.concat([activity_arr, ind_percent_dc_column], axis=1)
+
+    if save:
+        activity_arr.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fn_error_mod_actind_TYPE_SITE_summary"]}.csv')
+        actvtind_cont_column.to_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["fn_error_base_actind_TYPE_SITE_summary"]}.csv')
+
+    return activity_arr, actvtind_cont_column
