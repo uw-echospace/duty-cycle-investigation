@@ -20,12 +20,20 @@ sys.path.append(f"{Path(__file__).parent}/../src")
 import activity.activity_assembly as actvt
 from cli import get_file_paths
 
-from core import SITE_NAMES, FREQUENCY_COLOR_MAPPINGS
+from core import SITE_NAMES
 
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
+FREQUENCY_COLOR_MAPPINGS = {
+                    'LF' : 'skyblue',
+                    'LF1' : 'skyblue',
+                    'HF1' : 'red',
+                    'HF2' : 'yellow',
+                    'HF' : 'orange',
+                        }
 
 def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, osn_file_path, row_index, nfft):
     """
@@ -64,7 +72,7 @@ def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, osn_
                 ((det['start_time'] - start) * (fs / 2), det['low_freq'] / (fs / 2)),
                 (det['end_time'] - det['start_time']) * (fs / 2),
                 (det['high_freq'] - det['low_freq']) / (fs / 2),
-                linewidth=1, edgecolor=FREQUENCY_COLOR_MAPPINGS[det['freq_group']], facecolor='none', alpha=0.6
+                linewidth=1, edgecolor=FREQUENCY_COLOR_MAPPINGS[det['freq_group']], facecolor='none', alpha=0.8
             )
         ax.add_patch(rect)
 
@@ -76,6 +84,10 @@ def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, osn_
     ax.text(
         x=int(fs * 0.001), y=0.85,
         s=f'Det {row_index+1} ({row["freq_group"]})', fontweight='bold', color='white', fontsize=10)
+    
+    ax.text(
+        x=int(fs * 0.001), y=0.95,
+        s=f'{row["Site name"]} all dropped calls', fontweight='bold', color='white', fontsize=10)
 
     ax.set_xticks(ticks=np.linspace(0, duration * fs / 2, 6))
     ax.set_xticklabels(labels=np.round(np.linspace(0, 0 + duration, 6, dtype=float), 2), fontsize=10)
@@ -656,10 +668,12 @@ if __name__ == "__main__":
 
     file_paths = get_file_paths(data_params)
     file_paths['SITE_classes_file'] = f"{file_paths['SITE_classes_file'][:-4]}_raw.csv"
-    raw_location_df_filepath = Path(f'{Path(__file__).parent}/20241116__location_df_Foliage_kmeans_raw.csv')
+    raw_location_df_filepath = Path(f'{file_paths["SITE_folder"]}/{data_params["detector_tag"]}__{data_params["site_tag"]}_2022_kmeans_raw.csv')
     if raw_location_df_filepath.is_file():
+        print(f'Reading from {raw_location_df_filepath}')
         location_df_kmeans_raw = pd.read_csv(raw_location_df_filepath, low_memory=False, index_col=0)
     else:
+        print(f'Constructing raw location_df and saving to {raw_location_df_filepath}')
         init_location_sum = actvt.assemble_initial_location_summary(file_paths) 
         init_location_sum.reset_index(inplace=True)
         init_location_sum.rename({'index':'index_in_file'}, axis='columns', inplace=True)
