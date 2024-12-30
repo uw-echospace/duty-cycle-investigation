@@ -1,1 +1,4 @@
 start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+489.5005,489.5129,26328.0,32491.0,Echolocation,Eptesicus serotinus,0.131,0.245,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_004/20220823_130000.WAV,Carp Pond,recover-20220825,004,1795
+955.3395,955.3505,28906.0,34853.0,Echolocation,Eptesicus serotinus,0.115,0.227,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_004/20220823_130000.WAV,Carp Pond,recover-20220825,004,1795
+1609.1365,1609.1455,44375.0,51197.0,Echolocation,Pipistrellus pipistrellus,0.228,0.246,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_004/20220823_130000.WAV,Carp Pond,recover-20220825,004,1795

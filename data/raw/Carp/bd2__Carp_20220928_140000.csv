@@ -1,1 +1,6 @@
 start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+229.2665,229.2835,29765.0,33798.0,Echolocation,Eptesicus serotinus,0.086,0.217,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_004/20220928_140000.WAV,Carp Pond,recover-20220929,004,1795
+882.1685,882.1812,24609.0,28691.0,Echolocation,Nyctalus leisleri,0.101,0.22,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_004/20220928_140000.WAV,Carp Pond,recover-20220929,004,1795
+922.2215,922.2335,28906.0,33590.0,Echolocation,Eptesicus serotinus,0.106,0.217,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_004/20220928_140000.WAV,Carp Pond,recover-20220929,004,1795
+965.7135,965.7331,21171.0,24848.0,Echolocation,Nyctalus noctula,0.121,0.223,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_004/20220928_140000.WAV,Carp Pond,recover-20220929,004,1795
+1076.2415,1076.2537,34062.0,39445.0,Echolocation,Pipistrellus nathusii,0.098,0.243,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_004/20220928_140000.WAV,Carp Pond,recover-20220929,004,1795

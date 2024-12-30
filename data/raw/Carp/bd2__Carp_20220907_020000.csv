@@ -1,1 +1,31 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+6.5895,6.6029,23750.0,27962.0,Eptesicus serotinus,0.104,0.237,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+148.6805,148.6843,23750.0,39540.0,Plecotus austriacus,0.146,0.211,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+171.0635,171.0743,20312.0,28214.0,Nyctalus noctula,0.131,0.244,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+236.5705,236.5866,23750.0,27785.0,Nyctalus leisleri,0.142,0.229,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+302.5965,302.6078,27187.0,33881.0,Eptesicus serotinus,0.221,0.339,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+348.7625,348.7842,14296.0,17310.0,Nyctalus leisleri,0.209,0.222,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+351.9615,351.9814,14296.0,17875.0,Nyctalus leisleri,0.147,0.2,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+353.1075,353.1202,14296.0,17837.0,Nyctalus leisleri,0.299,0.355,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+424.8735,424.8778,13437.0,33011.0,Plecotus auritus,0.182,0.223,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+431.4065,431.4241,34062.0,35376.0,Pipistrellus nathusii,0.183,0.372,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+440.1845,440.1986,22031.0,28089.0,Nyctalus noctula,0.11,0.237,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+465.9475,465.9631,40078.0,42660.0,Pipistrellus nathusii,0.199,0.213,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+728.0625,728.0673,13437.0,30415.0,Plecotus auritus,0.168,0.205,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+732.8565,732.872,22890.0,27140.0,Nyctalus leisleri,0.106,0.227,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+739.3265,739.331,13437.0,31906.0,Plecotus auritus,0.285,0.33,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+745.2145,745.2189,13437.0,34017.0,Plecotus auritus,0.174,0.222,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+840.6305,840.6437,23750.0,28481.0,Nyctalus leisleri,0.161,0.25,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+920.3175,920.3228,13437.0,29284.0,Plecotus auritus,0.193,0.229,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+923.3905,923.3951,13437.0,33112.0,Plecotus auritus,0.199,0.225,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1039.4075,1039.4218,22890.0,27588.0,Nyctalus leisleri,0.104,0.248,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1133.5655,1133.5708,13437.0,32036.0,Plecotus auritus,0.2,0.217,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1140.7335,1140.7389,13437.0,30675.0,Plecotus auritus,0.184,0.21,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1299.3835,1299.4011,23750.0,27618.0,Nyctalus leisleri,0.148,0.211,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1326.5895,1326.5947,13437.0,33740.0,Plecotus auritus,0.236,0.255,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1360.3815,1360.3865,13437.0,32968.0,Plecotus auritus,0.217,0.236,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1384.4455,1384.4507,13437.0,28613.0,Plecotus auritus,0.208,0.232,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1431.8065,1431.8117,13437.0,33678.0,Plecotus auritus,0.199,0.236,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1475.9465,1475.9567,38359.0,41518.0,Pipistrellus nathusii,0.188,0.217,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1484.6145,1484.6257,23750.0,28691.0,Eptesicus serotinus,0.116,0.268,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795
+1641.9245,1641.9367,23750.0,28923.0,Nyctalus leisleri,0.154,0.39,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220908/UBNA_004/20220907_020000.WAV,Carp Pond,recover-20220908,004,1795

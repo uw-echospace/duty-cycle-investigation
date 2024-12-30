@@ -1,9 +1,25 @@
-start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card
-568.1435,568.1559,27187.0,31036.0,Echolocation,Nyctalus leisleri,0.45,0.578,-1,/mnt/ubna_data_02/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010
-568.3675,568.3785,27187.0,33561.0,Echolocation,Nyctalus leisleri,0.282,0.592,-1,/mnt/ubna_data_02/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010
-568.6865,568.6985999999999,26328.0,30890.0,Echolocation,Nyctalus leisleri,0.263,0.501,-1,/mnt/ubna_data_02/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010
-569.4965,569.5131,26328.0,29719.0,Echolocation,Nyctalus leisleri,0.441,0.528,-1,/mnt/ubna_data_02/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010
-570.3145,570.3295,26328.0,29271.0,Echolocation,Nyctalus leisleri,0.502,0.564,-1,/mnt/ubna_data_02/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010
-570.9325,570.948,25468.0,29464.0,Echolocation,Nyctalus leisleri,0.389,0.508,-1,/mnt/ubna_data_02/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010
-571.9035,571.9195,25468.0,28864.0,Echolocation,Nyctalus leisleri,0.561,0.643,-1,/mnt/ubna_data_02/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010
-572.3785,572.3937,26328.0,28910.0,Echolocation,Nyctalus leisleri,0.412,0.501,-1,/mnt/ubna_data_02/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+492.2845,492.2984,29765.0,34116.0,Echolocation,Eptesicus serotinus,0.124,0.221,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+567.6905,567.7102,26328.0,30569.0,Echolocation,Nyctalus leisleri,0.153,0.287,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+567.9145,567.9313,27187.0,31386.0,Echolocation,Nyctalus leisleri,0.217,0.367,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+568.1435,568.1559,27187.0,31036.0,Echolocation,Nyctalus leisleri,0.45,0.578,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+568.3675,568.3785,27187.0,33561.0,Echolocation,Nyctalus leisleri,0.282,0.592,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+568.6865,568.6985999999999,26328.0,30890.0,Echolocation,Nyctalus leisleri,0.263,0.501,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+568.9145,568.9294,27187.0,32023.0,Echolocation,Nyctalus leisleri,0.316,0.489,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+569.1514999999999,569.1741,26328.0,29710.0,Echolocation,Nyctalus leisleri,0.208,0.277,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+569.2475,569.2646,23750.0,27858.0,Echolocation,Nyctalus leisleri,0.157,0.256,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+569.4965,569.5131,26328.0,29719.0,Echolocation,Nyctalus leisleri,0.441,0.528,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+569.8475,569.8655,26328.0,29848.0,Echolocation,Nyctalus leisleri,0.317,0.453,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+570.3145,570.3295,26328.0,29271.0,Echolocation,Nyctalus leisleri,0.502,0.564,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+570.6695,570.6896,26328.0,29394.0,Echolocation,Nyctalus leisleri,0.328,0.405,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+570.9325,570.948,25468.0,29464.0,Echolocation,Nyctalus leisleri,0.389,0.508,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+571.1715,571.1878,26328.0,31218.0,Echolocation,Nyctalus leisleri,0.304,0.48,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+571.5275,571.5457,26328.0,29489.0,Echolocation,Nyctalus leisleri,0.239,0.322,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+571.9035,571.9195,25468.0,28864.0,Echolocation,Nyctalus leisleri,0.561,0.643,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+572.3785,572.3937,26328.0,28910.0,Echolocation,Nyctalus leisleri,0.412,0.501,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+573.1455,573.1665,24609.0,28115.0,Echolocation,Nyctalus leisleri,0.347,0.421,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+622.7175,622.7254,39218.0,47191.0,Echolocation,Pipistrellus nathusii,0.139,0.204,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+929.7835,929.7981,22031.0,27351.0,Echolocation,Nyctalus noctula,0.151,0.298,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+1089.9835,1089.9976,25468.0,30260.0,Echolocation,Nyctalus leisleri,0.208,0.347,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+1531.4185,1531.4299,32343.0,36639.0,Echolocation,Pipistrellus nathusii,0.156,0.358,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795
+1559.8865,1559.9101,20312.0,23998.0,Echolocation,Nyctalus noctula,0.207,0.341,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_010/20221015_033000.WAV,Carp Pond,recover-20221017,010,1795

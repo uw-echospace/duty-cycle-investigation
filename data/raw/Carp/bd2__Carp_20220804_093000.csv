@@ -1,2 +1,22 @@
 start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+54.917500000000004,54.9263,22031.0,30901.0,Echolocation,Plecotus austriacus,0.075,0.278,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+222.6625,222.6784,23750.0,26985.0,Echolocation,Nyctalus leisleri,0.231,0.312,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+360.5495,360.5622,28906.0,32559.0,Echolocation,Nyctalus leisleri,0.104,0.207,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+452.0365,452.0562,23750.0,27489.0,Echolocation,Nyctalus leisleri,0.211,0.28,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+474.7515,474.7768,17734.0,20725.0,Echolocation,Nyctalus noctula,0.169,0.233,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+643.0615,643.0783,22890.0,26518.0,Echolocation,Nyctalus leisleri,0.136,0.237,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+719.4355,719.4465,22890.0,29371.0,Echolocation,Eptesicus serotinus,0.079,0.22,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+722.1365,722.1438,22031.0,31972.0,Echolocation,Plecotus austriacus,0.12,0.271,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+766.5285,766.5364,34921.0,41807.0,Echolocation,Barbastellus barbastellus,0.109,0.245,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+852.3025,852.3147,28906.0,34612.0,Echolocation,Eptesicus serotinus,0.156,0.241,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+933.8785,933.8887,22890.0,29091.0,Echolocation,Nyctalus leisleri,0.104,0.333,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1085.6505,1085.6618,28906.0,35339.0,Echolocation,Eptesicus serotinus,0.138,0.224,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1153.8195,1153.8374,23750.0,27349.0,Echolocation,Nyctalus leisleri,0.158,0.223,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1222.4725,1222.4814,45234.0,56418.0,Echolocation,Pipistrellus pipistrellus,0.213,0.29,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1222.6795,1222.6852,51250.0,59245.0,Echolocation,Pipistrellus pipistrellus,0.217,0.299,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1222.7435,1222.7476,50390.0,61757.0,Echolocation,Pipistrellus pipistrellus,0.415,0.482,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
 1222.8965,1222.9021,49531.0,57359.0,Echolocation,Pipistrellus pipistrellus,0.432,0.584,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1223.0165,1223.0213,48671.0,58609.0,Echolocation,Pipistrellus pipistrellus,0.21,0.223,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1228.9585,1228.9648,23750.0,33455.0,Echolocation,Plecotus austriacus,0.181,0.334,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1383.1955,1383.212,23750.0,27310.0,Echolocation,Nyctalus leisleri,0.161,0.216,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
+1551.1045,1551.1256,20312.0,23613.0,Echolocation,Nyctalus leisleri,0.359,0.385,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_001/20220804_093000.WAV,Carp Pond,recover-20220804,001,1795
