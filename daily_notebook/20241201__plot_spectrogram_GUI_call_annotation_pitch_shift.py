@@ -35,7 +35,7 @@ FREQUENCY_COLOR_MAPPINGS = {
                     'HF' : 'orange',
                         }
 
-def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, osn_file_path, row_index, nfft):
+def plot_spectrogram(ax, row, audio_seg, location_df_orig, test_df, fs, duration, start, osn_file_path, row_index, nfft):
     """
     Plots a spectrogram for a given row of data with annotations.
 
@@ -55,8 +55,10 @@ def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, osn_
     ax.specgram(audio_seg, NFFT=nfft, cmap='jet', vmin=-60, vmax=0)
 
     # Filter detection data for the current row
+    file_df_orig = location_df_orig[location_df_orig['input_file'] == row['input_file']]
     plot_dets = file_df_orig[(file_df_orig['start_time'] >= start) & 
                              (file_df_orig['end_time'] <= (start + duration))]
+    
 
     # Add rectangles for detections
     for _, det in plot_dets.iterrows():
@@ -83,11 +85,11 @@ def plot_spectrogram(ax, row, audio_seg, file_df_orig, fs, duration, start, osn_
 
     ax.text(
         x=int(fs * 0.001), y=0.85,
-        s=f'Det {row_index+1} ({row["freq_group"]})', fontweight='bold', color='white', fontsize=10)
+        s=f'Det {row_index+1} ({row["freq_group"]}) of {int(len(test_df))} dropped dets', fontweight='bold', color='white', fontsize=10)
     
     ax.text(
         x=int(fs * 0.001), y=0.95,
-        s=f'{row["Site name"]} all dropped calls', fontweight='bold', color='white', fontsize=10)
+        s=f'{row["Site name"]} ({int(len(location_df_orig))} dets)', fontweight='bold', color='white', fontsize=10)
 
     ax.set_xticks(ticks=np.linspace(0, duration * fs / 2, 6))
     ax.set_xticklabels(labels=np.round(np.linspace(0, 0 + duration, 6, dtype=float), 2), fontsize=10)
@@ -523,10 +525,9 @@ class SpectrogramViewer:
         duration = (2 * call_dur) + (1 * pad)
         self.audio_file.seek(int(start * self.fs))
         self.audio_segment = self.audio_file.read(int(duration * self.fs))  # Numpy array
-        file_df_orig = self.location_df_kmeans_raw[self.location_df_kmeans_raw['input_file'] == row['input_file']]
         
         # Plot the spectrogram
-        plot_spectrogram(self.ax,row,self.audio_segment,file_df_orig=file_df_orig,
+        plot_spectrogram(self.ax,row,self.audio_segment,location_df_orig=location_df_kmeans_raw,test_df=self.dataframe,
             fs=self.fs,duration=duration,start=start,osn_file_path=osn_file_path,row_index=self.index,nfft=self.nfft.get())
 
         # Draw custom detections
@@ -660,7 +661,7 @@ def get_dropped_by_kmeans(thresh_file_df, all_file_kmeans_df):
 
 if __name__ == "__main__":
     data_params = dict()
-    data_params["site_tag"] = 'Foliage'
+    data_params["site_tag"] = 'Telephone'
     data_params["site_name"] = SITE_NAMES[data_params["site_tag"]]
     data_params["type_tag"] = ''
     data_params["detector_tag"] = 'bd2'
