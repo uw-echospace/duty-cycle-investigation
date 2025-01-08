@@ -1,11 +1,1 @@
-start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
-24.5985,24.6103,31484.0,36341.0,Eptesicus serotinus,0.088,0.202,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-966.1555,966.1731,21171.0,25355.0,Nyctalus noctula,0.125,0.201,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-1244.6495,1244.6636,46953.0,55884.0,Pipistrellus pipistrellus,0.169,0.241,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-1244.8325,1244.8436,46953.0,58810.0,Pipistrellus pipistrellus,0.149,0.351,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-1245.1025,1245.1119,47812.0,59823.0,Pipistrellus pipistrellus,0.328,0.466,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-1245.4595,1245.4703,46093.0,58660.0,Pipistrellus nathusii,0.229,0.396,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-1246.3665,1246.3751,46953.0,50634.0,Pipistrellus pipistrellus,0.178,0.212,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-1246.6435,1246.6513,45234.0,54620.0,Pipistrellus nathusii,0.178,0.362,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-1416.3255,1416.336,28906.0,35931.0,Eptesicus serotinus,0.149,0.2,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
-1594.7535,1594.7773,20312.0,23942.0,Nyctalus noctula,0.137,0.23,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221013/UBNA_004/20221012_070000.WAV,Carp Pond,recover-20221013,004,1795
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card

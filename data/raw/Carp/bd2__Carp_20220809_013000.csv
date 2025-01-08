@@ -1,10 +1,2 @@
-start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
-3.9815,3.9938,25468.0,30439.0,Nyctalus leisleri,0.093,0.204,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
-221.8925,221.9055,28906.0,33547.0,Eptesicus serotinus,0.133,0.232,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
-243.3505,243.3555,13437.0,33622.0,Plecotus auritus,0.22,0.268,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
-448.8715,448.8809,44375.0,49257.0,Pipistrellus pipistrellus,0.243,0.284,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
-860.1635,860.1687,13437.0,32012.0,Plecotus auritus,0.195,0.226,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
-941.4105,941.4275,23750.0,27326.0,Nyctalus leisleri,0.145,0.205,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
-1247.1925,1247.2012,28046.0,35882.0,Eptesicus serotinus,0.156,0.211,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
-1516.1185,1516.1375,21171.0,23781.0,Nyctalus leisleri,0.515,0.525,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
-1707.6855,1707.7007,23750.0,27462.0,Nyctalus leisleri,0.126,0.207,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+1516.1185,1516.1375,21171.0,23781.0,Echolocation,Nyctalus leisleri,0.515,0.525,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_007/20220809_013000.WAV,Carp Pond,recover-20220811,007,1795

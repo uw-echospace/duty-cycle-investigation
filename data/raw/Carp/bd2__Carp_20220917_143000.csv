@@ -1,11 +1,1 @@
-start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
-29.8005,29.8105,28906.0,34876.0,Eptesicus serotinus,0.141,0.253,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-96.8095,96.8206,23750.0,31161.0,Eptesicus serotinus,0.063,0.209,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-259.7505,259.7677,21171.0,25976.0,Nyctalus noctula,0.18,0.288,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-481.0195,481.0341,22031.0,26558.0,Nyctalus leisleri,0.089,0.201,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-942.6095,942.621,26328.0,31262.0,Nyctalus leisleri,0.11,0.215,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-1339.4115,1339.4214,29765.0,36102.0,Eptesicus serotinus,0.153,0.229,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-1405.6945,1405.7175,21171.0,24578.0,Nyctalus noctula,0.148,0.253,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-1694.4165,1694.4301,23750.0,28247.0,Nyctalus leisleri,0.15,0.278,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-1697.6475,1697.6672,22890.0,25948.0,Nyctalus leisleri,0.192,0.24,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
-1703.2995,1703.3182,22890.0,26400.0,Nyctalus leisleri,0.224,0.291,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220919/UBNA_010/20220917_143000.WAV,Carp Pond,recover-20220919,010,1795
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
