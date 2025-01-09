@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+183.4825,183.5001,22031.0,25727.0,Echolocation,Nyctalus noctula,0.115,0.241,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+351.3495,351.3658,22890.0,27343.0,Echolocation,Nyctalus leisleri,0.084,0.204,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+478.3515,478.3667,23750.0,27513.0,Echolocation,Nyctalus leisleri,0.136,0.206,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+929.4535,929.4726,23750.0,28092.0,Echolocation,Nyctalus leisleri,0.101,0.205,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+1339.4265,1339.4384,24609.0,29652.0,Echolocation,Nyctalus leisleri,0.088,0.215,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+1520.3545,1520.3625,45234.0,50274.0,Echolocation,Pipistrellus pipistrellus,0.375,0.399,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+1520.4585,1520.4682,45234.0,49522.0,Echolocation,Pipistrellus pipistrellus,0.26,0.303,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+1520.9415,1520.9487,43515.0,52173.0,Echolocation,Pipistrellus pipistrellus,0.301,0.385,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+1521.0375,1521.0467,44375.0,51036.0,Echolocation,Pipistrellus nathusii,0.11,0.223,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
+1521.6515,1521.6617,43515.0,50924.0,Echolocation,Pipistrellus pipistrellus,0.233,0.409,-1,/mnt/ubna_data_02_mir/recover-20221003/UBNA_010/20221003_050000.WAV,Carp Pond,recover-20221003,010,1795
