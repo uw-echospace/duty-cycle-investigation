@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+17.1855,17.1979,32343.0,36329.0,Pipistrellus nathusii,0.095,0.256,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+23.1665,23.1822,22031.0,26769.0,Nyctalus noctula,0.106,0.233,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+339.6425,339.6511,39218.0,49002.0,Pipistrellus nathusii,0.202,0.253,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+378.7895,378.8029,22031.0,28093.0,Nyctalus noctula,0.081,0.202,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+405.6275,405.632,24609.0,38535.0,Plecotus austriacus,0.204,0.291,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+743.4815,743.5065,18593.0,21488.0,Nyctalus noctula,0.187,0.25,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+956.6125,956.6239,40078.0,44356.0,Pipistrellus nathusii,0.254,0.283,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+1079.5425,1079.5644,20312.0,23258.0,Nyctalus noctula,0.118,0.202,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+1415.3665,1415.3821,40078.0,43057.0,Pipistrellus nathusii,0.236,0.253,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+1644.7435,1644.7573,40078.0,43861.0,Pipistrellus nathusii,0.175,0.217,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
+1687.4665,1687.4892,20312.0,23519.0,Nyctalus noctula,0.145,0.218,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20220922/UBNA_004/20220922_093000.WAV,Carp Pond,recover-20220922,004,1795
