@@ -5,6 +5,9 @@ data/audiomoth_recordings/*
 data/detected_calls/*
 data/generated_welch/*
 
+data_old
+data_new
+
 figures/*
 
 __pycache__
