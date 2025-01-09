@@ -77,13 +77,14 @@ def simulate_dutycycle_on_detections_with_bins(location_df, dc_tag, bin_size):
 
     return dc_applied_df
 
-def prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, bin_size):
+def prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params):
     """
     Generates a duty-cycled location summary of concatenated bd2 outputs for measuring effects of duty-cycling.
     """
 
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    plottable_location_df = simulate_dutycycle_on_detections_with_bins(location_df, dc_tag, bin_size)
+    location_df_above_detection_probability = location_df[location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']].copy()
+    plottable_location_df = simulate_dutycycle_on_detections_with_bins(location_df_above_detection_probability, dc_tag, data_params['bin_size'])
 
     return plottable_location_df
 

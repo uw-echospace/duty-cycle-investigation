@@ -23,7 +23,7 @@ def generate_activity_dets_results(data_params, file_paths, save=True):
 
     for dc_tag in data_params['dc_tags']:
 
-        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
+        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params)
         num_of_detections = get_number_of_detections_per_interval(location_df, data_params)
         dc_dets = construct_activity_arr_from_location_summary(num_of_detections, dc_tag, data_params)
         dc_dets = dc_dets.set_index("datetime_UTC")
@@ -44,7 +44,7 @@ def generate_activity_bouts_results(data_params, file_paths, save=True):
 
     for dc_tag in data_params['dc_tags']:
         
-        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
+        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params)
         bout_params = bt.get_bout_params_from_location(location_df, data_params)
         bout_metrics = bt.generate_bout_metrics_for_location_and_freq(location_df, data_params, bout_params)
         bout_duration_per_interval = get_bout_duration_per_interval(bout_metrics, data_params)
@@ -74,7 +74,7 @@ def generate_activity_inds_results(data_params, file_paths, save=True):
         data_params['time_on_in_secs'] = time_on_in_secs
         bin_size = float(data_params['bin_size'])
 
-        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params['bin_size'])
+        location_df = ss.prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, data_params)
         activity_indices = get_activity_index_per_interval(location_df, data_params)
         activity_ind_percent = get_activity_index_per_time_on_index(activity_indices, data_params)
         activity_ind_percent = (cycle_length_in_mins/bin_size)*activity_ind_percent
@@ -127,6 +127,8 @@ def assemble_initial_location_summary(file_paths):
         location_df['file_group'] = location_df['file_name']
         location_df = location_df.groupby('file_group', group_keys=False).apply(lambda x: sort_file_group(x))
 
+    if 'det_prob' in location_df.columns:
+        location_df = location_df[location_df['det_prob']>=0.2].copy()
     location_df['start_time'] = location_df['start_time'].astype('float64')
     location_df['end_time'] = location_df['end_time'].astype('float64')
     location_df['low_freq'] = location_df['low_freq'].astype('float64')
