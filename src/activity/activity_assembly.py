@@ -132,8 +132,8 @@ def assemble_initial_location_summary(file_paths):
     location_df['low_freq'] = location_df['low_freq'].astype('float64')
     location_df['high_freq'] = location_df['high_freq'].astype('float64')
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
-    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'], unit='S')
-    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'], unit='S')
+    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'], unit='s')
+    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'], unit='s')
 
     location_df.insert(0, 'call_end_time', anchor_end_times)
     location_df.insert(0, 'call_start_time', anchor_start_times)
