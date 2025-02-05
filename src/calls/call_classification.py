@@ -3,6 +3,7 @@ import pandas as pd
 import argparse
 import re
 import datetime as dt
+import fsspec
 from sklearn.cluster import KMeans
 
 import soundfile as sf
@@ -114,7 +115,7 @@ def open_and_get_call_info(audio_file, dets):
 
 
 def classify_calls_from_file(bd2_predictions, data_params):
-    file_path = Path(data_params['audio_file'])
+    file_path = data_params['filesys'].open(path=Path(data_params['audio_file']))
     audio_file = sf.SoundFile(file_path)
     call_signals, dets = open_and_get_call_info(audio_file, bd2_predictions.copy())
 
@@ -134,8 +135,7 @@ def classify_calls_from_file(bd2_predictions, data_params):
 
 
 def open_call_signals_using_summary(location_sum_df, data_params, corrected_classifications, classifications):
-    location_sum_df['input_file'] = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy())
-    bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
+    bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['input_file'])].copy()
     
     is_valid_params = len(bd2_predictions)>0 
 
@@ -174,9 +174,8 @@ def get_params_relevant_to_data_at_location(cfg):
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     location_sum_df.reset_index(inplace=True)
     location_sum_df.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
-    site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
 
-    data_params['good_audio_files'] = site_filepaths
+    data_params['good_audio_files'] = location_sum_df['input_file'].copy().unique()
     print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site_name']}")
 
     return location_sum_df, data_params
@@ -186,17 +185,18 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     corrected_classifications = pd.DataFrame()
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
-    # csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
     file_raw_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes_raw'
     file_corrected_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes'
+    filesys = fsspec.filesystem('s3', anon=True, client_kwargs={'endpoint_url': 'https://sdsc.osn.xsede.org'})
+    data_params['filesys'] = filesys
    
-    for filepath in data_params['good_audio_files']:
-        data_params['audio_file'] = Path(filepath)
-        # filename =  Path(filepath).name.split('.')[0]
-        # csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
-        print(f'Looking at {filepath}')
-        # data_params['csv_file'] = csv_path
-        # if (data_params['csv_file']) in csv_files_for_location:
+    for input_file in data_params['good_audio_files']:
+        file_path = '/'.join(Path(input_file).parts[2:])
+        cleaned_path = re.sub(r"(ubna_data_\d+)_mir", r"\1", file_path)
+        osn_file_path = Path(f'bio230143-bucket01/{cleaned_path}')
+        data_params['input_file'] = Path(input_file)
+        data_params['audio_file'] = Path(osn_file_path)
+        print(f'Looking at {osn_file_path}')
         corrected_classifications, classifications = open_call_signals_using_summary(location_sum_df, data_params, corrected_classifications, classifications)
 
     print('Resetting index for call catalogue')
