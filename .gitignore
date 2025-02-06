@@ -1,6 +1,7 @@
 .DS_Store
 
 data/2022_detector_summaries/*
+data/classifications/*
 data/audiomoth_recordings/*
 data/detected_calls/*
 data/generated_welch/*
