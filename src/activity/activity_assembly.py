@@ -170,6 +170,25 @@ def add_frequency_groups_to_summary_using_thresholds(location_df, file_paths, da
 
     return location_df
 
+def remove_harmonics_or_overlaps(file_dets):
+    association_mat = np.ones((len(file_dets), len(file_dets)), dtype='bool')
+    for index in range(len(file_dets)):
+        row = file_dets.iloc[index]
+        dist_to_all_calls = ((file_dets['peak_freq_time_infile'] - row['peak_freq_time_infile']).values)
+
+        considered_inds = np.where(np.abs(dist_to_all_calls)<=0.012)[0]
+        considered_dets = file_dets.iloc[considered_inds]
+
+        det_choices = np.zeros(len(considered_inds))
+        likely_call_ind = considered_dets['det_prob'].argmax()
+
+        det_choices[likely_call_ind] = 1
+        association_mat[considered_inds, index] = det_choices
+
+    cleaned_file_dets = file_dets[np.logical_and.reduce(association_mat, axis=1)]
+
+    return cleaned_file_dets
+
 def add_frequency_group_to_file_dets(file_dets, location_classes):
     file_classes = location_classes[pd.to_datetime(location_classes['file_name'], 
                                                    format='%Y%m%d_%H%M%S.WAV', exact=False)==file_dets.name].copy()
@@ -178,13 +197,16 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
     file_dets.set_index('index_in_file', inplace=True)
 
     classified = file_classes['KMEANS_CLASSES']!=''
-    file_classes.loc[classified, 'peak_frequency'] = file_classes.loc[classified, 'peak_frequency'].astype('float64')
+    file_classes.loc[classified, 'peak_frequency_WELCH'] = file_classes.loc[classified, 'peak_frequency_WELCH'].astype('float64')
+    file_classes.loc[classified, 'peak_frequency_time_SPECTROGRAM'] = file_classes.loc[classified, 'peak_frequency_time_SPECTROGRAM'].astype('float64')
     file_classes.loc[classified, 'SNR'] = file_classes.loc[classified, 'SNR'].astype('float64')
 
     file_dets.insert(0, 'peak_frequency', [np.NaN]*len(file_dets))
+    file_dets.insert(0, 'peak_freq_time_infile', [np.NaN]*len(file_dets))
     file_dets.insert(0, 'SNR', [np.NaN]*len(file_dets))
     file_dets.loc[file_classes['index_in_file'], 'freq_group'] = file_classes['KMEANS_CLASSES'].values
-    file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency'].values
+    file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency_WELCH'].values
+    file_dets.loc[file_classes['index_in_file'], 'peak_freq_time_infile'] = file_classes['peak_frequency_time_SPECTROGRAM'].values
     file_dets.loc[file_classes['index_in_file'], 'SNR'] = file_classes['SNR'].values
 
     for group in ['LF', 'HF']:
@@ -211,14 +233,18 @@ def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_p
     location_df_only_classified = location_df_only_classified.droplevel(level=0)
     location_df_only_classified = location_df_only_classified.reset_index()
 
+    location_df_grouped = location_df_only_classified.groupby('input_file_dt', group_keys=True)
+    location_df_classified_and_cleaned = location_df_grouped.apply(lambda x: remove_harmonics_or_overlaps(x))
+    location_df_classified_and_cleaned = location_df_classified_and_cleaned.droplevel(level=0)
+    location_df_classified_and_cleaned = location_df_classified_and_cleaned.reset_index(drop=True)
+
     if data_params['type_tag'] != '':
-        location_df_only_classified = location_df_only_classified.loc[location_df_only_classified['freq_group']==data_params['type_tag']]
+        location_df_classified_and_cleaned = location_df_classified_and_cleaned.loc[location_df_classified_and_cleaned['freq_group']==data_params['type_tag']]
 
     if save:
-        location_df_only_classified.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
+        location_df_classified_and_cleaned.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
 
-    return location_df_only_classified
-
+    return location_df_classified_and_cleaned
 
 def assemble_single_bd2_output_use_thresholds_to_group(path_to_bd2_output, data_params):
     """
