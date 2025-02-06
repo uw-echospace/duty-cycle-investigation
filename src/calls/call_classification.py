@@ -2,9 +2,12 @@ import numpy as np
 import pandas as pd
 import argparse
 import re
-import datetime as dt
+import math
+import matplotlib.pyplot as plt
+
 import fsspec
 from sklearn.cluster import KMeans
+import scipy
 
 import soundfile as sf
 from pathlib import Path
@@ -31,18 +34,24 @@ LABEL_FOR_GROUPS = {
 
 def get_section_of_call_in_file(detection, audio_file):
     fs = audio_file.samplerate
+    num_frames = audio_file.frames
+    file_length = num_frames/fs
 
     call_dur = (detection['end_time'] - detection['start_time'])
-    pad = min(min(detection['start_time'] - call_dur, 1795 - detection['end_time']), 0.006) / 3
+    pad = min(min(detection['start_time'] - call_dur, file_length - detection['end_time']), 0.006) / 3
     start = detection['start_time'] - call_dur - (3*pad)
-    duration = (2 * call_dur) + (4*pad)
+    duration = ((2 * call_dur) + (4*pad))
 
-    audio_file.seek(int(fs*start))
-    audio_seg = audio_file.read(int(fs*duration))
+    try:
+        audio_file.seek(int(fs*start))
+        audio_seg = audio_file.read(int(fs*duration))
+        length_of_section = call_dur + (2*pad)
+    except sf.LibsndfileError as e:
+        print(f'Start time : {start} invalid, detection starts at {detection["start_time"]} in segment:{audio_file.name}')
+        audio_seg = None
+        length_of_section = 0
 
-    length_of_section = call_dur + (2*pad)
-
-    return audio_seg, length_of_section
+    return audio_seg, length_of_section, pad
 
 
 def gather_features_of_interest(dets, kmean_welch, audio_file):
@@ -51,16 +60,39 @@ def gather_features_of_interest(dets, kmean_welch, audio_file):
     features_of_interest['call_signals'] = []
     features_of_interest['welch_signals'] = []
     features_of_interest['snrs'] = []
+    features_of_interest['peak_freqs_welch'] = []
+    features_of_interest['peak_freqs_spec'] = []
+    features_of_interest['peak_freq_times_spec'] = []
     features_of_interest['peak_freqs'] = []
     features_of_interest['classes'] = []
     nyquist = fs//2
     for index, row in dets.iterrows():
-        audio_seg, length_of_section = get_section_of_call_in_file(row, audio_file)
+        call_dur = (row['end_time'] - row['start_time'])
+        audio_seg, length_of_section, pad = get_section_of_call_in_file(row, audio_file)
+        seg_start = row['start_time'] - call_dur - (3*pad)
         
         freq_pad = 2000
         low_freq_cutoff = row['low_freq']-freq_pad
         high_freq_cutoff = min(nyquist-1, row['high_freq']+freq_pad)
         band_limited_audio_seg = call_extraction.bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
+
+        signal_for_peaks = band_limited_audio_seg.copy()
+        signal_for_peaks[:int(fs*(length_of_section+pad))] = 0
+        signal_for_peaks[-int(fs*pad):] = 0
+        mpl_specgram_window = plt.mlab.window_hanning(np.ones(32))
+        f, t, Sxx = scipy.signal.spectrogram(signal_for_peaks, fs, detrend=False,
+                                    nfft=32, 
+                                    window=mpl_specgram_window)
+        plt_Sxx = 10*np.log10(Sxx)
+        max_ind = np.where(plt_Sxx==np.max(plt_Sxx))
+        peak_freq = f[max_ind[0]]
+        peak_freq_time = t[max_ind[1]]
+        if math.isinf(np.max(plt_Sxx)):
+            features_of_interest['peak_freqs_spec'].append((row['low_freq']+row['high_freq'])/2)
+            features_of_interest['peak_freq_times_spec'].append((row['start_time']+row['end_time'])/2)
+        else:
+            features_of_interest['peak_freqs_spec'].append(peak_freq[0])
+            features_of_interest['peak_freq_times_spec'].append(seg_start+peak_freq_time[0])
 
         signal = band_limited_audio_seg.copy()
         signal[:int(fs*(length_of_section))] = 0
@@ -108,7 +140,9 @@ def open_and_get_call_info(audio_file, dets):
     call_infos['file_name'] = pd.DatetimeIndex(pd.to_datetime(dets['input_file'], format='%Y%m%d_%H%M%S', exact=False)).strftime('%Y%m%d_%H%M%S.WAV')
     call_infos['sampling_rate'] = len(dets) * [audio_file.samplerate]
     call_infos.insert(0, 'SNR', features_of_interest['snrs'])
-    call_infos.insert(0, 'peak_frequency', features_of_interest['peak_freqs'])
+    call_infos.insert(0, 'peak_frequency_WELCH', features_of_interest['peak_freqs_welch'])
+    call_infos.insert(0, 'peak_frequency_SPECTROGRAM', features_of_interest['peak_freqs_spec'])
+    call_infos.insert(0, 'peak_frequency_time_SPECTROGRAM', features_of_interest['peak_freq_times_spec'])
     call_infos.insert(0, 'KMEANS_CLASSES', pd.Series(features_of_interest['classes']).map(LABEL_FOR_GROUPS))
 
     return features_of_interest['call_signals'], call_infos
