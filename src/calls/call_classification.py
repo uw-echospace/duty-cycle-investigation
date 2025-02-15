@@ -19,7 +19,7 @@ sys.path.append(f"{Path(__file__).parents[0]}")
 print(sys.path)
 
 from core import SITE_NAMES
-import bout.assembly as bout
+import activity.activity_assembly as actvt
 import compute_features, call_extraction
 
 from cli import get_file_paths
@@ -213,25 +213,24 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params['good_audio_files'] = location_sum_df['input_file'].copy().unique()
     print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site_name']}")
 
-    return location_sum_df, data_params
+    return data_params
 
 
 def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     corrected_classifications = pd.DataFrame()
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
+    # csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
     file_raw_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes_raw'
     file_corrected_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes'
-    filesys = fsspec.filesystem('s3', anon=True, client_kwargs={'endpoint_url': 'https://sdsc.osn.xsede.org'})
-    data_params['filesys'] = filesys
    
-    for input_file in data_params['good_audio_files']:
-        file_path = '/'.join(Path(input_file).parts[2:])
-        cleaned_path = re.sub(r"(ubna_data_\d+)_mir", r"\1", file_path)
-        osn_file_path = Path(f'bio230143-bucket01/{cleaned_path}')
-        data_params['input_file'] = Path(input_file)
-        data_params['audio_file'] = Path(osn_file_path)
-        print(f'Looking at {osn_file_path}')
+    for filepath in data_params['good_audio_files']:
+        data_params['audio_file'] = Path(filepath)
+        # filename =  Path(filepath).name.split('.')[0]
+        # csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
+        print(f'Looking at {filepath}')
+        # data_params['csv_file'] = csv_path
+        # if (data_params['csv_file']) in csv_files_for_location:
         corrected_classifications, classifications = open_call_signals_using_summary(location_sum_df, data_params, corrected_classifications, classifications)
 
     print('Resetting index for call catalogue')
@@ -281,5 +280,6 @@ if __name__ == "__main__":
     cfg['recording_start'] = args['recording_start']
     cfg['recording_end'] = args['recording_end']
     cfg['detector'] = args['detector']
+    cfg['skip_existing'] = False
 
     sample_calls_and_generate_call_signal_bucket_for_location(cfg)

@@ -134,8 +134,8 @@ def assemble_initial_location_summary(file_paths):
     location_df['low_freq'] = location_df['low_freq'].astype('float64')
     location_df['high_freq'] = location_df['high_freq'].astype('float64')
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
-    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'], unit='S')
-    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'], unit='S')
+    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'], unit='s')
+    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'], unit='s')
 
     location_df.insert(0, 'call_end_time', anchor_end_times)
     location_df.insert(0, 'call_start_time', anchor_start_times)
@@ -223,11 +223,10 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
 
 def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_params, save=True):
     location_df.insert(0, 'freq_group', '')
-    location_classes = pd.read_csv(Path(file_paths['SITE_classes_file']), index_col=0)
     location_df.insert(0, 'input_file_dt', pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S.WAV', exact=False))
-    location_df_grouped = location_df.groupby('input_file_dt', group_keys=True)
+    location_df_grouped = location_df.groupby('input_file', group_keys=True)
 
-    location_df_classified = location_df_grouped.apply(lambda x: add_frequency_group_to_file_dets(x, location_classes))
+    location_df_classified = location_df_grouped.apply(lambda x: add_frequency_group_to_file_dets(x, file_paths), include_groups=False)
 
     location_df_only_classified = location_df_classified.loc[location_df_classified['freq_group']!='']
     location_df_only_classified = location_df_only_classified.droplevel(level=0)
@@ -320,7 +319,7 @@ def filter_and_prepare_metric(metric, data_params):
 
 def get_number_of_detections_per_cycle(location_df, cycle_length):
 
-    df_resampled_every_30 = location_df.resample(f"{cycle_length}T", on='cycle_ref_time')
+    df_resampled_every_30 = location_df.resample(f"{cycle_length}min", on='cycle_ref_time')
     num_of_detections = df_resampled_every_30['cycle_ref_time'].count()
 
     return num_of_detections
@@ -332,7 +331,7 @@ def get_number_of_detections_per_interval(location_df, data_params):
     """
 
     location_df.insert(0, 'call_durations', (location_df['call_end_time'] - location_df['call_start_time']))
-    df_resampled_every_30 = location_df.resample(f"{data_params['bin_size']}T", on='ref_time')
+    df_resampled_every_30 = location_df.resample(f"{data_params['bin_size']}min", on='ref_time')
     num_of_detections = df_resampled_every_30['ref_time'].count()
 
     return num_of_detections
@@ -381,7 +380,7 @@ def construct_activity_arr_from_location_summary(num_of_detections, dc_tag, data
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     col_name = f"num_dets ({dc_tag})"
     incomplete_activity_arr = pd.DataFrame(num_of_detections.values, index=num_of_detections.index, columns=[col_name])
-    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['bin_size']}T").first()
+    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['bin_size']}min").first()
     activity_arr = activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["datetime_UTC", col_name])
@@ -396,7 +395,7 @@ def get_bout_duration_per_cycle(bout_metrics, cycle_length_in_mins):
     bout_metrics['total_bout_duration_in_secs'] = bout_metrics['bout_duration_in_secs']
     bout_metrics = bout_metrics.set_index('ref_time')
 
-    bout_duration_per_interval = bout_metrics.resample(f"{cycle_length_in_mins}T")['total_bout_duration_in_secs'].sum()
+    bout_duration_per_interval = bout_metrics.resample(f"{cycle_length_in_mins}min")['total_bout_duration_in_secs'].sum()
 
     return bout_duration_per_interval
 
@@ -410,7 +409,7 @@ def get_bout_duration_per_interval(bout_metrics, data_params):
     bout_metrics['total_bout_duration_in_secs'] = bout_metrics['bout_duration_in_secs']
     bout_metrics = bout_metrics.set_index('ref_time')
 
-    bout_duration_per_interval = bout_metrics.resample(f"{data_params['bin_size']}T")['total_bout_duration_in_secs'].sum()
+    bout_duration_per_interval = bout_metrics.resample(f"{data_params['bin_size']}min")['total_bout_duration_in_secs'].sum()
 
     return bout_duration_per_interval
 
@@ -439,7 +438,7 @@ def construct_activity_arr_from_bout_metrics(bout_duration_per_interval, data_pa
     bout_dpi_df = pd.DataFrame(list(zip(bout_duration_per_interval.index, percent_time_occupied_by_bouts)),
                                 columns=['ref_time', f'bout_time ({dc_tag})'])
     bout_dpi_df = bout_dpi_df.set_index('ref_time')
-    bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['bin_size']}T").first()
+    bout_dpi_df = bout_dpi_df.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['bin_size']}min").first()
     bout_dpi_df = bout_dpi_df.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(bout_dpi_df.index, bout_dpi_df[f'bout_time ({dc_tag})'].values)), columns=["datetime_UTC", f'bout_time ({dc_tag})'])
@@ -454,7 +453,7 @@ def get_activity_index_per_cycle(location_df, data_params):
     location_df['ref_time'] = location_df['call_start_time']
     temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='ref_time')['ref_time'].count()
     temp[temp>0] = 1
-    activity_indices = temp.resample(f"{data_params['cycle_length']}T").sum()
+    activity_indices = temp.resample(f"{data_params['cycle_length']}min").sum()
     
     return activity_indices
 
@@ -470,9 +469,9 @@ def get_activity_index_per_interval(location_df, data_params):
 
     location_df['ref_time'] = location_df['call_start_time']
 
-    temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='ref_time')['ref_time'].count()
+    temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}s', on='ref_time')['ref_time'].count()
     temp[temp>0] = 1
-    activity_indices = temp.resample(f"{data_params['bin_size']}T").sum()
+    activity_indices = temp.resample(f"{data_params['bin_size']}min").sum()
     
     return activity_indices
 
@@ -489,7 +488,7 @@ def construct_activity_indices_arr(activity_indices, dc_tag, data_params):
     all_processed_filepaths = file_params['good_audio_files']
     all_processed_datetimes = pd.to_datetime(all_processed_filepaths, format="%Y%m%d_%H%M%S", exact=False)
     
-    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['bin_size']}T").first()
+    activity_arr = incomplete_activity_arr.reindex(index=all_processed_datetimes, fill_value=0).resample(f"{data_params['bin_size']}min").first()
     activity_arr = activity_arr.between_time(data_params['recording_start'], data_params['recording_end'], inclusive='left')
 
     return pd.DataFrame(list(zip(activity_arr.index, activity_arr[col_name].values)), columns=["datetime_UTC", col_name])

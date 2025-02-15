@@ -8,7 +8,7 @@ import activity.plot as plot
 
 from pathlib import Path
 
-def prepare_location_sumary(data_params, pipeline_params, file_paths):
+def prepare_location_sumary(data_params, file_paths):
     init_location_sum = actvt.assemble_initial_location_summary(file_paths) 
     init_location_sum.reset_index(inplace=True)
     init_location_sum.rename({'index':'index_in_file'}, axis='columns', inplace=True)
@@ -26,7 +26,7 @@ def run_for_dets(data_params, pipeline_params, file_paths):
 
     if not(pipeline_params["read_csv"]):
         if (pipeline_params['assemble_location_summary']):
-            prepare_location_sumary(data_params, pipeline_params, file_paths) 
+            prepare_location_sumary(data_params, file_paths) 
         activity_arr = actvt.generate_activity_dets_results(data_params, file_paths)
     else:
         activity_arr = pd.read_csv(f'{file_paths["duty_cycled_folder"]}/{file_paths["dc_dets_TYPE_SITE_summary"]}.csv', index_col=0)
