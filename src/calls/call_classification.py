@@ -83,39 +83,40 @@ def gather_features_of_interest(dets, kmean_welch, audio_file):
         f, t, Sxx = scipy.signal.spectrogram(signal_for_peaks, fs, detrend=False,
                                     nfft=32, 
                                     window=mpl_specgram_window)
-        plt_Sxx = 10*np.log10(Sxx)
-        max_ind = np.where(plt_Sxx==np.max(plt_Sxx))
-        peak_freq = f[max_ind[0]]
-        peak_freq_time = t[max_ind[1]]
-        if math.isinf(np.max(plt_Sxx)):
-            features_of_interest['peak_freqs_spec'].append((row['low_freq']+row['high_freq'])/2)
-            features_of_interest['peak_freq_times_spec'].append((row['start_time']+row['end_time'])/2)
-        else:
-            features_of_interest['peak_freqs_spec'].append(peak_freq[0])
-            features_of_interest['peak_freq_times_spec'].append(seg_start+peak_freq_time[0])
+        with np.errstate(divide='ignore'):
+            plt_Sxx = 10*np.log10(Sxx)
+            max_ind = np.where(plt_Sxx==np.max(plt_Sxx))
+            peak_freq = f[max_ind[0]]
+            peak_freq_time = t[max_ind[1]]
+            if math.isinf(np.max(plt_Sxx)):
+                features_of_interest['peak_freqs_spec'].append((row['low_freq']+row['high_freq'])/2)
+                features_of_interest['peak_freq_times_spec'].append((row['start_time']+row['end_time'])/2)
+            else:
+                features_of_interest['peak_freqs_spec'].append(peak_freq[0])
+                features_of_interest['peak_freq_times_spec'].append(seg_start+peak_freq_time[0])
 
-        signal = band_limited_audio_seg.copy()
-        signal[:int(fs*(length_of_section))] = 0
-        noise = band_limited_audio_seg - signal
-        snr_call_signal = signal[-int(fs*length_of_section):]
-        snr_noise_signal = noise[:int(fs*length_of_section)]
-        features_of_interest['call_signals'].append(snr_call_signal)
+            signal = band_limited_audio_seg.copy()
+            signal[:int(fs*(length_of_section))] = 0
+            noise = band_limited_audio_seg - signal
+            snr_call_signal = signal[-int(fs*length_of_section):]
+            snr_noise_signal = noise[:int(fs*length_of_section)]
+            features_of_interest['call_signals'].append(snr_call_signal)
 
-        snr = call_extraction.get_snr_from_band_limited_signal(snr_call_signal, snr_noise_signal)
-        features_of_interest['snrs'].append(snr)
+            snr = call_extraction.get_snr_from_band_limited_signal(snr_call_signal, snr_noise_signal)
+            features_of_interest['snrs'].append(snr)
 
-        welch_info = dict()
-        welch_info['num_points'] = 100
-        max_visible_frequency = 96000
-        welch_info['max_freq_visible'] = max_visible_frequency
-        welch_signal = compute_features.compute_welch_psd_of_call(snr_call_signal, fs, welch_info)
-        features_of_interest['welch_signals'].append(welch_signal)
+            welch_info = dict()
+            welch_info['num_points'] = 100
+            max_visible_frequency = 96000
+            welch_info['max_freq_visible'] = max_visible_frequency
+            welch_signal = compute_features.compute_welch_psd_of_call(snr_call_signal, fs, welch_info)
+            features_of_interest['welch_signals'].append(welch_signal)
 
-        peaks = np.argmax(welch_signal)
-        features_of_interest['peak_freqs'].append((max_visible_frequency/len(welch_signal))*peaks)
-        
-        welch_signal = (welch_signal).reshape(1, len(welch_signal))
-        features_of_interest['classes'].append(kmean_welch.predict(welch_signal)[0])
+            peaks = np.argmax(welch_signal)
+            features_of_interest['peak_freqs_welch'].append(max_visible_frequency*(peaks/len(welch_signal)))
+            
+            welch_signal = (welch_signal).reshape(1, len(welch_signal))
+            features_of_interest['classes'].append(kmean_welch.predict(welch_signal)[0])
 
     features_of_interest['call_signals'] = np.array(features_of_interest['call_signals'], dtype='object')
 
@@ -123,10 +124,10 @@ def gather_features_of_interest(dets, kmean_welch, audio_file):
 
 
 def open_and_get_call_info(audio_file, dets):
-    welch_key = 'all_locations'
+    welch_key = 'carp_and_telephone'
     output_dir = Path(f'{Path(__file__).parents[2]}/data/generated_welch/{welch_key}')
-    output_file_type = 'top1_inbouts_welch_signals'
-    welch_data = pd.read_csv(output_dir / f'2022_{welch_key}_{output_file_type}.csv', index_col=0, low_memory=False)
+    output_file_type = 'top1_inbouts_2ms_bandpass_welch_signals'
+    welch_data = pd.read_csv(output_dir / f'2022_bd2{welch_key}_{output_file_type}.csv', index_col=0, low_memory=False)
     k = 2
     kmean_welch = KMeans(n_clusters=k, n_init=10, random_state=1).fit(welch_data.values)
 
@@ -153,12 +154,12 @@ def classify_calls_from_file(bd2_predictions, data_params):
     audio_file = sf.SoundFile(file_path)
     call_signals, dets = open_and_get_call_info(audio_file, bd2_predictions.copy())
 
-    median_peak_HF_freq = dets[dets['KMEANS_CLASSES']=='HF']['peak_frequency'].median()
-    median_peak_LF_freq = dets[dets['KMEANS_CLASSES']=='LF']['peak_frequency'].median()
+    median_peak_HF_freq = dets[dets['KMEANS_CLASSES']=='HF']['peak_frequency_WELCH'].median()
+    median_peak_LF_freq = dets[dets['KMEANS_CLASSES']=='LF']['peak_frequency_WELCH'].median()
     print(f'Median LF frequency in File: {median_peak_LF_freq}')
     print(f'Median HF frequency in File: {median_peak_HF_freq}')
-    lf_inds = (dets['peak_frequency']<median_peak_LF_freq+7000)&(dets['peak_frequency']>median_peak_LF_freq-7000)
-    hf_inds = (dets['peak_frequency']>median_peak_HF_freq-7000)
+    lf_inds = (dets['peak_frequency_WELCH']<median_peak_LF_freq+7000)&(dets['peak_frequency_WELCH']>median_peak_LF_freq-7000)
+    hf_inds = (dets['peak_frequency_WELCH']>median_peak_HF_freq-7000)
 
     lf_dets = dets[lf_inds&(dets['KMEANS_CLASSES']=='LF')]
     hf_dets = dets[hf_inds&(dets['KMEANS_CLASSES']=='HF')]

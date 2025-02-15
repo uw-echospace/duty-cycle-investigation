@@ -4,7 +4,7 @@ import scipy
 import dask.dataframe as dd
 import argparse
 import re
-import math
+import fsspec
 
 import soundfile as sf
 from pathlib import Path
@@ -25,7 +25,6 @@ from cli import get_file_paths
 
 
 def get_snr_from_band_limited_signal(snr_call_signal, snr_noise_signal): 
-
     signal_power_rms = np.sqrt(np.square(snr_call_signal).mean())
     noise_power_rms = np.sqrt(np.square(snr_noise_signal).mean())
     snr = abs(20 * np.log10(signal_power_rms / noise_power_rms))
@@ -148,10 +147,10 @@ def sample_calls_using_bouts(detector_preds, bucket_for_location, data_params):
     bout_metrics = get_bout_metrics_from_single_bd2_output(detector_preds, data_params)
     bout_metrics.reset_index(drop=True, inplace=True)
         
-    file_path = Path(data_params['audio_file'])
+    file_path = data_params['filesys'].open(path=Path(data_params['audio_file']))
     audio_file = sf.SoundFile(file_path)
     fs = audio_file.samplerate
-    print(f'{len(detector_preds)} calls in this file: {file_path.name}')
+    print(f'{len(detector_preds)} calls in this file: {Path(data_params["audio_file"]).name}')
 
     calls_sampled_from_file = pd.DataFrame()
     for bout_index, row in bout_metrics.iterrows():
@@ -204,8 +203,7 @@ def sample_calls_from_file(detector_preds, bucket_for_location, data_params):
 
 
 def collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location):
-    location_sum_df['input_file'] = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy())
-    detector_preds = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
+    detector_preds = location_sum_df.loc[location_sum_df['input_file']==str(data_params['input_file'])].copy()
     groups_in_preds = detector_preds['freq_group'].unique()
     valid_group_in_preds = np.logical_or(np.logical_or('LF1' in groups_in_preds, 'HF1' in groups_in_preds), 'HF2' in groups_in_preds)
     print(f"Groups found in this file: {detector_preds['freq_group'].unique()}, valid? {valid_group_in_preds}")
@@ -253,19 +251,18 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params['bandpass'] = cfg['bandpass']
     data_params['use_bouts'] = cfg['use_bouts']
     data_params['use_file'] = cfg['use_file']
-    data_params['use_thresholds'] = True
-    data_params['use_kmeans'] = False
+    data_params['assembly_type'] = 'thresh'
     data_params['detector_tag'] = cfg['detector']
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
     location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+    location_sum_df = location_sum_df[location_sum_df['det_prob']>=0.5].copy()
     location_sum_df.reset_index(inplace=True)
     location_sum_df.rename({'index':'index_in_file'}, axis='columns', inplace=True)
-    site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
     bout_params = bout.get_bout_params_from_location(location_sum_df, data_params)
 
-    data_params['good_audio_files'] = site_filepaths
+    data_params['good_audio_files'] = location_sum_df['input_file'].copy().unique()
     data_params['bout_params'] = bout_params
     print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site_name']}")
 
@@ -283,6 +280,9 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     else:
         padding_bandpass = f'{padding}_nobandpass'
 
+    filesys = fsspec.filesystem('s3', anon=True, client_kwargs={'endpoint_url': 'https://sdsc.osn.xsede.org'})
+    data_params['filesys'] = filesys
+
     if data_params['use_bouts']:
         file_title = f'{year_detector_site_thresh}_inbouts'
     if data_params['use_file']:
@@ -290,14 +290,19 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
 
     call_signals_file_title = f'{file_title}_{padding_bandpass}_call_signals'
     welch_signals_file_title = f'{file_title}_{padding_bandpass}_welch_signals'
-    for filepath in data_params['good_audio_files']:
-        data_params['audio_file'] = Path(filepath)
-        print(f'Looking at {filepath}')
+    for input_file in data_params['good_audio_files']:
+        file_path = '/'.join(Path(input_file).parts[2:])
+        cleaned_path = re.sub(r"(ubna_data_\d+)_mir", r"\1", file_path)
+        osn_file_path = Path(f'bio230143-bucket01/{cleaned_path}')
+        data_params['input_file'] = Path(input_file)
+        data_params['audio_file'] = Path(osn_file_path)
+        print(f'Looking at {osn_file_path}')
         bucket_for_location, calls_sampled_from_location = collect_call_signals_from_location_sum(location_sum_df, data_params, bucket_for_location, calls_sampled_from_location)
 
     print('Resetting index for call catalogue')
     calls_sampled_from_location.reset_index(inplace=True)
     print(f'Saving call catalogue to {call_signals_file_title}.csv')
+    (Path(__file__).parents[2] / f'data/detected_calls/{data_params["site_tag"]}').mkdir(parents=True, exist_ok=True)
     calls_sampled_from_location.to_csv(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{file_title}_{padding_bandpass}.csv')
     print('Converting bucket to np array')
     np_bucket = np.array(bucket_for_location, dtype='object')
@@ -309,6 +314,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     welch_data = pd.DataFrame(welch_signals, columns=np.linspace(0, 96000, welch_signals.shape[1]).astype(int))
     welch_data.index.name = 'Call #'
     welch_data.columns.name = 'Frequency (kHz)'
+    (Path(__file__).parents[2] / f'data/generated_welch/{data_params["site_tag"]}').mkdir(parents=True, exist_ok=True)
     welch_data.to_csv(f'{Path(__file__).parents[2]}/data/generated_welch/{data_params["site_tag"]}/{welch_signals_file_title}.csv')
 
     return bucket_for_location, calls_sampled_from_location
