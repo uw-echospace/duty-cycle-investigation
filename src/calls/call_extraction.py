@@ -15,7 +15,6 @@ sys.path.append(f"{Path(__file__).parents[1]}")
 print(sys.path)
 
 from core import SITE_NAMES, FREQ_GROUPS
-import pipeline
 import bout.assembly as bout
 import activity.activity_assembly as actvt
 import activity.subsampling as ss
@@ -247,15 +246,11 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params["cur_dc_tag"] = "30of30"
     data_params["site_tag"] = cfg['site']
     data_params['site_name'] = SITE_NAMES[cfg['site']]
-    data_params["year"] = '2022'
-    data_params['recording_start'] = cfg['recording_start']
-    data_params['recording_end'] = cfg['recording_end']
     data_params['percent_threshold_for_snr'] = cfg['percent_threshold_for_snr']
     data_params['padding'] = cfg['padding']
     data_params['bandpass'] = cfg['bandpass']
     data_params['use_bouts'] = cfg['use_bouts']
     data_params['use_file'] = cfg['use_file']
-    data_params['assembly_type'] = 'thresh'
     data_params['assembly_type'] = 'thresh'
     data_params['detector_tag'] = cfg['detector']
     print(f"Searching for files from {data_params['site_name']}")
@@ -293,11 +288,6 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     if data_params['use_file']:
         file_title = f'{year_detector_site_thresh}_infile'
 
-    detected_calls_dir = Path(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}')
-    detected_calls_dir.mkdir(parents=True, exist_ok=True)
-    generated_welch_dir = Path(f'{Path(__file__).parents[2]}/data/generated_welch/{data_params["site_tag"]}')
-    generated_welch_dir.mkdir(parents=True, exist_ok=True)
-
     call_signals_file_title = f'{file_title}_{padding_bandpass}_call_signals'
     welch_signals_file_title = f'{file_title}_{padding_bandpass}_welch_signals'
     for input_file in data_params['good_audio_files']:
@@ -317,7 +307,7 @@ def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     print('Converting bucket to np array')
     np_bucket = np.array(bucket_for_location, dtype='object')
     print(f'Saving bucket to {call_signals_file_title}.npy')
-    np.save(detected_calls_dir / f'{call_signals_file_title}.npy', np_bucket)
+    np.save(f'{Path(__file__).parents[2]}/data/detected_calls/{data_params["site_tag"]}/{call_signals_file_title}.npy', np_bucket)
 
     calls_sampled_from_location['index'] = calls_sampled_from_location.index
     welch_signals = compute_features.generate_welchs_for_calls(calls_sampled_from_location, bucket_for_location)
