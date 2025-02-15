@@ -2,8 +2,12 @@ import numpy as np
 import pandas as pd
 import argparse
 import re
-import datetime as dt
+import math
+import matplotlib.pyplot as plt
+
+import fsspec
 from sklearn.cluster import KMeans
+import scipy
 
 import soundfile as sf
 from pathlib import Path
@@ -30,18 +34,24 @@ LABEL_FOR_GROUPS = {
 
 def get_section_of_call_in_file(detection, audio_file):
     fs = audio_file.samplerate
+    num_frames = audio_file.frames
+    file_length = num_frames/fs
 
     call_dur = (detection['end_time'] - detection['start_time'])
-    pad = min(min(detection['start_time'] - call_dur, 1795 - detection['end_time']), 0.006) / 3
+    pad = min(min(detection['start_time'] - call_dur, file_length - detection['end_time']), 0.006) / 3
     start = detection['start_time'] - call_dur - (3*pad)
-    duration = (2 * call_dur) + (4*pad)
+    duration = ((2 * call_dur) + (4*pad))
 
-    audio_file.seek(int(fs*start))
-    audio_seg = audio_file.read(int(fs*duration))
+    try:
+        audio_file.seek(int(fs*start))
+        audio_seg = audio_file.read(int(fs*duration))
+        length_of_section = call_dur + (2*pad)
+    except sf.LibsndfileError as e:
+        print(f'Start time : {start} invalid, detection starts at {detection["start_time"]} in segment:{audio_file.name}')
+        audio_seg = None
+        length_of_section = 0
 
-    length_of_section = call_dur + (2*pad)
-
-    return audio_seg, length_of_section
+    return audio_seg, length_of_section, pad
 
 
 def gather_features_of_interest(dets, kmean_welch, audio_file):
@@ -50,16 +60,39 @@ def gather_features_of_interest(dets, kmean_welch, audio_file):
     features_of_interest['call_signals'] = []
     features_of_interest['welch_signals'] = []
     features_of_interest['snrs'] = []
+    features_of_interest['peak_freqs_welch'] = []
+    features_of_interest['peak_freqs_spec'] = []
+    features_of_interest['peak_freq_times_spec'] = []
     features_of_interest['peak_freqs'] = []
     features_of_interest['classes'] = []
     nyquist = fs//2
     for index, row in dets.iterrows():
-        audio_seg, length_of_section = get_section_of_call_in_file(row, audio_file)
+        call_dur = (row['end_time'] - row['start_time'])
+        audio_seg, length_of_section, pad = get_section_of_call_in_file(row, audio_file)
+        seg_start = row['start_time'] - call_dur - (3*pad)
         
         freq_pad = 2000
         low_freq_cutoff = row['low_freq']-freq_pad
         high_freq_cutoff = min(nyquist-1, row['high_freq']+freq_pad)
         band_limited_audio_seg = call_extraction.bandpass_audio_signal(audio_seg, fs, low_freq_cutoff, high_freq_cutoff)
+
+        signal_for_peaks = band_limited_audio_seg.copy()
+        signal_for_peaks[:int(fs*(length_of_section+pad))] = 0
+        signal_for_peaks[-int(fs*pad):] = 0
+        mpl_specgram_window = plt.mlab.window_hanning(np.ones(32))
+        f, t, Sxx = scipy.signal.spectrogram(signal_for_peaks, fs, detrend=False,
+                                    nfft=32, 
+                                    window=mpl_specgram_window)
+        plt_Sxx = 10*np.log10(Sxx)
+        max_ind = np.where(plt_Sxx==np.max(plt_Sxx))
+        peak_freq = f[max_ind[0]]
+        peak_freq_time = t[max_ind[1]]
+        if math.isinf(np.max(plt_Sxx)):
+            features_of_interest['peak_freqs_spec'].append((row['low_freq']+row['high_freq'])/2)
+            features_of_interest['peak_freq_times_spec'].append((row['start_time']+row['end_time'])/2)
+        else:
+            features_of_interest['peak_freqs_spec'].append(peak_freq[0])
+            features_of_interest['peak_freq_times_spec'].append(seg_start+peak_freq_time[0])
 
         signal = band_limited_audio_seg.copy()
         signal[:int(fs*(length_of_section))] = 0
@@ -107,14 +140,16 @@ def open_and_get_call_info(audio_file, dets):
     call_infos['file_name'] = pd.DatetimeIndex(pd.to_datetime(dets['input_file'], format='%Y%m%d_%H%M%S', exact=False)).strftime('%Y%m%d_%H%M%S.WAV')
     call_infos['sampling_rate'] = len(dets) * [audio_file.samplerate]
     call_infos.insert(0, 'SNR', features_of_interest['snrs'])
-    call_infos.insert(0, 'peak_frequency', features_of_interest['peak_freqs'])
+    call_infos.insert(0, 'peak_frequency_WELCH', features_of_interest['peak_freqs_welch'])
+    call_infos.insert(0, 'peak_frequency_SPECTROGRAM', features_of_interest['peak_freqs_spec'])
+    call_infos.insert(0, 'peak_frequency_time_SPECTROGRAM', features_of_interest['peak_freq_times_spec'])
     call_infos.insert(0, 'KMEANS_CLASSES', pd.Series(features_of_interest['classes']).map(LABEL_FOR_GROUPS))
 
     return features_of_interest['call_signals'], call_infos
 
 
 def classify_calls_from_file(bd2_predictions, data_params):
-    file_path = Path(data_params['audio_file'])
+    file_path = data_params['filesys'].open(path=Path(data_params['audio_file']))
     audio_file = sf.SoundFile(file_path)
     call_signals, dets = open_and_get_call_info(audio_file, bd2_predictions.copy())
 
@@ -134,8 +169,7 @@ def classify_calls_from_file(bd2_predictions, data_params):
 
 
 def open_call_signals_using_summary(location_sum_df, data_params, corrected_classifications, classifications):
-    location_sum_df['input_file'] = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy())
-    bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
+    bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['input_file'])].copy()
     
     is_valid_params = len(bd2_predictions)>0 
 
@@ -171,50 +205,40 @@ def get_params_relevant_to_data_at_location(cfg):
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
-    init_location_sum = actvt.assemble_initial_location_summary(file_paths) 
-    init_location_sum.reset_index(inplace=True)
-    init_location_sum.rename({'index':'index_in_file'}, axis='columns', inplace=True)
-    init_location_sum.reset_index(inplace=True)
-    init_location_sum.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
-    
-    site_filepaths = relabel_drivenames_to_mirrors(init_location_sum['input_file'].copy().unique())
-    data_params['good_audio_files'] = site_filepaths
+    location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
+    location_sum_df.reset_index(inplace=True)
+    location_sum_df.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
+
+    data_params['good_audio_files'] = location_sum_df['input_file'].copy().unique()
     print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site_name']}")
 
-    return init_location_sum, data_params
+    return data_params
 
 
 def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     corrected_classifications = pd.DataFrame()
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
-    file_site_section = f'{cfg["detector"]}__{data_params["site_tag"]}_classified_'
-    script_save_folder = Path(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}')
-    (script_save_folder / 'raw').mkdir(parents=True, exist_ok=True)
-    (script_save_folder / 'corrected').mkdir(parents=True, exist_ok=True)
+    # csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
+    file_raw_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes_raw'
+    file_corrected_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes'
    
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
-        save_corrected_filepath = (script_save_folder / 'corrected')/f'{file_site_section}_{data_params["audio_file"].stem}.csv'
-        save_raw_filepath = (script_save_folder / 'raw')/f'{file_site_section}_{data_params["audio_file"].stem}_raw.csv'
+        # filename =  Path(filepath).name.split('.')[0]
+        # csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
+        print(f'Looking at {filepath}')
+        # data_params['csv_file'] = csv_path
+        # if (data_params['csv_file']) in csv_files_for_location:
+        corrected_classifications, classifications = open_call_signals_using_summary(location_sum_df, data_params, corrected_classifications, classifications)
 
-        if cfg['skip_existing'] & (save_corrected_filepath).is_file():
-            print(f'Classifications for this {data_params["audio_file"].name} have already been generated!')
-        else:
-            print(f'Looking at {filepath}')
-            location_sum_df['input_file'] = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy())
-            bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
-            is_valid_params = len(bd2_predictions)>0 
+    print('Resetting index for call catalogue')
+    corrected_classifications.reset_index(inplace=True)
+    print(f'Saving call catalogue to {file_corrected_title}.csv')
+    corrected_classifications.to_csv(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}/{file_corrected_title}.csv')
 
-            if is_valid_params:
-                corrected_classifications_in_file, classifications_in_file = classify_calls_from_file(bd2_predictions, data_params)
-            else:
-                corrected_classifications_in_file = pd.DataFrame()
-                classifications_in_file = pd.DataFrame()
-            
-            corrected_classifications_in_file.to_csv(save_corrected_filepath)
-            classifications_in_file.to_csv(save_raw_filepath)
-            print(f'There were {len(corrected_classifications_in_file)} rows in file')
+    classifications.reset_index(inplace=True)
+    classifications.to_csv(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}/{file_raw_title}.csv')
 
     return corrected_classifications, classifications
 
