@@ -213,7 +213,7 @@ def get_params_relevant_to_data_at_location(cfg):
     data_params['good_audio_files'] = location_sum_df['input_file'].copy().unique()
     print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site_name']}")
 
-    return data_params
+    return location_sum_df, data_params
 
 
 def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
