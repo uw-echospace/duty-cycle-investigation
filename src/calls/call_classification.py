@@ -15,7 +15,7 @@ sys.path.append(f"{Path(__file__).parents[0]}")
 print(sys.path)
 
 from core import SITE_NAMES
-import bout.assembly as bout
+import activity.activity_assembly as actvt
 import compute_features, call_extraction
 
 from cli import get_file_paths
@@ -171,41 +171,50 @@ def get_params_relevant_to_data_at_location(cfg):
     print(f"Searching for files from {data_params['site_name']}")
 
     file_paths = get_file_paths(data_params)
-    location_sum_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    location_sum_df.reset_index(inplace=True)
-    location_sum_df.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
-    site_filepaths = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy().unique())
-
+    init_location_sum = actvt.assemble_initial_location_summary(file_paths) 
+    init_location_sum.reset_index(inplace=True)
+    init_location_sum.rename({'index':'index_in_file'}, axis='columns', inplace=True)
+    init_location_sum.reset_index(inplace=True)
+    init_location_sum.rename({'index':'index_in_summary'}, axis='columns', inplace=True)
+    
+    site_filepaths = relabel_drivenames_to_mirrors(init_location_sum['input_file'].copy().unique())
     data_params['good_audio_files'] = site_filepaths
     print(f"Will be looking at {len(data_params['good_audio_files'])} files from {data_params['site_name']}")
 
-    return location_sum_df, data_params
+    return init_location_sum, data_params
 
 
 def sample_calls_and_generate_call_signal_bucket_for_location(cfg):
     corrected_classifications = pd.DataFrame()
     classifications = pd.DataFrame()
     location_sum_df, data_params = get_params_relevant_to_data_at_location(cfg)
-    # csv_files_for_location = sorted(list(Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}').glob(pattern='*.csv')))
-    file_raw_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes_raw'
-    file_corrected_title = f'2022_{cfg["detector"]}{data_params["site_tag"]}_call_classes'
+    file_site_section = f'{cfg["detector"]}__{data_params["site_tag"]}_classified_'
+    script_save_folder = Path(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}')
+    (script_save_folder / 'raw').mkdir(parents=True, exist_ok=True)
+    (script_save_folder / 'corrected').mkdir(parents=True, exist_ok=True)
    
     for filepath in data_params['good_audio_files']:
         data_params['audio_file'] = Path(filepath)
-        # filename =  Path(filepath).name.split('.')[0]
-        # csv_path = Path(f'{Path(__file__).parents[2]}/data/raw/{data_params["site_tag"]}/bd2__{data_params["site_tag"]}_{filename}.csv')
-        print(f'Looking at {filepath}')
-        # data_params['csv_file'] = csv_path
-        # if (data_params['csv_file']) in csv_files_for_location:
-        corrected_classifications, classifications = open_call_signals_using_summary(location_sum_df, data_params, corrected_classifications, classifications)
+        save_corrected_filepath = (script_save_folder / 'corrected')/f'{file_site_section}_{data_params["audio_file"].stem}.csv'
+        save_raw_filepath = (script_save_folder / 'raw')/f'{file_site_section}_{data_params["audio_file"].stem}_raw.csv'
 
-    print('Resetting index for call catalogue')
-    corrected_classifications.reset_index(inplace=True)
-    print(f'Saving call catalogue to {file_corrected_title}.csv')
-    corrected_classifications.to_csv(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}/{file_corrected_title}.csv')
+        if cfg['skip_existing'] & (save_corrected_filepath).is_file():
+            print(f'Classifications for this {data_params["audio_file"].name} have already been generated!')
+        else:
+            print(f'Looking at {filepath}')
+            location_sum_df['input_file'] = relabel_drivenames_to_mirrors(location_sum_df['input_file'].copy())
+            bd2_predictions = location_sum_df.loc[location_sum_df['input_file']==str(data_params['audio_file'])].copy()
+            is_valid_params = len(bd2_predictions)>0 
 
-    classifications.reset_index(inplace=True)
-    classifications.to_csv(f'{Path(__file__).parents[2]}/data/classifications/{data_params["site_tag"]}/{file_raw_title}.csv')
+            if is_valid_params:
+                corrected_classifications_in_file, classifications_in_file = classify_calls_from_file(bd2_predictions, data_params)
+            else:
+                corrected_classifications_in_file = pd.DataFrame()
+                classifications_in_file = pd.DataFrame()
+            
+            corrected_classifications_in_file.to_csv(save_corrected_filepath)
+            classifications_in_file.to_csv(save_raw_filepath)
+            print(f'There were {len(corrected_classifications_in_file)} rows in file')
 
     return corrected_classifications, classifications
 
@@ -246,5 +255,6 @@ if __name__ == "__main__":
     cfg['recording_start'] = args['recording_start']
     cfg['recording_end'] = args['recording_end']
     cfg['detector'] = args['detector']
+    cfg['skip_existing'] = False
 
     sample_calls_and_generate_call_signal_bucket_for_location(cfg)
