@@ -134,8 +134,8 @@ def assemble_initial_location_summary(file_paths):
     location_df['low_freq'] = location_df['low_freq'].astype('float64')
     location_df['high_freq'] = location_df['high_freq'].astype('float64')
     file_dts = pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S', exact=False)
-    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'], unit='s')
-    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'], unit='s')
+    anchor_start_times = file_dts + pd.to_timedelta(location_df['start_time'], unit='S')
+    anchor_end_times = file_dts + pd.to_timedelta(location_df['end_time'], unit='S')
 
     location_df.insert(0, 'call_end_time', anchor_end_times)
     location_df.insert(0, 'call_start_time', anchor_start_times)
@@ -223,10 +223,11 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
 
 def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_params, save=True):
     location_df.insert(0, 'freq_group', '')
+    location_classes = pd.read_csv(Path(file_paths['SITE_classes_file']), index_col=0)
     location_df.insert(0, 'input_file_dt', pd.to_datetime(location_df['input_file'], format='%Y%m%d_%H%M%S.WAV', exact=False))
-    location_df_grouped = location_df.groupby('input_file', group_keys=True)
+    location_df_grouped = location_df.groupby('input_file_dt', group_keys=True)
 
-    location_df_classified = location_df_grouped.apply(lambda x: add_frequency_group_to_file_dets(x, file_paths), include_groups=False)
+    location_df_classified = location_df_grouped.apply(lambda x: add_frequency_group_to_file_dets(x, location_classes))
 
     location_df_only_classified = location_df_classified.loc[location_df_classified['freq_group']!='']
     location_df_only_classified = location_df_only_classified.droplevel(level=0)
@@ -451,7 +452,7 @@ def get_activity_index_per_cycle(location_df, data_params):
     """
 
     location_df['ref_time'] = location_df['call_start_time']
-    temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}S', on='ref_time')['ref_time'].count()
+    temp = location_df.resample(f'{data_params["index_time_block_in_secs"]}s', on='ref_time')['ref_time'].count()
     temp[temp>0] = 1
     activity_indices = temp.resample(f"{data_params['cycle_length']}min").sum()
     
