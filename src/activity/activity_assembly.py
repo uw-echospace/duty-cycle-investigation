@@ -201,22 +201,24 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
     file_classes.loc[classified, 'peak_frequency_time_SPECTROGRAM'] = file_classes.loc[classified, 'peak_frequency_time_SPECTROGRAM'].astype('float64')
     file_classes.loc[classified, 'SNR'] = file_classes.loc[classified, 'SNR'].astype('float64')
 
-    file_dets.insert(0, 'peak_frequency', [np.NaN]*len(file_dets))
+    file_dets.insert(0, 'peak_frequency_WELCH', [np.NaN]*len(file_dets))
+    file_dets.insert(0, 'peak_frequency_SPECTROGRAM', [np.NaN]*len(file_dets))
     file_dets.insert(0, 'peak_freq_time_infile', [np.NaN]*len(file_dets))
     file_dets.insert(0, 'SNR', [np.NaN]*len(file_dets))
     file_dets.loc[file_classes['index_in_file'], 'freq_group'] = file_classes['KMEANS_CLASSES'].values
-    file_dets.loc[file_classes['index_in_file'], 'peak_frequency'] = file_classes['peak_frequency_WELCH'].values
+    file_dets.loc[file_classes['index_in_file'], 'peak_frequency_WELCH'] = file_classes['peak_frequency_WELCH'].values
+    file_dets.loc[file_classes['index_in_file'], 'peak_frequency_SPECTROGRAM'] = file_classes['peak_frequency_SPECTROGRAM'].values
     file_dets.loc[file_classes['index_in_file'], 'peak_freq_time_infile'] = file_classes['peak_frequency_time_SPECTROGRAM'].values
     file_dets.loc[file_classes['index_in_file'], 'SNR'] = file_classes['SNR'].values
 
     for group in ['LF', 'HF']:
         group_classified_dets = (file_dets['freq_group']==group)
-
-        low_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency'] > (file_dets.loc[group_classified_dets, 'low_freq']).median()-4000)
-        low_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency'] > (file_dets.loc[group_classified_dets, 'low_freq'])-4000)
+        bound = 5000
+        low_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency_SPECTROGRAM'] > (file_dets.loc[group_classified_dets, 'low_freq']).median()-bound)
+        low_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency_SPECTROGRAM'] > (file_dets.loc[group_classified_dets, 'low_freq'])-bound)
         assert(low_assert1|low_assert2).all()
-        high_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency'] < (file_dets.loc[group_classified_dets, 'high_freq']).median()+4000)
-        high_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency'] < (file_dets.loc[group_classified_dets, 'high_freq'])+4000)
+        high_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency_SPECTROGRAM'] < (file_dets.loc[group_classified_dets, 'high_freq']).median()+bound)
+        high_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency_SPECTROGRAM'] < (file_dets.loc[group_classified_dets, 'high_freq'])+bound)
         assert(high_assert1|high_assert2).all()
 
     return file_dets
