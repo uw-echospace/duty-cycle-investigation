@@ -213,12 +213,12 @@ def add_frequency_group_to_file_dets(file_dets, location_classes):
 
     for group in ['LF', 'HF']:
         group_classified_dets = (file_dets['freq_group']==group)
-        bound = 5000
-        low_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency_SPECTROGRAM'] > (file_dets.loc[group_classified_dets, 'low_freq']).median()-bound)
-        low_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency_SPECTROGRAM'] > (file_dets.loc[group_classified_dets, 'low_freq'])-bound)
+        bound = 7000
+        low_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency_WELCH'] > (file_dets.loc[group_classified_dets, 'low_freq']).median()-bound)
+        low_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency_WELCH'] > (file_dets.loc[group_classified_dets, 'low_freq'])-bound)
         assert(low_assert1|low_assert2).all()
-        high_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency_SPECTROGRAM'] < (file_dets.loc[group_classified_dets, 'high_freq']).median()+bound)
-        high_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency_SPECTROGRAM'] < (file_dets.loc[group_classified_dets, 'high_freq'])+bound)
+        high_assert1 = (file_dets.loc[group_classified_dets, 'peak_frequency_WELCH'] < (file_dets.loc[group_classified_dets, 'high_freq']).median()+bound)
+        high_assert2 = (file_dets.loc[group_classified_dets, 'peak_frequency_WELCH'] < (file_dets.loc[group_classified_dets, 'high_freq'])+bound)
         assert(high_assert1|high_assert2).all()
 
     return file_dets
@@ -235,16 +235,19 @@ def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_p
     location_df_only_classified = location_df_only_classified.droplevel(level=0)
     location_df_only_classified = location_df_only_classified.reset_index()
 
-    location_df_grouped = location_df_only_classified.groupby('input_file_dt', group_keys=True)
-    location_df_classified_and_cleaned = location_df_grouped.apply(lambda x: remove_harmonics_or_overlaps(x))
-    location_df_classified_and_cleaned = location_df_classified_and_cleaned.droplevel(level=0)
-    location_df_classified_and_cleaned = location_df_classified_and_cleaned.reset_index(drop=True)
+    if data_params['detector_tag']=='bd2':
+        location_df_grouped = location_df_only_classified.groupby('input_file_dt', group_keys=True)
+        location_df_classified_and_cleaned = location_df_grouped.apply(lambda x: remove_harmonics_or_overlaps(x))
+        location_df_classified_and_cleaned = location_df_classified_and_cleaned.droplevel(level=0)
+        location_df_classified_and_cleaned = location_df_classified_and_cleaned.reset_index(drop=True)
+    else:
+        location_df_classified_and_cleaned = location_df_only_classified.copy()
 
     if data_params['type_tag'] != '':
         location_df_classified_and_cleaned = location_df_classified_and_cleaned.loc[location_df_classified_and_cleaned['freq_group']==data_params['type_tag']]
 
     if save:
-        location_df_classified_and_cleaned.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
+        location_df_classified_and_cleaned.to_csv(f'{file_paths["SITE_folder"]}_classified_from_{data_params["training_set"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
 
     return location_df_classified_and_cleaned
 

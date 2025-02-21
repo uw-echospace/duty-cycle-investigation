@@ -11,21 +11,23 @@ import pipeline
 if __name__ == "__main__":
     data_params = dict()
     data_params["year"] = '2022'
-    data_params['detector_tag'] = 'bd2'
     data_params['bin_size'] = '30'
     data_params['recording_start'] = '00:00'
     data_params['recording_end'] = '16:00'
     data_params['assembly_type'] = 'kmeans'
+    data_params["training_set"] = 'all_locations'
 
-    for site_key in ['Telephone']:
+    for site_key in ['Telephone', 'Carp']:
         for type_key in ['', 'LF', 'HF']:
-            type_name = type_key
-            if type_key=='':
-                type_name = 'all'
-            print(f'Generating location summary dataframe for {type_name}-group from {SITE_NAMES[site_key]}')
-            data_params["site_name"] = SITE_NAMES[site_key]
-            data_params["site_tag"] = site_key
-            data_params["type_tag"] = type_key
+            for det_tag in ['kd', 'bd2']:
+                type_name = type_key
+                if type_key=='':
+                    type_name = 'all'
+                print(f'Generating {det_tag} location summary dataframe for {type_name}-group from {SITE_NAMES[site_key]}')
+                data_params["site_name"] = SITE_NAMES[site_key]
+                data_params["site_tag"] = site_key
+                data_params["type_tag"] = type_key
+                data_params['detector_tag'] = det_tag
 
-            file_paths = get_file_paths(data_params)
-            location_df_all = pipeline.prepare_location_sumary(data_params, file_paths) 
+                file_paths = get_file_paths(data_params)
+                location_df_all = pipeline.prepare_location_sumary(data_params, file_paths) 

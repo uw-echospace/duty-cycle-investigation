@@ -39,10 +39,13 @@ def select_dates_from_metrics(metric_for_scheme_for_comparison, cont_column, dat
 def generate_activity_btp_for_dc_schemes_and_cont(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
     bout_params = bt.get_bout_params_from_location(location_df_above_SNR_and_detthresh, data_params)
 
     dc_schemes = data_params['dc_tags'][1:]
@@ -102,10 +105,13 @@ def get_continuous_btp_partitioned_for_dc_scheme(metric_col_name, location_df, d
 def generate_activity_call_rate_for_dc_schemes_and_cont(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
 
     dc_schemes = data_params['dc_tags'][1:]
     cont_scheme = data_params['dc_tags'][0]
@@ -161,10 +167,13 @@ def get_continuous_call_rates_partitioned_for_dc_scheme(metric_col_name, locatio
 def generate_activity_index_percent_for_dc_schemes_and_cont(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
 
     dc_schemes = data_params['dc_tags'][1:]
     cont_scheme = data_params['dc_tags'][0]
@@ -246,10 +255,13 @@ def add_noise_to_group(group, frac):
 def generate_activity_btp_for_false_positives_investigation(data_params, file_paths, save=False):
     btp_mod_columns = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
     bout_params = bt.get_bout_params_from_location(location_df_above_SNR_and_detthresh, data_params)
 
     dc_tag = '30of30'
@@ -290,10 +302,13 @@ def removed_calls_from_group(group, frac):
 def generate_activity_btp_for_false_negatives_investigation(data_params, file_paths, save=False):
     btp_mod_columns = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
     bout_params = bt.get_bout_params_from_location(location_df_above_SNR_and_detthresh, data_params)
 
     dc_tag = '30of30'
@@ -329,10 +344,13 @@ def generate_activity_btp_for_false_negatives_investigation(data_params, file_pa
 def generate_activity_call_rate_for_false_positives_investigation(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
 
     dc_tag = '30of30'
     metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
@@ -366,10 +384,13 @@ def generate_activity_call_rate_for_false_positives_investigation(data_params, f
 def generate_activity_call_rate_for_false_negatives_investigation(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
 
     dc_tag = '30of30'
     metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
@@ -402,10 +423,13 @@ def generate_activity_call_rate_for_false_negatives_investigation(data_params, f
 def generate_activity_index_percent_for_false_positives_investigation(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
 
     dc_tag = '30of30'
     metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
@@ -438,10 +462,13 @@ def generate_activity_index_percent_for_false_positives_investigation(data_param
 def generate_activity_index_percent_for_false_negatives_investigation(data_params, file_paths, save=False):
     activity_arr = pd.DataFrame()
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
-    inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
-    location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
-    inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
-    location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    if data_params['detector_tag']=='bd2':
+        inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
+        location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
+        inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']
+        location_df_above_SNR_and_detthresh = location_df_above_detection_probability[inds_where_dets_above_SNR].copy()
+    else:
+        location_df_above_SNR_and_detthresh = location_df.copy()
 
     dc_tag = '30of30'
     metric_col_name = f'{data_params["metric_tag"]} ({dc_tag})'
