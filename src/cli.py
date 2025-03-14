@@ -79,7 +79,6 @@ def get_file_paths(data_params):
     else:
         file_paths["SITE_folder"] = f'{Path(__file__).resolve().parent}/../data/2022_detector_summaries/{data_params["site_tag"]}_classified_from_{data_params["training_set"]}'
     Path(f'{file_paths["SITE_folder"]}').mkdir(parents=True, exist_ok=True)
-    Path(f'{file_paths["SITE_folder"]}_classified_from_{data_params["training_set"]}').mkdir(parents=True, exist_ok=True)
     file_paths['SITE_classes_folder'] = f'{Path(__file__).resolve().parent}/../data/classifications/{data_params["site_tag"]}_classified_from_{data_params["training_set"]}'
     file_paths['SITE_classes_file'] = f'{file_paths["SITE_classes_folder"]}/2022_{file_paths["detector"]}{data_params["site_tag"]}_call_classes.csv'
     file_paths["detector_TYPE_SITE_YEAR"] = f'{file_paths["detector"]}__{data_params["type_tag"]}{data_params["site_tag"]}_2022_{data_params["assembly_type"]}'
