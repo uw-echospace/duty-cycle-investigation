@@ -1,0 +1,25 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+97.0135,97.0185,22031.0,35435.0,Echolocation,Plecotus austriacus,0.182,0.299,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+171.1065,171.1317,18593.0,21256.0,Echolocation,Nyctalus noctula,0.162,0.222,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+202.7465,202.7553,21171.0,29723.0,Echolocation,Plecotus austriacus,0.092,0.206,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+525.3195,525.3258,21171.0,35775.0,Echolocation,Plecotus austriacus,0.163,0.209,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+600.1175,600.1244,20312.0,34621.0,Echolocation,Plecotus austriacus,0.168,0.208,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+604.3295,604.3347,26328.0,37540.0,Echolocation,Plecotus auritus,0.114,0.21,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+649.3795,649.3859,22890.0,34497.0,Echolocation,Plecotus austriacus,0.177,0.22,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+845.4745,845.4815,21171.0,32232.0,Echolocation,Plecotus austriacus,0.182,0.224,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+857.4805,857.4861,22890.0,33829.0,Echolocation,Plecotus austriacus,0.232,0.27,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+878.5545,878.563,22031.0,30312.0,Echolocation,Plecotus austriacus,0.132,0.245,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+918.4835,918.4898,22890.0,35375.0,Echolocation,Plecotus austriacus,0.141,0.211,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+929.8135,929.8241,23750.0,31378.0,Echolocation,Eptesicus serotinus,0.078,0.231,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1112.8585,1112.8719,40078.0,43534.0,Echolocation,Pipistrellus nathusii,0.206,0.258,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1126.0545,1126.0646,30625.0,36635.0,Echolocation,Eptesicus serotinus,0.129,0.227,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1167.8715,1167.8772,23750.0,35600.0,Echolocation,Plecotus austriacus,0.156,0.21,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1197.1045,1197.1304,16875.0,20013.0,Echolocation,Nyctalus noctula,0.231,0.316,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1233.6155,1233.6368,22890.0,25952.0,Echolocation,Nyctalus leisleri,0.249,0.31,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1235.1345,1235.1592,16015.0,19045.0,Echolocation,Nyctalus noctula,0.245,0.324,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1246.4905,1246.4951,18593.0,36402.0,Echolocation,Plecotus austriacus,0.137,0.202,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1263.1265,1263.1509,22890.0,26636.0,Echolocation,Nyctalus noctula,0.096,0.207,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1272.8735,1272.8934,22890.0,25197.0,Echolocation,Nyctalus leisleri,0.21,0.234,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1338.2305,1338.2536,15156.0,18185.0,Echolocation,Nyctalus leisleri,0.142,0.21,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1511.3235,1511.3283,22890.0,39151.0,Echolocation,Plecotus austriacus,0.206,0.25,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795
+1552.2115,1552.2174,22031.0,35170.0,Echolocation,Plecotus austriacus,0.233,0.276,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_004/20220816_030000.WAV,Foliage,recover-20220818,004,1795

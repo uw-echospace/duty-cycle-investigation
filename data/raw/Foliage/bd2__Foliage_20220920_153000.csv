@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+134.2285,134.2404,28906.0,35025.0,Echolocation,Eptesicus serotinus,0.102,0.22,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+153.8115,153.8274,22890.0,26804.0,Echolocation,Nyctalus leisleri,0.127,0.231,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+237.2495,237.2612,27187.0,32590.0,Echolocation,Eptesicus serotinus,0.152,0.322,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+399.8375,399.8636,15156.0,19237.0,Echolocation,Nyctalus leisleri,0.222,0.287,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+439.8335,439.8461,23750.0,30053.0,Echolocation,Nyctalus leisleri,0.107,0.229,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+450.5095,450.5348,21171.0,25117.0,Echolocation,Nyctalus noctula,0.15,0.263,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+453.3035,453.3198,11718.0,16879.0,Echolocation,Nyctalus leisleri,0.21,0.286,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+976.4835,976.4982,24609.0,29540.0,Echolocation,Nyctalus leisleri,0.096,0.207,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+998.1225,998.133,28906.0,35780.0,Echolocation,Eptesicus serotinus,0.132,0.201,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+1038.4225,1038.4359,22031.0,26712.0,Echolocation,Nyctalus leisleri,0.094,0.215,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795
+1144.8845,1144.8958,23750.0,29383.0,Echolocation,Nyctalus leisleri,0.076,0.224,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220920_153000.WAV,Foliage,recover-20220922,002,1795

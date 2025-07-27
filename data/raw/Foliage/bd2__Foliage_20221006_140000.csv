@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+43.9755,43.992000000000004,23750.0,26897.0,Echolocation,Nyctalus leisleri,0.36,0.398,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+273.3505,273.3654,23750.0,27899.0,Echolocation,Nyctalus leisleri,0.348,0.449,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+420.7265,420.7544,16875.0,19590.0,Echolocation,Nyctalus noctula,0.137,0.202,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+502.7265,502.7438,23750.0,27290.0,Echolocation,Nyctalus leisleri,0.238,0.333,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+615.6445,615.6565,26328.0,31913.0,Echolocation,Eptesicus serotinus,0.104,0.215,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+732.1025,732.1171,23750.0,28175.0,Echolocation,Nyctalus leisleri,0.253,0.383,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+961.4785,961.4935,23750.0,27675.0,Echolocation,Nyctalus leisleri,0.339,0.439,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+1190.8545,1190.8709,23750.0,27650.0,Echolocation,Nyctalus leisleri,0.361,0.44,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+1420.2305,1420.2476,23750.0,27283.0,Echolocation,Nyctalus leisleri,0.172,0.266,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+1649.6065,1649.6205,23750.0,27673.0,Echolocation,Nyctalus leisleri,0.295,0.421,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795
+1659.7585,1659.7703,23750.0,29294.0,Echolocation,Eptesicus serotinus,0.08,0.209,-1,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221006_140000.WAV,Foliage,recover-20221006,002,1795

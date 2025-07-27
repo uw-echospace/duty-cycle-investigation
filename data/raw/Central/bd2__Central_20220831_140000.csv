@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+178.8725,178.8887,23750.0,29695.0,Echolocation,Nyctalus leisleri,0.082,0.2,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+279.3955,279.4046,25468.0,32689.0,Echolocation,Eptesicus serotinus,0.144,0.245,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+637.1095,637.1187,20312.0,28258.0,Echolocation,Plecotus austriacus,0.097,0.302,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+819.9105,819.9157,18593.0,30889.0,Echolocation,Plecotus austriacus,0.135,0.215,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+857.0455,857.0546,21171.0,27664.0,Echolocation,Plecotus austriacus,0.055,0.211,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+1098.6985,1098.719,21171.0,24411.0,Echolocation,Nyctalus noctula,0.094,0.203,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+1243.8985,1243.9081,28046.0,34608.0,Echolocation,Eptesicus serotinus,0.14,0.204,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+1273.1875,1273.2034,22890.0,27187.0,Echolocation,Nyctalus leisleri,0.119,0.224,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+1518.4585,1518.4645,19453.0,30357.0,Echolocation,Plecotus austriacus,0.162,0.209,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795
+1718.9855,1718.991,16015.0,31336.0,Echolocation,Plecotus auritus,0.15,0.2,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_140000.WAV,Central Pond,recover-20220901,004,1795

@@ -1,0 +1,8 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+186.4235,186.44650000000001,21171.0,25196.0,Echolocation,Nyctalus noctula,0.172,0.283,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221016_013000.WAV,Foliage,recover-20221017,008,1795
+279.3045,279.3225,11718.0,16883.0,Echolocation,Nyctalus leisleri,0.161,0.244,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221016_013000.WAV,Foliage,recover-20221017,008,1795
+766.5075,766.5217,22890.0,27484.0,Echolocation,Nyctalus leisleri,0.117,0.291,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221016_013000.WAV,Foliage,recover-20221017,008,1795
+1014.3135,1014.3322000000001,21171.0,25682.0,Echolocation,Nyctalus noctula,0.122,0.204,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221016_013000.WAV,Foliage,recover-20221017,008,1795
+1358.3845,1358.3958,22890.0,29586.0,Echolocation,Nyctalus leisleri,0.08,0.247,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221016_013000.WAV,Foliage,recover-20221017,008,1795
+1534.4815,1534.4958,23750.0,28439.0,Echolocation,Nyctalus leisleri,0.165,0.306,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221016_013000.WAV,Foliage,recover-20221017,008,1795
+1612.6815,1612.6935,45234.0,47407.0,Echolocation,Pipistrellus pipistrellus,0.188,0.232,-1,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221016_013000.WAV,Foliage,recover-20221017,008,1795

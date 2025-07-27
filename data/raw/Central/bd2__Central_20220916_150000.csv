@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+129.3785,129.3908,22031.0,27442.0,Echolocation,Nyctalus leisleri,0.105,0.251,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+233.3635,233.3835,17734.0,22300.0,Echolocation,Nyctalus noctula,0.186,0.248,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+534.5465,534.5643,22031.0,25860.0,Echolocation,Nyctalus leisleri,0.098,0.211,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+651.2165,651.2228,20312.0,31023.0,Echolocation,Plecotus austriacus,0.131,0.218,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+896.8435,896.8511,18593.0,28718.0,Echolocation,Plecotus austriacus,0.102,0.222,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+1170.8135,1170.8229,37500.0,42070.0,Echolocation,Pipistrellus nathusii,0.149,0.212,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+1189.6085,1189.6154,37500.0,44829.0,Echolocation,Myotis daubentonii,0.087,0.206,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+1289.7155,1289.7262,25468.0,31295.0,Echolocation,Eptesicus serotinus,0.14,0.222,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+1471.8145,1471.8197,23750.0,40256.0,Echolocation,Plecotus austriacus,0.166,0.249,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795
+1569.8145,1569.8264,25468.0,30740.0,Echolocation,Eptesicus serotinus,0.14,0.279,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220916_150000.WAV,Central Pond,recover-20220919,009,1795

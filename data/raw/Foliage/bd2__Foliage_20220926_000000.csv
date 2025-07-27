@@ -1,0 +1,13 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+57.2875,57.302,25468.0,29750.0,Echolocation,Nyctalus leisleri,0.132,0.209,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+98.1835,98.2059,21171.0,24253.0,Echolocation,Nyctalus noctula,0.113,0.208,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+109.3335,109.3485,23750.0,28090.0,Echolocation,Nyctalus leisleri,0.145,0.235,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+748.9605,748.9644,25468.0,59915.0,Echolocation,Myotis nattereri,0.228,0.265,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+988.5545,988.5674,12578.0,17787.0,Echolocation,Nyctalus leisleri,0.192,0.231,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+1017.1435,1017.1563,13437.0,16864.0,Echolocation,Nyctalus leisleri,0.204,0.276,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+1085.3165,1085.3413,20312.0,23936.0,Echolocation,Nyctalus noctula,0.152,0.249,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+1098.0155,1098.0354,22890.0,26096.0,Echolocation,Nyctalus leisleri,0.173,0.224,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+1295.5995,1295.6148,23750.0,29591.0,Echolocation,Eptesicus serotinus,0.091,0.237,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+1400.2985,1400.3205,18593.0,22154.0,Echolocation,Nyctalus noctula,0.193,0.266,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+1556.7915,1556.8124,22031.0,25823.0,Echolocation,Nyctalus leisleri,0.165,0.252,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795
+1601.1835,1601.1914,23750.0,40401.0,Echolocation,Plecotus austriacus,0.073,0.206,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220926_000000.WAV,Foliage,recover-20220926,008,1795

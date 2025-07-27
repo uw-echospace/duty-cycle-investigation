@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+184.5845,184.5929,20312.0,29685.0,Echolocation,Nyctalus noctula,0.1,0.317,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+398.7485,398.7606,28906.0,34481.0,Echolocation,Eptesicus serotinus,0.124,0.217,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+625.2755,625.2972,21171.0,24595.0,Echolocation,Nyctalus noctula,0.121,0.233,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+664.8455,664.8571,40937.0,43872.0,Echolocation,Pipistrellus nathusii,0.245,0.269,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+834.4975,834.5105,31484.0,36336.0,Echolocation,Pipistrellus nathusii,0.087,0.217,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+1024.8435,1024.8495,23750.0,37412.0,Echolocation,Plecotus austriacus,0.14,0.205,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+1115.1195,1115.1292,28046.0,35361.0,Echolocation,Eptesicus serotinus,0.119,0.203,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+1292.4295,1292.4426,23750.0,29024.0,Echolocation,Nyctalus leisleri,0.135,0.275,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+1338.8675,1338.8785,28906.0,35421.0,Echolocation,Eptesicus serotinus,0.153,0.223,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795
+1389.1705,1389.1911,18593.0,22398.0,Echolocation,Nyctalus noctula,0.147,0.204,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220825_143000.WAV,Central Pond,recover-20220825,008,1795

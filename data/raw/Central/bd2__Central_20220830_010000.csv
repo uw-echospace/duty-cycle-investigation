@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+133.6975,133.7099,25468.0,29991.0,Echolocation,Nyctalus leisleri,0.094,0.201,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+159.1285,159.1374,28046.0,34853.0,Echolocation,Eptesicus serotinus,0.198,0.276,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+470.6175,470.6278,45234.0,49349.0,Echolocation,Pipistrellus pipistrellus,0.197,0.216,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+504.77049999999997,504.7833,22890.0,27815.0,Echolocation,Nyctalus leisleri,0.091,0.22,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+1184.5195,1184.5314,28906.0,35744.0,Echolocation,Eptesicus serotinus,0.163,0.248,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+1220.1445,1220.1576,16875.0,22416.0,Echolocation,Nyctalus noctula,0.132,0.215,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+1383.1455,1383.1663,21171.0,24937.0,Echolocation,Nyctalus noctula,0.165,0.274,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+1439.6205,1439.6426,21171.0,25060.0,Echolocation,Nyctalus noctula,0.143,0.241,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+1458.2995,1458.3094,22031.0,30320.0,Echolocation,Nyctalus noctula,0.054,0.204,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795
+1674.7955,1674.821,20312.0,23280.0,Echolocation,Nyctalus leisleri,0.132,0.204,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_010000.WAV,Central Pond,recover-20220901,004,1795

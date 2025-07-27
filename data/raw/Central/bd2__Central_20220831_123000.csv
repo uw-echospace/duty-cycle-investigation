@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+513.1215,513.13,19453.0,26752.0,Echolocation,Plecotus austriacus,0.095,0.205,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+767.4735000000001,767.48,20312.0,29676.0,Echolocation,Plecotus austriacus,0.137,0.234,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+937.7115,937.7272,24609.0,27990.0,Echolocation,Nyctalus leisleri,0.382,0.47,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+938.1375,938.1568,24609.0,29078.0,Echolocation,Nyctalus leisleri,0.169,0.295,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+938.4415,938.4557,24609.0,29332.0,Echolocation,Nyctalus leisleri,0.408,0.57,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+940.5325,940.5521,23750.0,27828.0,Echolocation,Nyctalus leisleri,0.126,0.241,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+991.3495,991.3572,20312.0,29227.0,Echolocation,Plecotus austriacus,0.076,0.209,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+1128.0035,1128.0194,29765.0,33794.0,Echolocation,Nyctalus leisleri,0.11,0.201,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+1660.4045,1660.4152,29765.0,35403.0,Echolocation,Eptesicus serotinus,0.121,0.207,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795
+1746.9405,1746.9586,16015.0,20443.0,Echolocation,Nyctalus noctula,0.175,0.23,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220831_123000.WAV,Central Pond,recover-20220901,004,1795

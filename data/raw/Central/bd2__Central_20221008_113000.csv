@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+285.1355,285.148,28906.0,34473.0,Echolocation,Eptesicus serotinus,0.126,0.209,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+329.7455,329.7972,68437.0,83708.0,Echolocation,Rhinolophus ferrumequinum,0.203,0.203,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+753.5265,753.5411,22890.0,28565.0,Echolocation,Nyctalus leisleri,0.08,0.224,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+1001.5315,1001.5427999999999,36640.0,40269.0,Echolocation,Pipistrellus nathusii,0.166,0.219,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+1074.4465,1074.4581,25468.0,31075.0,Echolocation,Eptesicus serotinus,0.137,0.274,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+1138.9565,1138.9705,22890.0,27773.0,Echolocation,Nyctalus leisleri,0.103,0.222,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+1280.8725,1280.8951,17734.0,20550.0,Echolocation,Nyctalus noctula,0.155,0.221,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+1284.6615,1284.6786,22031.0,26674.0,Echolocation,Nyctalus leisleri,0.198,0.323,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+1350.3935,1350.4082,35781.0,39501.0,Echolocation,Pipistrellus nathusii,0.198,0.245,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795
+1601.1885,1601.2022,33203.0,37196.0,Echolocation,Pipistrellus nathusii,0.091,0.219,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221008_113000.WAV,Central Pond,recover-20221010,009,1795

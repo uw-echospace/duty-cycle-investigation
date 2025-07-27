@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+15.4215,15.4378,23750.0,28801.0,Nyctalus leisleri,0.108,0.2,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+102.2585,102.2766,23750.0,27297.0,Nyctalus leisleri,0.243,0.296,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+331.6335,331.6499,23750.0,27500.0,Nyctalus leisleri,0.304,0.372,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+561.0095,561.0269,23750.0,26829.0,Nyctalus leisleri,0.252,0.316,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+743.1935,743.205,22890.0,28626.0,Nyctalus leisleri,0.096,0.241,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+790.3845,790.4014,23750.0,27379.0,Nyctalus leisleri,0.202,0.277,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+1019.7615,1019.7766,23750.0,27536.0,Nyctalus leisleri,0.273,0.346,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+1249.1375,1249.1534,23750.0,27680.0,Nyctalus leisleri,0.279,0.34,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+1587.4835,1587.4959,28046.0,32457.0,Eptesicus serotinus,0.124,0.251,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+1707.8895,1707.9057,23750.0,27035.0,Nyctalus leisleri,0.375,0.445,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795
+1750.1835,1750.1925,27187.0,34987.0,Eptesicus serotinus,0.142,0.227,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_002/20221005_033000.WAV,Foliage,recover-20221006,002,1795

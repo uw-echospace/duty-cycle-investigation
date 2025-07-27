@@ -1,0 +1,22 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+33.4615,33.473,34921.0,39091.0,Echolocation,Pipistrellus nathusii,0.146,0.259,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+241.2815,241.2951,28046.0,33009.0,Echolocation,Eptesicus serotinus,0.129,0.218,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+389.9385,389.9481,47812.0,51716.0,Echolocation,Pipistrellus pipistrellus,0.189,0.22,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+441.4175,441.4309,22031.0,28131.0,Echolocation,Nyctalus noctula,0.121,0.303,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+472.5095,472.5182,27187.0,35438.0,Echolocation,Eptesicus serotinus,0.125,0.212,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+640.1865,640.1913,23750.0,39199.0,Echolocation,Plecotus austriacus,0.183,0.272,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+647.6255,647.6388,28906.0,33265.0,Echolocation,Eptesicus serotinus,0.099,0.2,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+653.4014999999999,653.4118,22890.0,30115.0,Echolocation,Nyctalus noctula,0.064,0.218,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+968.1065,968.1326,17734.0,20538.0,Echolocation,Nyctalus noctula,0.261,0.367,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1043.4665,1043.4753,19453.0,27625.0,Echolocation,Plecotus austriacus,0.084,0.252,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1139.9825,1139.9878,13437.0,34425.0,Echolocation,Plecotus auritus,0.228,0.262,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1174.2375,1174.2486,22031.0,29527.0,Echolocation,Eptesicus serotinus,0.07,0.242,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1180.0615,1180.084,16015.0,19722.0,Echolocation,Nyctalus noctula,0.187,0.254,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1272.5355,1272.5488,26328.0,30272.0,Echolocation,Nyctalus leisleri,0.178,0.292,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1414.3405,1414.3629,19453.0,22522.0,Echolocation,Nyctalus noctula,0.167,0.254,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1439.4645,1439.4824,34921.0,38963.0,Echolocation,Pipistrellus nathusii,0.18,0.253,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1596.0325,1596.0483,22031.0,25672.0,Echolocation,Nyctalus leisleri,0.131,0.209,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1648.7275,1648.7361,45234.0,49050.0,Echolocation,Pipistrellus pipistrellus,0.269,0.285,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1768.8735,1768.8916,11718.0,16238.0,Echolocation,Nyctalus leisleri,0.2,0.23,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1769.6715,1769.6955,17734.0,21037.0,Echolocation,Nyctalus noctula,0.159,0.228,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795
+1779.3115,1779.3214,26328.0,32402.0,Echolocation,Eptesicus serotinus,0.119,0.231,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220924_130000.WAV,Central Pond,recover-20220926,009,1795

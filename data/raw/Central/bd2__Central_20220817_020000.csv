@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+78.6895,78.6985,25468.0,31732.0,Echolocation,Eptesicus serotinus,0.152,0.294,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+198.4325,198.43880000000001,16875.0,36914.0,Echolocation,Plecotus austriacus,0.132,0.205,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+207.2575,207.2843,18593.0,22330.0,Echolocation,Nyctalus noctula,0.168,0.211,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+434.9545,434.9657,27187.0,32255.0,Echolocation,Eptesicus serotinus,0.106,0.203,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+698.9285,698.9519,19453.0,22076.0,Echolocation,Nyctalus noctula,0.149,0.207,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+727.0115,727.0228,58984.0,63558.0,Echolocation,Pipistrellus pipistrellus,0.133,0.275,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+1006.3605,1006.3679,23750.0,32184.0,Echolocation,Eptesicus serotinus,0.061,0.208,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+1102.5805,1102.5894,28906.0,37331.0,Echolocation,Eptesicus serotinus,0.154,0.243,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+1361.9105,1361.92,24609.0,32139.0,Echolocation,Eptesicus serotinus,0.094,0.22,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795
+1613.9245,1613.9303,16875.0,30665.0,Echolocation,Plecotus austriacus,0.141,0.2,-1,/mnt/ubna_data_01_mir/recover-20220818/UBNA_006/20220817_020000.WAV,Central Pond,recover-20220818,006,1795

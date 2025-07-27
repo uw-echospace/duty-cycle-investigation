@@ -1,0 +1,10 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+208.8405,208.8486,20312.0,28204.0,Echolocation,Plecotus austriacus,0.1,0.235,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795
+412.2875,412.3018,23750.0,27066.0,Echolocation,Nyctalus leisleri,0.175,0.227,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795
+697.6125,697.6197,34921.0,41303.0,Echolocation,Barbastellus barbastellus,0.118,0.2,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795
+1131.1515,1131.1625,22890.0,28230.0,Echolocation,Eptesicus serotinus,0.133,0.26,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795
+1207.7335,1207.7585,16015.0,19554.0,Echolocation,Nyctalus noctula,0.152,0.221,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795
+1226.4405,1226.4479,30625.0,37630.0,Echolocation,Eptesicus serotinus,0.154,0.348,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795
+1465.5515,1465.5581,22031.0,32958.0,Echolocation,Plecotus austriacus,0.148,0.203,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795
+1552.7315,1552.7467,14296.0,17737.0,Echolocation,Nyctalus leisleri,0.111,0.244,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795
+1587.2095,1587.2217,25468.0,30764.0,Echolocation,Eptesicus serotinus,0.115,0.223,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220913_143000.WAV,Central Pond,recover-20220915,003,1795

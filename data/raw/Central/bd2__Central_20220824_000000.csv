@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+200.5445,200.5588,23750.0,27385.0,Echolocation,Nyctalus leisleri,0.132,0.242,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+492.9865,492.993,36640.0,43585.0,Echolocation,Barbastellus barbastellus,0.077,0.215,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+630.8055,630.8174,43515.0,47520.0,Echolocation,Pipistrellus pipistrellus,0.183,0.265,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+705.3115,705.3163,14296.0,35337.0,Echolocation,Plecotus auritus,0.18,0.208,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+735.7435,735.7622,20312.0,23777.0,Echolocation,Nyctalus leisleri,0.498,0.535,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+1070.3235,1070.3304,22031.0,31260.0,Echolocation,Plecotus austriacus,0.135,0.217,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+1118.4765,1118.4906,23750.0,28569.0,Echolocation,Nyctalus leisleri,0.247,0.418,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+1165.6885,1165.6989,29765.0,37381.0,Echolocation,Eptesicus serotinus,0.164,0.217,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+1590.0095,1590.0168,45234.0,49605.0,Echolocation,Pipistrellus pipistrellus,0.215,0.257,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795
+1605.9005,1605.9194,23750.0,27472.0,Echolocation,Nyctalus leisleri,0.147,0.222,-1,/mnt/ubna_data_01_mir/recover-20220825/UBNA_008/20220824_000000.WAV,Central Pond,recover-20220825,008,1795

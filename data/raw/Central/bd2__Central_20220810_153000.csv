@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+361.8695,361.8768,18593.0,29111.0,Echolocation,Plecotus austriacus,0.109,0.244,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+463.9235,463.9329,21171.0,28246.0,Echolocation,Plecotus austriacus,0.053,0.203,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+609.7425,609.7525,20312.0,28500.0,Echolocation,Nyctalus noctula,0.072,0.221,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+767.3405,767.3492,20312.0,28057.0,Echolocation,Plecotus austriacus,0.114,0.256,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+1162.2445,1162.2532,21171.0,29021.0,Echolocation,Plecotus austriacus,0.076,0.24,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+1361.2325,1361.242,20312.0,27790.0,Echolocation,Plecotus austriacus,0.073,0.208,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+1364.8195,1364.8293,20312.0,28069.0,Echolocation,Plecotus austriacus,0.072,0.214,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+1511.5945,1511.6044,22031.0,29732.0,Echolocation,Eptesicus serotinus,0.093,0.234,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+1606.3075,1606.3156,20312.0,29040.0,Echolocation,Plecotus austriacus,0.086,0.214,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795
+1752.3685,1752.377,20312.0,28591.0,Echolocation,Plecotus austriacus,0.1,0.213,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220810_153000.WAV,Central Pond,recover-20220811,010,1795

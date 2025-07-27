@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+165.7445,165.7531,20312.0,28565.0,Echolocation,Plecotus austriacus,0.094,0.256,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+218.8175,218.82659999999998,19453.0,28589.0,Echolocation,Plecotus austriacus,0.11,0.226,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+268.1995,268.20799999999997,19453.0,27861.0,Echolocation,Plecotus austriacus,0.079,0.211,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+456.4125,456.4276,23750.0,28979.0,Echolocation,Eptesicus serotinus,0.083,0.238,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+532.4085,532.4265,21171.0,24812.0,Echolocation,Nyctalus noctula,0.139,0.26,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+773.5525,773.5605,20312.0,28764.0,Echolocation,Plecotus austriacus,0.087,0.221,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+872.6945,872.7035,20312.0,27516.0,Echolocation,Plecotus austriacus,0.083,0.255,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+1324.2005,1324.2084,20312.0,27592.0,Echolocation,Plecotus austriacus,0.097,0.218,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+1493.1075,1493.1208,28046.0,32952.0,Echolocation,Eptesicus serotinus,0.115,0.205,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795
+1507.4185,1507.4395,22031.0,25710.0,Echolocation,Nyctalus leisleri,0.128,0.242,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_130000.WAV,Central Pond,recover-20220811,010,1795

@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+79.6915,79.7007,20312.0,28453.0,Echolocation,Plecotus austriacus,0.085,0.244,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+84.4045,84.4142,20312.0,27421.0,Echolocation,Plecotus austriacus,0.076,0.205,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+139.90449999999998,139.9138,20312.0,27916.0,Echolocation,Plecotus austriacus,0.083,0.217,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+431.3835,431.3962,22031.0,28980.0,Echolocation,Nyctalus noctula,0.096,0.208,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+797.5645,797.5828,22031.0,26099.0,Echolocation,Nyctalus noctula,0.101,0.218,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+1138.2815,1138.2898,20312.0,28608.0,Echolocation,Plecotus austriacus,0.09,0.216,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+1241.6975,1241.7111,23750.0,28211.0,Echolocation,Nyctalus leisleri,0.133,0.233,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+1489.4245,1489.4386,28906.0,33468.0,Echolocation,Eptesicus serotinus,0.094,0.204,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+1607.8595,1607.8748,25468.0,30269.0,Echolocation,Nyctalus leisleri,0.131,0.253,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795
+1788.6115,1788.6213,20312.0,26968.0,Echolocation,Plecotus austriacus,0.077,0.235,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_133000.WAV,Central Pond,recover-20220811,010,1795

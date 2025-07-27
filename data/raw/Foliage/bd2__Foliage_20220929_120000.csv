@@ -1,0 +1,22 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+385.0875,385.1009,51250.0,55095.0,Echolocation,Pipistrellus pygmaeus,0.121,0.215,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+398.7105,398.7272,22890.0,26684.0,Echolocation,Nyctalus leisleri,0.109,0.209,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+412.6975,412.7063,42656.0,48877.0,Echolocation,Pipistrellus pipistrellus,0.267,0.563,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+412.85450000000003,412.8621,43515.0,51087.0,Echolocation,Pipistrellus pipistrellus,0.412,0.686,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+413.0945,413.10360000000003,43515.0,48252.0,Echolocation,Pipistrellus pipistrellus,0.281,0.541,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+413.2175,413.2258,42656.0,50227.0,Echolocation,Pipistrellus pipistrellus,0.246,0.573,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+413.5155,413.525,44375.0,49502.0,Echolocation,Pipistrellus pipistrellus,0.246,0.262,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+413.6315,413.644,41796.0,46174.0,Echolocation,Pipistrellus pipistrellus,0.129,0.29,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+413.8465,413.8568,42656.0,47596.0,Echolocation,Pipistrellus pipistrellus,0.187,0.34,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+447.7715,447.7826,40937.0,44172.0,Echolocation,Pipistrellus nathusii,0.2,0.214,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+451.7615,451.7663,47812.0,59759.0,Echolocation,Pipistrellus pipistrellus,0.368,0.384,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+451.8475,451.8533,47812.0,61336.0,Echolocation,Pipistrellus pipistrellus,0.572,0.662,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+566.3705,566.3809,45234.0,54222.0,Echolocation,Pipistrellus pipistrellus,0.194,0.247,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+566.5695,566.5801,43515.0,54217.0,Echolocation,Pipistrellus pipistrellus,0.392,0.525,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+566.8815,566.8921,44375.0,50696.0,Echolocation,Pipistrellus pipistrellus,0.414,0.46,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+788.2445,788.2567,30625.0,34407.0,Echolocation,Eptesicus serotinus,0.103,0.242,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+950.1775,950.1837,44375.0,50917.0,Echolocation,Pipistrellus pipistrellus,0.206,0.226,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+1135.8985,1135.9128,40078.0,43898.0,Echolocation,Pipistrellus nathusii,0.219,0.235,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+1365.2735,1365.2911,39218.0,43341.0,Echolocation,Pipistrellus nathusii,0.165,0.204,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+1594.6515,1594.6652,40078.0,43945.0,Echolocation,Pipistrellus nathusii,0.281,0.291,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795
+1748.5615,1748.5759,25468.0,29554.0,Echolocation,Eptesicus serotinus,0.093,0.21,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_120000.WAV,Foliage,recover-20220929,002,1795

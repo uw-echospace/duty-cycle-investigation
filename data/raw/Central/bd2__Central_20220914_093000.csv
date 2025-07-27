@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+342.6825,342.7045,20312.0,23493.0,Echolocation,Nyctalus leisleri,0.269,0.308,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+557.3205,557.3352,23750.0,29630.0,Echolocation,Nyctalus leisleri,0.178,0.33,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+602.7905,602.803,30625.0,35510.0,Echolocation,Eptesicus serotinus,0.102,0.201,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+697.1035,697.1116,21171.0,29804.0,Echolocation,Plecotus austriacus,0.074,0.203,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+1063.6745,1063.6806,23750.0,35261.0,Echolocation,Plecotus austriacus,0.115,0.203,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+1129.0155,1129.0292,22890.0,27054.0,Echolocation,Nyctalus leisleri,0.101,0.2,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+1304.7595,1304.7828,17734.0,20772.0,Echolocation,Nyctalus noctula,0.137,0.204,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+1308.9075,1308.9154,20312.0,29241.0,Echolocation,Plecotus austriacus,0.101,0.241,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+1440.6085,1440.6252,25468.0,29511.0,Echolocation,Nyctalus leisleri,0.131,0.202,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795
+1489.1695,1489.1754,21171.0,32928.0,Echolocation,Plecotus austriacus,0.117,0.209,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220914_093000.WAV,Central Pond,recover-20220915,003,1795

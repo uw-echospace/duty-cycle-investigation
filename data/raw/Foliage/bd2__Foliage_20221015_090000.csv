@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+21.1035,21.1147,40937.0,45598.0,Pipistrellus nathusii,0.213,0.243,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+110.1325,110.1485,19453.0,24340.0,Nyctalus noctula,0.128,0.21,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+263.6895,263.7029,22031.0,27954.0,Nyctalus noctula,0.095,0.219,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+419.5845,419.596,23750.0,28083.0,Nyctalus leisleri,0.14,0.27,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+575.3455,575.3569,40078.0,44464.0,Pipistrellus nathusii,0.289,0.309,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+640.5535,640.5676,22890.0,27799.0,Nyctalus leisleri,0.118,0.22,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+1167.1205,1167.138,22031.0,26811.0,Nyctalus noctula,0.118,0.232,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+1266.1085,1266.119,28906.0,36742.0,Eptesicus serotinus,0.17,0.247,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+1396.9265,1396.9367,27187.0,33621.0,Eptesicus serotinus,0.132,0.207,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+1518.7755,1518.7887,23750.0,29061.0,Nyctalus leisleri,0.093,0.203,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795
+1642.2825,1642.2881,44375.0,53586.0,Pipistrellus pipistrellus,0.47,0.509,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221015_090000.WAV,Foliage,recover-20221017,008,1795

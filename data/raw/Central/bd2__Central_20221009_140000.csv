@@ -1,0 +1,13 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+19.0585,19.0851,16015.0,19555.0,Nyctalus noctula,0.165,0.224,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+67.4405,67.4689,17734.0,20121.0,Nyctalus noctula,0.181,0.25,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+69.0885,69.1069,11718.0,16659.0,Nyctalus leisleri,0.181,0.269,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+80.5035,80.532,17734.0,20211.0,Nyctalus noctula,0.176,0.231,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+155.5945,155.6092,23750.0,27660.0,Nyctalus leisleri,0.161,0.259,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+513.4835,513.4938,22031.0,30014.0,Nyctalus noctula,0.103,0.245,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+539.9445,539.9595,11718.0,16887.0,Nyctalus leisleri,0.158,0.202,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+575.4985,575.5103,25468.0,29997.0,Nyctalus leisleri,0.103,0.212,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+1137.2555,1137.2639,27187.0,36681.0,Eptesicus serotinus,0.167,0.248,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+1318.0015,1318.0134,24609.0,29174.0,Nyctalus leisleri,0.169,0.243,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+1400.3805,1400.4028,21171.0,25647.0,Nyctalus noctula,0.13,0.23,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795
+1609.4125,1609.423,28046.0,33608.0,Eptesicus serotinus,0.096,0.21,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221009_140000.WAV,Central Pond,recover-20221010,009,1795

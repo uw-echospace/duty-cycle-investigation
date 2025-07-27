@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+108.1065,108.1329,16875.0,19356.0,Echolocation,Nyctalus noctula,0.189,0.249,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+125.7885,125.8053,25468.0,28728.0,Echolocation,Nyctalus leisleri,0.183,0.261,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+157.3805,157.3967,48671.0,51426.0,Echolocation,Pipistrellus pipistrellus,0.19,0.292,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+401.5295,401.5371,48671.0,52217.0,Echolocation,Pipistrellus pipistrellus,0.216,0.232,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+455.5835,455.5934,25468.0,32447.0,Echolocation,Eptesicus serotinus,0.137,0.241,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+616.1345,616.1485,23750.0,27672.0,Echolocation,Nyctalus leisleri,0.242,0.334,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+861.5445,861.5538,25468.0,32471.0,Echolocation,Eptesicus serotinus,0.128,0.274,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+987.5275,987.5441,22890.0,26828.0,Echolocation,Nyctalus noctula,0.091,0.208,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+1003.8475,1003.8597,28906.0,33567.0,Echolocation,Eptesicus serotinus,0.119,0.214,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+1148.8295,1148.8536,21171.0,24580.0,Echolocation,Nyctalus leisleri,0.137,0.256,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795
+1562.7355,1562.754,48671.0,51888.0,Echolocation,Pipistrellus pipistrellus,0.183,0.224,-1,/mnt/ubna_data_01_mir/recover-20220822/UBNA_013/20220819_020000.WAV,Foliage,recover-20220822,013,1795

@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+37.1555,37.1651,43515.0,48494.0,Echolocation,Pipistrellus pipistrellus,0.196,0.21,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+210.5315,210.549,22031.0,26453.0,Echolocation,Nyctalus leisleri,0.095,0.205,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+383.5585,383.571,23750.0,28499.0,Echolocation,Nyctalus leisleri,0.169,0.349,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+522.8655,522.8794,24609.0,29582.0,Echolocation,Nyctalus leisleri,0.091,0.209,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+796.0935,796.1152,20312.0,24182.0,Echolocation,Nyctalus noctula,0.195,0.311,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+1431.0365,1431.0477,28906.0,34470.0,Echolocation,Eptesicus serotinus,0.109,0.215,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+1501.3195,1501.3243,23750.0,36691.0,Echolocation,Plecotus austriacus,0.164,0.209,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+1501.8515,1501.8553,23750.0,56357.0,Echolocation,Myotis nattereri,0.185,0.224,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+1508.0065,1508.01,23750.0,46351.0,Echolocation,Myotis nattereri,0.108,0.239,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+1551.0635,1551.0837,21171.0,25232.0,Echolocation,Nyctalus noctula,0.138,0.292,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795
+1574.8235,1574.8268,29765.0,50186.0,Echolocation,Myotis nattereri,0.122,0.25,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_011/20220814_020000.WAV,Foliage,recover-20220815,011,1795

@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+469.8555,469.8677,24609.0,29491.0,Echolocation,Eptesicus serotinus,0.098,0.228,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+504.8765,504.89,23750.0,28367.0,Echolocation,Nyctalus leisleri,0.127,0.249,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+797.0585,797.0721,22890.0,27865.0,Echolocation,Nyctalus leisleri,0.135,0.285,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+900.1995,900.2158,15156.0,19365.0,Echolocation,Nyctalus noctula,0.166,0.267,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+1229.8425,1229.8576,22031.0,26175.0,Echolocation,Nyctalus noctula,0.13,0.287,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+1627.9445,1627.9652,21171.0,24599.0,Echolocation,Nyctalus leisleri,0.13,0.202,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+1642.3775,1642.391,23750.0,28361.0,Echolocation,Nyctalus leisleri,0.101,0.249,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+1642.4765,1642.4936,22031.0,26005.0,Echolocation,Nyctalus leisleri,0.155,0.269,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+1661.3555,1661.3751,22890.0,26047.0,Echolocation,Nyctalus leisleri,0.363,0.411,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+1663.1645,1663.1862,22890.0,25752.0,Echolocation,Nyctalus leisleri,0.145,0.22,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795
+1664.0495,1664.0713,22890.0,26175.0,Echolocation,Nyctalus leisleri,0.15,0.206,-1,/mnt/ubna_data_02_mir/recover-20220912/UBNA_008/20220910_150000.WAV,Foliage,recover-20220912,008,1795

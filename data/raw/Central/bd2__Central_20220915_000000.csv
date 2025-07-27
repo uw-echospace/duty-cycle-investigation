@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+301.3865,301.398,24609.0,31102.0,Echolocation,Eptesicus serotinus,0.099,0.205,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+330.3525,330.3661,32343.0,35100.0,Echolocation,Pipistrellus nathusii,0.104,0.207,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+393.7605,393.7685,17734.0,27105.0,Echolocation,Plecotus austriacus,0.096,0.231,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+418.8555,418.8611,21171.0,33515.0,Echolocation,Plecotus austriacus,0.154,0.205,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+425.2265,425.2394,22890.0,27484.0,Echolocation,Nyctalus leisleri,0.148,0.263,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+574.7355,574.7436,21171.0,26924.0,Echolocation,Plecotus austriacus,0.087,0.235,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+743.1835,743.2052,21171.0,24726.0,Echolocation,Nyctalus leisleri,0.115,0.247,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+871.1955,871.2093,22890.0,27397.0,Echolocation,Nyctalus leisleri,0.098,0.202,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+1419.2885,1419.2994,27187.0,32658.0,Echolocation,Eptesicus serotinus,0.106,0.201,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795
+1546.4885,1546.4946,20312.0,30420.0,Echolocation,Plecotus austriacus,0.169,0.233,-1,/mnt/ubna_data_02_mir/recover-20220915/UBNA_003/20220915_000000.WAV,Central Pond,recover-20220915,003,1795

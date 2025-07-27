@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+93.0655,93.0841,22031.0,25583.0,Echolocation,Nyctalus noctula,0.098,0.208,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+232.7065,232.7183,35781.0,41214.0,Echolocation,Pipistrellus nathusii,0.113,0.242,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+338.6615,338.6714,21171.0,28794.0,Echolocation,Nyctalus noctula,0.088,0.209,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+358.0945,358.0994,18593.0,35067.0,Echolocation,Plecotus austriacus,0.157,0.24,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+434.5155,434.5363,16015.0,19379.0,Echolocation,Nyctalus noctula,0.198,0.295,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+558.9445,558.9536,27187.0,34695.0,Echolocation,Eptesicus serotinus,0.133,0.228,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+844.4145,844.4208,17734.0,30743.0,Echolocation,Plecotus austriacus,0.153,0.208,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+914.3115,914.324,22890.0,28197.0,Echolocation,Nyctalus leisleri,0.087,0.226,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+1125.4075,1125.4181,28046.0,34397.0,Echolocation,Eptesicus serotinus,0.126,0.207,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795
+1425.0505,1425.0635,25468.0,31324.0,Echolocation,Eptesicus serotinus,0.108,0.204,-1,/mnt/ubna_data_01_mir/recover-20220828/UBNA_010/20220827_010000.WAV,Central Pond,recover-20220828,010,1795

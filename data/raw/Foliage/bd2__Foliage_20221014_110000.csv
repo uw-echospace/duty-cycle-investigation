@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+26.1235,26.1367,28906.0,34040.0,Eptesicus serotinus,0.135,0.232,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+41.9095,41.9277,22890.0,26602.0,Nyctalus leisleri,0.328,0.398,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+854.8965,854.9105,40078.0,43829.0,Pipistrellus nathusii,0.232,0.25,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+1084.2735,1084.288,40078.0,43581.0,Pipistrellus nathusii,0.206,0.229,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+1313.6485,1313.665,40078.0,43921.0,Pipistrellus nathusii,0.213,0.264,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+1543.0255,1543.0394000000001,40078.0,42799.0,Pipistrellus nathusii,0.204,0.22,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+1601.3295,1601.343,22031.0,27334.0,Nyctalus noctula,0.105,0.217,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+1640.1085,1640.1233,38359.0,40987.0,Pipistrellus nathusii,0.206,0.222,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+1689.5615,1689.5748,44375.0,48049.0,Pipistrellus pipistrellus,0.171,0.232,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+1772.4015,1772.4148,40078.0,43229.0,Pipistrellus nathusii,0.217,0.248,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795
+1784.5465,1784.5587,28906.0,33631.0,Eptesicus serotinus,0.125,0.236,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_110000.WAV,Foliage,recover-20221017,008,1795

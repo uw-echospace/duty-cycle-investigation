@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+20.4865,20.4913,22890.0,35529.0,Plecotus austriacus,0.169,0.227,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+33.3805,33.3896,23750.0,32475.0,Eptesicus serotinus,0.112,0.223,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+212.5665,212.5742,23750.0,32332.0,Eptesicus serotinus,0.108,0.323,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+596.9705,596.9814,22890.0,30154.0,Eptesicus serotinus,0.084,0.216,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+730.0065,730.0215,23750.0,27773.0,Nyctalus leisleri,0.187,0.305,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+890.9935,891.0055,22890.0,27739.0,Nyctalus leisleri,0.092,0.253,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+990.5145,990.5281,13437.0,16667.0,Nyctalus leisleri,0.26,0.416,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+1025.8525,1025.8733,16875.0,20287.0,Nyctalus noctula,0.18,0.24,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+1032.6885,1032.7026,23750.0,29003.0,Nyctalus leisleri,0.083,0.207,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+1160.9985,1161.0084,23750.0,30809.0,Eptesicus serotinus,0.103,0.254,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795
+1490.7665,1490.7844,11718.0,16440.0,Nyctalus leisleri,0.149,0.202,-1,Echolocation,/mnt/ubna_data_01_mir/recover-20220804/UBNA_003/20220804_023000.WAV,Central Pond,recover-20220804,003,1795

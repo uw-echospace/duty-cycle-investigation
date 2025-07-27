@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+297.3135,297.3247,43515.0,47457.0,Echolocation,Pipistrellus nathusii,0.116,0.234,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+471.0565,471.0699,23750.0,27514.0,Echolocation,Eptesicus serotinus,0.078,0.201,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+504.0655,504.0767,27187.0,33254.0,Echolocation,Eptesicus serotinus,0.121,0.205,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+537.8305,537.8406,24609.0,31247.0,Echolocation,Eptesicus serotinus,0.112,0.23,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+696.8245,696.8346,36640.0,42795.0,Echolocation,Pipistrellus nathusii,0.145,0.215,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+819.3755,819.3811,16015.0,27412.0,Echolocation,Plecotus auritus,0.168,0.238,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+876.3945,876.4001,22031.0,34692.0,Echolocation,Plecotus austriacus,0.154,0.229,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+1050.1655,1050.1854,16875.0,20322.0,Echolocation,Nyctalus noctula,0.146,0.212,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+1450.3335,1450.3378,17734.0,34698.0,Echolocation,Plecotus austriacus,0.169,0.244,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795
+1508.3395,1508.3501,16875.0,24090.0,Echolocation,Nyctalus noctula,0.097,0.207,-1,/mnt/ubna_data_02_mir/recover-20220901/UBNA_004/20220830_013000.WAV,Central Pond,recover-20220901,004,1795

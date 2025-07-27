@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+77.0085,77.0303,21171.0,24908.0,Echolocation,Nyctalus noctula,0.104,0.214,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+192.6835,192.702,22890.0,25690.0,Echolocation,Nyctalus leisleri,0.478,0.491,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+376.7605,376.7718,40078.0,44545.0,Echolocation,Pipistrellus nathusii,0.384,0.407,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+411.0825,411.0944,23750.0,28525.0,Echolocation,Nyctalus leisleri,0.108,0.253,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+500.4265,500.4381,22890.0,28139.0,Echolocation,Nyctalus leisleri,0.079,0.203,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+571.7125,571.7356,20312.0,23417.0,Echolocation,Nyctalus noctula,0.123,0.206,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+986.4295,986.4519,20312.0,22995.0,Echolocation,Nyctalus leisleri,0.204,0.252,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+1222.1295,1222.1468,23750.0,27999.0,Echolocation,Nyctalus leisleri,0.176,0.274,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+1247.7805,1247.7933,23750.0,28857.0,Echolocation,Nyctalus leisleri,0.083,0.216,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+1271.7735,1271.7928,20312.0,24038.0,Echolocation,Nyctalus noctula,0.147,0.23,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795
+1503.7845,1503.8099,20312.0,23059.0,Echolocation,Nyctalus noctula,0.12,0.209,-1,/mnt/ubna_data_02_mir/recover-20220929/UBNA_002/20220929_000000.WAV,Foliage,recover-20220929,002,1795

@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+36.6815,36.6989,19453.0,23548.0,Echolocation,Nyctalus noctula,0.106,0.206,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+246.2715,246.3013,17734.0,20092.0,Echolocation,Nyctalus noctula,0.169,0.23,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+643.0795,643.0897,26328.0,33398.0,Echolocation,Eptesicus serotinus,0.175,0.277,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+775.4725,775.481,20312.0,28138.0,Echolocation,Plecotus austriacus,0.105,0.206,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+775.7395,775.7585,20312.0,23492.0,Echolocation,Nyctalus noctula,0.124,0.214,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+931.0115,931.0205,19453.0,28020.0,Echolocation,Plecotus austriacus,0.072,0.226,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+1220.8465,1220.8641,22031.0,25672.0,Echolocation,Nyctalus noctula,0.121,0.25,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+1404.9035,1404.9227,15156.0,19305.0,Echolocation,Nyctalus leisleri,0.221,0.381,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+1572.9175,1572.9247,44375.0,49207.0,Echolocation,Pipistrellus pipistrellus,0.169,0.228,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795
+1645.4235,1645.4315,23750.0,31592.0,Echolocation,Eptesicus serotinus,0.066,0.229,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_009/20220925_153000.WAV,Central Pond,recover-20220926,009,1795

@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+21.6975,21.7113,43515.0,49401.0,Pipistrellus pipistrellus,0.168,0.216,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+392.6895,392.7011,23750.0,28921.0,Nyctalus leisleri,0.098,0.262,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+538.1945,538.2067,37500.0,40354.0,Pipistrellus nathusii,0.166,0.203,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+551.4505,551.463,40078.0,44689.0,Pipistrellus nathusii,0.204,0.255,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+731.7445,731.7651,46953.0,48876.0,Pipistrellus pipistrellus,0.2,0.253,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+824.3345,824.3527,22890.0,27054.0,Nyctalus leisleri,0.115,0.215,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+1010.2035,1010.2181,40078.0,42897.0,Pipistrellus nathusii,0.186,0.205,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+1468.9555,1468.9675,40078.0,44453.0,Pipistrellus nathusii,0.259,0.3,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+1472.4235,1472.4384,23750.0,28363.0,Nyctalus leisleri,0.15,0.25,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+1473.3095,1473.3246,22890.0,27655.0,Nyctalus leisleri,0.159,0.266,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795
+1713.0925,1713.1001,35781.0,42326.0,Barbastellus barbastellus,0.084,0.206,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221006/UBNA_003/20221004_093000.WAV,Central Pond,recover-20221006,003,1795

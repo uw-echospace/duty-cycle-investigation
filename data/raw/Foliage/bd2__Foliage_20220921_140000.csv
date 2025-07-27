@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+119.8725,119.8811,22890.0,31215.0,Echolocation,Eptesicus serotinus,0.077,0.201,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+349.6795,349.6934,25468.0,30352.0,Echolocation,Nyctalus leisleri,0.11,0.224,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+573.1785,573.1994,22031.0,25547.0,Echolocation,Nyctalus leisleri,0.308,0.337,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+636.8275,636.8538,16015.0,19063.0,Echolocation,Nyctalus noctula,0.232,0.328,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+641.6565,641.6818,16875.0,19791.0,Echolocation,Nyctalus noctula,0.287,0.37,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+902.1475,902.1599,12578.0,16707.0,Echolocation,Nyctalus leisleri,0.188,0.26,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+1068.5795,1068.6042,16875.0,19891.0,Echolocation,Nyctalus noctula,0.192,0.265,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+1206.3875,1206.3983,28046.0,33957.0,Echolocation,Eptesicus serotinus,0.14,0.219,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+1316.1305,1316.1389,54687.0,58973.0,Echolocation,Pipistrellus pygmaeus,0.222,0.23,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+1784.3265,1784.3549,21171.0,23579.0,Echolocation,Nyctalus leisleri,0.193,0.246,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795
+1792.0305,1792.0581,18593.0,20630.0,Echolocation,Nyctalus noctula,0.175,0.234,-1,/mnt/ubna_data_02_mir/recover-20220922/UBNA_002/20220921_140000.WAV,Foliage,recover-20220922,002,1795

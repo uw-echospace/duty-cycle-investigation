@@ -1,0 +1,13 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+512.2995,512.3153,11718.0,16122.0,Echolocation,Nyctalus leisleri,0.146,0.203,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+583.6455,583.6639,22031.0,25025.0,Echolocation,Nyctalus leisleri,0.138,0.218,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+624.0115,624.0246,23750.0,28908.0,Echolocation,Nyctalus leisleri,0.089,0.218,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+637.5685,637.592,16015.0,18741.0,Echolocation,Nyctalus noctula,0.107,0.203,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+1076.4085,1076.4251,23750.0,27733.0,Echolocation,Nyctalus leisleri,0.132,0.233,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+1302.3315,1302.3493,20312.0,23291.0,Echolocation,Nyctalus leisleri,0.112,0.214,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+1578.5955,1578.6219,16015.0,19179.0,Echolocation,Nyctalus noctula,0.225,0.284,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+1579.5005,1579.5251,16875.0,19532.0,Echolocation,Nyctalus noctula,0.119,0.215,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+1593.4575,1593.4743,11718.0,17517.0,Echolocation,Nyctalus leisleri,0.179,0.291,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+1593.5375,1593.5549,11718.0,15874.0,Echolocation,Nyctalus leisleri,0.238,0.295,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+1596.6585,1596.6774,22890.0,26898.0,Echolocation,Nyctalus leisleri,0.084,0.202,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795
+1599.3365,1599.3505,13437.0,16909.0,Echolocation,Nyctalus leisleri,0.161,0.244,-1,/mnt/ubna_data_01_mir/recover-20220811/UBNA_010/20220811_020000.WAV,Central Pond,recover-20220811,010,1795

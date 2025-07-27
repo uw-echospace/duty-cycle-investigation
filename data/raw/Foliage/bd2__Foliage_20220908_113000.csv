@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+411.5735,411.5866,28906.0,34214.0,Echolocation,Eptesicus serotinus,0.13,0.211,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+495.5345,495.5577,19453.0,21364.0,Echolocation,Nyctalus leisleri,0.245,0.497,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+495.5385,495.555,38359.0,42107.0,Echolocation,Pipistrellus nathusii,0.189,0.207,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+495.8805,495.9065,17734.0,20114.0,Echolocation,Nyctalus noctula,0.321,0.458,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+496.1175,496.1374,20312.0,23423.0,Echolocation,Nyctalus leisleri,0.258,0.372,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+651.6735,651.6855,32343.0,37255.0,Echolocation,Pipistrellus nathusii,0.087,0.237,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+809.7665,809.7819,22890.0,27564.0,Echolocation,Nyctalus leisleri,0.18,0.285,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+1003.7465,1003.7712,17734.0,19687.0,Echolocation,Nyctalus noctula,0.306,0.456,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+1067.8965,1067.9269,19453.0,21855.0,Echolocation,Nyctalus noctula,0.157,0.248,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+1072.5715,1072.5939,18593.0,21858.0,Echolocation,Nyctalus noctula,0.379,0.558,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795
+1454.6355,1454.6444,39218.0,42654.0,Echolocation,Pipistrellus nathusii,0.17,0.2,-1,/mnt/ubna_data_02_mir/recover-20220908/UBNA_002/20220908_113000.WAV,Foliage,recover-20220908,002,1795

@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+239.47050000000002,239.4826,27187.0,32124.0,Echolocation,Eptesicus serotinus,0.124,0.213,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+281.8815,281.8925,27187.0,33634.0,Echolocation,Eptesicus serotinus,0.139,0.239,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+305.5275,305.538,20312.0,23026.0,Echolocation,Nyctalus leisleri,0.163,0.203,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+545.7605,545.7727,27187.0,33049.0,Echolocation,Eptesicus serotinus,0.175,0.299,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+733.4725,733.4918,21171.0,25179.0,Echolocation,Nyctalus leisleri,0.099,0.223,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+819.1355,819.1404,23750.0,36782.0,Echolocation,Plecotus austriacus,0.138,0.24,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+1153.5715,1153.5851,25468.0,30904.0,Echolocation,Nyctalus leisleri,0.126,0.217,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+1211.8475,1211.8634,22890.0,27249.0,Echolocation,Nyctalus leisleri,0.107,0.219,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+1629.0385,1629.049,27187.0,33915.0,Echolocation,Eptesicus serotinus,0.155,0.231,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+1672.1445,1672.1566,27187.0,32207.0,Echolocation,Eptesicus serotinus,0.123,0.228,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795
+1742.7265,1742.7387,46953.0,50255.0,Echolocation,Pipistrellus pipistrellus,0.203,0.238,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_003/20221013_110000.WAV,Central Pond,recover-20221013,003,1795

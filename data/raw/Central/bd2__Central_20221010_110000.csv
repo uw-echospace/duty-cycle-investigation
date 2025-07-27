@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+357.0935,357.1073,22890.0,28564.0,Echolocation,Nyctalus leisleri,0.12,0.285,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+357.7985,357.8062,28046.0,36778.0,Echolocation,Eptesicus serotinus,0.174,0.259,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+481.8745,481.8884,11718.0,18600.0,Echolocation,Nyctalus leisleri,0.188,0.262,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+616.2745,616.282,28046.0,35883.0,Echolocation,Eptesicus serotinus,0.152,0.248,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+782.3945,782.4108,22890.0,26600.0,Echolocation,Nyctalus leisleri,0.172,0.289,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+866.3865,866.3944,28906.0,36823.0,Echolocation,Eptesicus serotinus,0.204,0.296,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+1085.8635,1085.8727,28906.0,35883.0,Echolocation,Eptesicus serotinus,0.185,0.265,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+1258.5385,1258.5481,45234.0,48301.0,Echolocation,Pipistrellus pipistrellus,0.21,0.221,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+1483.2615,1483.2727,28906.0,33993.0,Echolocation,Eptesicus serotinus,0.135,0.245,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795
+1662.1205,1662.1305,27187.0,34318.0,Echolocation,Eptesicus serotinus,0.131,0.209,-1,/mnt/ubna_data_02_mir/recover-20221010/UBNA_009/20221010_110000.WAV,Central Pond,recover-20221010,009,1795

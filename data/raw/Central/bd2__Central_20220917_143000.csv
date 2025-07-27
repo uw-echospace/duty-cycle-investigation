@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+211.1985,211.2188,33203.0,35856.0,Echolocation,Pipistrellus nathusii,0.155,0.349,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+299.29449999999997,299.3041,43515.0,48471.0,Echolocation,Pipistrellus pipistrellus,0.088,0.247,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+366.0125,366.0183,23750.0,34346.0,Echolocation,Plecotus austriacus,0.143,0.221,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+570.4415,570.4538,23750.0,28962.0,Echolocation,Nyctalus leisleri,0.143,0.313,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+749.4955,749.5195,21171.0,25083.0,Echolocation,Nyctalus noctula,0.123,0.228,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+899.2915,899.3044,22890.0,28707.0,Echolocation,Nyctalus leisleri,0.086,0.227,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+972.5245,972.5336,28046.0,34999.0,Echolocation,Eptesicus serotinus,0.206,0.308,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+1045.0425,1045.0592,22890.0,26523.0,Echolocation,Nyctalus leisleri,0.164,0.215,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+1358.7025,1358.7121,43515.0,50466.0,Echolocation,Pipistrellus pipistrellus,0.159,0.22,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795
+1535.8545,1535.865,43515.0,51561.0,Echolocation,Pipistrellus pipistrellus,0.224,0.303,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220917_143000.WAV,Central Pond,recover-20220919,009,1795

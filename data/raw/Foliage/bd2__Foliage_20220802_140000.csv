@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+317.7955,317.81,14296.0,17753.0,Echolocation,Nyctalus leisleri,0.11,0.259,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+449.8845,449.8978,13437.0,17489.0,Echolocation,Nyctalus leisleri,0.135,0.209,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+600.5345,600.548,13437.0,17800.0,Echolocation,Nyctalus leisleri,0.093,0.212,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+615.6455,615.6675,20312.0,23641.0,Echolocation,Nyctalus leisleri,0.175,0.274,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+1267.4365,1267.4527,22031.0,26731.0,Echolocation,Nyctalus noctula,0.121,0.242,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+1359.0215,1359.0498,16875.0,20207.0,Echolocation,Nyctalus noctula,0.187,0.273,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+1361.2465,1361.2695,16875.0,19532.0,Echolocation,Nyctalus noctula,0.174,0.23,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+1472.6985,1472.7281,18593.0,21497.0,Echolocation,Nyctalus noctula,0.235,0.292,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+1485.2445,1485.2654,20312.0,23217.0,Echolocation,Nyctalus leisleri,0.132,0.248,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+1697.7205,1697.7332,26328.0,29734.0,Echolocation,Nyctalus leisleri,0.165,0.258,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795
+1723.1495,1723.156,46953.0,51239.0,Echolocation,Pipistrellus pipistrellus,0.229,0.236,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220802_140000.WAV,Foliage,recover-20220804,002,1795

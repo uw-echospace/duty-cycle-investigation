@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+121.3815,121.395,26328.0,29413.0,Echolocation,Nyctalus leisleri,0.237,0.338,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+310.4695,310.4813,39218.0,43879.0,Echolocation,Pipistrellus nathusii,0.182,0.211,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+340.3445,340.3611,22031.0,27079.0,Echolocation,Nyctalus noctula,0.101,0.217,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+377.7125,377.7274,40937.0,42920.0,Echolocation,Pipistrellus nathusii,0.195,0.22,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+607.0895,607.104,40937.0,43258.0,Echolocation,Pipistrellus nathusii,0.186,0.256,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+836.4655,836.4802999999999,40078.0,42778.0,Echolocation,Pipistrellus nathusii,0.265,0.295,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+1295.2175,1295.2293,40078.0,44052.0,Echolocation,Pipistrellus nathusii,0.384,0.404,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+1454.2885,1454.309,21171.0,24505.0,Echolocation,Nyctalus leisleri,0.11,0.229,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+1524.5925,1524.6057,40078.0,43912.0,Echolocation,Pipistrellus nathusii,0.252,0.282,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+1643.6395,1643.6693,16875.0,20124.0,Echolocation,Nyctalus noctula,0.296,0.357,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795
+1753.9695,1753.9849,40937.0,43500.0,Echolocation,Pipistrellus nathusii,0.149,0.203,-1,/mnt/ubna_data_02_mir/recover-20221013/UBNA_002/20221011_143000.WAV,Foliage,recover-20221013,002,1795

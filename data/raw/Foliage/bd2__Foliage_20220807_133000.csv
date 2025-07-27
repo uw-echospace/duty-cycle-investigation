@@ -1,0 +1,27 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+65.9415,65.9688,16875.0,19175.0,Echolocation,Nyctalus leisleri,0.14,0.247,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+275.1955,275.2079,26328.0,30651.0,Echolocation,Nyctalus leisleri,0.105,0.217,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+305.1885,305.2038,23750.0,29209.0,Echolocation,Eptesicus serotinus,0.129,0.289,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+328.2885,328.3035,23750.0,28068.0,Echolocation,Nyctalus leisleri,0.097,0.225,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+364.7975,364.8112,22890.0,28681.0,Echolocation,Nyctalus leisleri,0.139,0.331,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+557.6655,557.6792,23750.0,27991.0,Echolocation,Nyctalus leisleri,0.16,0.269,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+589.5635,589.5769,26328.0,30798.0,Echolocation,Eptesicus serotinus,0.104,0.221,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+663.3785,663.3888,21171.0,28643.0,Echolocation,Nyctalus noctula,0.122,0.291,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+813.4205,813.4388,22031.0,26422.0,Echolocation,Nyctalus noctula,0.135,0.269,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+815.3545,815.3666,25468.0,30123.0,Echolocation,Eptesicus serotinus,0.1,0.201,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1103.7615,1103.7727,26328.0,32806.0,Echolocation,Eptesicus serotinus,0.11,0.208,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1113.3575,1113.3745,23750.0,27589.0,Echolocation,Nyctalus leisleri,0.278,0.339,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1217.5305,1217.5414,26328.0,32012.0,Echolocation,Eptesicus serotinus,0.164,0.289,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1342.7345,1342.7496,22890.0,27232.0,Echolocation,Nyctalus leisleri,0.203,0.331,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1437.4365,1437.445,23750.0,32202.0,Echolocation,Eptesicus serotinus,0.083,0.219,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1458.7675,1458.7799,26328.0,30883.0,Echolocation,Nyctalus leisleri,0.134,0.281,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1504.2685,1504.2857,23750.0,27169.0,Echolocation,Nyctalus leisleri,0.255,0.327,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1507.8365,1507.849,23750.0,29974.0,Echolocation,Eptesicus serotinus,0.101,0.231,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1554.7695,1554.7813,25468.0,29846.0,Echolocation,Eptesicus serotinus,0.097,0.205,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1560.1455,1560.1565,24609.0,30471.0,Echolocation,Eptesicus serotinus,0.121,0.24,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1563.3875,1563.4002,25468.0,30407.0,Echolocation,Eptesicus serotinus,0.11,0.218,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1572.2055,1572.2264,20312.0,23288.0,Echolocation,Nyctalus noctula,0.123,0.24,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1582.0755,1582.0848,24609.0,32097.0,Echolocation,Eptesicus serotinus,0.082,0.201,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1705.7235,1705.7344,24609.0,29389.0,Echolocation,Eptesicus serotinus,0.094,0.222,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1718.3535,1718.3636,25468.0,31110.0,Echolocation,Eptesicus serotinus,0.148,0.285,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795
+1771.2585,1771.2745,43515.0,47474.0,Echolocation,Pipistrellus pipistrellus,0.197,0.259,-1,/mnt/ubna_data_01_mir/recover-20220808/UBNA_014/20220807_133000.WAV,Foliage,recover-20220808,014,1795

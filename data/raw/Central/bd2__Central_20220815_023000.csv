@@ -1,0 +1,11 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+574.0655,574.0712,13437.0,27890.0,Echolocation,Plecotus auritus,0.205,0.235,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1003.0195,1003.0324,28046.0,32538.0,Echolocation,Eptesicus serotinus,0.114,0.239,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1012.9075,1012.9225,26328.0,30158.0,Echolocation,Nyctalus leisleri,0.103,0.204,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1042.7445,1042.7564,27187.0,32077.0,Echolocation,Eptesicus serotinus,0.109,0.231,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1061.6445,1061.6587,23750.0,28507.0,Echolocation,Nyctalus leisleri,0.099,0.232,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1061.6455,1061.6595,40078.0,43087.0,Echolocation,Pipistrellus nathusii,0.302,0.329,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1210.4245,1210.434,20312.0,27669.0,Echolocation,Plecotus austriacus,0.06,0.251,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1241.9545,1241.9789,20312.0,22348.0,Echolocation,Nyctalus leisleri,0.227,0.254,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1507.0165,1507.0229,13437.0,36445.0,Echolocation,Plecotus auritus,0.169,0.225,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795
+1545.8115,1545.8248,25468.0,31258.0,Echolocation,Eptesicus serotinus,0.116,0.217,-1,/mnt/ubna_data_01_mir/recover-20220815/UBNA_008/20220815_023000.WAV,Central Pond,recover-20220815,008,1795

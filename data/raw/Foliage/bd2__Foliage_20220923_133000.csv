@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+100.1785,100.1938,22890.0,26368.0,Echolocation,Nyctalus leisleri,0.154,0.201,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+189.0185,189.0439,19453.0,22105.0,Echolocation,Nyctalus noctula,0.144,0.28,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+267.1945,267.2083,26328.0,30349.0,Echolocation,Nyctalus leisleri,0.183,0.29,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+418.7605,418.7835,16015.0,21009.0,Echolocation,Nyctalus noctula,0.223,0.296,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+433.4755,433.4961,21171.0,25315.0,Echolocation,Nyctalus leisleri,0.166,0.299,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+599.6655,599.6765,40078.0,44392.0,Echolocation,Pipistrellus nathusii,0.183,0.202,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+755.6795,755.6956,25468.0,30000.0,Echolocation,Nyctalus leisleri,0.192,0.3,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+1565.1255,1565.1358,44375.0,48855.0,Echolocation,Pipistrellus pipistrellus,0.306,0.372,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+1596.0315,1596.0445,24609.0,30435.0,Echolocation,Eptesicus serotinus,0.153,0.255,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+1669.6315,1669.6482,22890.0,26056.0,Echolocation,Nyctalus leisleri,0.278,0.315,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795
+1669.6325,1669.6504,46953.0,48770.0,Echolocation,Pipistrellus pipistrellus,0.339,0.417,-1,/mnt/ubna_data_02_mir/recover-20220926/UBNA_008/20220923_133000.WAV,Foliage,recover-20220926,008,1795

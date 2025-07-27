@@ -1,0 +1,27 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+49.0625,49.0749,22890.0,27484.0,Echolocation,Nyctalus leisleri,0.084,0.201,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+309.6155,309.6227,44375.0,49415.0,Echolocation,Pipistrellus pipistrellus,0.3,0.332,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+386.2255,386.2401,32343.0,35898.0,Echolocation,Pipistrellus nathusii,0.107,0.249,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+511.4265,511.4396,33203.0,36215.0,Echolocation,Pipistrellus nathusii,0.109,0.275,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+608.6335,608.6433,22031.0,27548.0,Echolocation,Nyctalus leisleri,0.128,0.268,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+753.6035,753.6096,23750.0,34289.0,Echolocation,Plecotus austriacus,0.098,0.205,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+782.4565,782.4735,22031.0,26810.0,Echolocation,Nyctalus leisleri,0.116,0.265,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+825.1005,825.1074,23750.0,33140.0,Echolocation,Plecotus austriacus,0.071,0.224,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+870.7285,870.7375,48671.0,63721.0,Echolocation,Pipistrellus pipistrellus,0.328,0.355,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+870.8235,870.83,46953.0,60430.0,Echolocation,Pipistrellus pipistrellus,0.487,0.504,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+870.9265,870.9329,46953.0,63241.0,Echolocation,Pipistrellus pipistrellus,0.548,0.618,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.0285,871.0337,46953.0,62263.0,Echolocation,Pipistrellus pipistrellus,0.674,0.71,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.1275,871.1338,46953.0,62799.0,Echolocation,Pipistrellus pipistrellus,0.623,0.663,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.2195,871.226,46093.0,66107.0,Echolocation,Pipistrellus pipistrellus,0.631,0.681,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.3165,871.3224,46953.0,54508.0,Echolocation,Pipistrellus pipistrellus,0.584,0.631,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.4125,871.4199,46093.0,62127.0,Echolocation,Pipistrellus pipistrellus,0.625,0.682,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.5125,871.5188,46093.0,67066.0,Echolocation,Pipistrellus pipistrellus,0.639,0.718,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.6165,871.6231,46093.0,55032.0,Echolocation,Pipistrellus pipistrellus,0.508,0.545,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.7185,871.7269,46093.0,64165.0,Echolocation,Pipistrellus pipistrellus,0.56,0.67,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+871.9035,871.911,46953.0,64666.0,Echolocation,Pipistrellus pipistrellus,0.63,0.699,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+872.0965,872.1082,46953.0,51287.0,Echolocation,Pipistrellus pipistrellus,0.375,0.438,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+905.8745,905.8865,25468.0,30371.0,Echolocation,Nyctalus leisleri,0.104,0.202,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+1026.7135,1026.723,22890.0,28415.0,Echolocation,Nyctalus leisleri,0.081,0.214,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+1599.8555,1599.864,43515.0,47578.0,Echolocation,Pipistrellus pipistrellus,0.193,0.268,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+1655.4245,1655.4396,22031.0,25576.0,Echolocation,Nyctalus leisleri,0.124,0.212,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795
+1751.4085,1751.4161,43515.0,48524.0,Echolocation,Pipistrellus pipistrellus,0.18,0.225,-1,/mnt/ubna_data_02_mir/recover-20220919/UBNA_009/20220919_093000.WAV,Central Pond,recover-20220919,009,1795

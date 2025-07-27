@@ -1,0 +1,12 @@
+start_time,end_time,low_freq,high_freq,event,class,class_prob,det_prob,individual,input_file,Site name,Recover Folder,SD Card,File Duration
+340.1385,340.1621,21171.0,24153.0,Echolocation,Nyctalus leisleri,0.396,0.414,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+559.5275,559.5524,19453.0,22459.0,Echolocation,Nyctalus noctula,0.137,0.246,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+563.7175,563.7399,16015.0,18732.0,Echolocation,Nyctalus leisleri,0.107,0.219,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+565.3055,565.3368,16015.0,18747.0,Echolocation,Nyctalus noctula,0.151,0.209,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+568.3825,568.3975,22031.0,26627.0,Echolocation,Nyctalus leisleri,0.124,0.287,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+612.9275,612.9328,33203.0,44929.0,Echolocation,Barbastellus barbastellus,0.094,0.222,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+844.2115,844.2229,24609.0,30932.0,Echolocation,Eptesicus serotinus,0.089,0.214,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+915.1645,915.1874,21171.0,24335.0,Echolocation,Nyctalus leisleri,0.359,0.384,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+1155.8395,1155.8608,16015.0,18838.0,Echolocation,Nyctalus noctula,0.182,0.262,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+1295.7955,1295.8169,21171.0,25082.0,Echolocation,Nyctalus noctula,0.118,0.232,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795
+1410.8075,1410.8171,30625.0,37758.0,Echolocation,Eptesicus serotinus,0.166,0.235,-1,/mnt/ubna_data_01_mir/recover-20220804/UBNA_002/20220803_013000.WAV,Foliage,recover-20220804,002,1795

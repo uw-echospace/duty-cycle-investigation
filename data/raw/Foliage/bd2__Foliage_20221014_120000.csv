@@ -1,0 +1,16 @@
+start_time,end_time,low_freq,high_freq,class,class_prob,det_prob,individual,event,input_file,Site name,Recover Folder,SD Card,File Duration
+25.2855,25.2995,40078.0,43571.0,Pipistrellus nathusii,0.284,0.298,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+254.6615,254.6765,40078.0,44202.0,Pipistrellus nathusii,0.24,0.268,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+396.0955,396.1118,21171.0,25201.0,Nyctalus noctula,0.107,0.218,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+426.0015,426.02139999999997,20312.0,24664.0,Nyctalus noctula,0.113,0.203,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+426.0075,426.0268,21171.0,24669.0,Nyctalus noctula,0.125,0.249,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+458.9735,458.9982,19453.0,22466.0,Nyctalus noctula,0.148,0.215,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+469.5435,469.5569,34062.0,38892.0,Pipistrellus nathusii,0.168,0.269,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+518.8425,518.8604,22890.0,26589.0,Nyctalus leisleri,0.121,0.208,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+649.1505,649.1668999999999,43515.0,48067.0,Pipistrellus pipistrellus,0.164,0.204,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+682.5155,682.5289,24609.0,29091.0,Nyctalus leisleri,0.113,0.211,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+713.4135,713.4308,40078.0,43349.0,Pipistrellus nathusii,0.284,0.319,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+795.4305,795.4421,34062.0,40619.0,Pipistrellus nathusii,0.138,0.256,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+1489.3475,1489.3578,27187.0,33377.0,Eptesicus serotinus,0.185,0.382,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+1630.9185,1630.9325,40078.0,42813.0,Pipistrellus nathusii,0.23,0.254,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
+1732.0385,1732.052,23750.0,30090.0,Nyctalus leisleri,0.09,0.242,-1,Echolocation,/mnt/ubna_data_02_mir/recover-20221017/UBNA_008/20221014_120000.WAV,Foliage,recover-20221017,008,1795
