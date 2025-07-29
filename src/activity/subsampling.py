@@ -84,7 +84,7 @@ def prepare_summary_for_plotting_with_duty_cycle_and_bins(file_paths, dc_tag, da
 
     location_df = pd.read_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv', low_memory=False, index_col=0)
     location_df_for_subsampling = location_df.copy()
-    if data_params['detector_tag']=='bd2':
+    if data_params['detector_tag']=='bd2' and data_params['assembly_type'] == 'kmeans':
         inds_where_dets_above_detection_probability = location_df['det_prob'].astype(float)>=data_params['det_prob_threshold']
         location_df_above_detection_probability = location_df[inds_where_dets_above_detection_probability].copy()
         inds_where_dets_above_SNR = location_df_above_detection_probability['SNR'].astype(float)>=data_params['SNR_threshold']

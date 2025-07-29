@@ -121,7 +121,7 @@ def assemble_initial_location_summary(file_paths):
     Returns and saves a summary of bd2-detected bat calls within a desired frequency band.
     """
 
-    location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/{file_paths["detector"]}__*.csv').compute()
+    location_df = dd.read_csv(f'{file_paths["raw_SITE_folder"]}/{file_paths["detector"]}__*.csv', dtype={'SD Card': 'object'}).compute()
     if file_paths['detector']=='kd':
         location_df = convert_kaleidoscopedf_to_bd2df(location_df)
         location_df['file_group'] = location_df['file_name']
@@ -247,7 +247,7 @@ def add_frequency_groups_to_summary_using_kmeans(location_df, file_paths, data_p
         location_df_classified_and_cleaned = location_df_classified_and_cleaned.loc[location_df_classified_and_cleaned['freq_group']==data_params['type_tag']]
 
     if save:
-        location_df_classified_and_cleaned.to_csv(f'{file_paths["SITE_folder"]}_classified_from_{data_params["training_set"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
+        location_df_classified_and_cleaned.to_csv(f'{file_paths["SITE_folder"]}/{file_paths["detector_TYPE_SITE_YEAR"]}.csv')
 
     return location_df_classified_and_cleaned
 
